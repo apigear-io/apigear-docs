@@ -1,0 +1,51 @@
+site_name: API Gears
+site_description: lean cycle to discover APIs and drive the product cycle
+site_author: XPixels
+copyright: 2019 XPixels GmbH
+dev_addr: 0.0.0.0:8080
+
+theme:
+  name: 'material'
+  palette:
+    primary: "blue"
+    accent: "indigo"
+  font:
+    text: "Ubuntu"
+    code: "Ubuntu Mono"
+  logo:
+    icon: "home"
+  language: "en"
+  extra:
+    search:
+      language: "en"
+  feature:
+    tabs: true
+
+nav:
+- APIGear:
+  - "About": "apigear/about.md"
+  - "Company": "apigear/company.md"
+- Guide:
+  - "Getting Started": "guide/start.md"
+  - "Your first API": "guide/create.md"
+  - "For Designers": "guide/designer.md"
+  - "For Developers": "guide/developer.md"
+  - "For Service": "guide/service.md"
+- Topics:
+  - "Prodcut Lifecycle": "topics/productcycle.md"
+  - "Lean Cycle": "topics/leancycle.md"
+  - "Discovering APIs": "topics/discoverapi.md"
+  - "Design APIs": "topics/designapi.md"
+- IDL:
+  - "Interface Definition": "idl/index.md"
+  - "IDL Specification": "idl/spec.md"
+
+
+
+
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.magiclink
+
