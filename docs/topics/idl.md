@@ -1,11 +1,14 @@
-# IDL Specification
+# API Format
+
+The API format described the structure of an API contract. As a user you can either write the API using a user interfaces or using structured text. The APIGear UI will support users writing an API through a user interface or code assistance.
+
+## Specification
 
 The grammar of APIGear is well defined and is based on the concept of modules as larger collections of service descriptions.
 
-A module can have several interfaces, structs and/or enums/flags. Here a not complete unformal grammar.
+A module can have several interfaces, structures and/or enums/flags. Here is a not complete informal grammar.
 
-```html
-
+```
 module <module> <version>
 
 import <module> <version>
@@ -29,10 +32,9 @@ flag <Identifier> {
 }
 ```
 
-A APIGear document always describes one module. It is convention that a apig document is named after the module. If the same module appears in different documents the behavior is not defined currently. Each document can contain one or more interfaces, structs, flags or enums. Each document can import other modules using the import statement.
+One APIGear document always describes one module. It is convention that a `apig` document is named after the module. If the same module appears in different documents the behavior is not defined currently. Each document can contain one or more `interface`, `struct`, `flag` or `enum` statements. Each document can import other modules using the `import` statement.
 
-
-## Module
+### Module
 
 A module is identified by its name. A module should be normally a URI where all parts are lowercase (e.g. `entertainment.tuner`). A module may import other modules with the primary purpose being to ensure that dependencies are declared inside the APIGear file.
 
@@ -48,8 +50,7 @@ import org.common 1.0
 
     The parser will not validate if the module exists yet. It will just provide the reference to the module and will try to resolve the module on code-generation runtime.
 
-## Interface
-
+### Interface
 
 An interface is a collection of properties, operations and signals. Properties carry data, whereas the operations normally modify the data. Signals are used to notify the user of changes.
 
@@ -62,12 +63,11 @@ interface WeatherStation {
 }
 ```
 
-APIGear allows to extend interfaces using the ``extends`` keyword after the interface name.
+APIGear allows to extend interfaces using the `extends` keyword after the interface name.
 
 !!! note
 
     It is in the responsibility of the author to ensure the order of interfaces are correct. E.g. the base interface should come before the depending interface. APIGear does not try to re-order interfaces based on dependency. The order they appear in the document is the order they are passed to the code generator.
-
 
 ```js
 interface Station {
@@ -91,9 +91,7 @@ interface WeatherStation extends Station {
 
     The API reader does not need to know the internals of the API. The station behavior would be automatically attached by the custom generator.
 
-
-## Struct
-
+### Struct
 
 The struct resembles a data container. It consist of a set of fields where each field has a name and a data type. Data types can be primitive of complex types.
 
@@ -121,9 +119,7 @@ interface WeatherStation {
 
     When you nest structs, ensure the used struct comes before the using structs and there are no circular dependencies. The order struct appear is the same order they are passed to the code generator.
 
-
-
-## Enum/Flag
+### Enum/Flag
 
 An enum and flag is an enumeration type. The value of each member is automatically assigned if missing and starts with 0.
 
@@ -161,9 +157,9 @@ flag Cell {
 }
 ```
 
-## Types
+### Types
 
-Types are either local and can be referenced simply by their names, or they are from external modules. In the latter case they need to be referenced with the fully qualified name (``<module>.<symbol>``). A type can be an interface, struct, enum or flag. It is also possible to reference the inner members of the symbols with the fragment syntax (``<module>.<symbol>#<fragment>``).
+Types are either local and can be referenced simply by their names, or they are from external modules. In the latter case they need to be referenced with the fully qualified name (`<module>.<symbol>`). A type can be an interface, struct, enum or flag. It is also possible to reference the inner members of the symbols with the fragment syntax (`<module>.<symbol>#<fragment>`).
 
 A module consists of either one or more interfaces, structs and enums/flags. They can come in any number or combination. The interface is the only type which can contain properties, operations and signals. The struct is merely a container to transport structured data. An enum/flag allows the user to encode information used inside the struct or interface as data-type.
 
@@ -226,8 +222,7 @@ struct Station {
 }
 ```
 
-
-## Nested Types
+### Nested Types
 
 A nested type is a complex type which nests another type. Array is a container type.
 
@@ -241,7 +236,7 @@ A list is an array of the provided value type. A map specifies only the value ty
 
 A model is a special type of a list. It should be able to stream (e.g. add/change/remove) the data and the changes should be reflected by a more advanced API. Also the data could in general grow infinitely and the generator should provide some form of pagination or window API. You should use a model if you expect the data it represents to grow in a way that it may influence the performance of your API.
 
-## Annotations
+### Annotations
 
 Annotations allow the writer to add meta data to an interface document. It uses the `@` notation followed by valid YAML one line content.
 
@@ -254,7 +249,7 @@ interface Echo {
 
 More information on annotations can be found in the annotations chapter.
 
-## Comments
+### Comments
 
 Comments use the JavaDoc convention of using an `@` sign as prefix with the keyword followed by the required parameters.
 
@@ -268,8 +263,7 @@ Currently only brief, description, see and deprecated are supported doc tags.
 
 The QtCPP built-in generator generates valid Qt documentation out of these comments.
 
-
-## Default Values
+### Default Values
 
 APIGear supports the assignment of default values to properties and struct fields. A default values is a text string
 passed to the generator.

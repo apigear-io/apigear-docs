@@ -2,7 +2,7 @@
 
 The example we are looking at is a simple coffee counter. We will count how many coffee a user consumes per day.
 
-From the frintend perspective we would have a buttoin to increase the coffee count and a total score of the coffees we had a day. We assume the backend automatically resets the counter every night.
+From the frontend perspective we would have a button to increase the coffee count and a total score of the coffees we had a day. We assume the backend automatically resets the counter every night.
 
 For this we design an API which provides the coffee count for that day as also an action to record a new coffee consumption. This API will reside inside a project.
 
@@ -12,11 +12,9 @@ A default API module was already created for us. We can delete this, as we do no
 
 After we created a project we have to create a new API module. The module identifier is typically the module name, so for us this will be: `coffee`.
 
-
 !!! info
 
-    A project can have more than one API module. A project also defines the number of available API code generators. Also we will see later a API playground server does always refelect all the project APIs.
-
+    A project can have more than one API module. A project also defines the number of available API code generators. Also we will see later a API playground server does always reflect all the project APIs.
 
 Now we enter the design description into the editor field and save the content.
 
@@ -31,13 +29,11 @@ interface Counter {
 
 The API consist of an interface located in the `coffeee.counter` module. The `Counter` interface itself consist of a property `count` of the type integer. The interface also exposes one action named `increment`. For more information on the API definition language see here (TBD).
 
-
 ## Code Generation
 
 After we save the API we can start generating our source code.
 
 For this we need to configure a code generator. There are many code geenrators available on the system. Each generator can be configured with different features to run the code genertion step.
-
 
 We open the CodeGen tab and create a new runner. The runner is a configured code generator. Initially we select the JavaScript code generator and give the runner a name, e.g. JavaScript. After saving the runner we are able to use the code generator for our project.
 
@@ -51,16 +47,13 @@ The generate code will result into a JS class with some abstract methods. The AP
 
 Using the API in JavaScript would look like this
 
-
 ```javascript
 // JavaScript
-counter = Counter()
-console.log(counter.count) // => 0
-counter.increment()
-console.log(counter.count) // => 1
+counter = Counter();
+console.log(counter.count); // => 0
+counter.increment();
+console.log(counter.count); // => 1
 ```
-
-
 
 Or if you would have used a C++ code generator.
 
@@ -96,9 +89,6 @@ To make the API more descriptive we add some documentation.
 
     To write code examples just indent the code snippets
 
-
-
-
 ```
 # a coffee API to count our coffee consumption
 # over a day
@@ -114,6 +104,5 @@ interface Counter {
 ```
 
 After saving the API module we can see in the documentation in the documentation view. The documentation is automatically updated, based on the API module content.
-
 
 Now we have successfully defined an API. The next step will be to use the API. First in a playground like environment, later in a real project.

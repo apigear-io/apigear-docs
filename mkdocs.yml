@@ -10,7 +10,7 @@ theme:
     primary: "blue"
     accent: "indigo"
   font:
-    text: "Segoe UI"
+    text: "Segeo UI"
     code: "Segoe Mono"
   logo:
     icon: "home"
@@ -24,6 +24,10 @@ theme:
 nav:
   - Guide:
       - "Introduction": "guide/intro.md"
+      - "Create first API": "guide/create.md"
+  - Topics:
+      - "API Format": "topics/idl.md"
+      - "CLI Tool": "topics/cli.md"
 
 markdown_extensions:
   - admonition
