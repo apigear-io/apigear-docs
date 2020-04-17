@@ -1,10 +1,21 @@
 # API Format
 
-The API format described the structure of an API contract. As a user you can either write the API using a user interfaces or using structured text. The APIGear UI will support users writing an API through a user interface or code assistance.
+The API format described the structure of an API contract in terms of modules and interfaces with attached data structures. As a user you can either write the API using a our design UI (TBD) or using our code editor.
 
-## Specification
+## API Specification
 
 The grammar of APIGear is well defined and is based on the concept of modules as larger collections of service descriptions.
+
+Here is an example of a simple counter, which shows the use of modules, interfaces and operations.
+
+```
+module org.example 1.0
+
+interface Counter {
+    count: Int
+    increment()
+}
+```
 
 A module can have several interfaces, structures and/or enums/flags. Here is a not complete informal grammar.
 
@@ -36,7 +47,7 @@ One APIGear document always describes one module. It is convention that a `apig`
 
 ### Module
 
-A module is identified by its name. A module should be normally a URI where all parts are lowercase (e.g. `entertainment.tuner`). A module may import other modules with the primary purpose being to ensure that dependencies are declared inside the APIGear file.
+A module is identified by its name. A module should be normally a URI where all parts are lowercase (e.g. `entertainment.tuner`). A module may import other modules with the primary purpose being able to ensure that dependencies are declared inside the api document.
 
 ```js
 

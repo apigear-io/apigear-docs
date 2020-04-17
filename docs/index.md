@@ -1,8 +1,8 @@
-# API Gears - API Management for Devices
+# API Gears - Workflow For API Contracts
 
-We provide a lean learning cycle to discover your APIs and drive your product cycle.
+APIGear provides a digital workflow for API driven software contracts. Customers use us to accelerate their software products and remove frictions from contracting, development and testing. Our SaaS platform can be used by individuals and small businesses to create immediate revenue but also licensed by larger software agencies and organizations to streamline their contracting and APIs offerings.
 
-APIs are difficult to get right. As a contract between different components an API must adhere to high standards. We would help the customers to eplore the APIs and retrieve usage data of these APIs by this allowing the customer to build-measure-learn based on the provided API data.
+APIs are difficult to get right. As a contract between different components an API must adhere to high standards. We would help the customers to explore the APIs and retrieve usage data of these APIs by this allowing the customer to build-measure-learn based on the provided API data.
 
 
 

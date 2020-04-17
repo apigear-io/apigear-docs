@@ -1,7 +1,7 @@
-site_name: API Gears
+site_name: APIGear
 site_description: lean cycle to discover APIs and drive the product cycle
-site_author: XPixels
-copyright: 2019 XPixels GmbH
+site_author: JRyannel
+copyright: 2019 APIGear UG
 dev_addr: 0.0.0.0:8080
 
 theme:
@@ -12,8 +12,8 @@ theme:
   font:
     text: "Segeo UI"
     code: "Segoe Mono"
-  logo:
-    icon: "home"
+  # logo:
+  #   icon: "home"
   language: "en"
   extra:
     search:
@@ -28,6 +28,7 @@ nav:
   - Topics:
       - "API Format": "topics/idl.md"
       - "CLI Tool": "topics/cli.md"
+      - "API Patterns": "topics/apipatterns.md"
 
 markdown_extensions:
   - admonition
