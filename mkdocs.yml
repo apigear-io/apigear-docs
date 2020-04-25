@@ -1,36 +1,56 @@
 site_name: APIGear
 site_description: lean cycle to discover APIs and drive the product cycle
 site_author: JRyannel
-copyright: 2019 APIGear UG
+copyright: 2020 APIGear UG
 dev_addr: 0.0.0.0:8080
 
+extra_css:
+  - css/extra.css
+
+repo_name: apigear-io/apigear-webdocs
+repo_url: https://github.com/apigear-io/apigear-webdocs
 theme:
   name: "material"
   palette:
-    primary: "blue"
-    accent: "indigo"
+    primary: "indigo"
+    accent: "blue"
   font:
-    text: "Segeo UI"
+    text: "Segoe UI"
     code: "Segoe Mono"
-  # logo:
-  #   icon: "home"
   language: "en"
+  features:
+    tabs: true
   extra:
     search:
       language: "en"
-  feature:
-    tabs: true
-
-nav:
+  nav:
   - Guide:
-      - "Introduction": "guide/intro.md"
-      - "Create first API": "guide/create.md"
+    - guide/quick-start.md
+    - guide/why-apigear.md
+    - guide/how-apigear-works.md
+    - guide/api-workspace.md
+    - guide/faq.md
+  - Tutorials:
+    - tutorials/qtquick-plugin.md
   - Topics:
-      - "API Format": "topics/idl.md"
-      - "CLI Tool": "topics/cli.md"
-      - "API Patterns": "topics/apipatterns.md"
+    - topics/api-design.md
+    - topics/api-mock.md
+    - topics/api-codegen.md
+  - Reference:
+    - reference/idl.md
+    - reference/qtcpp-gen.md
 
 markdown_extensions:
   - admonition
   - codehilite
   - pymdownx.magiclink
+
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/apigear-io
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/apigear
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/company/apigear

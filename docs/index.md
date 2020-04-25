@@ -1,4 +1,6 @@
-# API Gears - Workflow For API Contracts
+# API Gear
+
+**Workflow for API Contracts**
 
 APIGear provides a digital workflow for API driven software contracts. Customers use us to accelerate their software products and remove frictions from contracting, development and testing. Our SaaS platform can be used by individuals and small businesses to create immediate revenue but also licensed by larger software agencies and organizations to streamline their contracting and APIs offerings.
 
