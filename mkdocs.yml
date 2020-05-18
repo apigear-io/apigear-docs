@@ -2,6 +2,7 @@ site_name: APIGear
 site_description: lean cycle to discover APIs and drive the product cycle
 site_author: JRyannel
 copyright: 2020 APIGear UG
+google_analytics: ['UA-166716652-4', 'docs.apigear.io']
 dev_addr: 0.0.0.0:8080
 
 extra_css:
