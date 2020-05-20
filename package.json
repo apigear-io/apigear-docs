@@ -1,0 +1,13 @@
+{
+  "name": "ApiGearDocs",
+  "version": "1.0.0",
+  "description": "Product documentation for ApiGear.io",
+  "dependencies": {
+    "vuepress": "^1.4.1"
+  },
+  "author": "apigear",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
