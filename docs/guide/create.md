@@ -14,13 +14,13 @@ A default API module is already created for us. We can delete this, as we do not
 
 We will create now a new API module called `coffee`.
 
-!!! info
-
-    A project can have more than one API module. Configured code generators to create API SDKs are also attached to a project as also the API simulations, which are auto updated with the API changes.
+:::info
+A project can have more than one API module. Configured code generators to create API SDKs are also attached to a project as also the API simulations, which are auto updated with the API changes.
+:::
 
 Now we enter the API definition into the API editor field and save the content.
 
-```
+```qml
 module coffee 1.0
 
 interface Counter {
@@ -49,7 +49,7 @@ The generate code will result into a JS class with some abstract methods. The AP
 
 Using the API in JavaScript would look like this
 
-```javascript
+```js
 // JavaScript
 counter = Counter();
 console.log(counter.count); // => 0
@@ -59,7 +59,7 @@ console.log(counter.count); // => 1
 
 Or if you would have used a C++ code generator.
 
-```c++
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -73,9 +73,9 @@ int main(int argc, char**argv) {
 }
 ```
 
-!!! note
-
-    Which concrete API you will use depends on the code generators you configure. The are code-generators for many languages and technolgies available.
+::: tip
+Which concrete API you will use depends on the code generators you configure. The are code-generators for many languages and technologies available.
+:::
 
 We can now continue the design the API inside the API designer view of APIGear.
 
@@ -85,11 +85,9 @@ The view allows us to save the API at any point and create a new version if requ
 
 To make the API more descriptive we add some documentation.
 
-!!! info
+The API language has full support for Java style documentation annotations useing '@'. The following tags are supported: '@param', '@deprecated', '@return', '@see', '@link'.
 
-    The API language has full support for Java style documentation annotations useing '@'. The following tags are supported: '@param', '@deprecated', '@return', '@see', '@link'.
-
-    To write code examples just indent the code snippets
+To write code examples just indent the code snippets
 
 ```
 # a coffee API to count our coffee consumption
