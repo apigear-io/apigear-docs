@@ -1,6 +1,14 @@
 module.exports = {
   title: 'ApiGear',
   description: "Documentation for ApiGear.io",
+  plugins: [
+    [
+      '@vuepress/google-analytics',
+      {
+        'ga': 'UA-166716652-4' // UA-00000000-0
+      }
+    ]
+  ],
   themeConfig: {
     nav: [      
     ],

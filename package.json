@@ -9,5 +9,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^1.5.0"
   }
 }
