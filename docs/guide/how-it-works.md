@@ -15,6 +15,7 @@ API scenarios can describe the usage of the APIs and are used to define the API 
 Our code generation tool is able to generate for different language and technologies a full SDK to get started with the development of features. The SDK can be generated either via our online UI or using our CLI tool, for example for CI integration.
 
 ## Mocking APIs
+
 The API mock is used to decouple teams from dependency. If Team A waits for an API implementation from Team B it would normally be locked. Using the API mock team A can continue to develop and cover all API scenarios until Team B starts delivering the real implementation. The API mock can be used in a mixed operation mode where API are partially used from the production API and others from the mock API.
 
 ## Testing APIs

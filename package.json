@@ -2,15 +2,15 @@
   "name": "ApiGearDocs",
   "version": "1.0.0",
   "description": "Product documentation for ApiGear.io",
-  "dependencies": {
-    "vuepress": "^1.4.1"
-  },
   "author": "apigear",
   "scripts": {
+    "start": "vuepress dev docs",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "devDependencies": {
+    "vuepress": "^1.5.0",
+    "watchpack": "1.6.1",
     "@vuepress/plugin-google-analytics": "^1.5.0"
   }
 }
