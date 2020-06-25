@@ -1,59 +1,58 @@
 module.exports = {
-  title: 'ApiGear',
+  title: "ApiGear",
   description: "Documentation for ApiGear.io",
   plugins: [
     [
-      '@vuepress/google-analytics',
+      "@vuepress/google-analytics",
       {
-        'ga': 'UA-166716652-4' // UA-00000000-0
-      }
-    ]
+        ga: "UA-166716652-4", // UA-00000000-0
+      },
+    ],
   ],
   themeConfig: {
-    nav: [      
-    ],
+    nav: [],
     sidebar: [
-      { 
-        title: "Guide",
-        path: '/guide/intro',
-        collapsable: false,
-        children: [
-          '/guide/intro',
-          '/guide/quickstart',
-          '/guide/create',
-          '/guide/how-it-works',
-          '/guide/why-apigear',
-          '/guide/workspace',
-          '/guide/faq',
-        ]
-      }, 
       {
-        title: "Reference",
-        path: "/reference/idl",
+        title: "Tutorials",
+        path: "/tutorials/getting-started",
         collapsable: false,
         children: [
-          "/reference/idl",
-          "/reference/qtcpp-gen",
-        ]
+          "/tutorials/getting-started",
+          "/tutorials/collaboration",
+          "/tutorials/design-api",
+          "/tutorials/objectapi-howto",
+        ],
+      },
+      {
+        title: "UI Overview",
+        path: "/ui/overview",
+        collapsable: false,
+        children: ["/ui/overview"],
       },
       {
         title: "Topics",
         path: "/topics/api-design",
         collapsable: false,
-        children: [
-          "/topics/api-design",
-          "/topics/api-mock",
-          "/topics/api-sdk",
-        ]
+        children: ["/topics/api-design", "/topics/api-mock", "/topics/api-sdk"],
       },
       {
-        title: "Tutorials",
-        path: "/tutorials/qtquick-plugin",
+        title: "Reference",
+        path: "/reference/idl",
+        collapsable: false,
+        children: ["/reference/idl", "/reference/qtcpp-gen", "/reference/cpp14-gen"],
+      },
+      {
+        title: "Accounts & Billing",
+        path: "/accounts/profile",
         collapsable: false,
         children: [
-          "/tutorials/qtquick-plugin",
-        ]
-      }
-   ],
+          "/accounts/profile",
+          "/accounts/teams",
+          "/accounts/members",
+          "/accounts/team-projects",
+          "/accounts/team-activity-log",
+        ],
+      },
+    ],
   },
-}
+};

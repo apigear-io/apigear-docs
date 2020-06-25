@@ -1,6 +1,6 @@
 # Introduction
 
-APIGear is an API contract workflow solution. It allows users to define APIs as contracts between entities and use these contracts at different stages in the daily work from early sketching of APIs, to integrate code into your product and analyse deployed APIs.
+ApiGear is an API contract workflow solution. It allows users to define APIs as contracts between entities and use these contracts at different stages in the daily work from early sketching of APIs, to integrate code into your product and analyse deployed APIs.
 
 From management perspective an API contract is a business document to specify a set of deliverables. From a developer perspective an API contract a technical document which defines an agreement between two technical parties to work towards a common goal.
 

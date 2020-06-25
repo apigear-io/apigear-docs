@@ -1,255 +1,280 @@
 # API Definition
 
-APIGear provides an Object interface definition language which can be used to describe the high-level interface of an object or service. The IDL is modern and very flexible to be used in many different contexts.
+ApiGear provides an object interface definition language which can be used to describe the high-level interface of an object or service. The IDL is modern and very flexible to be used in many different contexts.
 
 The API is organized into modules. Each module is identified by its name and contains interfaces, structures and enums/flags. A simple module looks like this.
 
-```js
-module climate.weather 1.0
+```yaml
+objectapi: "1.0"
+module: climate.weather
+version: 1.0
 
-interface WeatherStation {
-  temperature: Float
-  reset()
-  signal error(message: String)
-}
+interfaces:
+  - name: WeatherStation
+    properties:
+      - { name: temperature, type: float }
+    operations:
+      - { name: reset }
+    signals:
+      - name: error
+        params:
+          - { name: message, type: string }
 ```
 
-The grammar behind is described roughly when looking at the code below.
+A API document always describes one module. Each document can contain one or more `interfaces`, `structs`, `enums` or `flags` definition.
 
-```js
-module <module> <version>
-import <module> <version>
+The structure of an ObjectAPI module can be divided into several sections: header, info, interfaces, structs and enums declaration.
 
-interface <Identifier> {
-    <type> <identifier>
-    <type> <operation>(<parameter>*)
-    signal <signal>(<parameter>*)
-}
-
-struct <Identifier> {
-    <type> <identifier>;
-}
-
-enum <Identifier> {
-    <name> = <value>,
-}
-
-flag <Identifier> {
-    <name> = <value>,
-}
-```
-
-A API document always describes one module. Each document can contain one or more `interface`, `struct`, `flag` or `enum` declarations. Each document can import other modules using the import statement.
-
-## Declarations
-
-### Module Declaration
+## Header definition
 
 A module is identified by its name. A module should be normally a reverse URI where all parts are lowercase (e.g. `entertainment.tuner`). A module may import other modules with the primary purpose being to ensure that dependencies are declared inside the API module.
 
-```
-# Example module
-module org.example 1.0
-
-import org.common 1.0
-```
-
-### Interface Declaration
-
-The interface declaration is at the heart of the API description. The interface is a collection of properties, operations and signals. Properties carry data, whereas the operations normally modify the data. Signals are used to notify the user about changes.
-
-An interface can be extended from another interface using the extends keyword after the interface name.
-
-```
-interface Station {
-    reset()
-    signal error(message: String)
-}
-
-interface WeatherStation extends Station {
-    temperature: Float
-}
+```yaml
+objectapi: <version>
+module: <name>
+version: <version>
 ```
 
-!!! note
-    
-    For the sake of simplicity, as an API designer you should carefully evaluate if this is required. The typical way to allow extensions is normally to write your own code-generator and use type annotations.
+## Document information
 
-        @extends: Station
-        interface WeatherStation {
-          temperature: Float
-        }
+The info section allows user to add information related to the current document.
 
-    The API reader does not need to know the internals of the API. The station behavior would be automatically attached by the custom generator.
-
-### Struct Declaration
-
-The `struct` resembles a data container. It consist of a set of fields where each field has a data type and a name.
-
-```js
-struct Error {
-  message: String
-  code: Int
-};
+```yaml
+info:
+  license: <license-identifier>
 ```
 
-Structs can also be nested. A struct can be used everywhere where a type can be used.
+## Interface declarations
 
-```js
-interface WeatherStation {
-    real temperature;
-    Error lastError;
-    void reset();
-    signal error(Error error);
-}
+The interface definition is at the heart of the API description. The interface is a collection of properties, operations and signals. Properties carry data, whereas the operations normally modify the data. Signals are used to notify the user about changes.
+
+```yaml
+interfaces:
+  - name: <name>
+    properties:
+      - name: <name>
+        type: <type>
+    operations:
+      - name: <name>
+        type: <type>
+        params:
+          - name: <name>
+            type: <type>
+    signals:
+      - name: <name>
+        params:
+          - name: <name>
+            type: <type>
 ```
 
-### Enum/Flag Declaration
+## Data structure declarations
+
+A data structure resembles a data container. It consist of a set of fields where each field has a name and data type.
+
+The format for the struct is roughly this.
+
+```yaml
+structs:
+  - name: <name>
+    fields:
+      - name: <name>
+        type: <type>
+```
+
+And here is an example to declare a data structure
+
+```yaml
+structs:
+  - name: Error
+    fields:
+      - { name: message, type: string }
+      - { name: code, type: int }
+```
+
+To use a struct as a type in other parts of the API you need to use `$ref`. The parser will resolve the name to the real type. For example:
+
+```yaml
+interfaces:
+  - name: Report
+    properties:
+      - { name: error, $ref: Error }
+```
+
+This will resolve Error as struct and bind it to the `error` property.
+
+Data structures can also be nested. A struct can be used everywhere where a type can be used.
+
+```yaml
+interfaces:
+  - name: WeatherStation
+  - properties:
+      - { name: temperature, type: float }
+      - { name: lastError, $ref: Error }
+  - operations:
+      - { name: reset }
+  - signals:
+      - name: error
+        params:
+          - { name: error, $ref: Error }
+```
+
+## Enumeration declarations
 
 An enum and flag is an enumeration type. The value of each member is automatically assigned if missing.
 
-```js
-enum State {
-    Null,
-    Loading,
-    Ready,
-    Error
-}
+```yaml
+enums:
+  - name: <name>
+    members:
+      - name: <name>
+        value: <value>
+```
+
+An example for a status enumeration could ook like this
+
+```yaml
+enums:
+  - name: Status
+    members:
+      - name: None
+        value: 0
+      - name: Loading
+        value: 1
+      - name: Ready
+        value: 2
+      - name: Error
+        value: 3
+```
+
+A more compact form would be
+
+```yaml
+enums:
+  - name: Status
+    members:
+      - name: None
+      - name: Loading
+      - name: Ready
+      - name: Error
 ```
 
 The value assignment for the enum type is sequential beginning from 0. To specify the exact value you can assign a value to the member.
 
-```js
-    Null = 0,
-    Loading = 1,
-    Ready = 2,
-    Error = 3
-}
+```yaml
+enums:
+  - name: Status
+    members:
+      - name: None
+      - name: Loading
+      - name: Ready
+      - name: Error
 ```
 
-The flag type defines an enumeration type where different values are treated as a bit mask. The values are in the sequence of the power of two.
+Sometimes it is required to create a flag. For this you can add a flags tag. The flag type defines an enumeration type where different values are treated as a bit mask. The values are in the sequence of the power of two.
 
-```js
-flag Cell {
-    Null,
-    Box,
-    Wall,
-    Figure
-}
+```yaml
+flags:
+  - name: Cell
+    members:
+      - name: Null
+      - name: Box
+      - name: Wall
+      - name: Figure
 ```
 
+## Primitive types
 
-## Types
+TBD
 
-Types are either local and can be referenced simply by their names, or they are from external modules. In the latter case they need to be referenced with the fully qualified name (`<module>.<symbol>`). A type can be an interface, struct, enum or flag. It is also possible to reference the inner members of the symbols with the fragment syntax (`<module>.<symbol>#<fragment>`).
+## Referencing types
+
+Types are either local and can be referenced simply by their names, or they are from external modules. In the latter case they need to be referenced with the fully qualified name (`<module>.<symbol>`). A type can be an interface, struct, enum or flag.
+
+## Example module
 
 A module consists of either one or more interfaces, structs and enums/flags. They can come in any number or combination. The interface is the only type which can contain properties, operations and signals. The struct is merely a container to transport structured data. An enum/flag allows the user to encode information used inside the struct or interface as data-type.
 
-Below is an example of a API module.
+Below is an example of an API module.
 
-```js
-module entertainment.tuner 1.0;
+```yaml
+objectapi: "1.0"
+module: entertainment.tuner
+version: 1.0
 
-import common 1.0
+interfaces:
+  - name: Tuner
+    description: A tuner service to manages tuner stations
+    properties:
+      - name: currentStation
+        $ref: Station
+        description: current selected station
+      - name: stationList
+        type: array
+        $ref: Station
+        description: list of current available stations
+    operations:
+      - name: nextStation
+        description: sets current station to next station from list
+      - name: previousStation
+        description: sets current station to previous station from list
+      - name: updateCurrentStation
+        description: update current station
+        params:
+          - name: stationId
+          - type: id
 
-// Service Tuner
-interface Tuner {
-    // current selected station
-    currentStation: Station
-    // sets current station to next station from list
-    nextStation()
-    // sets current station to previous station from list
-    previousStation()
-    // update current station
-    updateCurrentStation(stationId: ID);
-    // list of current available stations
-    stationList: [Station]
-}
+structs:
+  - name: Station
+    fields:
+      - name: stationId
+        type: id
+        description: station id
+      - name: name
+        type: string
+        description: station name
+      - name: modified
+        type: string
+        format: date-time
+        description: station last time modified
 
-// tuner state
-enum State {
-    // tuner not initialized
-    Null=0,
-    // tuner is loading
-    Loading=1,
-    // tuner is ready, operational
-    Ready=2,
-    // tuner received and error
-    Error=3
-}
+enums:
+  - name: State
+    description: State for tuner interface
+    members:
+      - name: None
+        description: tuner not initialized
+      - name: Loading
+        description: tuner is loading
+      - name: Ready
+        description: tuner is ready and operational
+      - name: Error
+        description: tuner received an error
+  - name: Waveband
+    members:
+      - name: FM
+        description: FM waveband
+      - name: AM
+        description: AM waveband
 
-// different tuner wavebands
-enum Waveband {
-    // FM waveband
-    FM=0,
-    // AM waveband
-    AM=1
-}
-
-// tuner feature
-flag Features {
-    // audio supports mono
-    Mono = 0x1,
-    // audio supports stereo
-    Stereo = 0x2,
-}
-
-// station data type
-struct Station {
-    // station id
-    int stationId;
-    // station name
-    string name;
-    // station last time modified
-    common.TimeStamp modified;
-}
+flags:
+  - name: Features
+    members:
+      - name: Mono
+        description: audio supports mono
+      - name: Stereo
+        description: audio support stereo
 ```
 
-## Nested Types
+## Meta information
 
-A nested type is a complex type which nests another type. These are container types, e.g. arrays.
+Sometimes it is required to add additional information, which is not part of the ObjectAPI specification. For this the meta tag can be used.
 
-```js
-colors: [Color]
+```yaml
+interfaces:
+  - name: Tuner
+    meta:
+      singleton: true
+      config: { port: 1024 }
 ```
 
-A list is an array of the provided value type. A map specifies only the value type. The key-type should be generic (e.g. a string type) and can be freely chosen by the generator. This allows for example the generator to add an id to each structure and use it as a key in the map.
-
-A model is a special type of a list. It should be able to stream (e.g. add/change/remove) the data and the changes should be reflected by a more advanced API. Also the data could in general grow infinitely and the generator should provide some form of pagination or window API. You should use a model if you expect the data it represents to grow in a way that it may influence the performance of your API.
-
-## Annotations
-
-Annotations allow the writer to add meta data to an interface document. It uses the `@ `notation followed by valid YAML one line content.
-
-```js
-@singleton: true
-@config: { port: 1234 }
-interface Echo {
-}
-```
-
-More information on annotations can be found in the annotations chapter.
-
-## Comments
-
-Comments use the JavaDoc convention of using an `@` sign as prefix with the keyword followed by the required parameters.
-
-Currently only brief, description, see and deprecated are supported doc tags.
-
-The QtCPP built-in generator generates valid Qt documentation out of these comments.
-
-## Default Values
-The API supports the assignment of default values to properties and struct fields. A default values is a text string passed to the generator.
-
-```js
-interface Counter {
-    int count = "0";
-    Message lastMessage;
-}
-
-struct Message {
-    string text = "NO DATA";
-}
-```
-
-You can use quotes ‘ or double-quotes “ as a marker for text. There is no type check on API side. The text-content is directly passed to the generator.
+As the information is not part of the specification the applied code generator must have an understanding of the data. For example a C++ code generator could create a singleton type from the interface declaration.
