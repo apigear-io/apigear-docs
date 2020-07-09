@@ -160,16 +160,6 @@ enums:
 
 The value assignment for the enum type is sequential beginning from 0. To specify the exact value you can assign a value to the member.
 
-```yaml
-enums:
-  - name: Status
-    members:
-      - name: None
-      - name: Loading
-      - name: Ready
-      - name: Error
-```
-
 Sometimes it is required to create a flag. For this you can add a flags tag. The flag type defines an enumeration type where different values are treated as a bit mask. The values are in the sequence of the power of two.
 
 ```yaml

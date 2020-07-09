@@ -1,0 +1,46 @@
+Arguments: 
+  /usr/local/Cellar/node/14.3.0/bin/node /usr/local/bin/yarn global remove vuepress
+
+PATH: 
+  /usr/local/sbin:/Users/jryannel/go/bin:/Users/jryannel/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/TeX/texbin:/usr/local/go/bin:/Library/Apple/usr/bin:/usr/local/sbin:/Users/jryannel/go/bin:/Users/jryannel/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  14.3.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/jryannel/work/apigear/apigear-docs/package.json: Unexpected string in JSON at position 181
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "ApiGearDocs",
+    "version": "1.0.0",
+    "description": "Product documentation for ApiGear.io",
+    "author": "apigear",
+    "scripts": {
+      "start": "vuepress dev docs"
+      "docs:dev": "vuepress dev docs",
+      "docs:build": "vuepress build docs"
+    },
+    "devDependencies": {
+      "vuepress": "^1.5.0",
+      "watchpack": "1.6.1",
+      "@vuepress/plugin-google-analytics": "^1.5.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

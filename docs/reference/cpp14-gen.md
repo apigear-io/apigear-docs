@@ -1,3 +1,3 @@
-# C++14 SDK Template
+# C++14 SDK
 
-The Qt C++ code template
+The Qt C++ code SDK
