@@ -1,6 +1,15 @@
-# How APIGear Works
+# How It Works
 
-We developed an interface abstraction to let users define software interfaces. An interface is a contract between two software modules. These modules can be either a local module or a remote module sitting on a different hardware or even in the cloud.
+We developed an interface abstraction schema to let users define software interfaces as configuration. An interface define the boundary between two software modules and acts as a contract between them.
+
+## API Contracts
+
+API contracts are split into modules. Each module represent a partial agreement and can be versioned independent form the rest of the system. A contract can be documented directly inside the definition but also in external documents called pages. Typically a page describes additional concepts or underlying information to the recipient.
+
+- **Bundling**: Modules are bundled inside a project and can be exported as in different document formats or presented online to share the current API contract state across the team.
+
+- **Transformation**: For developers API contracts can be transformed into source code and updated regularly as SDKs. The source code can either be minimal to allow an integration into an existing offering or comes with a ready-to-use project structure to jump-start the development.
+
 
 ## Browsing APIs
 
