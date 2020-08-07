@@ -4,13 +4,13 @@
   "description": "Product documentation for ApiGear.io",
   "author": "apigear",
   "scripts": {
-    "start": "vuepress dev docs",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
-  "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.5.2",
-    "vuepress": "^1.5.2",
-    "watchpack": "1.6.1"
+  "dependencies": {
+    "@nuxt/content-theme-docs": "^0.4.1",
+    "nuxt": "^2.14.1"
   }
 }
