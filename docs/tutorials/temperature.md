@@ -1,3 +1,0 @@
-# Temperature Sensor API
-
-TBD
