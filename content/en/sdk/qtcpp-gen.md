@@ -1,8 +1,8 @@
 ---
-title: Qt C++ SDK
+title: Qt C++ SDK Blueprint
 description: Tutorials for using ApiGear with different technologies
-position: 99
-category: SDK
+position: 402
+category: Blueprints
 version: 1.0
 menuTitle: Qt SDK
 ---
