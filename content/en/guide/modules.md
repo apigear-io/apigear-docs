@@ -16,7 +16,7 @@ An API Module is an ObjectAPI document with a unique module name inside the proj
 To create a new module:
 
 - Open [ApiGear](https://app.apigear.io) and login.
-- Select the workspace and project you want to add the module to
+- Select a project inside a workspace to add the module
 - Inside the project click "Create Module" and fill in the module form.
 - A module name defines a namespace for your API and should only contain lowercase letters, numbers and the '.' (dot). For example `media.server`
 - The module url will be `https://app.apigear/<workspace>/<project>/<module>/`.

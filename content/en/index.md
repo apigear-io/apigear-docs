@@ -19,7 +19,7 @@ ApiGear is a team based collaborative tool which provides a new and unique Objec
 
 We enable teams to develop software driven products without friction using by providing a workflow around machine readable APIs and enhanced device analytics.
 
-[ObjectAPI Specification by ApiGear](https://objectapi.org) is a new interface language similar to OpenAPI but models Objects and their communication as a machine readable API specification. ObjectAPI is influenced by real world object communication covered in different programming languages and small and large scale software projects.
+[ObjectAPI Specification by ApiGear](https://objectapi.org) is a new interface language similar to OpenAPI but models Objects and their communication as a machine readable API specification. ObjectAPI is influenced by real world object communication inspired by different programming languages and small and large scale software projects.
 
 ## Features
 
