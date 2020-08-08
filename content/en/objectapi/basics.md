@@ -1,7 +1,7 @@
 ---
 title: "Basics"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
-position: 99
+position: 203
 category: "ObjectAPI"
 version: 1.0
 ---
@@ -65,12 +65,9 @@ Container are array of primitive or complex data types. Further nesting of conta
 
 A complex type is a symbol inside a module. This can be either an interface, struct or enum/flag symbol.
 
-```json
-"structs": [
-  {
-    "name": "Message",
-  }
-]
+```yaml
+structs:
+  - name: Message
 ```
 
 Inside the same module the type can be referenced using simple the name
@@ -80,10 +77,9 @@ Inside the same module the type can be referenced using simple the name
 
 Outside the module, the module itself needs to be imported and the type needs to be used with its fully qualified name
 
-```json
-"imports": [
-  "org.example"
-]
+```yaml
+imports:
+  - name: org.example"
 ```
 
 - `org.example.Message` - external complex type

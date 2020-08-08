@@ -1,10 +1,10 @@
 ---
-title: "Create a Workspace"
+title: "Create a workspace"
 description: "A workspace in ApiGear is used to group API Projects across your organisation"
 position: 3
 category: "Start"
 version: 1.0
-menuTitle: Workspaces
+menuTitle: Create a workspace
 ---
 
 ApiGear enables software construction using an API driven process in a collaborative manner. This enables you to drive efficiency, consistency and discipline across your API driven teams.

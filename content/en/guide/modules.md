@@ -1,10 +1,10 @@
 ---
-title: "Create a Module"
+title: "Define Modules"
 description: "A module in ApiGear is used to describe API inside a namespace"
 position: 5
 category: "Start"
 version: 1.0
-menuTitle: Modules
+menuTitle: Define Modules
 ---
 
 An API Module defines an ObjectAPI document inside a project to define an API surface for a defined use case. Typically there are several API modules inside a project. Inside a workspace the most important concept are Projects. Projects are a collection of API modules, documentation and other artifacts you want to keep together.

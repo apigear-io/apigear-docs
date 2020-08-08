@@ -1,7 +1,7 @@
 ---
 title: "Enumerations and Flags"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
-position: 99
+position: 207
 category: "ObjectAPI"
 version: 1.0
 menuTitle: Enumerations

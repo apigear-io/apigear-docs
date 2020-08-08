@@ -1,7 +1,7 @@
 ---
 title: Preparation
 description: Tutorials for using ApiGear with different technologies
-position: 99
+position: 301
 category: Tutorials
 version: 1.0
 menuTitle: Prepare
