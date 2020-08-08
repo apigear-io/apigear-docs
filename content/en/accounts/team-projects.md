@@ -1,7 +1,7 @@
 ---
 title: Team Owned Projects
 description: Tutorials for using ApiGear with different technologies
-position: 4
+position: 99
 category: Accounts
 version: 1.0
 menuTitle: Team Projects

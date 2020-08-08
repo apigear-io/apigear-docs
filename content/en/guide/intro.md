@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
-position: 1
+position: 99
 category: "Guide"
 version: 1.0
 ---

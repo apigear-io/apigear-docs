@@ -1,7 +1,7 @@
 ---
 title: Counter API
 description: A counter tutorial using ApiGear
-position: 2
+position: 99
 category: Tutorials
 version: 1.0
 ---

@@ -1,7 +1,7 @@
 ---
 title: Team Activity Logs
 description: Tutorials for using ApiGear with different technologies
-position: 6
+position: 99
 category: Accounts
 version: 1.0
 menuTitle: Team Activity

@@ -1,7 +1,7 @@
 ---
 title: Qt C++ SDK
 description: Tutorials for using ApiGear with different technologies
-position: 4
+position: 99
 category: SDK
 version: 1.0
 menuTitle: Qt SDK

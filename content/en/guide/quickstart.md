@@ -1,7 +1,7 @@
 ---
 title: "Quick Start"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
-position: 2
+position: 99
 category: "Guide"
 version: 1.0
 ---

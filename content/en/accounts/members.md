@@ -1,7 +1,7 @@
 ---
 title: Manage Team Members
 description: Tutorials for using ApiGear with different technologies
-position: 3
+position: 99
 category: Accounts
 version: 1.0
 menuTitle: Members
