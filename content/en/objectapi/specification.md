@@ -1,7 +1,7 @@
 ---
 title: "Specification"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
-position: 2
+position: 99
 category: "ObjectAPI"
 version: 1.0
 ---

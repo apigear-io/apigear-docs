@@ -1,7 +1,7 @@
 ---
 title: Team Management
 description: Tutorials for using ApiGear with different technologies
-position: 2
+position: 99
 category: Accounts
 version: 1.0
 menuTitle: Teams
