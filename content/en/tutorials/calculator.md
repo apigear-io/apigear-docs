@@ -6,16 +6,17 @@ category: Tutorials
 version: 1.0
 ---
 
-A calculator allows you to enter numbers and calculator a new number based on an operation. Our calculator will support add/subtract and multiply/divide operations as also a clear action. The calculator has a total value to show the current calculated value.
+A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as also a `clear` action. The calculator always has a total value to show the current calculated value.
 
 A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as also a grid for the operations '+', '-', '\*', '/' and the 'clear' action.
 
-From inside a project we create a new API module called 'demo.calc' and create a new interface named 'Calculator'.
+## Defining an API Module
+From inside a project we create a new API module called `demo.calc` using the `Create Module` action and create a new interface named 'Calculator'.
 
 ```yml
 objectapi: "1.0"
 name: demo.calc
-version: 1.0
+version: '1.0'
 
 interfaces:
   - name: Calculator
@@ -45,7 +46,7 @@ interfaces:
               type: int
 ```
 
-Let's add the rest of the calculator operations.
+Let's add the rest of the calculator operations and the clear action.
 
 ```yml
 objectapi: "1.0"
@@ -77,9 +78,10 @@ interfaces:
       - name: clear
 ```
 
-Additional to the operations we also add a clear action to reset the value to `0`.
+We added all missing calculator operations. The clear action will reset the calculator value to `0`.
 
-When we apply a Python SDK generator the code will look like this:
+## Python Interface
+For our implementation we configure a Python SDK as runner and generate our calculator SDK. The abstract calculator interface will look like this:
 
 ```python
 # demo_calc.py
@@ -104,7 +106,9 @@ class AbstractCalculator(object):
     raise NotImplementedError
 ```
 
-A full implementation of this python calculator would then be
+## Sample Implementation
+
+To implement the interface we derive from the abstract calculator and implement the missing operations. A simple implementation could look like this.
 
 ```python
 
@@ -128,4 +132,7 @@ class Calculator(demo_calc.AbstractCalculator):
     self.value = 0
 ```
 
-It is very easy now to add implementations also for other programming languages or even for a microservice using one of the many supported SDK blueprints.
+## API Updates
+The next time we change the API module we need to update the abstract interface and ensure all changed operations are implemented.
+
+It is very easy now to add implementations also for other programming languages or even for a micro service using one of the many supported SDK blueprints.
