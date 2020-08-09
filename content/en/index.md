@@ -15,11 +15,11 @@ features:
   - "Make data driven decisions based on API traffic analytics"
 ---
 
-ApiGear is a team based collaborative tool which provides a new and unique ObjectAPI driven digital workflow for software construction with integrated API analytics.
+ApiGear is a team based collaborative tool which provides a new and unique digital workflow for software construction with integrated API analytics.
 
-We enable teams to develop software driven products without friction using by providing a workflow around machine readable APIs and enhanced device analytics.
+We enable teams to develop software driven products without friction by providing a workflow around machine readable APIs and enhanced device analytics.
 
-[ObjectAPI Specification by ApiGear](https://objectapi.org) is a new interface language similar to OpenAPI but models Objects and their communication as a machine readable API specification. ObjectAPI is influenced by real world object communication inspired by different programming languages and small and large scale software projects.
+[ObjectAPI Specification by ApiGear](https://objectapi.org) is a new interface language similar to OpenAPI but models objects and their communication as a machine readable API specification. ObjectAPI is influenced by real world object communication inspired by different programming languages, small and large scale software projects.
 
 ## Features
 

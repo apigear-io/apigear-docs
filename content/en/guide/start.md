@@ -9,20 +9,20 @@ menuTitle: Get started
 
 - [Create a Workspace](workspaces)
 
-Bring together your team inside a workspace
+	Bring together your team inside a workspace
 
 - [Create an API Project](projects)
 
-Define your API collection inside a project with additional documentation
+	Define your API collection inside a project with additional documentation
 
 - [Invite Team Members](members)
 
-Expand you API contributors by adding new team members.
+	Expand you API contributors by adding new team members.
 
 - [Lean more about ApiGear](features)
 
-ApiGear offers different features and tools to support you during your API driven software construction.
+	ApiGear offers different features and tools to support you during your API driven software construction.
 
 - [Explore ApiGear Use Cases](cases)
 
-Ensure you are informed about how ApiGear can help your software project today.
+	Ensure you are informed about how ApiGear can help your software project today.
