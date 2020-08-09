@@ -7,7 +7,7 @@ version: 1.0
 menuTitle: C++ SDK
 ---
 
-The Qt C++ code SDK generates a C++ 14 conform interfaces to be implemented by the developers. If scaffolding is switched on it will also generate a full project with CMake and test support. The project will scale with new API modules.
+The C++ 14 code SDK generates a C++ 14 conform interfaces to be implemented by the developers. If scaffolding is switched on it will also generate a full project with CMake and test support. The project will scale with new API modules.
 
 Following blueprint feature switches are supported:
 

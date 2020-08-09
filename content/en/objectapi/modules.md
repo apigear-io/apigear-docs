@@ -1,5 +1,5 @@
 ---
-title: "Modules"
+title: "API Modules"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 204
 category: "ObjectAPI"
