@@ -1,5 +1,5 @@
 ---
-title: "Core"
+title: "Basics"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 203
 category: "ObjectAPI"
