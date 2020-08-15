@@ -6,19 +6,19 @@ category: "ObjectAPI"
 version: 1.0
 ---
 
-ObjectAPI is defined in terms of modules inside a layer. Each module is captured inside a ObjectAPI module document. ObjectAPI is a YAML base specification with a linked schema document for validation.
+ObjectAPI is defined in terms of modules inside a layer. Each module is captured inside a ObjectAPI module document. ObjectAPI is a YAML based specification with a linked schema document for validation.
 
 ## Format
 
-The files describing the ObjectAPI in accordance to APIGear ObjectAPI specification are described either in JSON syntax and must conform to the JSON standard.
+The files describing the ObjectAPI in accordance to APIGear ObjectAPI specification are described in JSON syntax and must conform to the JSON standard.
 
-While the the API is described in JSON other formats (YAML) can be used as input formats.
+While the the API is described in JSON, other formats (YAML) can be used as input formats.
 
 Unless otherwise noted all file names in this specification are case sensitive.
 
 ## File Structure
 
-There exists a set of files where each file represents an API modules. Ideally the file name represent the module name. Other files can be added which add meta information to the API modules. They allow to inject additional information which is not relevant or available during API definitions.
+There exists a set of files where each file represents an API module. Ideally, the file name matches the module name. Other files can be added which contain meta information for the API modules. They allow to inject additional information which is not relevant or available during API definitions.
 
 - `*.oapi.yaml` | `*.oapi.yml` | `*.oapi.json` - ObjectAPI document
 - `*.oapi.meta.yaml` | `*.oapi.meta.yml` | `*.oapi.meta.json` - ObjectAPI meta information injected into the relevant APIs.
@@ -54,7 +54,7 @@ Data types can be re-presented in different forms in different programming langu
 
 ## Container
 
-Container are array of primitive or complex data types. Further nesting of containers are not supported. A data type is converted into a container by appending `[]` to the type.
+Containers are arrays of primitive or complex data types. Further nesting of containers is not supported. A data type is converted into a container by appending `[]` to the type.
 
 - `bool[]`
 - `int[]`
@@ -70,7 +70,7 @@ structs:
   - name: Message
 ```
 
-Inside the same module the type can be referenced using simple the name
+Inside the same module the type can be referenced by simply using the name
 
 - Message
 - Message[]

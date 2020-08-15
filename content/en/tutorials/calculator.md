@@ -6,9 +6,9 @@ category: Tutorials
 version: 1.0
 ---
 
-A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as also a `clear` action. The calculator always has a total value to show the current calculated value.
+A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as well as a `clear` action. The calculator always has a total value to show the current calculated value.
 
-A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as also a grid for the operations '+', '-', '\*', '/' and the 'clear' action.
+A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as well as a grid for the operations '+', '-', '\*', '/' and the 'clear' action.
 
 ## Defining an API Module
 

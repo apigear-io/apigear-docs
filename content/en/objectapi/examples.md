@@ -105,6 +105,10 @@ flags:
 The weather station uses a more compact YAML format to display the current temperature. 
 
 ```yaml
+objectapi: "1.0"
+module: sensors.weatherstation
+version: 2.5
+
 interfaces:
   - name: WeatherStation
   - properties:

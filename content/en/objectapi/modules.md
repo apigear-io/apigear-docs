@@ -14,11 +14,11 @@ A module is identified by its `name` and `version`. The module name should be ty
 
 A module can have an additional `info` block to describe in more detailed the module information.
 
-Typically a module consist of the `objectapi` version declaration, the module name and version, the list of interfaces, structures and signals.
+Typically, a module consists of the `objectapi` version declaration, the module name and version, the list of interfaces, structures and signals.
 
-The version number must be written as a string, otherwise it wil be converted to a numeric value (e.g. 1 for 1.0).
+The version number must be written as a string, otherwise it will be converted to a numeric value (e.g. 1 for 1.0).
 
-Only objectapi, name, version are mandatory. The other identifiers are optional.
+Only objectapi version, name and module version are mandatory. The other identifiers are optional.
 
 ```yml
 objectapi: "1.0"
@@ -31,7 +31,7 @@ enums:
 
 ## Interfaces
 
-An interface is the main instance to describe your software boundary using object terms. The interface consist of properties, operations and signals. Properties typically describe the state of the object and operation modify these properties. Signals notify the user of changes of the object.
+An interface is the main instance to describe your software boundary using object terms. The interface consists of properties, operations and signals. Properties typically describe the state of the object and operations modify these properties. Signals notify the user of changes of the object.
 
 The interface itself is identified by its `name` inside a module.
 
@@ -46,7 +46,7 @@ interfaces:
 
 ### Properties
 
-Each property has a `name` and a `type` as also `description` and additional `meta` data.
+Each property has a `name` and a `type` as well as a `description` and additional `meta` data.
 
 ```yml
 # ...
@@ -134,7 +134,7 @@ interfaces:
             type: Message
 ```
 
-Data structure can be identified just be identified its name.
+A data structure can just be identified by its name.
 
 Data structures can be nested by using the type name of the nested type. In some programming languages care needs to be taken by the order of declaration.
 
