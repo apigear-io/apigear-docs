@@ -6,9 +6,9 @@ category: "ObjectAPI"
 version: 1.0
 ---
 
-ObjectAPI is an interface specification to describe your boundaries of your software modules in an object format.
+ObjectAPI is an interface specification to describe the boundaries of your software modules in an object format.
 
-ObjectAPI sees the world as a set of interface modules, which form together a interface layer. Each module is encapsulated in one ObjectAPI document.
+ObjectAPI sees the world as a set of interface modules, which together form an interface layer. Each module is encapsulated in one ObjectAPI document.
 
 The specification describes the details how to write such a ObjectAPI document.
 
@@ -20,9 +20,9 @@ The ObjectAPI Specification is copyrighted by ApiGear UG, all rights reserved.
 
 ## Introduction
 
-The ObjectAPI Specification is a project used to describe and document Object oriented APIs across languages and technologies.
+The ObjectAPI specification is a project used to describe and document object oriented APIs across languages and technologies.
 
-The ObjectAPI Specification defines a set of files required to describe such an API.
+The ObjectAPI specification defines a set of files required to describe such an API.
 These files can then be used to create utilities, such as documentation, integration and/or testing tools.
 
 The ObjectAPI Specification is often used to describe the interface between software modules or inter-process communication (IPC) in distributed systems built using a object oriented programming API. The ObjectAPI recommends to split APIs into smaller modules with loose coupling.
