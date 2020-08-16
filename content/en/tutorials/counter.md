@@ -10,9 +10,9 @@ The example we are looking at is a simple coffee counter. Our product will track
 
 From the frontend perspective we have a button to increase the coffee count and a total score of the coffees we had a day. We assume the backend automatically resets the counter every night.
 
-For this we design an API which provides the coffee count for that day as well as an action to record a new coffee consumption. This API module will reside inside a workspace project.
+For this we design an API which provides the coffee count for that day as well as an action to record a new coffee consumption. This API module will reside inside a team project.
 
-As an API module resides inside a project, we will create a project named "*daily coffee*" and provide a catchy brief description: "*count the coffee the user consumes per day*". When the project is created we are forwarded to the project page.
+As an API module resides inside a project, we will create a project named "_daily coffee_" and provide a catchy brief description: "_count the coffee the user consumes per day_". When the project is created we are forwarded to the project page.
 
 A default API module is already created for us. We can delete this, as we do not need it for this project.
 
