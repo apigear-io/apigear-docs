@@ -38,4 +38,7 @@ Initial ObjectAPI specification
 ## Definitions
 
 - A system: A system is a collection of modules, which describe a coherent set of APIs on the same layer.
-- A module: A module describes a name spaced collection of API symbols of different types. There exists one module per file.
+- A module: A module describes a name spaced collection of API symbols, such as interfaces, structures, enumerations. There exists one module per file.
+- An interface is a named interface description of an object with properties, operations and signals.
+- A structure is a data type with fields describing the structure
+- A enumeration is a enumerated integer or string value
