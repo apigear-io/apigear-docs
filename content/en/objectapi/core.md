@@ -52,38 +52,67 @@ Data types can be re-presented in different forms in different programming langu
 - `float`
 - `string`
 
-## Container
+## Arrays
 
-Containers are arrays of primitive or complex data types. Further nesting of containers is not supported. A data type is converted into a container by appending `[]` to the type.
+An array is an index based list of primitive or complex data types. Further nesting of containers are not supported but can be achieved using structs as array items. A data type is converted into a container by setting the type to array and specifying the containing type in the items key.
 
-- `bool[]`
-- `int[]`
-- `float[]`
-- `string[]`
+For example an integer array can be noted like this:
+
+```yaml
+properties:
+  - name: names
+    type: array
+    items: string
+```
+
+If an array does contain a symbol as containing type, then the symbol name can be used in the items key.
+
+```yaml
+properties:
+  - name: messages
+    type: array
+    items: { ref: Message }
+```
+
+Primitive types are always lowercase and symbols are always uppercase. The cases might change in the target language.
 
 ## Complex Types
 
-A complex type is a symbol inside a module. This can be either an interface, struct or enum/flag symbol.
+A symbol is a named element inside a module. This can be either an interface, struct or enum/flag symbol.
 
 ```yaml
 structs:
   - name: Message
 ```
 
-Inside the same module the type can be referenced by simply using the name
+Inside the same module the type can be referenced by the name of the symbol using a `ref`. This holds true for all symbols.
 
-- Message
-- Message[]
+```yaml
+properties:
+  - name: msg1
+    type: { ref: Message }
+  - name: msg2
+    type: array
+    items: struct
+    symbol: { ref: Message }
+```
 
 Outside the module, the module itself needs to be imported and the type needs to be used with its fully qualified name
 
 ```yaml
 imports:
-  - name: org.example"
+  - org.example
+
+interfaces:
+  - name: Interface1
+    properties:
+      - name: msg1
+        type: { ref: org.example.Message }
 ```
 
-- `org.example.Message` - external complex type
-- `org.example.Message[]` - Array of external complex type
+- `org.example.Message` - external symbol
+
+Note: Not every language profile does support importing.
 
 ## Rich Text Formatting
 
