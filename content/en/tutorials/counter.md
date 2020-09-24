@@ -38,11 +38,11 @@ interfaces:
 
 The API consists of an interface located in the `demo.daily` module. The `Counter` interface itself consist of a property `count` of the type integer. The interface also exposes an operation named `increment`. For more information on the API definition language see the [ObjectAPI guide](../objectapi).
 
-We create a C++14 API for this tutorial. When open the SDK section we select the C++14 SDK and press run. After we downloaded the created SDK, we unzip the source code in our terminal and run the project. Detailed information how to run the project will be in the README file of your SDK.
+We create a C++14 API for this tutorial. When we open the SDK section, we select the C++14 SDK and press run. After we downloaded the created SDK, we unzip the source code in our terminal and run the project. Detailed information how to run the project will be in the README file of your SDK.
 
 ## Using the API
 
-The generated code will result into a C++ class with some abstract methods. The API has no functionality yet, and needs to be provided by you. So open the project in your favorite editor and add the implementation.
+The generated code will result in a C++ class with some abstract methods. The API has no functionality yet, and needs to be provided by you. So open the project in your favorite editor and add the implementation.
 
 ```cpp
 // counter.h
