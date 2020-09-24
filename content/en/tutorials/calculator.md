@@ -8,7 +8,7 @@ version: 1.0
 
 A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as well as a `clear` action. The calculator always has a total value to show the current calculated value.
 
-A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as well as a grid for the operations '+', '-', '\*', '/' and the 'clear' action.
+A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as well as a grid for the operations `+`, `-`, `*`, `/` and the `clear` action.
 
 ## Defining an API Module
 
@@ -35,7 +35,7 @@ interfaces:
 
 We expect the value is always updated when a number was entered and a new operation is entered.
 
-We add the first operation add to the calculator. It takes one parameter, the number to be added.
+We add the first operation `add` to the calculator. It takes one parameter and the number to be added.
 
 ```yml
 interfaces:

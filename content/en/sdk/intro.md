@@ -11,7 +11,7 @@ ApiGear comes with a collection of SDK blueprints which allows our users to crea
 
 A blueprint is a transformation of a group of API modules into source code for your software project.
 
-All Blueprint SDKs can scale with your project by adding more API modules. A command line tool will support you with the  merging of update SDK code.
+All Blueprint SDKs can scale with your project by adding more API modules. A command line tool will support you with merging the updated SDK code.
 
 These blueprints can be configured by enabling and disabling certain features. Also SDKs are build on top of certain ObjectAPI profiles, which enable or disable certain language features. A user will get a warning when an API uses features not available in the configured language profile.
 
