@@ -1,7 +1,7 @@
 ---
 title: Calculator API
 description: A calculator tutorial using ApiGear
-position: 302
+position: 303
 category: Tutorials
 version: 1.0
 ---
@@ -9,6 +9,8 @@ version: 1.0
 A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as well as a `clear` action. The calculator always has a total value to show the current calculated value.
 
 A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as well as a grid for the operations `+`, `-`, `*`, `/` and the `clear` action.
+
+<alert>In addition to the explanation below we also created some real modules for different languages and example applications. Please check out our [demos over at github](https://github.com/apigear-io/objectapi-demos/tree/master/calc) </alert>
 
 ## Defining an API Module
 
