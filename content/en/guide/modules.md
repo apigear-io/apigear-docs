@@ -21,7 +21,7 @@ An API Module is an ObjectAPI document with a unique module name inside the proj
 - A module name defines a namespace for your API and should only contain lowercase letters, numbers and the '.' (dot). For example `media.server`
 - The module url will be `https://app.apigear/<team>/<project>/<module>/`.
 - You will be redirected automatically to the newly created module.
-- Now, you can start designing your API using the [ObjectAPI specification](https://objectapi.org)
+- Now, you can start designing your API using the [ObjectAPI specification](../objectapi/overview)
 - You can change the name and other options in the module settings.
 
 Next start [your API design](design) using your newly created API Module.
