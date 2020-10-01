@@ -24,4 +24,4 @@ An API Module is an ObjectAPI document with a unique module name inside the proj
 - Now, you can start designing your API using the [ObjectAPI specification](../objectapi/overview)
 - You can change the name and other options in the module settings.
 
-Next start [your API design](design) using your newly created API Module.
+Next start [your API design](../objectapi/overview) using your newly created API Module.

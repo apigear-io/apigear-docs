@@ -24,4 +24,4 @@ A default team space is already created for you when you register. This is your 
 - By default your are the new owner of the new team and can invite new members.
 - You can change the members, name, owner and other options in the team settings.
 
-Next add [projects](project) to your newly create team.
+Next add [projects](projects) to your newly create team.
