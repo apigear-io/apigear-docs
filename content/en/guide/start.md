@@ -19,10 +19,6 @@ Define your API collection inside a project with additional documentation
 
 Expand you API contributors by adding new team members.
 
-- [Lean more about ApiGear](features)
-
-ApiGear offers different features and tools to support you during your API driven software construction.
-
 - [Explore ApiGear Use Cases](cases)
 
 Ensure you are informed about how ApiGear can help your software project today.
