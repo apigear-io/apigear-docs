@@ -1,6 +1,9 @@
 import theme from "@nuxt/content-theme-docs";
 
 export default theme({
+  // https://nuxtjs.org/blog/going-full-static/
+  target: 'static',
+
   /*
    ** Nuxt.js modules
    */
