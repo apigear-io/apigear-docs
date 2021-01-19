@@ -25,37 +25,9 @@ services:
       increment:
         actions:
           - add: [ $state.count, $params.step ]
-        return:
-          value: 5
       decrement:
         actions:
           - add: [ $state.count, $params.step ]
-          - add: [ $state.count ]
-        return:
-          schema:
-            type: integer
-            maximum: 1000
-            minimum: 0
-    playbook:
-      interval: 2000
-      loop: true
-      steps:
-        - name: increment
-          sequence:  # modified state
-            - set: [ $state.count,  1 ]
-            - notify: [ shutdown, 10]
-        - name: increment
-          sequence:
-          - add: [ $state.count,  1 ]
-          - notify: [ shutdown, 9]
-        - name: increment
-          sequence:
-            - add: [ $state.count,  1 ]
-            - notify: [ shutdown, 8]
-        - name: clear
-          sequence:
-            - set: [ $state.count, 0]
-            - notify: [ shutdown, 7]
 ```
 
 ## Variables
@@ -70,7 +42,9 @@ At several places the scenario uses action sequences. A sequence is a list of ac
 - command: [ argument list ]
 ```
 
-In actions 
+When an action changes the state a state changed notification will automatically be send after all actions of the sequence have been run.
+
+
 Typical actions are
 * `set` sets a value `- set: [$state.count, 5 ]` - similar the `state.count = 5`
 * `notify` emits a signal from the simulation: `- notify: [ shutdown, { timeout: 5 }]` similar to `notify('shutdown', { timeout: 5} )`
