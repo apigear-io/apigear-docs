@@ -7,9 +7,9 @@ version: 1.0
 menuTitle: Overview
 ---
 
-The simulation server allows service consumers to use a service also if it is not yet implemented, just based on a service definition and a attached scenario document.
+The simulation server allows service consumers to use a service also if it is not yet implemented, just based on a service definition and a attached scenario document. This i snot only decouples the service implementation from the service consumer 
 
-A simulation can have static, dynamic random data, or can run a series of actions or even be an active simulation.
+A simulation can have static data, dynamic random data, run a series of actions or even be an active simulation.
 
 * Static Data: Provides fixed data or default data back to the caller
 * Dynamic Data: Provides fake data based on a data schema back to the caller
