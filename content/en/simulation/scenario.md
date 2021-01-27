@@ -7,7 +7,7 @@ version: 1.0
 menuTitle: Scenarios
 ---
 
-A scenario is a document describing the data and behavior of a service for the simulation protocol.
+A scenario is a document describing the data and behavior of one or more services for the simulation server. The simulation server is embedded into the ApiGear Studio tool. The simulation server can be used using the simulation protocol over HTTP or WebSockets.  Support for the simulation protocol does come with most of ApiGear Blueprint Templates. 
 
 It can provide simulation to one or more services and their operation endpoints. The format of a scenario is described here.
 

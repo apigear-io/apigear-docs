@@ -97,9 +97,11 @@ The response will be the state
 
 of the interface.
 
-# JSON_RPC over WebSocket (experimental)
+# JSON_RPC over WebSocket
 
 The second supported simulation protocol is the [JSON-RPC](https://www.jsonrpc.org/specification) over websocket protocol. The simulation is fully supported and supports also active simulations.
+
+## Simulate Operations
 
 To call an operation endpoint the format is
 
@@ -130,6 +132,7 @@ The response will be either an error or the return value of the operation as a J
 }
 ```
 
+# Service State
 To get the state of a service you need to call the service itself using the `simu.state` method.
 
 ```json
@@ -155,6 +158,8 @@ The response will be current the state of the service.
 }
 ```
 
+## Simulation Signals
+
 The server might also call the client to notify the client about server side events, e.g. state changes or signal invoked by an action.
 
 The state changes are announced through sending a JSON-RPC notification back to the client. A notification in JSON-RPC looks like a call, but it does not have an ID parameter and no response is send back from the client.
@@ -165,7 +170,7 @@ The state changes are announced through sending a JSON-RPC notification back to 
   "method": "simu.state",
   "params": {
     "service": "demo.Counter",
-    "fields": {
+    "params": {
       "count": 10
     } 
   }
@@ -190,74 +195,6 @@ The simulation will also send signals as noted in the ObjectAPI back to the clie
   }
 }
 ```
-
-
-# WAMP Protocol (experimental)
-
-The WAMP protocol defined a router where the simulation will connect to and the client will then call the router and the registered procedures or listen to published messages.
-
-To call a simulation operation you need to call the "simu.call" procedure using the WAMP call message.
-
-```json
-[
-  "${callMessageType}",
-  "${requestId}",
-  {},
-  "simu.call",
-  [ ${service}, ${operation}, ${params}],
-  {}
-]
-```
-
-Or for a typical session implementation
-
-```js
-// call(procedure, arguments, argumentsKW)
-const res = await session.call("simu.call", ["demo.Hello", "say", { message: "hello"}], {})
-console.log(res.result) // >> hello
-```
-
-To request the initial state, call the service with no operation.
-
-
-```js
-// call(procedure, arguments, argumentsKW)
-const res = await session.call("simu.state", ["demo.Counter"], {})
-console.log(res.result) // >> { "count": 10 }
-```
-
-
-The server will send notifications regarding state changes and emitted signals. To receive them you need to subscribe to them.
-
-```js
-session.subscribe("simu.state")
-session.subscribe("simu.notify")
-```
-
-You will receive notifications from all modules, you need to filter away all events not applicable to your service.
-
-```js
-const myService = 'demo.Counter'
-session.on('simu.state' ( args ) => {
-  const [service, fields] = args
-  if(service == myService) {
-    console.log('state changed, these fields have changed: ', fields)
-  }
-})
-```
-
-or for the signal handling
-
-```js
-const myService = 'demo.Counter'
-session.on('simu.notify' ( args ) => {
-  const [service, signal, params] = args
-  if(service == myService) {
-    console.log(`${signal} signal received with params ${params}`)
-  }
-})
-```
-
 
 
 
