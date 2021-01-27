@@ -1,6 +1,6 @@
 # Simulation with ApiGear Studio
 
-The simulation server is integrated into ApiGear studio. A simulation of a service is defined using a scenario document. The scenario document can be created using the `New -> New Solution` toolbar button.
+The simulation server is integrated into ApiGear studio. A simulation of a service is defined using a scenario document. The scenario document can be created using the `New -> New Scenario` toolbar button.
 
 The scenario can then be edited using an external YAML editor, e.g. Visual Studio Code using our VSCode extension ('apigear').
 
