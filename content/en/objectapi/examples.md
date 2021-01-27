@@ -2,7 +2,7 @@
 title: "API Examples"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 209
-category: "ObjectAPI"
+category: "InterfaceAPI"
 version: 1.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0
 The typical counter example to increment and decrement a count value.
 
 ```yml
-objectapi: "1.0"
+apigear.module: "1.0"
 name: org.example
 version: "1.0"
 info:
@@ -34,7 +34,7 @@ interfaces:
 A radio tuner with a current station and a station list. It can operate on different wavebands.
 
 ```yaml
-objectapi: "1.0"
+apigear.module: "1.0"
 module: entertainment.tuner
 version: 1.0
 
@@ -78,7 +78,7 @@ enums:
     description: State for tuner interface
     members:
       - name: None
-        description: tuner not initialised
+        description: tuner not initialized
       - name: Loading
         description: tuner is loading
       - name: Ready
@@ -91,21 +91,13 @@ enums:
         description: FM waveband
       - name: AM
         description: AM waveband
-
-flags:
-  - name: Features
-    members:
-      - name: Mono
-        description: audio supports mono
-      - name: Stereo
-        description: audio support stereo
 ```
 
 ## Weather Station
 The weather station uses a more compact YAML format to display the current temperature. 
 
 ```yaml
-objectapi: "1.0"
+apigear.module: "1.0"
 module: sensors.weatherstation
 version: 2.5
 
@@ -121,7 +113,7 @@ interfaces:
         params:
           - { name: error, type: Error }
 
-struct:
+structs:
   - name: Error
     fields:
       - name: msg

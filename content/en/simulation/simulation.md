@@ -7,7 +7,7 @@ version: 1.0
 menuTitle: Overview
 ---
 
-The simulation server allows service consumers to use a service also if it is not yet implemented, just based on a service definition and a attached scenario document. This i snot only decouples the service implementation from the service consumer 
+The simulation server allows API clients to use a interface also if it is not yet implemented, just based on an interface definition and an attached scenario document. It decouples the interface implementation from the interface users. 
 
 A simulation can have static data, dynamic random data, run a series of actions or even be an active simulation.
 
@@ -20,13 +20,13 @@ A simulation can have static data, dynamic random data, run a series of actions 
 Using our demo counter we can write a scenario like this.
 
 ```yaml
-scenario: "1.0"
+apigear.scenario: "1.0"
 name: "demo.scenario"
 version: "1.0"
-services:
+interfaces:
   demo.Counter:
-    state:
-      { count: { value: 0 }} # static fixed definition of the state
+    properties:
+      count: { value: 0 } # static fixed definition of the state
     operations:
       increment:
         actions:
@@ -40,9 +40,9 @@ services:
         return { value: "$params.message" } # returns the incoming message param back as result
 ```
 
-This is a simple scenario which mimic the `Counter` and `Echo` example.
+This is a simple scenario which imitate a `demo.Counter` and `demo.Echo` interface.
 
-When this scenario is loaded into the simulation server a client can just call these endpoints.
+When this scenario is loaded into the simulation server a client can just call these simulation operations.
 
 
         

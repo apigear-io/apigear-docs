@@ -9,7 +9,7 @@ version: 1.0
 ApiGear provides a modern API driven workflow using ObjectAPI to construct software. An API led process provides many benefits to many stakeholders. Here are some use cases listed.
 
 
-- **Design**: Create clean object APIs, consistently across the teams
+- **Design**: Create clean object based APIs, consistently across the teams
 - **Blueprints**: Develop API driven software efficiently using our SDK blueprints and simulations
 - **Documentation**: Create an interactive developer experience for internal and external stakeholders
 - **Collaboration**: Gather your team around APIs and all the stakeholders can participate

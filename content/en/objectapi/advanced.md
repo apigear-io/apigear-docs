@@ -2,11 +2,11 @@
 title: "Advanced"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 208
-category: "ObjectAPI"
+category: "InterfaceAPI"
 version: 1.0
 ---
 
-Advanced ObjectAPI concepts
+Advanced InterfaceAPI concepts
 
 
 ## Document information
@@ -20,7 +20,7 @@ info:
 
 ## Meta information
 
-Sometimes it is required to add additional information, which is not part of the ObjectAPI specification. For this the meta tag can be used.
+Sometimes it is required to add additional information, which is not part of the InterfaceAPI specification. For this the meta tag can be used.
 
 ```yaml
 interfaces:

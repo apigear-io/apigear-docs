@@ -14,18 +14,18 @@ It can provide simulation to one or more services and their operation endpoints.
 
 
 ```yaml
-scenario: "1.0"
+apigear.scenario: "1.0"
 name: "count scenario"
 version: "1.0"
-services:
-  demo.Counter:
+interfaces:
+  - name: demo.Counter
     state:
       count: { value: 0 }
-    operations:
-      increment:
+    methods:
+      - name: increment
         actions:
           - add: [ $state.count, $params.step ]
-      decrement:
+      - name: decrement
         actions:
           - add: [ $state.count, $params.step ]
 ```
@@ -47,7 +47,7 @@ When an action changes the state a state changed notification will automatically
 
 Typical actions are
 * `set` sets a value `- set: [$state.count, 5 ]` - similar the `state.count = 5`
-* `notify` emits a signal from the simulation: `- notify: [ shutdown, { timeout: 5 }]` similar to `notify('shutdown', { timeout: 5} )`
+* `signal` emits a signal from the simulation: `- signal: [ shutdown, { timeout: 5 }]` similar to `signal('shutdown', { timeout: 5} )`
 
 other actions are `add`, `sub`, `mult`, `div`. There are more to come.
 
@@ -59,16 +59,16 @@ A playbook is a time based execution of actions. A playbook has a name and can b
 playbooks:
   - name: increment counter
     interval: 2000 # 2 seconds  
-    loop: true
-    steps:
+    loop: true # start over when at end
+    steps: # step is called every 2 secs according to interval
       - name: increment
-        sequence:  # modify state
+        actions:  # list of actions
         - set: [ $state.count,  1 ]
-        - notify: [ shutdown, 10]
+        - signal: [ shutdown, 10]
       - name: clear
-        sequence:
+        actions:
         - set: [ $state.count, 0]
-        - notify: [ shutdown, 7]    
+        - signal: [ shutdown, 7]    
 ```
 
 The interval defined the tick and on each tick a step is running. If loops is true then the playbook will start again after finished.
@@ -80,12 +80,12 @@ When a state or return statement  defines a value it can be defined as static va
 For example to create a random count value you can between 0 and 100 you can create a schema.
 
 ```yaml
-scenario: "1.0"
+apigear.scenario: "1.0"
 name: "count scenario"
 version: "1.0"
-services:
-  demo.Counter:
-    state:
+interfaces:
+  - name: demo.Counter
+    properties:
       count: 
         schema:
             type: integer

@@ -2,15 +2,15 @@
 title: "Basics"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 203
-category: "ObjectAPI"
+category: "InterfaceAPI"
 version: 1.0
 ---
 
-ObjectAPI is defined in terms of modules inside a layer. Each module is captured inside a ObjectAPI module document. ObjectAPI is a YAML based specification with a linked schema document for validation.
+InterfaceAPI is defined in terms of modules inside a layer. Each module is captured inside a InterfaceAPI module document. InterfaceAPI is a YAML based specification with a linked schema document for validation.
 
 ## Format
 
-The files describing the ObjectAPI in accordance to APIGear ObjectAPI specification are described in JSON syntax and must conform to the JSON standard.
+The files describing the InterfaceAPI in accordance to APIGear InterfaceAPI specification are described in JSON syntax and must conform to the JSON standard.
 
 While the the API is described in JSON, other formats (YAML) can be used as input formats.
 
@@ -20,16 +20,16 @@ Unless otherwise noted all file names in this specification are case sensitive.
 
 There exists a set of files where each file represents an API module. Ideally, the file name matches the module name. Other files can be added which contain meta information for the API modules. They allow to inject additional information which is not relevant or available during API definitions.
 
-- `*.oapi.yaml` | `*.oapi.yml` | `*.oapi.json` - ObjectAPI document
-- `*.oapi.meta.yaml` | `*.oapi.meta.yml` | `*.oapi.meta.json` - ObjectAPI meta information injected into the relevant APIs.
+- `*.module.yaml` | `*.module.json` - InterfaceAPI document
+- `*.module.meta.yaml` | `*.module.meta.json` - InterfaceAPI meta information injected into the relevant APIs.
 
-So if a module is name `org.example` the ObjectAPI document should be called `org.example.oapi.yml`
+So if a module is name `org.example` the InterfaceAPI document should be called `org.example.module.yaml`
 
 ## Data Types
 
-In the ObjectAPI specification data types are used in many locations. Properties, Operations, Operation Parameters, Signal Parameters or Structures.
+In the InterfaceAPI specification data types are used in many locations. State, Method return types and parameters, signal parameters or structures.
 
-Data fields are added at the same level to describe the data name and type. For example for properties, these are:
+Data fields are added at the same level to describe the data name and type. For example for the interface properties, these are:
 
 ```yaml
 properties:
@@ -37,7 +37,7 @@ properties:
     type: int
 ```
 
-The general types available to ObjectAPI are:
+The general types available to InterfaceAPI are:
 
 - Primitives (`bool`, `int`, `float`, `string`)
 - Containers (`arrays`)
