@@ -23,7 +23,7 @@ A project can have more than one API module. Configured code generators to creat
 Now we enter the API definition into the API editor field and save the content.
 
 ```yml
-objectapi: "1.0"
+schema: apigear.module/1.0
 name: demo.daily
 version: "1.0"
 
@@ -86,7 +86,7 @@ The API language has full support for markdown based descriptions.
 To write code examples just indent the code snippets
 
 ```yml
-objectapi: "1.0"
+schema: apigear.module/1.0
 name: demo.daily
 version: "1.0"
 description: A module to demonstrate an API

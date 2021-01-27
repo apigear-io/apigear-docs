@@ -20,7 +20,7 @@ A simulation can have static data, dynamic random data, run a series of actions 
 Using our demo counter we can write a scenario like this.
 
 ```yaml
-apigear.scenario: "1.0"
+schema: apigear.scenario/1.0
 name: "demo.scenario"
 version: "1.0"
 interfaces:

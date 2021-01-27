@@ -17,7 +17,7 @@ A typical frontend would show a field to display the current total value and a g
 From inside a project we create a new API module called `demo.calc` using the `Create Module` action and create a new interface named 'Calculator'.
 
 ```yml
-objectapi: "1.0"
+schema: apigear.module/1.0
 name: demo.calc
 version: "1.0"
 
@@ -52,7 +52,7 @@ interfaces:
 Let's add the rest of the calculator operations and the clear action.
 
 ```yml
-objectapi: "1.0"
+schema: apigear.module/1.0
 name: demo.calc
 version: "1.0"
 

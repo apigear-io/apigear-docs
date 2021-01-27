@@ -11,7 +11,7 @@ version: 1.0
 The typical counter example to increment and decrement a count value.
 
 ```yml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 name: org.example
 version: "1.0"
 info:
@@ -34,7 +34,7 @@ interfaces:
 A radio tuner with a current station and a station list. It can operate on different wavebands.
 
 ```yaml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 module: entertainment.tuner
 version: 1.0
 
@@ -97,7 +97,7 @@ enums:
 The weather station uses a more compact YAML format to display the current temperature. 
 
 ```yaml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 module: sensors.weatherstation
 version: 2.5
 

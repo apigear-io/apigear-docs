@@ -14,7 +14,7 @@ It can provide simulation to one or more services and their operation endpoints.
 
 
 ```yaml
-apigear.scenario: "1.0"
+schema: apigear.scenario/1.0
 name: "count scenario"
 version: "1.0"
 interfaces:
@@ -80,7 +80,7 @@ When a state or return statement  defines a value it can be defined as static va
 For example to create a random count value you can between 0 and 100 you can create a schema.
 
 ```yaml
-apigear.scenario: "1.0"
+schema: apigear.scenario/1.0
 name: "count scenario"
 version: "1.0"
 interfaces:

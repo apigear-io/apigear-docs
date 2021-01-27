@@ -21,7 +21,7 @@ The version number must be written as a string, otherwise it wil be converted to
 Only interfaceapi, name, version are mandatory. The other identifiers are optional.
 
 ```yml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 name: org.example
 version: "1.0"
 interfaces:
@@ -36,7 +36,7 @@ An interface is the main instance to describe your software boundary using inter
 The interface itself is identified by its `name` inside a module.
 
 ```yml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 name: "org.example"
 version: "1.0"
 

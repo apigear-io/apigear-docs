@@ -18,7 +18,7 @@ The simulation server can be called via HTTP or websocket using JSON-RPC or usin
 We will use always our counter example which looks like this:
 
 ```yaml
-apigear.module: "1.0"
+schema: apigear.module/1.0
 name: 'demo'
 version: '1.0'
 
