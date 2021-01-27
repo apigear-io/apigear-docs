@@ -18,7 +18,7 @@ The simulation server can be called via HTTP or websocket using JSON-RPC or usin
 We will use always our counter example which looks like this:
 
 ```yaml
-objectapi: "1.0"
+apigear.module: "1.0"
 name: 'demo'
 version: '1.0'
 
@@ -55,36 +55,33 @@ As a convention, calling the service should always give back the current state, 
 
 The HTTP endpoint is the simples to use but is also limited in functionality. It only support direct responses on requests. Whereas the websockets protocols allow also playbook based active simulations.
 
-You can start the simulation server using a pre-defined, manually entered or auto-deducted port. If you use the local server then the endpoint will be available at `http://localhost:${PORT}/simu/`. THe call must be a post request and the payload must be a JSON document in the form of:
+You can start the simulation server using a pre-defined, manually entered or auto-deducted port. If you use the local server then the endpoint will be available at `http://localhost:${PORT}/simu/`. The call must be a post request and the payload must be a JSON document in the form of:
 
 ```json
 {
-  "service": "${service}",
-  "operation": "${operation}",
+  "symbol": "${module}.${object}#${operation}",
   "params": "${params}",
 }
 ```
 
-Where the payload is based on the objectAPI endpoint notation. `${module}.${$interface}.${operation}`.
-
-Where `${module}.${interface}` forms a service identifier.
+Where the payload is based on the objectAPI endpoint notation. `${module}.${$object}.${operation}`.
 
 Using the [http](https://httpie.io/) tool we can write
 
 ```shell
-http :3000 service=demo.Counter operation=increment params="{ step: 5 }"
+http :3000 symbol=demo.Counter#increment params="{ step: 5 }"
 ```
 
 It is also valid to call the endpoint without parameters, in this case some actions relying on the step parameter might fail if defined.
 
 ```shell
-http :3000 service=demo.Counter operation=increment
+http :3000 symbol=demo.Counter#increment
 ```
 
-To get the latest state you can call
+To get the latest state you can call the object directly
 
 ```shell
-http :3000 service=demo.Counter
+http :3000 symbol=demo.Counter
 ```
 
 The response will be the state
@@ -95,11 +92,28 @@ The response will be the state
 }
 ```
 
-of the interface.
+of the object.
 
 # JSON_RPC over WebSocket
 
 The second supported simulation protocol is the [JSON-RPC](https://www.jsonrpc.org/specification) over websocket protocol. The simulation is fully supported and supports also active simulations.
+
+## Flow
+
+The communication flow is typically initiated by the client by requesting the state of an object using the `simu.state` call.
+
+The a client can call operations on the simulation. A call can trigger other signals from the simulation as part of the scenario `actions`.
+
+An simulation which contains a playbook can actively send signals to the client without an external trigger.
+
+```
+Client          Simulation    Description
+
+simu.call ->                  call an operation
+simu.state ->                 send state changes
+            <- simu.state     notify state changes
+            <- simu.signal    send emitted signal
+```
 
 ## Simulate Operations
 
@@ -111,8 +125,7 @@ To call an operation endpoint the format is
   "id": 1,
   "method": "simu.call",
   "params": {
-    "service": "demo.Echo",
-    "operation": "say",
+    "symbol": "demo.Echo#say",
     "params": {
       "message": "hello"
     }
@@ -141,7 +154,7 @@ To get the state of a service you need to call the service itself using the `sim
   "id": 1,
   "method": "simu.state",
   "params": {
-    "service": "demo.Counter",
+    "symbol": "demo.Counter",
   }
 }
 ```
@@ -169,7 +182,7 @@ The state changes are announced through sending a JSON-RPC notification back to 
   "jsonrpc": "2.0",
   "method": "simu.state",
   "params": {
-    "service": "demo.Counter",
+    "symbol": "demo.Counter",
     "params": {
       "count": 10
     } 
@@ -185,10 +198,9 @@ The simulation will also send signals as noted in the ObjectAPI back to the clie
 ```json
 {
   "jsonrpc": "2.0",
-  "method": "simu.notify",
+  "method": "simu.signal",
   "params": {
-    "service": "demo.Hello",
-    "signal": "shutdown",
+    "symbol": "demo.Hello#shutdown",
     "params": {
       "timeout": 10
     } 

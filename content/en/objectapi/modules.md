@@ -2,26 +2,26 @@
 title: "API Modules"
 description: "A temperature sensor tutorial using ApiGear and Raspberry Pi"
 position: 204
-category: "ObjectAPI"
+category: "InterfaceAPI"
 version: 1.0
 ---
 
 ## Module Namespaces
 
-A module is a namespace for ObjectAPI symbols like interfaces, structures and enumerations. The module bundles these symbols together in one namespace.
+A module is a namespace for InterfaceAPI symbols like interfaces, structures and enumerations. The module bundles these symbols together in one namespace.
 
 A module is identified by its `name` and `version`. The module name should be typically lowercase and words separated by `.`, like a reverse URI notation `org.example`.
 
 A module can have an additional `info` block to describe in more detailed the module information.
 
-Typically a module consist of the `objectapi` version declaration, the module name and version, the list of interfaces, structures and signals.
+Typically a module consist of the `apigear.interfaces` version declaration, the module name and version, the list of interfaces, structures and signals.
 
 The version number must be written as a string, otherwise it wil be converted to a numeric value (e.g. 1 for 1.0).
 
-Only objectapi, name, version are mandatory. The other identifiers are optional.
+Only interfaceapi, name, version are mandatory. The other identifiers are optional.
 
 ```yml
-objectapi: "1.0"
+apigear.module: "1.0"
 name: org.example
 version: "1.0"
 interfaces:
@@ -29,14 +29,14 @@ structs:
 enums:
 ```
 
-## Interface Objects
+## Interfaces
 
-An interface is the main instance to describe your software boundary using object terms. The interface consist of properties, operations and signals. Properties typically describe the state of the object and operation modify these properties. Signals notify the user of changes of the object.
+An interface is the main instance to describe your software boundary using interface terms. The interface consist of state, operation and signals. The state is typically describe a a set of properties of the interface and operations modify the interface state. Signals notify the user of changes of the interface.
 
 The interface itself is identified by its `name` inside a module.
 
 ```yml
-objectapi: "1.0"
+apigear.module: "1.0"
 name: "org.example"
 version: "1.0"
 
@@ -44,7 +44,7 @@ interfaces:
   - name: MyInterface
 ```
 
-### Properties
+### Object state
 
 Each property has a `name` and a `type` as also `description` and additional `meta` data.
 
@@ -57,17 +57,17 @@ interfaces:
         type: int
 ```
 
-### Operations
+### Operation
 
 A operation defines the interaction with the interface. It is a collection of operations which can either manipulate the properties or return data.
 
-Ideally you design your operations in a way that they can be divided into commands and queries. A command is an operation which does something on the object and a query collects data from the object and returns it to the user.
+Ideally you design your operations in a way that they can be divided into commands and queries. A command is an operation which does something on the interface and a query collects data from the interface and returns it to the user.
 
 ```yml
 # ...
 interfaces:
   - name: MyInterface
-    operation:
+    operations:
       - name: command
         description: A command does not have a return type
       - name: query
@@ -92,7 +92,7 @@ The arguments do parameterize the operation.
 
 ### Signals
 
-A signal allows the object to notify the outside world about events happening, e.g. triggered by others. A signal is like an operation, but never defines a type.
+A signal allows the interface to notify the outside world about events happening, e.g. triggered by others. A signal is like an operation, but never defines a type.
 
 ```yml
 # ...
@@ -111,7 +111,7 @@ A structure represents a data structure which can be used for communication. The
 
 ```yml
 # ...
-structures:
+types:
   - name: Message
     fields:
       - name: msg
@@ -138,7 +138,7 @@ Data structure can be identified just be identified its name.
 
 Data structures can be nested by using the type name of the nested type. In some programming languages care needs to be taken by the order of declaration.
 
-## Enumerations and Flags
+## Enumerations
 
 Enumerations and Flags are value types, which allow a user to use a defined number of choices to identify a value.
 
