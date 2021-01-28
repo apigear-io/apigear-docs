@@ -13,10 +13,10 @@ The protocol is resembled after the simulation protocol.
 
 The message is typically a JSON message send to an HTTP endpoint depending if an operation call, state change or a signal is reported.
 
-Note: An extended version of the monitoring protocol is planned to provide detailed API analytics information our upcoming cloud API analytics solution for devices.
+*Note: An extended version of the monitoring protocol is planned to provide detailed API analytics information our upcoming cloud API analytics solution for devices.*
 
 
-## Reporting an API Call
+## Tracing operation calls
 
 For an method call the message looks like this:
 
@@ -25,19 +25,19 @@ An API call occurs when the client calls an method. The uri is the module name, 
 ```json
 {
     "type": "call",
-    "symbol": "${module}.${interface}#${method}",
+    "symbol": "${module}/${interface}#${method}",
     "params": "${params}",
 }
 ```
 
-## Reporting a state change
+## Tracing property changes
 
 A state change can be an partial update or a full update of all interface properties. The state is always an JSON object.
 
 ```json
 {
     "type": "state",
-    "symbol": "${module}.${interface}",
+    "symbol": "${module}/${interface}",
     "state": "${state}",
 }
 ```
@@ -50,7 +50,7 @@ For an interface signal the message looks like this
 ```json
 {
     "type": "signal",
-    "symbol": "${module}.${interface}#{signal}",
+    "symbol": "${module}/${interface}#{signal}",
     "params": "${params}",
 }
 ```
