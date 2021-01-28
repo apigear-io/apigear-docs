@@ -49,7 +49,7 @@ We can identify an operation using an URI like this `demo/Counter#increment` and
 As a convention, calling the service should always give back the current state, which is the sum of properties. Calling an operation should always return a valid value defined by the `return` type.
 
 
-# HTTP Endpoint (experimental)
+# HTTP Endpoint
 
 The HTTP endpoint is the simples to use but is also limited in functionality. It only support direct responses on requests. Whereas the websockets protocols allow also playbook based active simulations.
 
@@ -67,7 +67,7 @@ Where the payload is based on the ObjectAPI endpoint notation. `${module}/${$int
 Using the [http](https://httpie.io/) tool we can write
 
 ```shell
-http :3000 symbol=demo.Counter#increment params="{ step: 5 }"
+http :3000 symbol=demo/Counter#increment params="{ step: 5 }"
 ```
 
 It is also valid to call the endpoint without parameters, in this case some actions relying on the step parameter might fail if defined.
