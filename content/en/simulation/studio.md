@@ -1,4 +1,11 @@
-# Simulation with ApiGear Studio
+---
+title: Simulation with ApiGear Studio
+description: Simulating API Modules using ApiGear Studio
+position: 503
+category: Simulation
+version: 1.0
+menuTitle: ApiGear Studio
+---
 
 The simulation server is integrated into ApiGear studio. A simulation of a service is defined using a scenario document. The scenario document can be created using the `New -> New Scenario` toolbar button.
 

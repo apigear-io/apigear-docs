@@ -11,7 +11,7 @@ The simulation framework allows client to simulate interfaces using a simulation
 
 The simulation server can be called via HTTP or websocket using JSON-RPC. The different protocols and behavior will be explained below.
 
-# Example
+## Example
 
 We will use always our counter example which looks like this:
 
@@ -49,7 +49,7 @@ We can identify an operation using an URI like this `demo/Counter#increment` and
 As a convention, calling the service should always give back the current state, which is the sum of properties. Calling an operation should always return a valid value defined by the `return` type.
 
 
-# HTTP Endpoint
+### HTTP Endpoint
 
 The HTTP endpoint is the simples to use but is also limited in functionality. It only support direct responses on requests. Whereas the websockets protocols allow also playbook based active simulations.
 
@@ -58,7 +58,7 @@ You can start the simulation server using a pre-defined, manually entered or aut
 ```json
 {
   "symbol": "${module}/${object}#${operation}",
-  "params": "${params}",
+  "data": "${params}",
 }
 ```
 
@@ -67,7 +67,7 @@ Where the payload is based on the ObjectAPI endpoint notation. `${module}/${$int
 Using the [http](https://httpie.io/) tool we can write
 
 ```shell
-http :3000 symbol=demo/Counter#increment params="{ step: 5 }"
+http :3000 symbol=demo/Counter#increment data="{ step: 5 }"
 ```
 
 It is also valid to call the endpoint without parameters, in this case some actions relying on the step parameter might fail if defined.
@@ -92,11 +92,11 @@ The response will be the state
 
 of the interface.
 
-# JSON RPC over WebSockets
+## JSON RPC over WebSockets
 
 The second supported simulation protocol is the [JSON-RPC](https://www.jsonrpc.org/specification) over websocket protocol. The simulation is fully supported and supports also active simulations.
 
-## Protocol Flow
+### Protocol Flow
 
 The communication flow is typically initiated by the client by requesting the state of an object using the `simu.state` call.
 
@@ -113,7 +113,7 @@ simu.state ->                 			return property changes
             			<- simu.signal    	emit a signal
 ```
 
-## Simulating Operations
+### Simulating Operations
 
 To call an operation endpoint the format is
 
@@ -124,7 +124,7 @@ To call an operation endpoint the format is
   "method": "simu.call",
   "params": {
     "symbol": "demo/Echo#say",
-    "params": {
+    "data": {
       "message": "hello"
     }
   }
@@ -143,7 +143,7 @@ The response will be either an error or the return value of the operation as a J
 }
 ```
 
-# Interface State
+## Interface State
 
 To get the state of a service you need to call the service itself using the `simu.state` method.
 
@@ -170,7 +170,7 @@ The response will be current the state of the service.
 }
 ```
 
-## Simulating Signals
+### Simulating Signals
 
 The server might also call the client to notify the client about server side events, e.g. state changes or signal invoked by an action.
 
@@ -182,7 +182,7 @@ The state changes are announced through sending a JSON-RPC notification back to 
   "method": "simu.state",
   "params": {
     "symbol": "demo/Counter",
-    "params": {
+    "data": {
       "count": 10
     } 
   }
@@ -200,7 +200,7 @@ The simulation will also send signals as noted in the ObjectAPI back to the clie
   "method": "simu.signal",
   "params": {
     "symbol": "demo/Hello#shutdown",
-    "params": {
+    "data": {
       "timeout": 10
     } 
   }

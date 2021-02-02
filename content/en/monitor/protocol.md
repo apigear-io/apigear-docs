@@ -15,8 +15,12 @@ The message is typically a JSON message send to an HTTP endpoint depending if an
 
 *Note: An extended version of the monitoring protocol is planned to provide detailed API analytics information our upcoming cloud API analytics solution for devices.*
 
+## HTTP Tracing
 
-## Tracing operation calls
+The http tracing endpoint can be looked up under ApiGear Studio settings page.
+
+
+### Tracing operation calls
 
 For an method call the message looks like this:
 
@@ -26,11 +30,11 @@ An API call occurs when the client calls an method. The uri is the module name, 
 {
     "type": "call",
     "symbol": "${module}/${interface}#${method}",
-    "params": "${params}",
+    "data": "${params}",
 }
 ```
 
-## Tracing property changes
+### Tracing property changes
 
 A state change can be an partial update or a full update of all interface properties. The state is always an JSON object.
 
@@ -38,12 +42,12 @@ A state change can be an partial update or a full update of all interface proper
 {
     "type": "state",
     "symbol": "${module}/${interface}",
-    "state": "${state}",
+    "data": "${state}",
 }
 ```
 
 
-## Reporting a signal notification
+### Reporting a signal notification
 
 For an interface signal the message looks like this
 
@@ -51,8 +55,34 @@ For an interface signal the message looks like this
 {
     "type": "signal",
     "symbol": "${module}/${interface}#{signal}",
-    "params": "${params}",
+    "data": "${params}",
 }
 ```
 
 
+
+
+## Websocket Tracing
+
+Tracing over web sockets uses the JSON-RPC protocol. The protocol is mostly the same as the http protocol.
+
+The JSON RPC method is called `trace` and uses the same endpoint as the simulation server for ApiGear Studio.
+Where in the HTTP trace protocol the source as part of the endpoint, in the websocket protocol it is part of the message. 
+
+Otherwise all parameters, especially also the `type` are the same.
+
+The websocket tracing endpoint can be looked up under ApiGear Studio settings page.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "trace",
+  "params": {
+    "id": "1000230240",
+    "source": "local-device",
+    "type": "call",
+    "symbol": "count/Counter#increment",
+    "data": {}
+  }
+}
+```
