@@ -19,6 +19,10 @@ The message is typically a JSON message send to an HTTP endpoint depending if an
 
 The http tracing endpoint can be looked up under ApiGear Studio settings page.
 
+All HTTP traces work in batch mode. You need to send an array of traces to the server. The oldest trace should be the first element in the array. This should normally be the order you recieve the traces from a FIFO queue.
+
+In case no ID was transferred we generate a running ID based on the current timestamp.
+
 
 ### Tracing operation calls
 
