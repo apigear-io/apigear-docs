@@ -18,22 +18,22 @@ The process to adapt an existing blueprint or to create a fresh new blueprint is
 
 ## Maker
 
-A user which creates blueprints is called a maker. Normally is is possible to contribute to existing blueprints to enhance in an open discussion the qualoty for everyone. But often there is also a desire to solve a new problem or to create a project specific adaptation. In these cases it makes sense to fork a blueprint or to create a new blueprint.
+A user which creates blueprints is called a maker. Normally is is possible to contribute to existing blueprints to enhance in an open discussion the quality for everyone. But often there is also a desire to solve a new problem or to create a project specific adaptation. In these cases it makes sense to fork a blueprint or to create a new blueprint.
 
-Blueprints allows you to solve all kind of API problems in a very easy way.
+Blueprints allows you to solve all kind of API structured problems in a very easy way.
 
 ## Creating a blueprint
 
-A blueprint is a folder with a common structure consisting of a rules document, which controls the code generation process and the templates folder. The templates wll be listed inside a rules document. Later a solution document will link the blueprint with API modules for code generation.
+A blueprint is a folder with a common structure consisting of a rules document, which controls the code generation process and the templates folder. The templates will be listed inside a rules document. Later a solution document will link the blueprint with API modules for code generation.
 
-This is roughly the process to create and developer a blueprint
+Below is roughly the process to create and develop a blueprint
 
-* create a blueprint folder with rules document and templates folder
-*  create an ApiGear Studio API project with a demo API
-*  add a solution to the API project to link API modules with the blueprint
-*  edit the blueprint and re-generate the output
+* Create a blueprint folder with rules document and templates folder
+*  Create an ApiGear Studio API project with a demo API
+*  Add a solution to the API project to link API modules with the blueprint
+*  Edit the blueprint and re-generate the output
 
-The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the language by custom programming language specific filters.
+The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks.
 
 *Note: Visual Studio Code marketplace provides an extension to support the `.liquid` files, you can find it [here](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid).*
 
@@ -57,16 +57,16 @@ default:
 ```
 
 
-The first level (here `default`) defines a feature. This can be enabled or diabled using the feature settings for the code generator. 
+The first level (here `default`) defines a feature. This can be enabled or disabled using the feature settings for the code generator. 
 The next level (here `system`) defines to which symbol is shall be applied. A symbol is a defined location inside the API description. 
 
-There exists the following symbols:
+Inside an API there exists the following symbols:
 
-* `system`: A list of all API modules
-* `module`: document is applied for each module in the system
-* `interface`: document is applied for each interface inside the module
-* `struct`: document is applied for each struct inside the module
-* `enum`: document is applied for each enum inside the module
+* `system`: will be applied once for the root level system
+* `module`: will be applied for each module in the system
+* `interface`: will be is applied for each interface inside the module
+* `struct`: will be is applied for each struct inside the module
+* `enum`: will be is applied for each enum inside the module
 
 For each of these symbols inside the API description the target documents are written based on the source template.
 
@@ -110,6 +110,7 @@ summary:
       target: summary.md
 ```
 
-The `{{}}` are a template expression. For example `{{module.name}}` will be replaced with the content of `module.name`. This allows you to write exact these document names you require.
-Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example `{{module.name|lower}}` will lower case the module name. There are more filters in the [template engine documentation](https://liquidjs.com/filters/overview.html) and ApiGear also added many different filters to the engine.
+The `{{}}` are a template expression. For example `{{module.name}}` will be replaced with the content of `module.name`. This allows you to write exactly these document names you require.
+
+Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example `{{ module.name | lower }}` will lower case the module name. There are more filters in the [template engine documentation](https://liquidjs.com/filters/overview.html) and ApiGear also adds many different code specific filters to the engine.
 

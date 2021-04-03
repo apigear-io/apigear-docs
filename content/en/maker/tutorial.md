@@ -12,7 +12,7 @@ A blueprint is a technology template to transform the ObjectAPI in any kind and 
 
 The best way to create a new blueprint template is to create an external blueprint folder and link it up to an ApiGear Studio API project using an API module and a solution.
 
-The goal of the blueprint is to create a typescript interface from an API document. For this we use an demo API which looks like this:
+The goal of this tutorial is to create a blueprint which generates a typescript interface from an API document. For this we use an demo API which like this:
 
 ```yaml
 # demo.module.yaml
@@ -28,7 +28,7 @@ interfaces:
       - name: decrement
 ```
 
-Which shall be transformed into a typescript interface which looks like this:
+The API shall be transformed into a typescript interface which will finally be like this:
 
 ```ts
 // demo.ts
@@ -39,12 +39,11 @@ interface Counter {
 }
 ```
 
-
-## Create Blueprint
+## Creating a blueprint
 
 First we create a new blueprint by creating a folder and placing a rules document at the root folder and an empty template document inside a templates folder.
 
-The folder structure should look like this.
+The folder structure will look like this.
 
 ```
 myproject/
@@ -54,14 +53,14 @@ myproject/
 ```
 
 
-The rules document defines which documents are written based on which API symbols, in our case the `module` symbol. The source document is a liquid template document and the target document is a text document, where the target name is also a template string.
+The rules document defines which documents are written based on which API symbols, in our case the `module` symbol, as we want to create one typescript document per module. The source document is a liquid template document and the target document is a text document, where the target name can also be a template string.
 
 ```yaml
 # rules.yaml
 default:
   module:
     - source: module.ts.liquid
-      target: "{{module.name | lower }}.ts"
+      target: "{{ module.name | lower }}.ts"
 ```
 
 The `module.txt.liquid` file inside the template folder can be empty initially, we fill it up later.
@@ -90,9 +89,9 @@ interfaces:
       - name: decrement
 ```
 
-The demo API now needs to be linked to the blueprint rules document. This is done from within a solution, which links API modules to blueprints.
+The demo API now needs to be linked to the blueprint rules document. This is done from within a solution document, which links API modules to blueprints.
 
-Create a solution document from within ApiGear Studio also called `demo`, and the content should look like this.
+Open ApiGear Studio and create a solution document also called `demo`, and the content should look like this.
 
 ```yaml
 # demo.solution.yaml
@@ -144,7 +143,7 @@ The rules document already takes care that for each API module one typescript do
 ## Typescript Template
 
 Inside our `module.ts.liquid` template document each interface in the module shall be an typescript interface. 
-This can be accomplished with the for loop from the template engine.
+This can be accomplished with the for-loop from the liquidjs template engine.
 
 ```liquid
 {% for interface in module.interfaces %}
@@ -164,12 +163,12 @@ interface Counter {
 
 ## Filling in the details
 
-There are still the properties and operations missing from the source code. We can add them into the template using another for loops.
+There are still the properties and operations missing from the source code. We can add them into the template using another for loop, which iterate over the properties and operations from the interface.
 
 ```liquid
 {% for interface in module.interfaces %}
 interface {{ interface.name }} {
-{% for property in interface.propertys %}
+{% for property in interface.properties %}
   {{ property.name }}: {{ property | tsReturn }}
 {% endfor %}
 {% for operation in interface.operations %}
@@ -190,7 +189,7 @@ interface Counter {
 }
 ```
 
-So great. Are we finished? The mindful reader already figured out that the operation parameters are missing. To try this we can add steps to the operations.
+So great. Are we finished? The mindful reader already figured out that the operation parameters are missing. To demonstrate this we will add steps parameters to the increment and decrement operations.
 
 We first update our API demo module (`demo.module.yaml`) adding parameters to the operations like this:
 
@@ -229,7 +228,7 @@ This shows how easy it is to create an own template solution for a supported tec
 
 ## Packaging
 
-It is possible to create a blueprint package for distribution. For this we use [npm](https://docs.npmjs.com/cli/v7/commands/npm) to create a package. 
+It is also possible to create a blueprint package for distribution. For this we use [npm](https://docs.npmjs.com/cli/v7/commands/npm) to create a package. 
 
 To create a package run `npm init --yes`, this will create a `package.json` document in the current directory. 
 
