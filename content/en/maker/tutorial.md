@@ -4,7 +4,7 @@ description: Tutorial to create a custom blueprint
 position: 702
 category: Maker
 version: 1.0
-menuTitle: Blueprint Tutorial
+menuTitle: Tutorial
 ---
 
 
@@ -257,5 +257,3 @@ This simple demo shows the workflow of creating technology blueprints using ApiG
 ApiGear support several programming languages and technologies, such as Python, C++, TypeScript, Go and others and is able to create complex solutions for almost every application.
 
 ApiGear comes with several advanced technology blueprints which provides solutions for the most common problems. IN case the provides solutions do not fit your needs ApiGear is designed to allow quick adoptions of the underlying technology blueprints.
-
-
