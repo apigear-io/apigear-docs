@@ -1,10 +1,10 @@
 ---
-title: Blueprint Filters
+title: Filter Reference
 description: Blueprint template filter
 position: 703
 category: Maker
 version: 1.0
-menuTitle: Blueprint Filters
+menuTitle: Filters
 ---
 
 ## String Filters
@@ -119,7 +119,7 @@ These are the common filters for all languages
     {{ property | cpp14Default }}
     ```
 
-## Python
+## Python Filters
 
 * **pyReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
 
@@ -150,7 +150,7 @@ These are the common filters for all languages
     {{ property | pyDefault }}
     ```
 
-## Go
+## Go Filters
 
 * **goReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
 
@@ -181,7 +181,7 @@ These are the common filters for all languages
     {{ property | goDefault }}
     ```
 
-## TypeScript
+## TypeScript Filters
 
 
 * **tsReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
@@ -213,7 +213,7 @@ These are the common filters for all languages
     {{ property | tsDefault }}
     ```
 
-## Qt C++
+## Qt C++ Filters
 
 
 
