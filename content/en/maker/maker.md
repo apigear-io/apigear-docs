@@ -33,7 +33,7 @@ Below is roughly the process to create and develop a blueprint
 *  Add a solution to the API project to link API modules with the blueprint
 *  Edit the blueprint and re-generate the output
 
-The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks.
+The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks. To read more about LiquidJS visit their [tags](https://liquidjs.com/tags/overview.html) and [filter](https://liquidjs.com/filters/overview.html) documentation.
 
 *Note: Visual Studio Code marketplace provides an extension to support the `.liquid` files, you can find it [here](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid).*
 
