@@ -12,6 +12,10 @@
   "dependencies": {
     "@nuxt/content-theme-docs": "^0.6.0",
     "@nuxtjs/gtm": "^2.3.2",
-    "nuxt": "^2.14.5"
+    "add": "^2.0.6",
+    "mermaid": "^8.9.2",
+    "nuxt": "^2.14.5",
+    "remark-admonitions": "^1.2.1",
+    "yarn": "^1.22.10"
   }
 }
