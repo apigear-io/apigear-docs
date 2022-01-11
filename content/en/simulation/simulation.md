@@ -26,7 +26,7 @@ schema: apigear.scenario/1.0
 name: "demo scenario"
 version: "1.0"
 interfaces:
-  demo/Counter:
+  demo.Counter:
     properties:
       count: { value: 0 } # static fixed definition of the state
     operations:
@@ -42,7 +42,7 @@ interfaces:
         return { value: "$params.message" } # returns the incoming message param back as result
 ```
 
-This is a simple scenario which imitate a `demo/Counter` and `demo/Echo` interface.
+This is a simple scenario which imitate a `demo.Counter` and `demo.Echo` interface.
 
 When this scenario is loaded into the simulation server a client can just call these simulation operations.
 

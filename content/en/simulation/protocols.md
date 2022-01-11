@@ -44,7 +44,7 @@ interfaces:
           - type: string
 ```
 
-We can identify an operation using an URI like this `demo/Counter#increment` and a service like this `demo/Counter`.
+We can identify an operation using an URI like this `demo.Counter/increment` and a service like this `demo.Counter`.
 
 As a convention, calling the service should always give back the current state, which is the sum of properties. Calling an operation should always return a valid value defined by the `return` type.
 
@@ -57,29 +57,29 @@ You can start the simulation server using a pre-defined, manually entered or aut
 
 ```json
 {
-  "symbol": "${module}/${object}#${operation}",
+  "symbol": "${module}.${object}/${operation}",
   "data": "${params}",
 }
 ```
 
-Where the payload is based on the ObjectAPI endpoint notation. `${module}/${$interface}.${operation}`.
+Where the payload is based on the ObjectAPI endpoint notation. `${module}.${$interface}/${operation}`.
 
 Using the [http](https://httpie.io/) tool we can write
 
 ```shell
-http :3000 symbol=demo/Counter#increment data="{ step: 5 }"
+http :3000 symbol=demo.Counter/increment data="{ step: 5 }"
 ```
 
 It is also valid to call the endpoint without parameters, in this case some actions relying on the step parameter might fail if defined.
 
 ```shell
-http :3000 symbol=demo/Counter#increment
+http :3000 symbol=demo.Counter/increment
 ```
 
 To get the latest state you can call the object directly
 
 ```shell
-http :3000 symbol=demo/Counter
+http :3000 symbol=demo.Counter
 ```
 
 The response will be the state
@@ -123,7 +123,7 @@ To call an operation endpoint the format is
   "id": 1,
   "method": "simu.call",
   "params": {
-    "symbol": "demo/Echo#say",
+    "symbol": "demo.Echo/say",
     "data": {
       "message": "hello"
     }
@@ -153,7 +153,7 @@ To get the state of a service you need to call the service itself using the `sim
   "id": 1,
   "method": "simu.state",
   "params": {
-    "symbol": "demo/Counter",
+    "symbol": "demo.Counter",
   }
 }
 ```
@@ -181,7 +181,7 @@ The state changes are announced through sending a JSON-RPC notification back to 
   "jsonrpc": "2.0",
   "method": "simu.state",
   "params": {
-    "symbol": "demo/Counter",
+    "symbol": "demo.Counter",
     "data": {
       "count": 10
     } 
@@ -199,7 +199,7 @@ The simulation will also send signals as noted in the ObjectAPI back to the clie
   "jsonrpc": "2.0",
   "method": "simu.signal",
   "params": {
-    "symbol": "demo/Hello#shutdown",
+    "symbol": "demo.Hello/shutdown",
     "data": {
       "timeout": 10
     } 
