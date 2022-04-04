@@ -1,11 +1,4 @@
----
-title: "Modules"
-description: "A module in ApiGear is used to describe API inside a namespace"
-position: 5
-category: "Start"
-version: 1.0
-menuTitle: Modules
----
+# API Modules
 
 An API Module defines an ObjectAPI document inside a project to define an API surface for a defined use case. Typically, there are several API modules inside a project.
 
