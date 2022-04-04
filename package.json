@@ -4,18 +4,10 @@
   "description": "Product documentation for ApiGear.io",
   "author": "apigear",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "@nuxt/content-theme-docs": "^0.6.0",
-    "@nuxtjs/gtm": "^2.3.2",
-    "add": "^2.0.6",
-    "mermaid": "^8.13.8",
-    "nuxt": "^2.14.5",
-    "remark-admonitions": "^1.2.1",
-    "yarn": "^1.22.10"
+    "vuepress": "^1.9.7"
   }
 }
