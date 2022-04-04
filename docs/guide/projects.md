@@ -1,11 +1,4 @@
----
-title: "Projects"
-description: "A project in ApiGear is used to group API modules"
-position: 4
-category: "Start"
-version: 1.0
-menuTitle: Projects
----
+# Projects
 
 Inside a team the most important concept are Projects. Projects are a collection of API modules, documentation and other artifacts you want to keep together.
 

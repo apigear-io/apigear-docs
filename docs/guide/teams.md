@@ -1,11 +1,4 @@
----
-title: "Teams"
-description: "A team in ApiGear is a collaborative space to work on API Projects"
-position: 3
-category: "Start"
-version: 1.0
-menuTitle: Teams
----
+# Teams
 
 ApiGear enables software construction using an API driven process in a collaborative manner. This allows you to drive efficiency, consistency and discipline across your API driven teams.
 

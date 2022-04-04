@@ -1,11 +1,4 @@
----
-title: "Invite Members"
-description: "A module in ApiGear is used to describe API inside a namespace"
-position: 6
-category: "Start"
-version: 1.0
-menuTitle: Invite Members
----
+# Invite Members
 
 Design, create, document, test and governance are essential tasks belonging to a API driven managed project. To create a great API it requires all information from all stakeholders coming together using the same platform and same modern tooling. Knowledge silos will lead to inconsistency and friction.
 
