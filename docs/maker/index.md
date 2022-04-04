@@ -112,6 +112,6 @@ features:
           target: summary.md
 ```
 
-The `{{}}` are a template expression. For example `{{module.name}}` will be replaced with the content of `module.name`. This allows you to write exactly these document names you require.
+The <code v-pre>{{ }}</code> are a template expression. For example <code v-pre>{{module.name}}</code> will be replaced with the content of `module.name`. This allows you to write exactly these document names you require.
 
-Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example `{{ module.name | lower }}` will lower case the module name. There are more filters in the [template engine documentation](https://liquidjs.com/filters/overview.html) and ApiGear also adds many different code specific filters to the engine.
+Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example <code v-pre>{{ module.name | lower }}</code> will lower case the module name. There are more filters in the [template engine documentation](https://liquidjs.com/filters/overview.html) and ApiGear also adds many different code specific filters to the engine.
