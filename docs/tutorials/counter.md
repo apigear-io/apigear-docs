@@ -1,4 +1,4 @@
-# Counter API
+# Counter API Demo
 
 The example we are looking at is a simple coffee counter. Our product will track the daily coffee consumption of a user. For this the user interface requires an API to the backend to count coffees.
 

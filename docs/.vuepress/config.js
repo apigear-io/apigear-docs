@@ -85,7 +85,7 @@ module.exports = {
         { 
           title: 'Tutorials', 
           collapsable: false, 
-          children: ['', 'counter', 'calculator', 'devcycle'] 
+          children: ['', 'counter', 'calculator'] 
         }
       ],
       '/sdks/': [

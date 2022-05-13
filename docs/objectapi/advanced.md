@@ -13,7 +13,7 @@ info:
 
 ## Meta information
 
-Sometimes it is required to add additional information, which is not part of the InterfaceAPI specification. For this the meta tag can be used.
+Sometimes it is required to add additional information, which is not part of the ObjectAPI specification. For this the meta tag can be used.
 
 ```yaml
 interfaces:

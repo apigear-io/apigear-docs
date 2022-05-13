@@ -2,7 +2,7 @@
 
 ## Module Namespaces
 
-A module is a namespace for InterfaceAPI symbols like interfaces, structures and enumerations. The module bundles these symbols together in one namespace.
+A module is a namespace for ObjectAPI symbols like interfaces, structures and enumerations. The module bundles these symbols together in one namespace.
 
 A module is identified by its `name` and `version`. The module name should be typically lowercase and words separated by `.`, like a reverse URI notation `org.example`.
 
@@ -12,7 +12,7 @@ Typically a module consist of the `apigear.interfaces` version declaration, the 
 
 The version number must be written as a string, otherwise it wil be converted to a numeric value (e.g. 1 for 1.0).
 
-Only interfaceapi, name, version are mandatory. The other identifiers are optional.
+Only ObjectAPI, name, version are mandatory. The other identifiers are optional.
 
 ```yml
 schema: apigear.module/1.0
