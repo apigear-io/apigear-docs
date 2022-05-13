@@ -31,11 +31,12 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
-    editLinks: false,
-    docsDir: '',
-    editLinkText: '',
-    lastUpdated: false,
+    repo: 'apigear-io/apigear-docs',
+    editLinks: true,
+    docsDir: 'docs',
+    editLinkText: 'Contribute',
+    lastUpdated: true,
+    docsBranch: 'main',
     nav: [
       {
         text: 'Learning',
@@ -71,14 +72,13 @@ module.exports = {
           { text: 'ApiGear', link: 'https://apigear.io' }
         ]
       },
-      { text: 'Github', link: 'https://github.com/apigear-io' }
     ],
     sidebar: {
       '/guide/': [
         {
           title: 'Guide',
           collapsable: false,
-          children: ['', 'teams', 'projects', 'members', 'cases']
+          children: ['']
         }
       ],
       '/tutorials/': [
