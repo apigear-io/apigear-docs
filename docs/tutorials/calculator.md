@@ -1,4 +1,4 @@
-# Calculator API
+# Calculator API Demo
 
 A calculator allows you to enter numbers and calculate a new value based on different operations. Our calculator will support `add`, `subtract`, `multiply` and `divide` operations as well as a `clear` action. The calculator always has a total value to show the current calculated value.
 

@@ -1,27 +1,38 @@
-# Basics
+# API Foundation
 
-InterfaceAPI is defined in terms of modules inside a layer. Each module is captured inside a InterfaceAPI module document. InterfaceAPI is a YAML based specification with a linked schema document for validation.
+ObjectAPI is defined in terms of modules inside a system. Each module is described as an ObjectAPI document.
+
+ObjectAPI is a YAML based specification to describe objects as interfaces.
 
 ## Format
 
-The files describing the InterfaceAPI in accordance to APIGear InterfaceAPI specification are described in JSON syntax and must conform to the JSON standard.
+ObjectAPI is described as an open specification format using JSON Schema. Every ObjectAPI document must conform to this JSON schema definition.
 
-While the the API is described in JSON, other formats (YAML) can be used as input formats.
+:::tip
+While the the API is described in JSON, other formats like YAML can be used as input formats and are automatically converted to JSON by the ObjectAPI tooling.
+:::
 
 Unless otherwise noted all file names in this specification are case sensitive.
 
-## File Structure
+## Managing Documents
 
-There exists a set of files where each file represents an API module. Ideally, the file name matches the module name. Other files can be added which contain meta information for the API modules. They allow to inject additional information which is not relevant or available during API definitions.
+The ObjectAPI documents are simple files on the file system. Several files can be processed together and form a system. It is convention that the file name matches the module name.
 
-- `*.module.yaml` | `*.module.json` - InterfaceAPI document
-- `*.module.meta.yaml` | `*.module.meta.json` - InterfaceAPI meta information injected into the relevant APIs.
+- `*.module.yaml` | `*.module.json` - ObjectAPI document
 
-So if a module is name `org.example` the InterfaceAPI document should be called `org.example.module.yaml`
+Other files can be added which contain meta information for the API modules. They allow to inject additional information which is not relevant or available during API definitions.
+
+- `*.module.meta.yaml` | `*.module.meta.json` - ObjectAPI meta information injected into the relevant APIs.
+
+So if a module is name `org.example` the ObjectAPI document should be called `org.example.module.yaml`
+
+:::tip
+Outside of the ObjectAPI specification a solution document format is described which binds several modules together and links them to a code template for code generation.
+:::
 
 ## Data Types
 
-In the InterfaceAPI specification data types are used in many locations. State, Method return types and parameters, signal parameters or structures.
+In the ObjectAPI specification data types are used in many locations. State, Method return types and parameters, signal parameters or structures.
 
 Data fields are added at the same level to describe the data name and type. For example for the interface properties, these are:
 
@@ -31,7 +42,7 @@ properties:
     type: int
 ```
 
-The general types available to InterfaceAPI are:
+The general types available to ObjectAPI are:
 
 - Primitives (`bool`, `int`, `float`, `string`)
 - Containers (`arrays`)
@@ -41,10 +52,10 @@ The general types available to InterfaceAPI are:
 
 Data types can be re-presented in different forms in different programming languages. They all need to be convertible to JSON data types on request.
 
-- `bool`
-- `int`
-- `float`
-- `string`
+- `bool` - A simple boolean value (true or false)
+- `int` - A signed integer value
+- `float` - A floating point value
+- `string` - A string value
 
 ## Arrays
 
@@ -68,7 +79,11 @@ properties:
     items: { ref: Message }
 ```
 
-Primitive types are always lowercase and symbols are always uppercase. The cases might change in the target language.
+Primitive types are always start with a lower case character and symbols always with an upper case character.
+
+::: tip
+The code templates will change the casing based on the target language preferences.
+:::
 
 ## Complex Types
 
