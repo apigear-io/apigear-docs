@@ -42,6 +42,9 @@ module.exports = {
         items: [
           { text: 'Getting Started', link: '/guide/' },
           { text: 'Tutorials', link: '/tutorials/'},    
+          { text: 'ObjectAPI Specification', link: '/objectapi/' },
+          { text: 'ObjectAPI Mappings', link: '/mappings/' } ,       
+          { text: 'ObjectLink Specification', link: '/objectlink/' }
         ]
       },
       { 
@@ -54,12 +57,11 @@ module.exports = {
           { text: 'Templates', link: '/sdks/' },
         ]
       },
-      { 
-        text: 'Specifications',
+      {
+        text: 'Community',
         items: [
-          { text: 'ObjectAPI', link: '/objectapi/' },
-          { text: 'ObjectAPI Mappings', link: '/mappings/' } ,       
-          { text: 'ObjectLink', link: '/objectlink/' }
+          { text: 'Github', link: 'https://github.com/apigear-io' },
+          { text: 'Discussion', link: 'https://github.com/orgs/apigear-io/discussions' }
         ]
       },
       { 
