@@ -16,8 +16,10 @@ The goal of this tutorial is to create a blueprint which generates a typescript 
 
 ```yaml
 # demo.module.yaml
+schema: "apigear.module/1.0"
 name: demo
-version: 1.0
+version: "0.1"
+
 interfaces:
   - name: Counter
     properties:
@@ -57,13 +59,15 @@ The rules document defines which documents are written based on which API symbol
 
 ```yaml
 # rules.yaml
-default:
-  module:
-    - source: module.ts.liquid
-      target: "{{ module.name | lower }}.ts"
+features:
+  default:
+    module:
+      documents:
+        - source: module.ts.liquid
+          target: "{{ module.name | lower }}.ts"
 ```
 
-The `module.txt.liquid` file inside the template folder can be empty initially, we fill it up later.
+The `module.ts.liquid` file inside the template folder can be empty initially, we fill it up later.
 
 Now our basic blueprint project is ready, it's time to link it up with an ApiGear Studio API project.
 
@@ -77,8 +81,10 @@ Copy our demo API into the API document.
 
 ```yaml
 # demo.module.yaml
+schema: "apigear.module/1.0"
 name: demo
-version: 1.0
+version: "0.1"
+
 interfaces:
   - name: Counter
     properties:
@@ -95,13 +101,20 @@ Open ApiGear Studio and create a solution document also called `demo`, and the c
 
 ```yaml
 # demo.solution.yaml
+schema: "apigear.solution/1.0"
+name: demo
+version: "0.1"
+
 layers:
   - name: demo
-    output: ../src
+    output: ../ouput
     modules:
       - demo.module.yaml
     blueprint:
-      - rules: ../rules.yaml
+      package: ""
+      rules: ../rules.yaml
+      features:
+        - all
 ```
 
 This will first parse all defined modules (demo) and apply the given blueprint to the modules. The documents will then be written relative to the given output directory.
@@ -118,7 +131,7 @@ myproject/
     module.ts.liquid
 ```
 
-When you now run the solution it will create an empty `src/demo.ts` document inside the project directory.
+When you now run the solution it will create an empty `output/demo.ts` document inside the project directory.
 
 Now we have a basic setup ready.
 
