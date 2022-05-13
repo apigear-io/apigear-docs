@@ -88,26 +88,34 @@ for module in system.modules:
 Here is a more elaborate example of a rules document:
 
 ```yaml
-markdown:
-  system:
-    - source: system.md.liquid
-      target: system.md
-  module:
-    - source: module.md.liquid
-      target: {{module.name}}.md
-  interface:
-    - source: interface.md.liquid
-      target: {{interface.name}}.md
-  struct:
-    - source: struct.md.liquid
-      target: {{struct.name}}.md
-  enum:
-    - source: enum.md.liquid
-      target: {{enum.name}}.md
-summary:
-  system:
-    - source: summary.md.liquid
-      target: summary.md
+# rules.yaml
+features:
+  default:
+    system:
+      documents:
+        - source: system.md.liquid
+          target: system.md
+    module:
+      documents:
+        - source: module.md.liquid
+          target: {{module.name}}.md
+    interface:
+      documents:
+        - source: interface.md.liquid
+          target: {{interface.name}}.md
+    struct:
+      documents:
+        - source: struct.md.liquid
+          target: {{struct.name}}.md
+    enum:
+      documents:
+        - source: enum.md.liquid
+          target: {{enum.name}}.md
+  summary:
+    system:
+      documents:
+        - source: summary.md.liquid
+          target: summary.md
 ```
 
 The `{{}}` are a template expression. For example `{{module.name}}` will be replaced with the content of `module.name`. This allows you to write exactly these document names you require.
