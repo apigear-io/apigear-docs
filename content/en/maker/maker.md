@@ -50,10 +50,12 @@ first/
 The rules document is a YAML document and lists all template file and how they shall be written inside the output folder. A simple rules document could look like this:
 
 ```yaml
-default:
-  system:
-    - source: welcome.txt.liquid
-      target: welcome.txt
+features:
+  default:
+    system:
+      documents:
+        - source: welcome.txt.liquid
+          target: welcome.txt
 ```
 
 
