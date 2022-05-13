@@ -38,41 +38,38 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Guide',
-        link: '/guide/'
+        text: 'Learning',
+        items: [
+          { text: 'Getting Started', link: '/guide/' },
+          { text: 'Tutorials', link: '/tutorials/'},    
+        ]
       },
-      {
-        text: 'ObjectAPI',
-        link: '/objectapi/'
+      { 
+        text: 'Tooling', 
+        items: [
+          { text: 'Desktop Studio', link: '/studio/' },
+          { text: 'Simulation', link: '/simulation/' },
+          { text: 'Monitoring', link: '/monitor/' },
+          { text: 'Maker', link: '/maker/' },
+          { text: 'Templates', link: '/sdks/' },
+        ]
       },
-      {
-        text: 'Tutorials',
-        link: '/tutorials/'
+      { 
+        text: 'Specifications',
+        items: [
+          { text: 'ObjectAPI', link: '/objectapi/' },
+          { text: 'ObjectAPI Mappings', link: '/mappings/' } ,       
+          { text: 'ObjectLink', link: '/objectlink/' }
+        ]
       },
-      {
-        text: 'SDK Templates',
-        link: '/sdks/'
+      { 
+        text: 'About', 
+        items: [
+          { text: 'About', link: '/about/' },
+          { text: 'ApiGear', link: 'https://apigear.io' }
+        ]
       },
-      {
-        text: 'Simulation',
-        link: '/simulation/'
-      },
-      {
-        text: 'Monitor',
-        link: '/monitor/'
-      },
-      {
-        text: 'Maker',
-        link: '/maker/'
-      },
-      {
-        text: 'Mappings',
-        link: '/mappings/'
-      },
-      {
-        text: 'ApiGear',
-        link: 'https://apigear.io'
-      }
+      { text: 'Github', link: 'https://github.com/apigear-io' }
     ],
     sidebar: {
       '/guide/': [
@@ -80,13 +77,6 @@ module.exports = {
           title: 'Guide',
           collapsable: false,
           children: ['', 'teams', 'projects', 'members', 'cases']
-        }
-      ],
-      '/objectapi/': [
-        {
-          title: 'ObjectAPI',
-          collapsable: false,
-          children: ['', 'core', 'modules', 'advanced', 'examples']
         }
       ],
       '/tutorials/': [
@@ -126,9 +116,23 @@ module.exports = {
       ],
       '/mappings/': [
         {
-          title: 'Protocol Mapping',
+          title: 'ObjectAPI Mappings',
           collapsable: false,
           children: ['', 'http', 'wamp']
+        }
+      ],
+      '/objectapi/': [
+        {
+          title: 'ObjectAPI',
+          collapsable: false,
+          children: ['', 'core', 'modules', 'advanced', 'examples']
+        }
+      ],
+      '/objectlink/': [
+        { 
+          title: 'ObjectLink', 
+          collapsable: false, 
+          children: ['', 'lifecycle', 'methods', 'properties', 'signals'] 
         }
       ]
     }
