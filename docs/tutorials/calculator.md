@@ -134,4 +134,4 @@ class Calculator(demo_calc.AbstractCalculator):
 
 The next time we change the API module we need to update the abstract interface and ensure all changed operations are implemented.
 
-It is very easy now to add implementations also for other programming languages or even for a micro service using one of the many supported SDK blueprints.
+It is very easy now to add implementations also for other programming languages or even for a micro service using one of the many supported SDK templates.

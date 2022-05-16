@@ -4,7 +4,7 @@ The Qt C++ template generates a CMake based SDK to develop QtQuick plugins or C+
 
 The Qt C++ SDK also supports the use of the simulation backend. And the ApiGear analytics data center (experimental).
 
-Following blueprint feature switches are supported:
+Following template feature switches are supported:
 
 - Basic - Only creates the interface files for you
 - Scaffold - Creates a full project with reference implementation and build system support.

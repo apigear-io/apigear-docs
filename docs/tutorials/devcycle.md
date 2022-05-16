@@ -20,7 +20,7 @@ The easiest way to do this in a team is to use our online collaboration suite as
 
 ## Create SDK
 
-Once you have created one or several API modules you are set to create your first SDK. Therefore you choose one of our expert engineered [SDK blueprints](../sdk/intro) and a SDK runner for your project.
+Once you have created one or several API modules you are set to create your first SDK. Therefore you choose one of our expert engineered [SDK templates](../sdk/intro) and a SDK runner for your project.
 
 The SDK runner will create a _.zip_ file for you to download.
 

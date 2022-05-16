@@ -1,8 +1,8 @@
-# C++ 14 SDK Blueprint
+# C++ 14 SDK template
 
 The C++ 14 code SDK generates C++ 14 conform interfaces to be implemented by the developers. If scaffolding is switched on it will also generate a full project with CMake, Conan and test support. The project will scale with new API modules.
 
-Following blueprint feature switches are supported:
+Following template feature switches are supported:
 
 - Basic - Only creates the interface files for you
 - Scaffold - Creates a full project with reference implementation and build system support.

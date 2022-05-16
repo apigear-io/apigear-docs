@@ -4,7 +4,7 @@ The Go template generates a Golang module based on the module name and exposes c
 
 The Go module allows to be extended and implemented based on the API core and the scaffolding files.
 
-Following blueprint feature switches are supported:
+Following template feature switches are supported:
 
 - API - Only creates the interface files for you
 - Scaffold - Creates a full project with reference implementation and build system support.
