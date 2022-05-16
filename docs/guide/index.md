@@ -64,7 +64,7 @@ layers:
     modules:
       - <name>.module.yaml
     output: "../output"
-    template:
+    blueprint:
       package: <template-name>
 ```
 
