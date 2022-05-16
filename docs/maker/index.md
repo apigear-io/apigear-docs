@@ -1,30 +1,30 @@
 # Custom Templates
 
-ApiGear offers a large set of pre-made technology blueprints covering the major programming languages and technologies.
-But often a project requires some adaptations to the blueprints or require support for a different technology which is not yet covered.
+ApiGear offers a large set of pre-made technology templates covering the major programming languages and technologies.
+But often a project requires some adaptations to the templates or require support for a different technology which is not yet covered.
 
-ApiGear was designed to allow customers easily to adapt the existing blueprints for the specifics of each customer project.
+ApiGear was designed to allow customers easily to adapt the existing templates for the specifics of each customer project.
 
-Customers can provide their own technology blueprints, either as open source or proprietary blueprints.
+Customers can provide their own technology templates, either as open source or proprietary templates.
 
-The process to adapt an existing blueprint or to create a fresh new blueprint is not really difficult and will be covered here.
+The process to adapt an existing template or to create a fresh new template is not really difficult and will be covered here.
 
 ## Maker
 
-A user which creates blueprints is called a maker. Normally is is possible to contribute to existing blueprints to enhance in an open discussion the quality for everyone. But often there is also a desire to solve a new problem or to create a project specific adaptation. In these cases it makes sense to fork a blueprint or to create a new blueprint.
+A user which creates templates is called a maker. Normally is is possible to contribute to existing templates to enhance in an open discussion the quality for everyone. But often there is also a desire to solve a new problem or to create a project specific adaptation. In these cases it makes sense to fork a template or to create a new template.
 
-Blueprints allows you to solve all kind of API structured problems in a very easy way.
+templates allows you to solve all kind of API structured problems in a very easy way.
 
 ## Creating a template
 
-A blueprint is a folder with a common structure consisting of a rules document, which controls the code generation process and the templates folder. The templates will be listed inside a rules document. Later a solution document will link the blueprint with API modules for code generation.
+A template is a folder with a common structure consisting of a rules document, which controls the code generation process and the templates folder. The templates will be listed inside a rules document. Later a solution document will link the template with API modules for code generation.
 
-Below is roughly the process to create and develop a blueprint
+Below is roughly the process to create and develop a template
 
-- Create a blueprint folder with rules document and templates folder
+- Create a template folder with rules document and templates folder
 - Create an ApiGear Studio API project with a demo API
-- Add a solution to the API project to link API modules with the blueprint
-- Edit the blueprint and re-generate the output
+- Add a solution to the API project to link API modules with the template
+- Edit the template and re-generate the output
 
 The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks. To read more about LiquidJS visit their [tags](https://liquidjs.com/tags/overview.html) and [filter](https://liquidjs.com/filters/overview.html) documentation.
 
@@ -32,7 +32,7 @@ _Note: Visual Studio Code marketplace provides an extension to support the `.liq
 
 ## Your first template
 
-A typical blueprint folder structure looks like this
+A typical template folder structure looks like this
 
 ```
 first/

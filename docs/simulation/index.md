@@ -9,7 +9,7 @@ A simulation can have static data, dynamic random data, run a series of actions 
 - Action Sequences: Run a sequence of actions which manipulates the data and return based on a operation call
 - Active Playbook: Runs a playbook based on a timed behavior. The playbook can be started, restarted, stopped based on actions or automatically run in a loop.
 
-_A Blueprint must support the simulation protocol to talk to a simulation server. Please contact the individual blueprint documentation for more information._
+_A template must support the simulation protocol to talk to a simulation server. Please contact the individual template documentation for more information._
 
 Using our demo counter we can write a scenario like this.
 

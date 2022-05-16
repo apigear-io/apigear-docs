@@ -4,7 +4,7 @@ The TypeScript template generates a ES6 module based on the module path and expo
 
 The TypeScript module allows to be extended and implemented based on the API core and the scaffolding files.
 
-Following blueprint feature switches are supported:
+Following template feature switches are supported:
 
 - API - Only creates the interface files for you
 - Scaffold - Creates a full project with reference implementation and build system support.

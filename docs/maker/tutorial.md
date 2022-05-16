@@ -1,10 +1,10 @@
 # Template Tutorial
 
-A blueprint is a technology template to transform the ObjectAPI in any kind and amount of other text documents, e.g. source code. It consist of a set of rules and template documents.
+A template is a technology template to transform the ObjectAPI in any kind and amount of other text documents, e.g. source code. It consist of a set of rules and template documents.
 
-The best way to create a new blueprint template is to create an external blueprint folder and link it up to an ApiGear Studio API project using an API module and a solution.
+The best way to create a new template template is to create an external template folder and link it up to an ApiGear Studio API project using an API module and a solution.
 
-The goal of this tutorial is to create a blueprint which generates a typescript interface from an API document. For this we use an demo API which like this:
+The goal of this tutorial is to create a template which generates a typescript interface from an API document. For this we use an demo API which like this:
 
 ```yaml
 # demo.module.yaml
@@ -35,7 +35,7 @@ interface Counter {
 
 ## Creating a template
 
-First we create a new blueprint by creating a folder and placing a rules document at the root folder and an empty template document inside a templates folder.
+First we create a new template by creating a folder and placing a rules document at the root folder and an empty template document inside a templates folder.
 
 The folder structure will look like this.
 
@@ -60,7 +60,7 @@ features:
 
 The `module.ts.liquid` file inside the template folder can be empty initially, we fill it up later.
 
-Now our basic blueprint project is ready, it's time to link it up with an ApiGear Studio API project.
+Now our basic template project is ready, it's time to link it up with an ApiGear Studio API project.
 
 ## Create API Project
 
@@ -86,7 +86,7 @@ interfaces:
       - name: decrement
 ```
 
-The demo API now needs to be linked to the blueprint rules document. This is done from within a solution document, which links API modules to blueprints.
+The demo API now needs to be linked to the template rules document. This is done from within a solution document, which links API modules to templates.
 
 Open ApiGear Studio and create a solution document also called `demo`, and the content should look like this.
 
@@ -108,7 +108,7 @@ layers:
         - all
 ```
 
-This will first parse all defined modules (demo) and apply the given blueprint to the modules. The documents will then be written relative to the given output directory.
+This will first parse all defined modules (demo) and apply the given template to the modules. The documents will then be written relative to the given output directory.
 
 Your project should look like this now:
 
@@ -229,7 +229,7 @@ This shows how easy it is to create an own template solution for a supported tec
 
 ## Packaging
 
-It is also possible to create a blueprint package for distribution. For this we use [npm](https://docs.npmjs.com/cli/v7/commands/npm) to create a package.
+It is also possible to create a template package for distribution. For this we use [npm](https://docs.npmjs.com/cli/v7/commands/npm) to create a package.
 
 To create a package run `npm init --yes`, this will create a `package.json` document in the current directory.
 
@@ -246,14 +246,14 @@ The package document needs to know which files to package, for this we add a fil
 
 Now you can run `npm pack` to create an NPM package which then can be distributed.
 
-This package can then be shared with other users. Inside ApiGear Studio you can install a blueprint package using the upload button.
+This package can then be shared with other users. Inside ApiGear Studio you can install a template package using the upload button.
 
-In the future it will be possible to upload a blueprint package to our central registry and be available to all users.
+In the future it will be possible to upload a template package to our central registry and be available to all users.
 
 ## Next Steps
 
-This simple demo shows the workflow of creating technology blueprints using ApiGear Studio.
+This simple demo shows the workflow of creating technology templates using ApiGear Studio.
 
 ApiGear support several programming languages and technologies, such as Python, C++, TypeScript, Go and others and is able to create complex solutions for almost every application.
 
-ApiGear comes with several advanced technology blueprints which provides solutions for the most common problems. IN case the provides solutions do not fit your needs ApiGear is designed to allow quick adoptions of the underlying technology blueprints.
+ApiGear comes with several advanced technology templates which provides solutions for the most common problems. IN case the provides solutions do not fit your needs ApiGear is designed to allow quick adoptions of the underlying technology templates.

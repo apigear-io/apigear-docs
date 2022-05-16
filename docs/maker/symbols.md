@@ -1,6 +1,6 @@
 # Symbol Reference
 
-When developing technology blueprints it is vital to understand what each symbol traversing has to offer on properties. ObjectAPI is structured based on the idea of modules, interfaces, structures and enumerations.
+When developing technology templates it is vital to understand what each symbol traversing has to offer on properties. ObjectAPI is structured based on the idea of modules, interfaces, structures and enumerations.
 
 And an interface contains properties, operations and signals and structures contain fields and enumerations contain members.
 
@@ -27,7 +27,7 @@ Each symbol you can iterate over is either element or an element with additional
 - **description**: string
   - test to describe the element
 - **meta**: object
-  - free form data, evaluated by the technology blueprint
+  - free form data, evaluated by the technology template
 - **kind**: string
   - one of [module, interface, struct, enum, property, operation, signal]
 
