@@ -1,2 +1,4 @@
 node_modules
 .nuxt
+.DS_Store
+docs/.vuepress/dist
