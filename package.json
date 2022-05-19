@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "vuepress": "^1.9.7"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-google-analytics": "^1.9.7"
   }
 }
