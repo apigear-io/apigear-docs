@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>API Examples | ApiGear</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="Product documentation for ApiGear.io">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.e98b764f.js" as="script"><link rel="preload" href="/assets/js/2.179ded00.js" as="script"><link rel="preload" href="/assets/js/21.547f89f5.js" as="script"><link rel="prefetch" href="/assets/js/10.558acead.js"><link rel="prefetch" href="/assets/js/11.e225714e.js"><link rel="prefetch" href="/assets/js/12.ec9cb783.js"><link rel="prefetch" href="/assets/js/13.c4b8baf1.js"><link rel="prefetch" href="/assets/js/14.17989361.js"><link rel="prefetch" href="/assets/js/15.a81d012d.js"><link rel="prefetch" href="/assets/js/16.ed3edd5d.js"><link rel="prefetch" href="/assets/js/17.ea33b044.js"><link rel="prefetch" href="/assets/js/18.5e5dddf5.js"><link rel="prefetch" href="/assets/js/19.5b50f90f.js"><link rel="prefetch" href="/assets/js/20.88b729be.js"><link rel="prefetch" href="/assets/js/22.c04e626e.js"><link rel="prefetch" href="/assets/js/23.88990eea.js"><link rel="prefetch" href="/assets/js/24.c2e11447.js"><link rel="prefetch" href="/assets/js/25.a5ba9dfb.js"><link rel="prefetch" href="/assets/js/26.a455094f.js"><link rel="prefetch" href="/assets/js/27.2b5f1164.js"><link rel="prefetch" href="/assets/js/28.ef14575a.js"><link rel="prefetch" href="/assets/js/29.4eff8b65.js"><link rel="prefetch" href="/assets/js/3.b6f22b97.js"><link rel="prefetch" href="/assets/js/30.c710be36.js"><link rel="prefetch" href="/assets/js/31.3a7b891f.js"><link rel="prefetch" href="/assets/js/32.eaf6bc13.js"><link rel="prefetch" href="/assets/js/33.a20ec5ae.js"><link rel="prefetch" href="/assets/js/34.2fc30015.js"><link rel="prefetch" href="/assets/js/35.95bf8dc7.js"><link rel="prefetch" href="/assets/js/36.a72af7b4.js"><link rel="prefetch" href="/assets/js/37.c14957c3.js"><link rel="prefetch" href="/assets/js/38.39374075.js"><link rel="prefetch" href="/assets/js/39.683266e7.js"><link rel="prefetch" href="/assets/js/4.ed8f2e2d.js"><link rel="prefetch" href="/assets/js/40.810c8cbe.js"><link rel="prefetch" href="/assets/js/41.34432550.js"><link rel="prefetch" href="/assets/js/42.4f7ed425.js"><link rel="prefetch" href="/assets/js/5.965d8b2b.js"><link rel="prefetch" href="/assets/js/6.1c1e44cf.js"><link rel="prefetch" href="/assets/js/7.e5ee2ad3.js"><link rel="prefetch" href="/assets/js/8.0142bd99.js"><link rel="prefetch" href="/assets/js/9.75ebcf75.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">ApiGear</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Learning" class="dropdown-title"><span class="title">Learning</span> <span class="arrow down"></span></button> <button type="button" aria-label="Learning" class="mobile-dropdown-title"><span class="title">Learning</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">
+  Getting Started
+</a></li><li class="dropdown-item"><!----> <a href="/tutorials/" class="nav-link">
+  Tutorials
+</a></li><li class="dropdown-item"><!----> <a href="/objectapi/" class="nav-link router-link-active">
+  ObjectAPI Specification
+</a></li><li class="dropdown-item"><!----> <a href="/mappings/" class="nav-link">
+  ObjectAPI Mappings
+</a></li><li class="dropdown-item"><!----> <a href="/objectlink/" class="nav-link">
+  ObjectLink Specification
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tooling" class="dropdown-title"><span class="title">Tooling</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tooling" class="mobile-dropdown-title"><span class="title">Tooling</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/studio/" class="nav-link">
+  Desktop Studio
+</a></li><li class="dropdown-item"><!----> <a href="/simulation/" class="nav-link">
+  Simulation
+</a></li><li class="dropdown-item"><!----> <a href="/monitor/" class="nav-link">
+  Monitoring
+</a></li><li class="dropdown-item"><!----> <a href="/maker/" class="nav-link">
+  Maker
+</a></li><li class="dropdown-item"><!----> <a href="/sdks/" class="nav-link">
+  Templates
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Community" class="dropdown-title"><span class="title">Community</span> <span class="arrow down"></span></button> <button type="button" aria-label="Community" class="mobile-dropdown-title"><span class="title">Community</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/apigear-io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/orgs/apigear-io/discussions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Discussion
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About" class="dropdown-title"><span class="title">About</span> <span class="arrow down"></span></button> <button type="button" aria-label="About" class="mobile-dropdown-title"><span class="title">About</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  About
+</a></li><li class="dropdown-item"><!----> <a href="https://apigear.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ApiGear
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/apigear-io/apigear-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Learning" class="dropdown-title"><span class="title">Learning</span> <span class="arrow down"></span></button> <button type="button" aria-label="Learning" class="mobile-dropdown-title"><span class="title">Learning</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">
+  Getting Started
+</a></li><li class="dropdown-item"><!----> <a href="/tutorials/" class="nav-link">
+  Tutorials
+</a></li><li class="dropdown-item"><!----> <a href="/objectapi/" class="nav-link router-link-active">
+  ObjectAPI Specification
+</a></li><li class="dropdown-item"><!----> <a href="/mappings/" class="nav-link">
+  ObjectAPI Mappings
+</a></li><li class="dropdown-item"><!----> <a href="/objectlink/" class="nav-link">
+  ObjectLink Specification
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tooling" class="dropdown-title"><span class="title">Tooling</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tooling" class="mobile-dropdown-title"><span class="title">Tooling</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/studio/" class="nav-link">
+  Desktop Studio
+</a></li><li class="dropdown-item"><!----> <a href="/simulation/" class="nav-link">
+  Simulation
+</a></li><li class="dropdown-item"><!----> <a href="/monitor/" class="nav-link">
+  Monitoring
+</a></li><li class="dropdown-item"><!----> <a href="/maker/" class="nav-link">
+  Maker
+</a></li><li class="dropdown-item"><!----> <a href="/sdks/" class="nav-link">
+  Templates
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Community" class="dropdown-title"><span class="title">Community</span> <span class="arrow down"></span></button> <button type="button" aria-label="Community" class="mobile-dropdown-title"><span class="title">Community</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/apigear-io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/orgs/apigear-io/discussions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Discussion
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About" class="dropdown-title"><span class="title">About</span> <span class="arrow down"></span></button> <button type="button" aria-label="About" class="mobile-dropdown-title"><span class="title">About</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  About
+</a></li><li class="dropdown-item"><!----> <a href="https://apigear.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ApiGear
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/apigear-io/apigear-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ObjectAPI</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/objectapi/" aria-current="page" class="sidebar-link">ObjectAPI Overview</a></li><li><a href="/objectapi/core.html" class="sidebar-link">API Foundation</a></li><li><a href="/objectapi/modules.html" class="sidebar-link">API Modules</a></li><li><a href="/objectapi/advanced.html" class="sidebar-link">Advanced Concepts</a></li><li><a href="/objectapi/examples.html" aria-current="page" class="active sidebar-link">API Examples</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/objectapi/examples.html#counter" class="sidebar-link">Counter</a></li><li class="sidebar-sub-header"><a href="/objectapi/examples.html#radio-tuner" class="sidebar-link">Radio Tuner</a></li><li class="sidebar-sub-header"><a href="/objectapi/examples.html#weather-station" class="sidebar-link">Weather Station</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="api-examples"><a href="#api-examples" class="header-anchor">#</a> API Examples</h1> <h2 id="counter"><a href="#counter" class="header-anchor">#</a> Counter</h2> <p>The typical counter example to increment and decrement a count value.</p> <div class="language-yml extra-class"><pre class="language-yml"><code><span class="token key atrule">schema</span><span class="token punctuation">:</span> apigear.module/1.0
+<span class="token key atrule">name</span><span class="token punctuation">:</span> org.example
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">&quot;1.0&quot;</span>
+<span class="token key atrule">info</span><span class="token punctuation">:</span>
+  <span class="token key atrule">title</span><span class="token punctuation">:</span> <span class="token string">&quot;Counter API&quot;</span>
+  <span class="token key atrule">description</span><span class="token punctuation">:</span> A counter module develope
+
+<span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Counter
+    <span class="token key atrule">description</span><span class="token punctuation">:</span> Counter interface to count up and down
+    <span class="token key atrule">properties</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> count
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> int
+    <span class="token key atrule">operations</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> increment
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> decrement
+</code></pre></div><h2 id="radio-tuner"><a href="#radio-tuner" class="header-anchor">#</a> Radio Tuner</h2> <p>A radio tuner with a current station and a station list. It can operate on different wavebands.</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">schema</span><span class="token punctuation">:</span> apigear.module/1.0
+<span class="token key atrule">module</span><span class="token punctuation">:</span> entertainment.tuner
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+
+<span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Tuner
+    <span class="token key atrule">description</span><span class="token punctuation">:</span> A tuner service to manages tuner stations
+    <span class="token key atrule">properties</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> currentStation
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> Station
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> current selected station
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> stationList
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> Station<span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> list of current available stations
+    <span class="token key atrule">operations</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nextStation
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> sets current station to next station from list
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> previousStation
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> sets current station to previous station from list
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> updateCurrentStation
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> update current station
+        <span class="token key atrule">params</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> stationId
+          <span class="token punctuation">-</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> id
+
+<span class="token key atrule">structs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Station
+    <span class="token key atrule">fields</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> stationId
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> id
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> station id
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> name
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> station name
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> modified
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">format</span><span class="token punctuation">:</span> date<span class="token punctuation">-</span>time
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> station last time modified
+
+<span class="token key atrule">enums</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> State
+    <span class="token key atrule">description</span><span class="token punctuation">:</span> State for tuner interface
+    <span class="token key atrule">members</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> None
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> tuner not initialized
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Loading
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> tuner is loading
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Ready
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> tuner is ready and operational
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Error
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> tuner received an error
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Waveband
+    <span class="token key atrule">members</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> FM
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> FM waveband
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> AM
+        <span class="token key atrule">description</span><span class="token punctuation">:</span> AM waveband
+</code></pre></div><h2 id="weather-station"><a href="#weather-station" class="header-anchor">#</a> Weather Station</h2> <p>The weather station uses a more compact YAML format to display the current temperature.</p> <div class="language-yaml extra-class"><pre class="language-yaml"><code><span class="token key atrule">schema</span><span class="token punctuation">:</span> apigear.module/1.0
+<span class="token key atrule">module</span><span class="token punctuation">:</span> sensors.weatherstation
+<span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2.5</span>
+
+<span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> WeatherStation
+  <span class="token punctuation">-</span> <span class="token key atrule">properties</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token punctuation">{</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> temperature<span class="token punctuation">,</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> float <span class="token punctuation">}</span>
+      <span class="token punctuation">-</span> <span class="token punctuation">{</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> lastError<span class="token punctuation">,</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> Error <span class="token punctuation">}</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">operations</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token punctuation">{</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> reset <span class="token punctuation">}</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">signals</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> error
+        <span class="token key atrule">params</span><span class="token punctuation">:</span>
+          <span class="token punctuation">-</span> <span class="token punctuation">{</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> error<span class="token punctuation">,</span> <span class="token key atrule">type</span><span class="token punctuation">:</span> Error <span class="token punctuation">}</span>
+
+<span class="token key atrule">structs</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Error
+    <span class="token key atrule">fields</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> msg
+        <span class="token key atrule">type</span><span class="token punctuation">:</span> string
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/apigear-io/apigear-docs/edit/main/docs/objectapi/examples.md" target="_blank" rel="noopener noreferrer">Contribute</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">5/19/2022, 3:48:27 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/objectapi/advanced.html" class="prev">
+        Advanced Concepts
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.e98b764f.js" defer></script><script src="/assets/js/2.179ded00.js" defer></script><script src="/assets/js/21.547f89f5.js" defer></script>
+  </body>
+</html>
