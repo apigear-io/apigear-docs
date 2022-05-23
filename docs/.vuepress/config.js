@@ -81,6 +81,13 @@ module.exports = {
           children: ['']
         }
       ],
+      '/studio/': [
+        {
+          title: 'Desktop Studio',
+          collapsable: false,
+          children: ['', 'projects', 'new', 'dashboard', 'modules', 'solutions', 'simulations', 'monitoring', 'templates', 'logs', 'settings']
+        },
+      ],
       '/tutorials/': [
         { 
           title: 'Tutorials', 
