@@ -44,6 +44,7 @@ module.exports = {
           { text: 'Getting Started', link: '/guide/' },
           { text: 'Tutorials', link: '/tutorials/'},    
           { text: 'ObjectAPI Specification', link: '/objectapi/' },
+          { text: 'API Solutions', link: '/solutions/' },
           { text: 'ObjectAPI Mappings', link: '/mappings/' } ,       
           { text: 'ObjectLink Specification', link: '/objectlink/' }
         ]
@@ -100,6 +101,13 @@ module.exports = {
           title: 'SDK Templates',
           collapsable: false,
           children: ['', 'cpp14-sdk', 'qtcpp-sdk', 'python-sdk', 'go-sdk', 'typescript-sdk']
+        }
+      ],
+      '/solutions/': [
+        {
+          title: 'Solutions',
+          collapsable: false,
+          children: ['']
         }
       ],
       '/simulation/': [

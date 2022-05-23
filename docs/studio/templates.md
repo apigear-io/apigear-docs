@@ -7,3 +7,7 @@ These templates are listed at the ApiGEar template server and can be used to gen
 To install your local custom templates, click the `Local Template` button and select the template package to be installed.
 
 The installed packages are then available for your solutions to be used.
+
+The currently available templates are listed in the [SDK Templates](/sdks) section.
+
+If you are interested to create your own template or extend an existing template, please read the [template guide](/maker).

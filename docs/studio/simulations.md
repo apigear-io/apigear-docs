@@ -4,4 +4,4 @@ The API Simulation View shows you all the API simulation documents in the projec
 
 Now you can target your client API towards the simulation server and use the API to test the simulation, without a service backend required.
 
-The simulation document format are described in the [simulation guide](/simulation).
+The simulation document format is described in the [simulation guide](/simulation).
