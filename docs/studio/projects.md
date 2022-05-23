@@ -2,6 +2,8 @@
 
 The dashboard shows the recently used API projects and allows you to create new API projects or import exiting projects.
 
+![Studio Projects](./studio-projects.png)
+
 :::tip
 The API project is basically a folder with an `apigear` folder containing the API documents.
 :::
