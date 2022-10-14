@@ -39,23 +39,28 @@ module.exports = {
     docsBranch: 'main',
     nav: [
       {
-        text: 'Learning',
+        text: 'Learn',
         items: [
           { text: 'Getting Started', link: '/guide/' },
-          { text: 'Tutorials', link: '/tutorials/'},    
-          { text: 'ObjectAPI Specification', link: '/objectapi/' },
-          { text: 'ObjectAPI Mappings', link: '/mappings/' } ,       
-          { text: 'ObjectLink Specification', link: '/objectlink/' }
+          { text: 'Tutorials', link: '/tutorials/'} 
         ]
       },
       { 
-        text: 'Tooling', 
+        text: 'Tools', 
         items: [
-          { text: 'Desktop Studio', link: '/studio/' },
-          { text: 'Simulation', link: '/simulation/' },
-          { text: 'Monitoring', link: '/monitor/' },
-          { text: 'Maker', link: '/maker/' },
-          { text: 'Templates', link: '/sdks/' },
+          { text: 'ApiGear Studio', link: '/studio/' },
+          { text: 'ApiGear CLI', link: '/cli/' },
+        ]
+      },
+      {
+        text: 'Reference',
+        items: [
+          { text: 'ObjectAPI', link: '/objectapi/' },
+          { text: 'ObjectLink', link: '/objectlink/' },
+          { text: 'API Simulation', link: '/simulation/' },
+          { text: 'API Monitoring', link: '/monitor/' },
+          { text: 'SDK Templates', link: '/sdks/' },
+          { text: 'Template Maker', link: '/maker/' },
         ]
       },
       {
@@ -74,6 +79,20 @@ module.exports = {
       },
     ],
     sidebar: {
+      '/studio/': [
+        {
+          title: 'ApiGear Studio',
+          collapsable: false,
+          children: ['', 'quickstart', 'project']
+        }
+      ],
+      '/cli/': [
+        {
+          title: 'ApiGear CLI',
+          collapsable: false,
+          children: ['', 'generate', 'monitor', 'simulate', 'project', 'template']
+        }
+      ],
       '/guide/': [
         {
           title: 'Guide',
@@ -116,25 +135,18 @@ module.exports = {
           children: ['', 'tutorial', 'filters', 'symbols', 'rules']
         }
       ],
-      '/mappings/': [
-        {
-          title: 'ObjectAPI Mappings',
-          collapsable: false,
-          children: ['', 'http', 'wamp']
-        }
-      ],
       '/objectapi/': [
         {
           title: 'ObjectAPI',
           collapsable: false,
-          children: ['', 'core', 'modules', 'advanced', 'examples']
+          children: ['', 'core', 'modules', 'advanced', 'examples', 'idl', 'mapping', 'mapping_http', 'mapping_wamp']
         }
       ],
       '/objectlink/': [
         { 
           title: 'ObjectLink', 
           collapsable: false, 
-          children: ['', 'lifecycle', 'methods', 'properties', 'signals'] 
+          children: ['', 'cases', 'lifecycle', 'methods', 'properties', 'signals', 'errors'] 
         }
       ]
     }
