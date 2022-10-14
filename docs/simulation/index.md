@@ -1,6 +1,6 @@
 # API Simulation
 
-The simulation server allows API clients to use a interface also if it is not yet implemented, just based on an interface definition and an attached scenario document. It decouples the interface implementation from the interface users.
+The simulation server allows API clients to simulate interfaces and (limited) behavior. This is very useful during testing, demonstration also development to simulate specific behavior. It decouples the interface implementation from the interface users.
 
 A simulation can have static data, dynamic random data, run a series of actions or even be an active simulation.
 
@@ -11,27 +11,30 @@ A simulation can have static data, dynamic random data, run a series of actions 
 
 _A template must support the simulation protocol to talk to a simulation server. Please contact the individual template documentation for more information._
 
-Using our demo counter we can write a scenario like this.
+Simulation scenarios can be written using a YAML schema or using a JavaScript file. The JavaScript file can be used to implement more complex scenarios.
+
+Using our demo counter we can write a YAML based scenario like this.
 
 ```yaml
 schema: apigear.scenario/1.0
 name: "demo scenario"
 version: "1.0"
 interfaces:
-  demo.Counter:
+  - name: demo.Counter:
     properties:
-      count: { value: 0 } # static fixed definition of the state
+      count: 0
     operations:
       increment:
         actions:
-          - add: { $state.count, $params.step} # adds step to count on every call
+          - $set { count: 10 }
       decrement:
         actions:
-          - sub: { $state.count, $params.step} # subs step to count on every call
+          - $set { count: -10 }
   demo.Echo:
     operation:
       say:
-        return { value: "$params.message" } # returns the incoming message param back as result
+        actions:
+          - $return { value: "Hello World" }
 ```
 
 This is a simple scenario which imitate a `demo.Counter` and `demo.Echo` interface.

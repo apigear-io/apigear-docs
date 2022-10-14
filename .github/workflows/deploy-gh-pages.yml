@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "16.x"
-      - run: yarn --frozen-lockfile
-      - run: yarn docs:build
+      - run: npm ci
+      - run: npm run docs:build
 
       - name: deploy to github pages
         uses: peaceiris/actions-gh-pages@v3
