@@ -42,11 +42,11 @@ module.exports = {
         text: 'Learn',
         items: [
           { text: 'Getting Started', link: '/guide/' },
-          { text: 'Tutorials', link: '/tutorials/'} 
+          { text: 'Tutorials', link: '/tutorials/' }
         ]
       },
-      { 
-        text: 'Tools', 
+      {
+        text: 'Tools',
         items: [
           { text: 'ApiGear Studio', link: '/studio/' },
           { text: 'ApiGear CLI', link: '/cli/' },
@@ -70,8 +70,8 @@ module.exports = {
           { text: 'Discussion', link: 'https://github.com/orgs/apigear-io/discussions' }
         ]
       },
-      { 
-        text: 'About', 
+      {
+        text: 'About',
         items: [
           { text: 'About', link: '/about/' },
           { text: 'ApiGear', link: 'https://apigear.io' }
@@ -101,10 +101,10 @@ module.exports = {
         }
       ],
       '/tutorials/': [
-        { 
-          title: 'Tutorials', 
-          collapsable: false, 
-          children: ['', 'counter', 'calculator'] 
+        {
+          title: 'Tutorials',
+          collapsable: false,
+          children: ['', 'counter', 'calculator']
         }
       ],
       '/sdks/': [
@@ -132,7 +132,7 @@ module.exports = {
         {
           title: 'Maker',
           collapsable: false,
-          children: ['', 'tutorial', 'filters', 'symbols', 'rules']
+          children: ['', 'tutorial', 'template', 'filters', 'symbols', 'rules']
         }
       ],
       '/objectapi/': [
@@ -143,10 +143,10 @@ module.exports = {
         }
       ],
       '/objectlink/': [
-        { 
-          title: 'ObjectLink', 
-          collapsable: false, 
-          children: ['', 'cases', 'lifecycle', 'methods', 'properties', 'signals', 'errors'] 
+        {
+          title: 'ObjectLink',
+          collapsable: false,
+          children: ['', 'cases', 'lifecycle', 'methods', 'properties', 'signals', 'errors']
         }
       ]
     }

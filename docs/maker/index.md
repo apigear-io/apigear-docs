@@ -26,9 +26,10 @@ Below is roughly the process to create and develop a template
 - Add a solution to the API project to link API modules with the template
 - Edit the template and re-generate the output
 
-The templates are written using the [liquidjs](https://liquidjs.com/) template language and each template should end with `.liquid`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks. To read more about LiquidJS visit their [tags](https://liquidjs.com/tags/overview.html) and [filter](https://liquidjs.com/filters/overview.html) documentation.
+The templates are written using the [go-template](https://pkg.go.dev/text/template) template language and each template should end with `.tpl`. ApiGear extends the template language by custom programming language specific filters to ease many complex tasks. 
 
-_Note: Visual Studio Code marketplace provides an extension to support the `.liquid` files, you can find it [here](https://marketplace.visualstudio.com/items?itemName=sissel.shopify-liquid)._
+The Go-Template is used in several projects and is well documented. The ApiGear extensions are documented in the [Filters](./filters.md) section.
+
 
 ## Your first template
 
@@ -37,18 +38,19 @@ A typical template folder structure looks like this
 ```
 first/
     rules.yaml
-    templates/welcome.txt.liquid
+    templates/welcome.txt.tpl
 ```
 
 The rules document is a YAML document and lists all template file and how they shall be written inside the output folder. A simple rules document could look like this:
 
 ```yaml
 features:
-  default:
-    system:
-      documents:
-        - source: welcome.txt.liquid
-          target: welcome.txt
+  - name: default
+    scopes:
+      - match: system
+        documents:
+          - source: welcome.txt.tpl
+            target: welcome.txt
 ```
 
 The first level (here `default`) defines a feature. This can be enabled or disabled using the feature settings for the code generator.
@@ -84,34 +86,36 @@ Here is a more elaborate example of a rules document:
 ```yaml
 # rules.yaml
 features:
-  default:
-    system:
-      documents:
-        - source: system.md.liquid
-          target: system.md
-    module:
-      documents:
-        - source: module.md.liquid
-          target: {{module.name}}.md
-    interface:
-      documents:
-        - source: interface.md.liquid
-          target: {{interface.name}}.md
-    struct:
-      documents:
-        - source: struct.md.liquid
-          target: {{struct.name}}.md
-    enum:
-      documents:
-        - source: enum.md.liquid
-          target: {{enum.name}}.md
-  summary:
-    system:
-      documents:
-        - source: summary.md.liquid
-          target: summary.md
+  - name: default
+    scopes:
+      - match: system
+        documents:
+          - source: system.md.tpl
+            target: system.md
+      - match: module
+        documents:
+          - source: module.md.tpl
+            target: {{.Module.Name}}.md
+      - match: interface:
+        documents:
+          - source: interface.md.tpl
+            target: {{.Interface.Name}}.md
+      - match: struct
+        documents:
+          - source: struct.md.tpl
+            target: {{.Struct.Name}}.md
+      - match: enum
+        documents:
+          - source: enum.md.tpl
+            target: {{.Enum.Name}}.md
+  - name: summary
+    scopes:
+      - match: system
+        documents:
+          - source: summary.md.tpl
+            target: summary.md
 ```
 
-The <code v-pre>{{ }}</code> are a template expression. For example <code v-pre>{{module.name}}</code> will be replaced with the content of `module.name`. This allows you to write exactly these document names you require.
+The <code v-pre>{{ }}</code> are a template expression. For example <code v-pre>{{.Module.Name}}</code> will be replaced with the content of module name. This allows you to write exactly these document names you require.
 
-Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example <code v-pre>{{ module.name | lower }}</code> will lower case the module name. There are more filters in the [template engine documentation](https://liquidjs.com/filters/overview.html) and ApiGear also adds many different code specific filters to the engine.
+Additional to the template tags, the template engine also support filters. A filter is a function which takes a object and return a string. For example <code v-pre>{{ lower .Module.Name }}</code> or <code v-pre>{{ .Module.Name | lower }}</code> will lower case the module name. There are more filters in the in our filters documentation.
