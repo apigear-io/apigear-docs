@@ -1,231 +1,340 @@
 # Filter Reference
 
-## String Filters
+## Template Filters
 
 String filters are used inside templates to transform text in different formats.
 
-A typical usage would look like this
+A typical usage would use the filter name followed by a string reference to the value to be transformed. For example:
 
-```liquid
-{{ module.name | identifier }}
 ```
+{{ snake .Module.Name }}
+```
+
+Where `.` is the current context and `.Module` is the module object from the current context and `.Name` is the name property of the module object. The context can change for example inside a range loop.
+
+```
+{{ range .Module.Interfaces }}
+  {{ snake .Name }}
+{{ end }}
+```
+
+Where the current context if the interface object inside the range loop.
+
+
+## String Filter
 
 The list of the common string filters are listed here
 
-- **identifier**: creates a snake-case string
-  - `org.demo` => `org_demo`
-- **constant**: create a constant case
-  - `UpDirection` => `UP_DIRECTION`
-- **path**: transforms into a lower case string with slashes between words,
-  - `org.demo` => `org/demo`
-- **upper**: transforms the string to upper case,
-  - `hello world` => `HELLO WORLD`
-- **lower**: transforms the string to lower case
-  - `Hello World` => `hello world`
-- **capital**: transform into a space separated string with each word capitalized
-  - `hello world` => `Hello World`
-- **param**: transform into a lower cased string with dashes between words
-  - `Hello world` => `hello-world`
-- **lowerFirst**: transforms the string with only the first character in lower case
-  - `Hello world` => `hello world`
-- **upperFirst**: transforms the string with the first character in upper cased
-  - `localVar` => `LocalVar`
-- **firstLower**: transforms the string with only the first character in lower case
-  - `LocalVar` => `localVar`
-- **last**: extracts the last word from a dot based string
-  - `hello.world` => `world`
-- **first**: extracts the first word from a dot based string
-  - `hello.world` => `hello`
-- **version**: extracts major, minor, build version from a version string
-  - `1.2.3` => `{ major: 1, minor: 2, build: 3 }`
+### **snake**, **Snake**, **SNAKE**
 
-## Common Filters
+Converts a string to snake case - (lower, title, upper) case with underscores
+
+```
+  {{snake "org.demo"}} => org_demo
+  {{Snake "org.demo"}} => Org_Demo
+  {{SNAKE "org.demo"}} => ORG_DEMO
+```
+
+### **camel**, **Camel**, **CAMEL**
+
+Converts a string to camel case - (lower, title, upper) case with first letter lower case
+
+```
+{{camel "org.demo"}} => orgDemo
+{{Camel "org.demo"}} => OrgDemo
+{{CAMEL "org.demo"}} => ORGDEMO
+```
+
+### **dot**, **Dot**, **DOT**
+
+Converts a string to dot case - (lower, title, upper) case with dots
+
+```
+{{dot "org.demo"}} => org.demo
+{{Dot "org.demo"}} => Org.Demo
+{{DOT "org.demo"}} => ORG.DEMO
+```
+
+### **kebap**, **Kebap**, **KEBAP**
+
+Converts a string to kebap case - (lower, title, upper) case with dashes
+
+```
+{{kebap "org.demo"}} => org-demo
+{{Kebap "org.demo"}} => Org-Demo
+{{KEBAP "org.demo"}} => ORG-DEMO
+```
+
+### **path**, **Path**, **PATH**
+
+Converts a string to path case - (lower, title, upper) case with slashes
+  
+```
+{{path "org.demo"}} => org/demo
+{{Path "org.demo"}} => Org/Demo
+{{PATH "org.demo"}} => ORG/DEMO
+```
+
+### **lower**
+
+Converts a string to lower case
+
+```
+{{lower "org.demo"}} => org.demo
+```
+
+### *upper**
+
+Converts a string to upper case
+
+```
+{{upper "org.demo"}} => ORG.DEMO
+```
+
+###  **upperFirst**
+
+Converts the first letter of a string to upper case
+
+```
+{{upper1 "org.demo"}} => Org.demo
+```
+
+###  **lowerFirst**
+
+Converts the first letter of a string to lower case
+
+```
+{{lower1 "org.demo"}} => org.demo
+```
+
+###  **first**, **First**, **FIRST**
+
+Returns the first character of a string as lower, unchanged, upper case
+
+```
+{{first "org.demo"}} => o
+{{First "org.demo"}} => o
+{{FIRST "org.demo"}} => O
+```
+
+
+### **join**
+
+joins a list of strings with a separator
+
+```
+{{join .Module.Interfaces ", "}} => org.demo.Interface1, org.demo.Interface2
+```
+
+### **trimPrefix**
+
+Trims a prefix from a string
+
+```
+{{trimPrefix "org.demo" "org."}} => demo
+```
+
+### **trimSuffix**
+
+Trims a suffix from a string
+```
+{{trimSuffix "org.demo" ".demo"}} => org
+```
+
+###  **replace**
+
+Replaces a string with another string
+
+```
+{{replace "org.demo" "org" "com"}} => com.demo
+```
+
+### **int2word**, **Int2Word**, **INT2WORD**
+
+Converts an integer to words (lower, title and upper case)
+
+```
+{{int2word 1}} => one
+{{Int2Word 1}} => One
+{{INT2WORD 1}} => ONE
+```
+###  **plural**
+
+pluralizes a string
+
+```
+{{plural "org.demo"}} => org.demos
+```
+### **nl**
+
+prints a new line
+
+```
+{{nl}}
+```
+
+### **version**
+
+extracts major, minor, build version from a version string
+
+```
+{{$v := version "1.2.3"}}
+{{$v}} => 1.2.3
+{{$v.Major}} => 1
+{{$v.Minor}} => 2
+{{$v.Build}} => 3
+```
+
+## Language Filters
 
 All programming languages share a common set of filters which then are adapted to the specifics of the language.
-These are `return`, `param`, `params` and the `default` filter.
+These are `return`, `param`, `params`, `vars`, `names` and the `default` filter.
 
 For example for the C++ programming language you would use the `return` and `params` filter named `cpp14Return` and `cpp14Params` during operation declaration.
 
-A typical usage could look like this
+A typical usage could look like this:
 
-```liquid
-{% for op in interface.operations %}
-{{ op | cpp14Return }} {{ interface }}::{{ op }}({{ op | cpp14Params }});
-{% endfor %}
 ```
+{{ range .Operations }}
+  {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+{{ end }}
+```
+
+Here the `cppReturn` and `cppParams` are the language specific filters for the C++ programming language. The `""` is the a prefix applied to the return type and the parameters. This is used to add a namespace to the return type and the parameters. All language specific filters have the same signature.
+
+:::tip
+We might offer a "2" version of a language filter in the future (e.g. `cppReturn` and `cppReturn2`) where the second version will support the prefix syntax.
+:::
 
 These are the common filters for all languages
 
-- **<lang>Return**: takes and typed element and returns the type declaration of the type
+### **{lang}Return**
 
-  ```liquid
-  {{ operation  |cpp14return }}
+Takes and typed element and returns the type declaration of the type
+
+  ```
+  {{ range .Module.Interfaces }}
+  {{ range .Operations }}
+    {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+  {{ end }}
+  {{ end }}
+  ```
+  
+
+### **{lang}Param**
+
+Takes a typed element and returns the function parameter declaration
+
+  ```
+  {{ range .Module.Interfaces }}
+  {{ range .Operations }}
+    {{ cppReturn "" .Return }} {{ camel .Name }}(
+      {{ range $i, $p := .Params }}
+        {{ if $i }}, {{ end }}
+      {{ cppParam "" $p }}
+      {{ end }});
+  {{ end }}
+  {{ end }}
   ```
 
-- **<lang>Param**: takes a typed element and returns the function parameter declaration
+### **{lang}Params**
 
-  ```liquid
-  {{ param | cpp14Param }}
-  ```
+Takes an operation and return the lists of function parameters
 
-- **<lang>Params**: takes an operation and return the lists of function parameters
+```
+{{ range .Module.Interfaces }}
+{{ range .Operations }}
+  {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+{{ end }}
+{{ end }}
+```
 
-  ```liquid
-  {{ operation | cpp14Params }}
-  ```
+### **{lang}Default**
 
-- **<lang>Default**: takes a typed element and returns default value
+Takes a typed element and returns default value
 
-  ```liquid
-  {{ property | cpp14Default }}
-  ```
+```
+{{ range .Module.Interfaces }}
+{{ $class := .Name }}
+{{ range .Operations }}
+  {{ cppReturn "" .Return }} {{$class}}::{{ camel .Name }}({{ cppParams "" .Params }}) {
+    return {{ cppDefault "" .Return }};
+  }
+{{ end }}
+{{ end }}
+```
+
+### **{lang}}Vars**
+
+Takes a list of types and creates variable names for them
+
+```
+{{ cppVars "" .Properties }}
+```
+
+### **{lang}Var**
+
+Takes a typed element and creates a variable name for it
+
+```
+{{ cppVar "" .Property }}
+```
+
+### **{lang}Type**
+
+Takes a typed element and returns the type declaration of the type
+
+```
+{{ cppType "" .Property }}
+```
 
 ## C++14 Filters
 
-- **cpp14Return**: takes a typed element and returns the type information. Typically used as return value in function calls.
-
-  ```liquid
-  {{ operation | cpp14Return }}
-  ```
-
-- **cpp14Param**: takes a typed element and creates an individual function parameter.
-
-  ```liquid
-  {% for param in operation.params %}
-  {{ param | cpp14Param }}
-  {% endfor %}
-  ```
-
-- **cpp14Params**: takes an operation and creates an list of function parameters
-
-  ```liquid
-  {{ operation | cpp14Params }}
-  ```
-
-* **cpp14Default**: takes a a typed element and returns the default value of the type.
-
-  For an integer type this would be the value 0. For an enumeration this would be the first value.
-
-  ```liquid
-  {{ property | cpp14Default }}
-  ```
-
-## Python Filters
-
-- **pyReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
-
-  ```liquid
-  {{ operation | pyReturn }}
-  ```
-
-- **pyParam**: takes a typed element and creates an individual function parameter.
-
-  ```liquid
-  {% for param in operation.params %}
-  {{ param | pyParam }}
-  {% endfor %}
-  ```
-
-- **pyParams**: takes an operation and creates an list of function parameters
-
-  ```liquid
-  {{ operation | pyParams }}
-  ```
-
-* **pyDefault**: takes a a typed element and returns the default value of the type.
-
-  For an integer type this would be the value 0. For an enumeration this would be the first value.
-
-  ```liquid
-  {{ property | pyDefault }}
-  ```
+- **cppReturn**: takes a typed element and returns the type declaration of the type
+- **cppParam**: takes a typed element and returns the function parameter declaration
+- **cppParams**: takes an operation and return the lists of function parameters
+- **cppDefault**: takes a typed element and returns default value
+- **cppVars**: takes a list of types and creates variable names for them
+- **cppVar**: takes a typed element and creates a variable name for it
+- **cppType**: takes a typed element and returns the type declaration of the type
 
 ## Go Filters
 
-- **goReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
-
-  ```liquid
-  {{ operation | goReturn }}
-  ```
-
-- **goParam**: takes a typed element and creates an individual function parameter.
-
-  ```liquid
-  {% for param in operation.params %}
-  {{ param | goParam }}
-  {% endfor %}
-  ```
-
-- **goParams**: takes an operation and creates an list of function parameters
-
-  ```liquid
-  {{ operation | goParams }}
-  ```
-
-* **goDefault**: takes a a typed element and returns the default value of the type.
-
-  For an integer type this would be the value 0. For an enumeration this would be the first value.
-
-  ```liquid
-  {{ property | goDefault }}
-  ```
+- **goReturn**: takes a typed element and returns the type declaration of the type
+- **goParam**: takes a typed element and returns the function parameter declaration
+- **goParams**: takes an operation and return the lists of function parameters
+- **goDefault**: takes a typed element and returns default value
+- **goVars**: takes a list of types and creates variable names for them
+- **goVar**: takes a typed element and creates a variable name for it
+- **goType**: takes a typed element and returns the type declaration of the type
 
 ## TypeScript Filters
 
-- **tsReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
+- **tsReturn**: takes a typed element and returns the type declaration of the type
+- **tsParam**: takes a typed element and returns the function parameter declaration
+- **tsParams**: takes an operation and return the lists of function parameters
+- **tsDefault**: takes a typed element and returns default value
+- **tsVars**: takes a list of types and creates variable names for them
+- **tsVar**: takes a typed element and creates a variable name for it
+- **tsType**: takes a typed element and returns the type declaration of the type
 
-  ```liquid
-  {{ operation | tsReturn }}
-  ```
+## QtC++ Filters
 
-- **tsParam**: takes a typed element and creates an individual function parameter.
+- **qtReturn**: takes a typed element and returns the type declaration of the type
+- **qtParam**: takes a typed element and returns the function parameter declaration
+- **qtParams**: takes an operation and return the lists of function parameters
+- **qtDefault**: takes a typed element and returns default value
+- **qtVars**: takes a list of types and creates variable names for them
+- **qtVar**: takes a typed element and creates a variable name for it
+- **qtType**: takes a typed element and returns the type declaration of the type
 
-  ```liquid
-  {% for param in operation.params %}
-  {{ param | tsParam }}
-  {% endfor %}
-  ```
+## Python Filters
 
-- **tsParams**: takes an operation and creates an list of function parameters
+- **pyReturn**: takes a typed element and returns the type declaration of the type
+- **pyParam**: takes a typed element and returns the function parameter declaration
+- **pyParams**: takes an operation and return the lists of function parameters
+- **pyDefault**: takes a typed element and returns default value
+- **pyVars**: takes a list of types and creates variable names for them
+- **pyVar**: takes a typed element and creates a variable name for it
+- **pyType**: takes a typed element and returns the type declaration of the type
 
-  ```liquid
-  {{ operation | tsParams }}
-  ```
-
-* **tsDefault**: takes a a typed element and returns the default value of the type.
-
-  For an integer type this would be the value 0. For an enumeration this would be the first value.
-
-  ```liquid
-  {{ property | tsDefault }}
-  ```
-
-## Qt C++ Filters
-
-- **qtReturn**: takes a typed element and returns the type information. Typically used as return value in function calls.
-
-  ```liquid
-  {{ operation | qtReturn }}
-  ```
-
-- **qtParam**: takes a typed element and creates an individual function parameter.
-
-  ```liquid
-  {% for param in operation.params %}
-  {{ param | qtParam }}
-  {% endfor %}
-  ```
-
-- **qtParams**: takes an operation and creates an list of function parameters
-
-  ```liquid
-  {{ operation | qtParams }}
-  ```
-
-* **qtDefault**: takes a a typed element and returns the default value of the type.
-
-  For an integer type this would be the value 0. For an enumeration this would be the first value.
-
-  ```liquid
-  {{ property | qtDefault }}
-  ```

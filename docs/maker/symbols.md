@@ -4,48 +4,87 @@ When developing technology templates it is vital to understand what each symbol 
 
 And an interface contains properties, operations and signals and structures contain fields and enumerations contain members.
 
-```
-module: Element
-  interface: Element
-    property: Typed Element
-    operation: Typed Element
-      param: Typed Element
-    signal: Typed Element
-      param: Typed Element
-  struct: Element
-    field: Typed Element
-  enumeration: Element
-    member: Element
+```go
+type System struct {
+    Name string
+    Modules []Module
+}
+
+type Module struct {
+    Name string
+    Interfaces []Interface
+    Structures []Structure
+    Enumerations []Enumeration
+}
+
+type Interface struct {
+    Name string
+    Properties []TypedElement
+    Operations []Operation
+    Signals []Signal
+}
+
+type TypedElement struct {
+    Name string
+    Type Type
+}
+
+type Operation struct {
+    Name string
+    Params []TypedElement
+    Return Type
+}
+
+type Signal struct {
+    Name string
+    Params []TypedElement
+}
+
+type Structure struct {
+    Name string
+    Fields []TypedElement
+}
+
+type Enumeration struct {
+    Name string
+    Members []ValueElement
+}
+
+type ValueElement struct {
+    Name string
+    Value string
+}
 ```
 
 Each symbol you can iterate over is either element or an element with additional type information.
 
-## Element
+## Named Element
 
-- **name**: string
+Named element is the base element for all symbols. It contains the following properties:
+
+- **Name**: string
   - name of the element
-- **description**: string
+- **Description**: string
   - test to describe the element
-- **meta**: object
+- **Meta**: object
   - free form data, evaluated by the technology template
-- **kind**: string
+- **Kind**: string
   - one of [module, interface, struct, enum, property, operation, signal]
 
 ## Typed Element
 
-An element with additional properties for typing
+Typed element is a named element with additional properties for typing
 
-- **type** type information
-  - one of [void, bool, int, float, string, id, array] or reference to interface, struct, enum
-- **items**: array type information
-  - one of [void, bool, int, float, string, id] or reference to struct, enum
-- **isPrimitive**: primitive type
-  - type is one of [bool, int, float, string, id]
-- **isComplex**: is reference to type
+- **Type** type information
+  - one of [bool, int, float, string] or reference to interface, struct, enum
+- **Array**: true if the type is an array
+- **IsPrimitive**: primitive type
+  - type is one of [bool, int, float, string]
+- **IsSymbol**: is reference to type
   - type is one of struct, enum, interface
-- **isPrimitiveArray**: array with items of primitive type
-- **isComplexArray**: array with item of reference to type
-- **isArray**: type is array
+- **IsPrimitiveArray**: array with items of primitive type
+- **IsSymbolArray**: array with item of reference to type
+- **IsArray**: true if the type is an array
 
 ## Module
 
@@ -53,21 +92,21 @@ The module is an element with additional version and an information object. Addi
 
 All information from the element plus
 
-- **version**: string
-- **info**: information object
-- **interfaces**: array of interface elements
-- **structs**: array of struct elements
-- **enums**: array of enum elements
+- **Version**: string
+- **Info**: information object
+- **Interfaces**: array of interface elements
+- **Structs**: array of struct elements
+- **Enums**: array of enum elements
 
 ### Information
 
 The information object allows customers to provide additional information about the API.
 
-- **title**: string
-- **description**: string
-- **termsOfService**: string
-- **contact**: is an object consisting of **name**, **url** and **email**
-- **license**: is an object containing of **name** and **url**
+- **Title**: string
+- **Description**: string
+- **TermsOfService**: string
+- **Contact**: is an object consisting of **name**, **url** and **email**
+- **License**: is an object containing of **name** and **url**
 
 ## Interface
 
@@ -75,9 +114,9 @@ The interface is an container element for properties, operations and signals.
 
 All information from the element plus
 
-- **properties**: array of property elements
-- **operations**: array of operation elements
-- **signals**: array of signal elements
+- **Properties**: array of property elements
+- **Operations**: array of operation elements
+- **Signals**: array of signal elements
 
 ### Property
 
@@ -87,11 +126,12 @@ All information from the typed element.
 
 ### Operation
 
-Operation is a typed element with an additional list of parameters. The type information defines the return type of the operation.
+Operation is a named element with an additional list of typed parameters. The return element defines the return type.
 
 All information from the typed element plus
 
-- **params**: array of typed elements
+- **Params**: array of typed elements
+- **Return**: type information
 
 ### Signal
 
@@ -99,7 +139,7 @@ Signal is a typed element and has the same signature as operation, besides the r
 
 All information from the typed element plus
 
-- **params**: array of typed elements
+- **Params**: array of typed elements
 
 ## Structure
 
@@ -107,7 +147,7 @@ Structure is an element and act as a container for fields.
 
 All information from the element, plus
 
-- **fields**: array of field
+- **Fields**: array of typed elements
 
 ### Field
 
@@ -121,12 +161,12 @@ Enumeration is an element and act as a container for members.
 
 All information from the element, plus
 
-- **members**: array of member
+- **Members**: array of member
 
 ### Member
 
 Member is a element with an additional value.
 
-All information from the element, plus
+All information from the named element, plus
 
-- **value**: the value of the member
+- **Value**: the value of the member

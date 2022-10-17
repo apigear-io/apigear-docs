@@ -1,4 +1,4 @@
-# Template Tutorial
+# Quick Start
 
 A template is a technology template to transform the ObjectAPI in any kind and amount of other text documents, e.g. source code. It consist of a set of rules and template documents.
 
@@ -35,32 +35,47 @@ interface Counter {
 
 ## Creating a template
 
-First we create a new template by creating a folder and placing a rules document at the root folder and an empty template document inside a templates folder.
+In this project we will create a `mytemplate` template inside a `myproject` together some apis to test the template.
+
+```bash
+mkdir myproject && cd myproject
+mkdir mytemplate && cd mytemplate
+```
+
+First we create our toot project folder called `myproject` and inside out template folder called `mytemplate`. Insie the `mytemplate` folder we place a rules document (`rules.yaml`) and an templates folder for our template documents.
 
 The folder structure will look like this.
 
 ```
 myproject/
-  rules.yaml
-  templates/
-    module.ts.liquid
+  mytemplate/
+    rules.yaml
+    templates/
 ```
 
-The rules document defines which documents are written based on which API symbols, in our case the `module` symbol, as we want to create one typescript document per module. The source document is a liquid template document and the target document is a text document, where the target name can also be a template string.
+The rules document defines which documents are written based on which API symbols, in our case we use the `module` scope, as we want to create one document per module. The source document is a `tpl` template document and the target document is a text document, where the target name can also be a template string.
 
 ```yaml
 # rules.yaml
 features:
-  default:
-    module:
-      documents:
-        - source: module.ts.liquid
-          target: "{{ module.name | lower }}.ts"
+  - name: default
+    scopes:
+      - match: module
+        documents:
+          - { source: module.ts.tpl, target: {{.Module.Name}}.ts }
 ```
 
-The `module.ts.liquid` file inside the template folder can be empty initially, we fill it up later.
+The `module.ts.tpl` file inside the `template/templates` folder can be empty initially, we fill it up later.
 
 Now our basic template project is ready, it's time to link it up with an ApiGear Studio API project.
+
+```
+myproject/
+  mytemplate/
+    rules.yaml
+    templates/
+      module.ts.tpl
+```
 
 ## Create API Project
 
@@ -98,14 +113,12 @@ version: "0.1"
 
 layers:
   - name: demo
-    output: ../ouput
-    modules:
+    output: ../output
+    inputs:
       - demo.module.yaml
-    blueprint:
-      package: ""
-      rules: ../rules.yaml
-      features:
-        - all
+    template: ../mytemplate
+    features:
+      - default
 ```
 
 This will first parse all defined modules (demo) and apply the given template to the modules. The documents will then be written relative to the given output directory.
@@ -117,14 +130,29 @@ myproject/
   apigear/
     demo.module.yaml
     demo.solution.yaml
-  rules.yaml
-  templates/
-    module.ts.liquid
+  template/
+    rules.yaml
+    templates/
+      module.ts.tpl
 ```
 
 When you now run the solution it will create an empty `output/demo.ts` document inside the project directory.
 
 Now we have a basic setup ready.
+
+```treeview
+myproject/
+  apigear/
+    demo.module.yaml
+    demo.solution.yaml
+  template/
+    rules.yaml
+    templates/
+      module.ts.tpl
+  output/
+    demo.ts
+```
+
 
 ## Demo Goal
 
@@ -148,15 +176,14 @@ The rules document already takes care that for each API module one typescript do
 Inside our `module.ts.liquid` template document each interface in the module shall be an typescript interface.
 This can be accomplished with the for-loop from the liquidjs template engine.
 
-```liquid
-{% for interface in module.interfaces %}
-interface {{ interface.name }} {
-
+```
+{{ range .Module.Interfaces }}
+interface {{ .Name }} {
 }
-{% endfor %}
+{{ end }}
 ```
 
-After updating the `module.ts.liquid` with the above content, we can run the solution. This will rewrite the target document with the content of the typescript template.
+After updating the `module.ts.tpl` with the above content, we can run the solution. This will rewrite the target document with the content of the typescript template.
 
 ```ts
 interface Counter {}
@@ -166,17 +193,17 @@ interface Counter {}
 
 There are still the properties and operations missing from the source code. We can add them into the template using another for loop, which iterate over the properties and operations from the interface.
 
-```liquid
-{% for interface in module.interfaces %}
-interface {{ interface.name }} {
-{% for property in interface.properties %}
-  {{ property.name }}: {{ property | tsReturn }}
-{% endfor %}
-{% for operation in interface.operations %}
-  {{ operation.name }}() {{ operation | tsReturn }}
-{% endfor %}
+```
+{{ range .Module.Interfaces }}
+interface {{ .Name }} {
+  {{ range .Properties }}
+  {{ .Name }}: {{ tsType . }};
+  {{ end }}
+  {{ range .Operations }}
+  {{ .Name }}(): {{ tsReturn .Return }};
+  {{ end }}
 }
-{% endfor %}
+{{ end }}
 ```
 
 This will already add the properties and some simple operations to the source code. After running the solution we will see the update source code.
@@ -208,10 +235,10 @@ operations:
 
 If you would run the solution again you would no see a change as we currently not handle these parameters. We need to update the template document (`module.ts.liquid`) first to handle the parameters using the params filter.
 
-```liquid
-{% for operation in interface.operations %}
-  {{ operation.name }}({{ operation | tsParams }}) {{ operation | tsReturn }}
-{% endfor %}
+```
+{{ range .Operations }}
+{{ .Name }}({{ params .Params }}): {{ tsReturn .Return }};
+{{ end }}
 ```
 
 Now running the solution again will update the typescript source code to the final result:
@@ -229,26 +256,18 @@ This shows how easy it is to create an own template solution for a supported tec
 
 ## Packaging
 
-It is also possible to create a template package for distribution. For this we use [npm](https://docs.npmjs.com/cli/v7/commands/npm) to create a package.
+Template packages are git repositories, which can be published to a git server. The template package can be referenced from a solution document using the `git` scheme.
 
-To create a package run `npm init --yes`, this will create a `package.json` document in the current directory.
-
-The package document needs to know which files to package, for this we add a files section to the document.
-
-```json
-  "files": [
-    "/templates",
-    "/rules.yaml",
-    "/README.md",
-    "/LICENSE.txt"
-  ],
+```bash
+apigear template install <git-url>
 ```
 
-Now you can run `npm pack` to create an NPM package which then can be distributed.
+Or if the template is registered with the registry, it can be installed using the name.
 
-This package can then be shared with other users. Inside ApiGear Studio you can install a template package using the upload button.
+```bash
+apigear template install <name>
+```
 
-In the future it will be possible to upload a template package to our central registry and be available to all users.
 
 ## Next Steps
 
@@ -256,4 +275,4 @@ This simple demo shows the workflow of creating technology templates using ApiGe
 
 ApiGear support several programming languages and technologies, such as Python, C++, TypeScript, Go and others and is able to create complex solutions for almost every application.
 
-ApiGear comes with several advanced technology templates which provides solutions for the most common problems. IN case the provides solutions do not fit your needs ApiGear is designed to allow quick adoptions of the underlying technology templates.
+ApiGear comes with several advanced technology templates which provides solutions for the most common problems. In case the provides solutions do not fit your needs ApiGear is designed to allow quick adoptions of the underlying technology templates.

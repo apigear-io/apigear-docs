@@ -8,14 +8,12 @@ To get started you first need to download the ApiGear Studio.
 
 ## Install Apigear Studio
 
-ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/apigear-io/apigear-studio/releases). Studio is available for Mac, Windows and Linux.
+ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/apigear-io/studio-releases/releases). Studio is available for Mac, Windows and Linux.
 
 After installation you can start the ApiGear Studio.
 
 :::warning
-ApiGear Studio is Beta Software and can be used for research and testing purposes only.
-It is not yet ready for production use.
-We are working on.
+ApiGear Studio is Early Access Software and should not be used for production yet. We are working to finalize the product and will release a stable version soon.
 :::
 
 As ApiGear Studio is still in early access version there are no certificates yet. Which requires you on Windows and MacOS to accept some exceptions.
@@ -56,16 +54,15 @@ A solution is a document and can be created using the `New -> Solution` action. 
 
 To edit the solution click the `Edit` icon. The solution will be opened in the editor.
 
-Now you can add our modules to the solution. As also the template we installed earlier.
+Now you can add our inputs to the solution. Inputs can be API modules in the form of the YAML of IDL format. As also the template we installed earlier.
 
 ```
 layers:
   - name: "C++"
-    modules:
+    inputs:
       - <name>.module.yaml
     output: "../output"
-    blueprint:
-      package: <template-name>
+    template: <template-name>
 ```
 
 Make sure you also have added an output folder where the SDK will be generated. The output folder is relative to the solution document.
