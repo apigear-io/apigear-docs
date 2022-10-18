@@ -1,8 +1,7 @@
 # Protocol Mappings
 
-ObjectAPI describes object communication patterns based on simple to use protocols. These communication patterns can be mapped to other communication patterns this process is called binding.
+ObjectAPI describes object communication patterns based on simple to use protocols. These communication patterns can be mapped to other communication patterns.
 
-ObjectAPI supports current HTTP RPC and WAMP binding but can support more.
 
 ## API Types
 

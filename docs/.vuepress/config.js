@@ -139,7 +139,7 @@ module.exports = {
         {
           title: 'ObjectAPI',
           collapsable: false,
-          children: ['', 'core', 'modules', 'advanced', 'examples', 'idl', 'mapping', 'mapping_http', 'mapping_wamp']
+          children: ['', 'core', 'modules', 'advanced', 'examples', 'idl', 'mapping', 'mapping_http']
         }
       ],
       '/objectlink/': [
