@@ -15,11 +15,12 @@ Error can be raised in several places. The error message is always send back to 
 
 Error codes are string messages starting with `olink.error.` followed by a short description of the error. The following error codes are defined:
 
-- `invalid_message`: the message is not a valid JSON array
-- `invalid_message_type`: the message type is not a valid integer
-- `no_such_module`: the module does not exist
-- `no_such_object`: the object does not exist
-- `no_such_operation`: the operation does not exist
+- `olink.error.invalid_message`: the message is not a valid JSON array
+- `olink.error.invalid_message_type`: the message type is not a valid integer
+- `olink.error.no_such_module`: the module does not exist
+- `olink.error.no_such_object`: the object does not exist
+- `olink.error.no_such_property`: the property does not exist
+- `olink.error.no_such_operation`: the operation does not exist
 
 
 :::tip
