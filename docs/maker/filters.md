@@ -297,6 +297,7 @@ Takes a typed element and returns the type declaration of the type
 - **cppVars**: takes a list of types and creates variable names for them
 - **cppVar**: takes a typed element and creates a variable name for it
 - **cppType**: takes a typed element and returns the type declaration of the type
+- **cppConstType**: takes a typed element and returns the type declaration of the type with const qualifier
 
 ## Go Filters
 
@@ -338,3 +339,14 @@ Takes a typed element and returns the type declaration of the type
 - **pyVar**: takes a typed element and creates a variable name for it
 - **pyType**: takes a typed element and returns the type declaration of the type
 
+
+## Unreal Engine Filters
+
+- **ueReturn**: takes a typed element and returns the type declaration of the type
+- **ueParam**: takes a typed element and returns the function parameter declaration
+- **ueParams**: takes an operation and return the lists of function parameters
+- **ueDefault**: takes a typed element and returns default value
+- **ueVars**: takes a list of types and creates variable names for them
+- **ueVar**: takes a typed element and creates a variable name for it
+- **ueType**: takes a typed element and returns the type declaration of the type
+- **ueConstType**: takes a typed element and returns the type declaration of the type with const qualifier
