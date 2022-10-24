@@ -298,6 +298,10 @@ Takes a typed element and returns the type declaration of the type
 - **cppVar**: takes a typed element and creates a variable name for it
 - **cppType**: takes a typed element and returns the type declaration of the type
 - **cppConstType**: takes a typed element and returns the type declaration of the type with const qualifier
+- **cppNs**: takes a symbol and returns the namespace declaration
+- **cppNsOpen**: takes a symbol and returns the namespace opening
+- **cppNsClose**: takes a symbol and returns the namespace closing
+- **cppGpl**: takes a symbol and returns the GPL license header
 
 ## Go Filters
 
