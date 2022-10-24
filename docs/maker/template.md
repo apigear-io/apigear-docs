@@ -38,6 +38,29 @@ A loop can also be empty and the `else` keyword can be used to define the empty 
 {{ end }}
 ```
 
+To use the index and current element you can 
+
+```
+{{ range $index, $element := .Module.Interfaces }}
+    {{ $index }}: {{ $element.Name }}
+{{ end }}
+```
+
+Index is a zero-based iterator and element is the current element in the loop.
+
+::: tip
+To join lists with commas you can use the loop index.
+
+```go
+{{ range $i, $e := .Module.Interfaces }}
+    {{ if $i}},{{ end }}{{ .Name }}
+{{ end }}
+```
+
+A comma will be printed when `$i` is not zero.
+:::
+
+
 ## Assignments
 
 To define new variable you can assign a value to a variable. For example to assign the name of the current module to a variable:
@@ -75,6 +98,7 @@ or to output a default value if the name is empty:
 {{ end }}
 ```
 
+
 ## White Space
 
 The template language allows to control the white space. For example to remove the white space before the output:
@@ -93,3 +117,26 @@ or to remove the white space after the output:
 {{ end }}
 ```
 
+## String Formatting
+
+You can use the `printf` function to format strings. For example to prefix an interface name with `I`:
+
+```go
+{{ printf "I%s" .Name }}
+```
+
+or to merge two strings, where each string is camel cased.
+
+```go
+{{ printf "%s%s" (Camel .Interface.Name) (Camel .Name) }}
+```
+
+The `printf` syntax is described in the [Go Printf Formatting](https://gobyexample.com/string-formatting).
+
+## Debugging Templates
+
+Sometimes it is useful to see the current context of the template. You can use the `printf` function to print the current context:
+
+```go
+{{ printf "%#v" . }}
+```
