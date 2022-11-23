@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ObjectAPI IDL | ApiGear</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="Product documentation for ApiGear.io">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.0cb9b869.css" as="style"><link rel="preload" href="/assets/js/app.d6d1e6fd.js" as="script"><link rel="preload" href="/assets/js/2.fe76ba1d.js" as="script"><link rel="preload" href="/assets/js/26.07036069.js" as="script"><link rel="prefetch" href="/assets/js/10.41c37fd3.js"><link rel="prefetch" href="/assets/js/11.b87a7744.js"><link rel="prefetch" href="/assets/js/12.d1f44e0c.js"><link rel="prefetch" href="/assets/js/13.5fb2cb17.js"><link rel="prefetch" href="/assets/js/14.e805cc78.js"><link rel="prefetch" href="/assets/js/15.2225816b.js"><link rel="prefetch" href="/assets/js/16.dde1faff.js"><link rel="prefetch" href="/assets/js/17.5994eb66.js"><link rel="prefetch" href="/assets/js/18.4135b96a.js"><link rel="prefetch" href="/assets/js/19.c44ee6e9.js"><link rel="prefetch" href="/assets/js/20.e46acb0d.js"><link rel="prefetch" href="/assets/js/21.cc908866.js"><link rel="prefetch" href="/assets/js/22.f3a26d02.js"><link rel="prefetch" href="/assets/js/23.2797fb50.js"><link rel="prefetch" href="/assets/js/24.16f6058d.js"><link rel="prefetch" href="/assets/js/25.1ceb6389.js"><link rel="prefetch" href="/assets/js/27.61361869.js"><link rel="prefetch" href="/assets/js/28.c4fab1f2.js"><link rel="prefetch" href="/assets/js/29.5e9407d1.js"><link rel="prefetch" href="/assets/js/3.a610c1bb.js"><link rel="prefetch" href="/assets/js/30.40d0d6c3.js"><link rel="prefetch" href="/assets/js/31.8a21a411.js"><link rel="prefetch" href="/assets/js/32.0a7ecedc.js"><link rel="prefetch" href="/assets/js/33.6c8af483.js"><link rel="prefetch" href="/assets/js/34.1adba53c.js"><link rel="prefetch" href="/assets/js/35.e03eb96e.js"><link rel="prefetch" href="/assets/js/36.e827663a.js"><link rel="prefetch" href="/assets/js/37.1bb08ca9.js"><link rel="prefetch" href="/assets/js/38.5963aeaa.js"><link rel="prefetch" href="/assets/js/39.b41198f6.js"><link rel="prefetch" href="/assets/js/4.0d5c9678.js"><link rel="prefetch" href="/assets/js/40.ea351c0a.js"><link rel="prefetch" href="/assets/js/41.f3da1391.js"><link rel="prefetch" href="/assets/js/42.6e8f5aeb.js"><link rel="prefetch" href="/assets/js/43.d84b378a.js"><link rel="prefetch" href="/assets/js/44.0c44f42c.js"><link rel="prefetch" href="/assets/js/45.cba688fd.js"><link rel="prefetch" href="/assets/js/46.6deea237.js"><link rel="prefetch" href="/assets/js/47.1320abb9.js"><link rel="prefetch" href="/assets/js/48.f6476ca8.js"><link rel="prefetch" href="/assets/js/49.5fb702e4.js"><link rel="prefetch" href="/assets/js/5.0777bc74.js"><link rel="prefetch" href="/assets/js/50.e34862f1.js"><link rel="prefetch" href="/assets/js/51.83bbb45c.js"><link rel="prefetch" href="/assets/js/52.458b1bc5.js"><link rel="prefetch" href="/assets/js/53.622a9eb7.js"><link rel="prefetch" href="/assets/js/54.65623815.js"><link rel="prefetch" href="/assets/js/55.b033c247.js"><link rel="prefetch" href="/assets/js/6.66f56766.js"><link rel="prefetch" href="/assets/js/7.d59266b4.js"><link rel="prefetch" href="/assets/js/8.83f125b0.js"><link rel="prefetch" href="/assets/js/9.5976fe31.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0cb9b869.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">ApiGear</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Learn" class="dropdown-title"><span class="title">Learn</span> <span class="arrow down"></span></button> <button type="button" aria-label="Learn" class="mobile-dropdown-title"><span class="title">Learn</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">
+  Getting Started
+</a></li><li class="dropdown-item"><!----> <a href="/tutorials/" class="nav-link">
+  Tutorials
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tools" class="dropdown-title"><span class="title">Tools</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tools" class="mobile-dropdown-title"><span class="title">Tools</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/studio/" class="nav-link">
+  ApiGear Studio
+</a></li><li class="dropdown-item"><!----> <a href="/cli/" class="nav-link">
+  ApiGear CLI
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Reference" class="dropdown-title"><span class="title">Reference</span> <span class="arrow down"></span></button> <button type="button" aria-label="Reference" class="mobile-dropdown-title"><span class="title">Reference</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/objectapi/" class="nav-link router-link-active">
+  ObjectAPI
+</a></li><li class="dropdown-item"><!----> <a href="/objectlink/" class="nav-link">
+  ObjectLink
+</a></li><li class="dropdown-item"><!----> <a href="/simulation/" class="nav-link">
+  API Simulation
+</a></li><li class="dropdown-item"><!----> <a href="/monitor/" class="nav-link">
+  API Monitoring
+</a></li><li class="dropdown-item"><!----> <a href="/sdks/" class="nav-link">
+  SDK Templates
+</a></li><li class="dropdown-item"><!----> <a href="/maker/" class="nav-link">
+  Template Maker
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Community" class="dropdown-title"><span class="title">Community</span> <span class="arrow down"></span></button> <button type="button" aria-label="Community" class="mobile-dropdown-title"><span class="title">Community</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/apigear-io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/orgs/apigear-io/discussions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Discussion
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About" class="dropdown-title"><span class="title">About</span> <span class="arrow down"></span></button> <button type="button" aria-label="About" class="mobile-dropdown-title"><span class="title">About</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  About
+</a></li><li class="dropdown-item"><!----> <a href="https://apigear.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ApiGear
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/apigear-io/apigear-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Learn" class="dropdown-title"><span class="title">Learn</span> <span class="arrow down"></span></button> <button type="button" aria-label="Learn" class="mobile-dropdown-title"><span class="title">Learn</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/guide/" class="nav-link">
+  Getting Started
+</a></li><li class="dropdown-item"><!----> <a href="/tutorials/" class="nav-link">
+  Tutorials
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tools" class="dropdown-title"><span class="title">Tools</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tools" class="mobile-dropdown-title"><span class="title">Tools</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/studio/" class="nav-link">
+  ApiGear Studio
+</a></li><li class="dropdown-item"><!----> <a href="/cli/" class="nav-link">
+  ApiGear CLI
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Reference" class="dropdown-title"><span class="title">Reference</span> <span class="arrow down"></span></button> <button type="button" aria-label="Reference" class="mobile-dropdown-title"><span class="title">Reference</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/objectapi/" class="nav-link router-link-active">
+  ObjectAPI
+</a></li><li class="dropdown-item"><!----> <a href="/objectlink/" class="nav-link">
+  ObjectLink
+</a></li><li class="dropdown-item"><!----> <a href="/simulation/" class="nav-link">
+  API Simulation
+</a></li><li class="dropdown-item"><!----> <a href="/monitor/" class="nav-link">
+  API Monitoring
+</a></li><li class="dropdown-item"><!----> <a href="/sdks/" class="nav-link">
+  SDK Templates
+</a></li><li class="dropdown-item"><!----> <a href="/maker/" class="nav-link">
+  Template Maker
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Community" class="dropdown-title"><span class="title">Community</span> <span class="arrow down"></span></button> <button type="button" aria-label="Community" class="mobile-dropdown-title"><span class="title">Community</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/apigear-io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/orgs/apigear-io/discussions" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Discussion
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="About" class="dropdown-title"><span class="title">About</span> <span class="arrow down"></span></button> <button type="button" aria-label="About" class="mobile-dropdown-title"><span class="title">About</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  About
+</a></li><li class="dropdown-item"><!----> <a href="https://apigear.io" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  ApiGear
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/apigear-io/apigear-docs" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ObjectAPI</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/objectapi/" aria-current="page" class="sidebar-link">ObjectAPI Overview</a></li><li><a href="/objectapi/core.html" class="sidebar-link">API Foundation</a></li><li><a href="/objectapi/modules.html" class="sidebar-link">API Modules</a></li><li><a href="/objectapi/advanced.html" class="sidebar-link">Advanced Concepts</a></li><li><a href="/objectapi/examples.html" class="sidebar-link">API Examples</a></li><li><a href="/objectapi/idl.html" aria-current="page" class="active sidebar-link">ObjectAPI IDL</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/objectapi/idl.html#interfaces" class="sidebar-link">Interfaces</a></li><li class="sidebar-sub-header"><a href="/objectapi/idl.html#structures" class="sidebar-link">Structures</a></li><li class="sidebar-sub-header"><a href="/objectapi/idl.html#enumerations" class="sidebar-link">Enumerations</a></li><li class="sidebar-sub-header"><a href="/objectapi/idl.html#example" class="sidebar-link">Example</a></li></ul></li><li><a href="/objectapi/mapping.html" class="sidebar-link">Protocol Mappings</a></li><li><a href="/objectapi/mapping_http.html" class="sidebar-link">HTTP Mapping</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="objectapi-idl"><a href="#objectapi-idl" class="header-anchor">#</a> ObjectAPI IDL</h1> <p>The ObjectAPI IDL can be used in parallel to the ObjectAPI JSON Schema. In fact the IDL is transformed to the JSON schema and then processed by the same tools.</p> <p>Vice versa the JSON schema can be transformed to the IDL.</p> <p>The IDL does more look like an actual developer language. It is more verbose and more powerful. It allows to define more complex types and to define more complex APIs.</p> <div class="language-go extra-class"><pre class="language-go"><code>module demo <span class="token number">1.0</span>
+
+<span class="token comment">// Counter is a simple counter object</span>
+<span class="token keyword">interface</span> Counter <span class="token punctuation">{</span>
+    <span class="token comment">// count is the current counter value</span>
+    count<span class="token punctuation">:</span> <span class="token builtin">int</span>
+    <span class="token comment">// increment the count property by step</span>
+    <span class="token function">increment</span><span class="token punctuation">(</span><span class="token builtin">int</span> step<span class="token punctuation">)</span>
+    <span class="token comment">// decrement the count property by step</span>
+    <span class="token function">decrement</span><span class="token punctuation">(</span><span class="token builtin">int</span> step<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="interfaces"><a href="#interfaces" class="header-anchor">#</a> Interfaces</h2> <p>An interface defines a set of properties, operations and signals.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">interface</span> name <span class="token punctuation">{</span>
+    <span class="token string">`prop-name`</span> <span class="token punctuation">:</span> <span class="token keyword">type</span>                     <span class="token comment">// property</span>
+    <span class="token string">`method-name`</span> <span class="token punctuation">(</span> params <span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token string">`type`</span>       <span class="token comment">// operation</span>
+    signal <span class="token string">`signal-name`</span> <span class="token punctuation">(</span> params <span class="token punctuation">)</span>        <span class="token comment">// signal</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>A type can be either a primitive type or a complex type. A complex type can be a structure, enumeration or another interface.</p> <p>A primitive type can be one of the following:</p> <ul><li><code>int</code> : integer value</li> <li><code>float</code> : floating point value</li> <li><code>string</code> : string value</li> <li><code>bool</code> : boolean value</li></ul> <p>A complex type can be one of the following:</p> <ul><li>name of an interface</li> <li>name of an enumeration</li> <li>name of a structure</li></ul> <div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Currently we do not support sub-types (e.g. int32, int64, ...). We will add this in the future.</p></div> <p>To define arrays of a type just append the <code>[]</code> to the type.</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">struct</span> Struct1 <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> Demo <span class="token punctuation">{</span>
+    propString<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    propStringArray<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+    propStruct<span class="token punctuation">:</span> Struct1
+<span class="token punctuation">}</span>
+</code></pre></div><div class="custom-block tip"><p class="custom-block-title">TIP</p> <p>Currently we do not support importing other modules. This is planned for a future version.</p></div> <h2 id="structures"><a href="#structures" class="header-anchor">#</a> Structures</h2> <p>A data structure is a message which can be used to send complex information between objects. A structure is defined as follows:</p> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">struct</span> name <span class="token punctuation">{</span>
+    field<span class="token operator">-</span>name <span class="token punctuation">:</span> <span class="token keyword">type</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="enumerations"><a href="#enumerations" class="header-anchor">#</a> Enumerations</h2> <p>An enumeration is a set of named values. An enumeration is defined as follows:</p> <div class="language-go extra-class"><pre class="language-go"><code>enum Enum1 <span class="token punctuation">{</span>
+    Value1 <span class="token operator">=</span> <span class="token number">0</span>
+    Value2 <span class="token operator">=</span> <span class="token number">1</span>
+    Value3 <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>A value can also be a hex number in the format of <code>0x2</code>. If there is no value specified the next value is used.</p> <h2 id="example"><a href="#example" class="header-anchor">#</a> Example</h2> <p>Here is a complete example:</p> <div class="language-go extra-class"><pre class="language-go"><code>module demo <span class="token number">1.0</span>
+
+<span class="token keyword">interface</span> Radio <span class="token punctuation">{</span>
+    <span class="token comment">// frequency is the current frequency in MHz</span>
+    frequency<span class="token punctuation">:</span> float
+    <span class="token comment">// stations is a list of stations</span>
+    stations<span class="token punctuation">:</span> Station<span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token comment">// if enabled automatically tunes to the next station</span>
+    autoTune<span class="token punctuation">:</span> <span class="token builtin">bool</span>
+    <span class="token comment">// scan for stations</span>
+    <span class="token function">scan</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">// tune to a specific frequency</span>
+    <span class="token function">tuneFrequency</span><span class="token punctuation">(</span>float frequency<span class="token punctuation">)</span>
+    <span class="token comment">// tune to a specific station</span>
+    <span class="token function">tuneStation</span><span class="token punctuation">(</span>stationId<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+    <span class="token comment">// signal emitted when a new station is found</span>
+    signal <span class="token function">stationFound</span><span class="token punctuation">(</span>stationId<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> Station <span class="token punctuation">{</span>
+    <span class="token comment">// id is the station id</span>
+    id<span class="token punctuation">:</span> <span class="token builtin">int</span>
+    <span class="token comment">// name of the station</span>
+    name<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    <span class="token comment">// short name of the station</span>
+    shortName<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    <span class="token comment">// frequency in MHz</span>
+    frequency<span class="token punctuation">:</span> float
+    <span class="token comment">// artwork url</span>
+    artwork<span class="token punctuation">:</span> <span class="token builtin">string</span>
+    <span class="token comment">// category of the content</span>
+    category<span class="token punctuation">:</span> Category
+<span class="token punctuation">}</span>
+
+enum Category <span class="token punctuation">{</span>
+    News <span class="token operator">=</span> <span class="token number">0</span>
+    Music <span class="token operator">=</span> <span class="token number">1</span>
+    Talk <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Our ApiGear tooling can create code in different languages. For example in C++ this would look like (simplified):</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">class</span> <span class="token class-name">Radio</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// scan for stations</span>
+    <span class="token keyword">void</span> <span class="token function">scan</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// tune to a specific frequency</span>
+    <span class="token keyword">void</span> <span class="token function">tuneFrequency</span><span class="token punctuation">(</span><span class="token keyword">float</span> frequency<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// tune to a specific station</span>
+    <span class="token keyword">void</span> <span class="token function">tuneStation</span><span class="token punctuation">(</span><span class="token keyword">int</span> stationId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// signal emitted when a new station is found</span>
+    <span class="token keyword">void</span> <span class="token function">onStationFound</span><span class="token punctuation">(</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token keyword">int</span> stationId<span class="token punctuation">)</span><span class="token operator">&gt;</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token comment">// frequency is the current frequency in MHz</span>
+    <span class="token keyword">float</span> frequency<span class="token punctuation">;</span>
+    <span class="token comment">// stations is a list of stations</span>
+    std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&lt;</span>Station<span class="token operator">&gt;</span> stations<span class="token punctuation">;</span>
+    <span class="token comment">// if enabled automatically tunes to the next station</span>
+    <span class="token keyword">bool</span> autoTune<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Station</span> <span class="token punctuation">{</span>
+    <span class="token comment">// id is the station id</span>
+    <span class="token keyword">int</span> id<span class="token punctuation">;</span>
+    <span class="token comment">// name of the station</span>
+    std<span class="token double-colon punctuation">::</span>string name<span class="token punctuation">;</span>
+    <span class="token comment">// short name of the station</span>
+    std<span class="token double-colon punctuation">::</span>string shortName<span class="token punctuation">;</span>
+    <span class="token comment">// frequency in MHz</span>
+    <span class="token keyword">float</span> frequency<span class="token punctuation">;</span>
+    <span class="token comment">// artwork url</span>
+    std<span class="token double-colon punctuation">::</span>string artwork<span class="token punctuation">;</span>
+    <span class="token comment">// category of the content</span>
+    Category category<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/apigear-io/apigear-docs/edit/main/docs/objectapi/idl.md" target="_blank" rel="noopener noreferrer">Contribute</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">10/14/2022, 8:21:55 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/objectapi/examples.html" class="prev">
+        API Examples
+      </a></span> <span class="next"><a href="/objectapi/mapping.html">
+        Protocol Mappings
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d6d1e6fd.js" defer></script><script src="/assets/js/2.fe76ba1d.js" defer></script><script src="/assets/js/26.07036069.js" defer></script>
+  </body>
+</html>
