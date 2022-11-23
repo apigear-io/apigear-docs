@@ -34,11 +34,13 @@ The view has now changed to the `Api Modules` view. Here you see all your API mo
 
 You can now edit and save the API Module. API modules structure and meaning is defined in the [ObjectAPI Specification](../objectapi/).
 
-## Install Code Templates
+## Install Blueprints
 
-To create your first SDK from API modules we need to have Code Templates installed and a configuration file, called solution.
+To create your first SDK from API modules you need to have Blueprints installed and a configuration file, called solution. The Blueprint allows creating new files for your solution based on defined rules and file templatea inside the Blueprint.
 
-In the `Templates` view you see all templates available from the ApiGear cloud. You can install templates by clicking the `Install` button. The templates are installed in a local folder on you drive.
+In the `Blueprint` view you see all templates available from the ApiGear cloud. You can install them by clicking the `Install` button. The Blueprints are installed in a local folder on you drive.
+
+Or you can add your own Blueprint using the `Local Blueprint` button and point to your Blueprint localization.
 
 The name of a template will be used later for creating a SDK from the API modules.
 
