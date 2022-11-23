@@ -80,6 +80,8 @@ interfaces:
         params:
           - name: step
             type: int
+        return:
+          type: int
 ```
 
 The arguments do parameterize the operation.
