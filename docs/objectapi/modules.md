@@ -101,11 +101,11 @@ interfaces:
 
 ## Data Structures
 
-A structure represents a data structure which can be used for communication. The structure consist of a `name` and a set of data fields. Each field again has a `name` and a `type` information.
+A structure represents a data structure which can be used for communication. The structure consists of a `name` and a set of data fields. Each field again has a `name` and a `type` information.
 
 ```yml
 # ...
-types:
+structs:
   - name: Message
     fields:
       - name: msg
