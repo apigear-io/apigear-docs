@@ -120,12 +120,12 @@ interfaces:
   - name: MessageSender
     properties:
       - name: lastMessage
-        type: { ref: Message }
+        type: Message
     operations:
       - name: send
         params:
           - name: msg
-            type: { ref: Message }
+            type: Message
 ```
 
 Data structure can be identified just be identified its name.
@@ -170,5 +170,5 @@ interfaces:
   - name: MyInterface
     properties:
       - name: status
-        type: { ref: Status } # references the Status enumeration
+        type: Status # references the Status enumeration
 ```

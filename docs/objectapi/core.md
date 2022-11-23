@@ -76,7 +76,7 @@ If an array does contain a symbol as containing type, then the symbol name can b
 properties:
   - name: messages
     type: array
-    items: { ref: Message }
+    items: Message
 ```
 
 Primitive types are always start with a lower case character and symbols always with an upper case character.
@@ -99,11 +99,11 @@ Inside the same module the type can be referenced by the name of the symbol usin
 ```yaml
 properties:
   - name: msg1
-    type: { ref: Message }
+    type: Message
   - name: msg2
     type: array
     items: struct
-    symbol: { ref: Message }
+    symbol: Message
 ```
 
 Outside the module, the module itself needs to be imported and the type needs to be used with its fully qualified name
@@ -116,7 +116,7 @@ interfaces:
   - name: Interface1
     properties:
       - name: msg1
-        type: { ref: org.example.Message }
+        type: org.example.Message
 ```
 
 - `org.example.Message` - external symbol
