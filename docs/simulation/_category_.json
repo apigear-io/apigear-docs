@@ -1,0 +1,8 @@
+{
+  "label": "API Simulation",
+  "position": 8,
+  "link": {
+    "type": "generated-index",
+    "description": "Simulates API interactions"
+  }
+}

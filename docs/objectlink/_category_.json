@@ -1,0 +1,8 @@
+{
+  "label": "ObjectLink",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "ObjectLink protocol specification"
+  }
+}

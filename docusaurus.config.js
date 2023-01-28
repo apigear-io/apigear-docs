@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'ApiGear',
+  tagline: 'Design your API and generate code, documentation and tests',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -42,7 +42,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/apigear-io/apigear-docs/edit/main/',
         },
         blog: {
           showReadingTime: true,
@@ -64,21 +64,21 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: 'ApiGear',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'ApiGear Logo',
+          src: 'img/icon.png',
         },
         items: [
           {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/apigear-io/apigear-docs',
             label: 'GitHub',
             position: 'right',
           },
@@ -91,8 +91,16 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'CLI',
+                to: '/docs/cli',
+              },
+              {
+                label: 'Studio',
+                to: '/docs/studio',
+              },
+              {
+                label: 'Guide',
+                to: '/docs/guide',
               },
             ],
           },
@@ -122,7 +130,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/apigear-io',
               },
             ],
           },
