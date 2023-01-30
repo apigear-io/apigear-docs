@@ -12,7 +12,7 @@ It can be used during development using JSON and later switch to a binary protoc
 
 When designing embedded platforms, it is often necessary to provide a state full design. The state is inherent from the device (e.g. temperature, location, current radio station). These states are often used by multiple applications. The applications are often not aware of each other and the state is not synchronized. This leads to a lot of duplicated code and a lot of complexity.
 
-The protocol allows to share state between applications. ANd the state is automatically synced across applications and platforms. The applications can be written in different languages and can be running on different platforms. The protocol is designed to be used with the [ObjectAPI](../objectapi) specification. This allows to define a common API surface for the applications.
+The protocol allows to share state between applications. ANd the state is automatically synced across applications and platforms. The applications can be written in different languages and can be running on different platforms. The protocol is designed to be used with the [ObjectAPI](/docs/advanced/objectapi) specification. This allows to define a common API surface for the applications.
 
 Protocol Features Used:
 
@@ -38,7 +38,7 @@ Protocol Features Used:
 
 ## Remote Procedure Calls
 
-The protocol can be used to implement remote procedure calls. The protocol is designed to be used with the [ObjectAPI](../objectapi) specification. This allows to define a common API surface for the applications. The protocol can be used to implement a remote procedure call. The request is send to the service and the service replies with the result.
+The protocol can be used to implement remote procedure calls. The protocol is designed to be used with the [ObjectAPI](/docs/advanced/objectapi) specification. This allows to define a common API surface for the applications. The protocol can be used to implement a remote procedure call. The request is send to the service and the service replies with the result.
 
 Additional the service can notify the client about events using the signal aspect of the protocol.
 

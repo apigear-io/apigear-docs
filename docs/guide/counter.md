@@ -34,7 +34,7 @@ interfaces:
       - name: increment
 ```
 
-The API consists of an interface located in the `demo.daily` module. The `Counter` interface itself consist of a property `count` of the type integer. The interface also exposes an operation named `increment`. For more information on the API definition language see the [ObjectAPI guide](../objectapi).
+The API consists of an interface located in the `demo.daily` module. The `Counter` interface itself consist of a property `count` of the type integer. The interface also exposes an operation named `increment`. For more information on the API definition language see the [ObjectAPI guide](/docs/advanced/objectapi).
 
 We create a C++14 API for this tutorial. When we open the SDK section, we select the C++14 SDK and press run. After we downloaded the created SDK, we unzip the source code in our terminal and run the project. Detailed information how to run the project will be in the README file of your SDK.
 

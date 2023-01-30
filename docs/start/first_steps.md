@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
-# Getting Started
+# First Steps
 
 ObjectAPI and the ApiGear tooling are an open source project to improve the current way of integrating software.
 ObjectAPI allows teams to create a description of their software interfaces and generate a ready to use integration SDK.
@@ -10,19 +10,7 @@ The SDK comes already pre-configured with support for monitoring, logging, and t
 
 To get started you first need to download the ApiGear Studio.
 
-## Install Apigear Studio
-
-ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/apigear-io/studio-releases/releases). Studio is available for Mac, Windows and Linux.
-
-After installation you can start the ApiGear Studio.
-
-:::warning
-ApiGear Studio is Early Access Software and should not be used for production yet. We are working to finalize the product and will release a stable version soon.
-:::
-
-As ApiGear Studio is still in early access version there are no certificates yet. Which requires you on Windows and MacOS to accept some exceptions.
-
-## First Run
+## Using the Studio
 
 When you run the Studio for the first time you need to accept our TOS once. This is a requirement to get the Studio working.
 
@@ -36,7 +24,7 @@ Now you have an empty project without any APIs. You can add APIs to the project 
 
 The view has now changed to the `Api Modules` view. Here you see all your API modules and actions to manage them. To edit and API you can click the `Edit` icon. It will open the API editor, which is normally Visual Studio Code.
 
-You can now edit and save the API Module. API modules structure and meaning is defined in the [ObjectAPI Specification](../objectapi/).
+You can now edit and save the API Module. API modules structure and meaning is defined in the [ObjectAPI Specification](/docs/advanced/objectapi/).
 
 ## Install Code Templates
 
@@ -51,7 +39,7 @@ The name of a template will be used later for creating a SDK from the API module
 A solution binds API modules with an SDK. It can contain several layers of code generation. For example you can generate a C++ SDK from the API modules, as also a Python SDK. All templates have also different features for example `http` or `olink` support. Which features are supported is different for each template.
 
 :::tip
-In the [ObjectAPI Mapping](/docs/objectapi/mapping) is a description how different APIs are mapped to different transports and protocols.
+In the [ObjectAPI Mapping](/docs/advanced/objectapi/mapping) is a description how different APIs are mapped to different transports and protocols.
 :::
 
 A solution is a document and can be created using the `New -> Solution` action. The dialog allows you to name the solution. When clicking `OK` the solution will be created and a new document will be shown. Also the view has changed to the "Solution" view.

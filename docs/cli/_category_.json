@@ -1,6 +1,6 @@
 {
   "label": "Command Line",
-  "position": 2,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "The ApiGear command line tool"

@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Studio Overview
+# Introduction
 
 The desktop studio is a desktop application that allows you to create and manage APIs. It is available for Linux, MacOS and Windows.
 

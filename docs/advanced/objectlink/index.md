@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Protocol
 
-ObjectLink is an IPC protocol based on the idea to link a local object to a remote object a network connection. Object link allows users to communicate state full objects over a network connection. The protocol is designed to be used with the [ObjectAPI](../objectapi) specification.
+ObjectLink is an IPC protocol based on the idea to link a local object to a remote object a network connection. Object link allows users to communicate state full objects over a network connection. The protocol is designed to be used with the [ObjectAPI](/docs/advanced/objectapi) specification.
 
 The design is based on several main concepts:
 
