@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Custom Templates
+# Introduction
 
 ApiGear offers a large set of pre-made technology templates covering the major programming languages and technologies.
 But often a project requires some adaptations to the templates or require support for a different technology which is not yet covered.

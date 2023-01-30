@@ -7,7 +7,7 @@ const FeatureList = [
     title: 'Easy to Use',
     description: (
       <>
-        ApiGear was designed from the ground up to design clean APIs, consistently across teams.
+        ApiGear is designed from the ground up to design clean APIs, consistently across teams. No more boilerplate code. No more manual work.
       </>
     ),
   },

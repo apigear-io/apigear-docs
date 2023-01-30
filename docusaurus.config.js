@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ApiGear',
-  tagline: 'Design your API and generate code, documentation and tests',
+  title: 'The future of API driven workflows',
+  tagline: 'Design your APIs and generate your SDKs with ease.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -44,13 +44,6 @@ const config = {
           editUrl:
             'https://github.com/apigear-io/apigear-docs/edit/main/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -76,7 +69,11 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            label: 'Discussions',
+            href: 'https://github.com/orgs/apigear-io/discussions',
+            position: 'right',
+          },
           {
             href: 'https://github.com/apigear-io/apigear-docs',
             label: 'GitHub',
@@ -88,19 +85,36 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Guide',
             items: [
               {
-                label: 'CLI',
-                to: '/docs/cli',
+                label: 'First Steps',
+                to: '/docs/start/first_steps',
               },
               {
-                label: 'Studio',
-                to: '/docs/studio',
+                label: 'Installation',
+                to: '/docs/start/install',
               },
               {
-                label: 'Guide',
-                to: '/docs/guide',
+                label: 'More',
+                to: '/docs/guide/intro',
+              },
+            ],
+          },
+          {
+            title: 'References',
+            items: [
+              {
+                label: 'ObjectAPI',
+                href: '/docs/advanced/objectapi',
+              },
+              {
+                label: 'ObjectLink',
+                href: '/docs/advanced/objectlink',
+              },
+              {
+                label: 'Custom Templates',
+                href: '/docs/advanced/maker/intro',
               },
             ],
           },
@@ -108,25 +122,8 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Discussions',
+                href: 'https://github.com/orgs/apigear-io/discussions',
               },
               {
                 label: 'GitHub',
@@ -135,7 +132,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ApiGear UG.`,
       },
       prism: {
         theme: lightCodeTheme,

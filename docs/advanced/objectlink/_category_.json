@@ -1,6 +1,6 @@
 {
   "label": "ObjectLink",
-  "position": 7,
+  "position": 5,
   "link": {
     "type": "generated-index",
     "description": "ObjectLink protocol specification"

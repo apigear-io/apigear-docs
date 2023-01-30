@@ -2,15 +2,17 @@
 sidebar_position: 2
 ---
 
-# Network Protocols
+# Monitoring Protocol
 
-The API Monitor protocol is a simple HTTP post call to a dedicated http server instance embedded in the ApiGear Studio.
+The API Monitor protocol is a simple HTTP post call to a dedicated http server instance embedded in the ApiGear Studio / CLI.
 
-The protocol is resembled after the simulation protocol.
+The protocol allows to send property changes, operation calls and signals to the monitoring server.
 
 The message is typically a JSON message send to an HTTP endpoint depending if an operation call, state change or a signal is reported.
 
-_Note: An extended version of the monitoring protocol is planned to provide detailed API analytics information our upcoming cloud API analytics solution for devices._
+:::note
+An extended version of the monitoring protocol is planned to provide detailed API analytics information our upcoming cloud API analytics solution for devices.
+:::
 
 ## HTTP Tracing
 

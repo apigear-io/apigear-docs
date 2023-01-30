@@ -1,0 +1,11 @@
+{
+  "label": "API Monitoring",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "API monitoring"
+  },
+  "customProps": {
+    "description": "API monitoring"
+  }
+}
