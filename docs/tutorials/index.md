@@ -10,7 +10,7 @@ This is section is about how to use ApiGear to create SDKs with the ObjectAPI.
 Feel free to jump directly to our [demos over at github](https://github.com/apigear-io/objectapi-demos). They showcase two different APIs in several languages including applications which use the API modules.
 :::
 
-Now, that you know the basics about the [ObjectAPI](../objectapi/overview) and how to create SDKs using ApiGear, we provide some demos and hints for real world projects.
+Now, that you know the basics about the [ObjectAPI](/docs/objectapi) and how to create SDKs using ApiGear, we provide some demos and hints for real world projects.
 
 We will cover starting from scratch as well as updating an existing API, previously created using ApiGear. Our [demos](https://github.com/apigear-io/objectapi-demos) are implemented using the same process as described below.
 
@@ -25,12 +25,12 @@ However, using the _API first approach_ will help you design more stable and hig
 
 ## Define API
 
-As with every _API first approach_ you start at defining your [ObjectAPI module](../objectapi/modules).
-The easiest way to do this in a team is to use our online collaboration suite as described in [Start -> modules](../guide/modules) section.
+As with every _API first approach_ you start at defining your [ObjectAPI module](/docs/objectapi/modules).
+The easiest way to do this in a team is to use our online collaboration suite as described in [Start -> modules](/docs/guide) section.
 
 ## Create SDK
 
-Once you have created one or several API modules you are set to create your first SDK. Therefore you choose one of our expert engineered [SDK templates](../sdk/intro) and a SDK runner for your project.
+Once you have created one or several API modules you are set to create your first SDK. Therefore you choose one of our expert engineered [SDK templates](/docs/sdks) and a SDK runner for your project.
 
 The SDK runner will create a _.zip_ file for you to download.
 

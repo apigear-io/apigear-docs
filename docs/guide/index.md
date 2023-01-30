@@ -51,7 +51,7 @@ The name of a template will be used later for creating a SDK from the API module
 A solution binds API modules with an SDK. It can contain several layers of code generation. For example you can generate a C++ SDK from the API modules, as also a Python SDK. All templates have also different features for example `http` or `olink` support. Which features are supported is different for each template.
 
 :::tip
-In the [ObjectAPI Mapping](../mappings/) is a description how different APIs are mapped to different transports and protocols.
+In the [ObjectAPI Mapping](/docs/objectapi/mapping) is a description how different APIs are mapped to different transports and protocols.
 :::
 
 A solution is a document and can be created using the `New -> Solution` action. The dialog allows you to name the solution. When clicking `OK` the solution will be created and a new document will be shown. Also the view has changed to the "Solution" view.
