@@ -12,7 +12,7 @@ ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/
 
 After installation you can start the ApiGear Studio.
 
-:::warning
+:::caution
 ApiGear Studio is Early Access Software and should not be used for production yet. We are working to finalize the product and will release a stable version soon.
 :::
 
