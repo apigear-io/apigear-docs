@@ -17,12 +17,12 @@ REST API is about browsing data but the underlying nature of the protocol is HTT
 
 For example to increment a value this logic would be in REST like this.
 
-<mermaid>
+```mermaid
 sequenceDiagram
   client->>service: get /counter/$id
   client->>client: increment
   client-->service: put /counter/$id
-</mermaid>
+```
 
 We first fetch the counter state, than increment the count value and push back the result. The logic is on the client side and the service mostly manages data.
 
@@ -41,12 +41,12 @@ Often these kind of APIs makes it hard in complex logic driven services to valid
 
 Message based APIs are typically realized using a message broker. The broker is responsible to ensure all messages are delivered to the subscribed or registered peers.
 
-<mermaid>
+```mermaid
 sequenceDiagram
   client->>broker: subscribe '/counter/$id'
   client->>broker: publish 'counter/$id/increment'
   broker->>client: publish '/counter/$id/'
-</mermaid>
+```
 
 First we would subscribe to and interface state changes. Then we would publish the increment signal and wait for changes on the interface state. The changes are announces by the service via the broker.
 
@@ -65,12 +65,12 @@ client.publish("/counter/$id/increment");
 
 Object based APIs focus on the developer API and take care of the internal mapping to the different protocol types. Interface properties will be typically automatically synced and signals will allow service side notifications to the clients.
 
-<mermaid>
+```mermaid
 sequenceDiagram
   client->>service: increment
   service->>service: increment
   service->>client: sync state
-</mermaid>
+```
 
 The API for this would look like this.
 

@@ -29,7 +29,7 @@ To link a local object to a remote object we need to send a link message.
 
 ```mermaid
 sequenceDiagram
-Sink->Source: [LINK:int, ObjectId:string]
-Source->Sink: [INIT:int, ObjectId:string, Properties:jsonObject]
-Sink->Source: [UNLINK:int, ObjectId:string]
+    Sink->Source: [LINK:int, ObjectId:string]
+    Source->Sink: [INIT:int, ObjectId:string, Properties:jsonObject]
+    Sink->Source: [UNLINK:int, ObjectId:string]
 ```
