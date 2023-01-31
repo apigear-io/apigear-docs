@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# ObjectAPI Overview
+# Introduction
 
 ObjectAPI is an interface specification to describe the boundaries of your software modules in an object format.
 

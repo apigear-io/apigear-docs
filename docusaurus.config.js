@@ -115,11 +115,11 @@ const config = {
             items: [
               {
                 label: 'ObjectAPI',
-                href: '/docs/advanced/objectapi',
+                href: '/docs/advanced/objectapi/intro',
               },
               {
                 label: 'ObjectLink',
-                href: '/docs/advanced/objectlink',
+                href: '/docs/advanced/objectlink/intro',
               },
               {
                 label: 'Custom Templates',

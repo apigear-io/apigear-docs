@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# SDK Templates
+# Introduction
 
 ApiGear comes with a collection of SDK templates which allows our users to create code interfaces but also complete SDKs from the API Modules.
 

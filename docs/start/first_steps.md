@@ -24,7 +24,7 @@ Now you have an empty project without any APIs. You can add APIs to the project 
 
 The view has now changed to the `Api Modules` view. Here you see all your API modules and actions to manage them. To edit and API you can click the `Edit` icon. It will open the API editor, which is normally Visual Studio Code.
 
-You can now edit and save the API Module. API modules structure and meaning is defined in the [ObjectAPI Specification](/docs/advanced/objectapi/).
+You can now edit and save the API Module. API modules structure and meaning is defined in the [ObjectAPI Specification](/docs/advanced/objectapi/intro).
 
 ## Install Code Templates
 

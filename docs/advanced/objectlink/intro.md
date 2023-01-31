@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Protocol
+# Introduction
 
-ObjectLink is an IPC protocol based on the idea to link a local object to a remote object a network connection. Object link allows users to communicate state full objects over a network connection. The protocol is designed to be used with the [ObjectAPI](/docs/advanced/objectapi) specification.
+ObjectLink is an IPC protocol based on the idea to link a local object to a remote object a network connection. Object link allows users to communicate state full objects over a network connection. The protocol is designed to be used with the [ObjectAPI](/docs/advanced/objectapi/intro) specification.
 
 The design is based on several main concepts:
 
@@ -29,19 +29,19 @@ The client and server needs to know their transport and encoding in advance. The
 
 ## Message Types
 
-- [Lifecycle](lifecycle)
+- [Lifecycle](./lifecycle)
   - `--> LINK` - link the local object with a remote object
   - `<-- INIT` - initialized the local object with properties from the remote object
   - `--> UNLINK` - unlinks a local object from a remote object
-- [Properties](properties)
+- [Properties](./properties)
   - `--> SET_PROPERTY` - send a property change to a remote object
   - `<-- PROPERTY_CHANGE` - sends property changes to all linked client objects
-- [Methods](methods)
+- [Methods](./methods)
   - `--> INVOKE` - invoke a method on a remote object
   - `<-- INVOKE_REPLY` - reply of an remote invokation
-- [Signals](signals)
+- [Signals](./signals)
   - `<-- SIGNAL` - send remote events back to all linked client objects
-- [Errors](errors)
+- [Errors](./errors)
   - `<-- ERROR` - send an error back to the client with the msg type of the original message
 
 ## Message Formats
