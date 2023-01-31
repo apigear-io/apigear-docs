@@ -33,6 +33,12 @@ const config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
+
   presets: [
     [
       'classic',
@@ -49,7 +55,7 @@ const config = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         gtag: {
-          trackingID: 'G-KD8KC8Z417',
+          trackingID: 'G-D2X4N3X4K7',
           anonymizeIP: true,
         },
       }),
@@ -59,8 +65,6 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'ApiGear',
         logo: {
@@ -144,6 +148,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
 };
 
 module.exports = config;
