@@ -8,7 +8,9 @@ The simulation server is integrated into ApiGear studio. A simulation of a servi
 
 The scenario can then be edited using an external YAML editor, e.g. Visual Studio Code using our VSCode extension ('apigear').
 
-Note: A visual editing of simulation scenarios is on the roadmap and will be available as part of our cloud offering.
+:::note
+A visual editing of simulation scenarios is on the road-map and will be available as part of our cloud offering.
+:::
 
 After the scenario is defined the simulation can be started with the `Start` button on the scenario document. Currently only one scenario at a time can be active.
 
