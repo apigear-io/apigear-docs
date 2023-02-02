@@ -47,7 +47,7 @@ As a convention, calling the service should always give back the current state, 
 
 ## ObjectLink Protocol for Simulation
 
-The simulation server can be called using the ObjectLink protocol over WebSockets. The protocol is described in the [ObjectLink specification](/docs/objectlink/intro).
+The simulation server can be called using the ObjectLink protocol over WebSockets. The protocol is described in the [ObjectLink specification](/docs/advanced/objectlink/intro).
 
 An incoming object link message is wired to a scenario document. Each scenario document can contain multiple interfaces. The interface name is used to identify the interface to be simulated. The operation name is used to identify the operation to be simulated. In case no scenario document is provided, the simulation server will use a default scenario document.
 
