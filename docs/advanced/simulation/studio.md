@@ -20,7 +20,7 @@ To stop the scenario, click the `Stop` button next to the scenario document.
 
 To connect to the ApiGear Studio simulation server you need to know the connection address, which can be queries from the settings panel.
 
-The connection address in the form of `ws://127.0.0.1/5554` or parts of it needs to be made available to your API SDK. Please consult the dedicated SDK readme about the correct procedure.
+The connection address in the form of `ws://127.0.0.1/5554/ws` or parts of it needs to be made available to your API SDK. Please consult the dedicated SDK readme about the correct procedure.
 
 ## Monitoring
 

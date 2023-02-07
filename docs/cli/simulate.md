@@ -33,16 +33,19 @@ Now we can run the simulation server using the following command.
 apigear simulate run demo.scenario.yaml
 ```
 
-The simulation server will listen on port 5555. To change the port use the `--port` option. It will load the simulation scenario from the `demo.scenario.yaml` file. The simulation server will listen for API calls. Normally the API calls will come from a running API client. It is also possible to feed API calls using the `feed` command.
+The simulation server will listen on port 5554. To change the port use the `--port` option. It will load the simulation scenario from the `demo.scenario.yaml` file. The simulation server will listen for API calls. Normally the API calls will come from a running API client. It is also possible to feed API calls using the `feed` command.
 
-The following example shows how to feed API calls to the simulation server using a new line delimited json document (`NDJSON`).
+The following example shows how to feed API calls to the simulation server using a new line delimited json document (`NDJSON`). The format is described in the ObjectLink specification.
 
 ```json
-{ "method": "simu.state", "params": { "symbol": "demo.Counter" }}
-{ "method": "simu.call", "params": { "symbol": "demo.Counter/increment", "data": { "step": 1 } }}
-{ "method": "simu.call", "params": { "symbol": "demo.Counter/decrement", "data": { "step": 2 } }}
-{ "method": "simu.state", "params": { "symbol": "demo.Counter", "data": { "count": 4 } }}
-{ "method": "simu.state", "params": { "symbol": "demo.Counter" }}
+["link", "demo.Counter"]
+["set", "demo.Counter/count", 10]
+["set", "demo.Counter/count", 11]
+["set", "demo.Counter/count", 12]
+["invoke", 1, "demo.Counter/increment", []]
+["invoke", 2, "demo.Counter/increment", []]
+["invoke", 3, "demo.Counter/decrement", []]
+["unlink", "demo.Counter"]
 ```
 
 To feed the API calls to the simulation server just run the following command.

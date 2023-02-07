@@ -14,7 +14,7 @@ API Monitoring is a feature of the ApiGear platform. It allows to monitor the tr
 apigear monitor run
 ```
 
-This will start the API monitoring server. The server will listen on port 5555. To change the port use the `--port` option.
+This will start the API monitoring server. The server will listen on port 5554. To change the port use the `--port` option.
 
 The monitoring server will listen for API calls. Normally the API events will come from a running API client. It is also possible to feed API events using the `feed` command.
 

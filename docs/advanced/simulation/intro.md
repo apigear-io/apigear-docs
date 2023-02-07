@@ -38,7 +38,7 @@ interfaces:
         actions:
           - $set { count: -10 }
   - name: demo.Echo:
-    operation:
+    operations:
       - name: say:
         actions:
           - $return { value: "Hello World" }
