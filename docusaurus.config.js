@@ -39,11 +39,13 @@ const config = {
   themes: ['@docusaurus/theme-mermaid'],
 
 
+
   presets: [
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
+        debug: true,
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
@@ -57,6 +59,11 @@ const config = {
         gtag: {
           trackingID: 'G-D2X4N3X4K7',
           anonymizeIP: true,
+        },
+        blog: {
+          showReadingTime: true,
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: 'All our posts',
         },
       }),
     ],
@@ -79,6 +86,11 @@ const config = {
             label: 'Docs',
           },
           {
+            to: 'blog',
+            label: 'Blog',
+            position: 'left'
+          },
+          {
             label: 'Discussions',
             href: 'https://github.com/orgs/apigear-io/discussions',
             position: 'right',
@@ -94,36 +106,19 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Guide',
+            title: 'Learn',
             items: [
               {
-                label: 'First Steps',
+                label: 'Introduction',
+                to: '/docs/intro',
+              },
+              {
+                label: 'Getting Started',
                 to: '/docs/start/first_steps',
               },
               {
                 label: 'Installation',
                 to: '/docs/start/install',
-              },
-              {
-                label: 'More',
-                to: '/docs/guide/intro',
-              },
-            ],
-          },
-          {
-            title: 'References',
-            items: [
-              {
-                label: 'ObjectAPI',
-                href: '/docs/advanced/objectapi/intro',
-              },
-              {
-                label: 'ObjectLink',
-                href: '/docs/advanced/objectlink/intro',
-              },
-              {
-                label: 'Custom Templates',
-                href: '/docs/advanced/maker/intro',
               },
             ],
           },
@@ -135,13 +130,51 @@ const config = {
                 href: 'https://github.com/orgs/apigear-io/discussions',
               },
               {
+                label: 'Help',
+                href: '/docs/community/help',
+              },
+            ],
+          },
+          {
+            title: 'More',
+            items: [
+              {
+                label: 'Blog',
+                href: 'https://www.apigear.io/blog',
+              },
+              {
                 label: 'GitHub',
                 href: 'https://github.com/apigear-io',
+              },
+              {
+                label: 'Twitter',
+                href: 'https://twitter.com/apigear',
+              },
+            ],
+          },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Privacy Policy',
+                href: 'https://www.apigear.io/imprint',
+              },
+              {
+                label: 'Terms of Service',
+                href: 'https://www.apigear.io/imprint',
+              },
+              {
+                label: 'Imprint',
+                href: 'https://www.apigear.io/imprint',
+              },
+              {
+                label: 'Cookie Policy',
+                href: 'https://www.apigear.io/imprint',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} ApiGear UG.`,
+        copyright: `Copyright © ${new Date().getFullYear()} ApiGear by Epic Games Inc.`,
       },
       prism: {
         theme: lightCodeTheme,
