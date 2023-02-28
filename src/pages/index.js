@@ -1,40 +1,26 @@
 import React from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
+import FeatureListSection from '../sections/FeatureListSection';
+import HeroSection from '../sections/HeroSection';
+import TechnologiesSection from '../sections/TechnologiesSection';
+import WorkflowSection from '../sections/WorkflowSection';
 import styles from './index.module.css';
-
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx('hero', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--primary button--lg"
-            to="/docs/intro">
-            Get Started
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 export default function Home() {
-  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title={`Design your APIs and generate code`}
       description="Design your API and generate code">
-      <HomepageHeader />
+      <HeroSection />
       <main>
-        <HomepageFeatures />
+        <section className={styles.section}>
+          <FeatureListSection />
+        </section>
+        <section className={styles.sectionDark}>
+          <WorkflowSection />
+        </section>
+        <section className={styles.section}>
+          <TechnologiesSection />
+        </section>
       </main>
     </Layout>
   );
