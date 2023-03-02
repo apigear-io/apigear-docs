@@ -18,7 +18,7 @@ We will cover starting from scratch as well as updating an existing API, previou
 
 ## Cycle Overview
 
-![Developer Cycle](/img/devcycle_43_light.svg)
+![Developer Cycle](/img/devcycle_light.svg)
 
 The graphic describes the development cycle using ApiGear.
 

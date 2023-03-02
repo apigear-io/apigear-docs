@@ -35,6 +35,7 @@ export default function TextRight({ item }) {
                     <div className="col col--6">
                         <ThemedImage
                             alt={item.title}
+                            width="800px"
                             sources={{
                                 light: item.imageLight || item.image,
                                 dark: item.imageDark || item.image
