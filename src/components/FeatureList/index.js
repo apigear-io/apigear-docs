@@ -9,6 +9,7 @@ function Feature({ item }) {
         <div className={clsx('col col--4')}>
             <div className="text--center">
                 <ThemedImage
+                    className={styles.image}
                     alt={item.title}
                     sources={{
                         light: item.imageLight || item.image,
