@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'The future of API driven workflows',
-  tagline: 'Design your APIs and generate your SDKs with ease.',
+  title: 'ApiGear for API driven software integration',
+  tagline: 'Open source tooling for API driven code generation based on ObjectAPI',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -60,11 +60,7 @@ const config = {
           trackingID: 'G-D2X4N3X4K7',
           anonymizeIP: true,
         },
-        blog: {
-          showReadingTime: true,
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: 'All our posts',
-        },
+        blog: false,
       }),
     ],
   ],
@@ -86,7 +82,7 @@ const config = {
             label: 'Docs',
           },
           {
-            to: 'blog',
+            href: 'https://apigear.io/blog',
             label: 'Blog',
             position: 'left'
           },

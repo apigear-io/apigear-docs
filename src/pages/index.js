@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import FeatureListSection from '../sections/FeatureListSection';
 import HeroSection from '../sections/HeroSection';
-import TechnologiesSection from '../sections/TechnologiesSection';
+import ObjectAPISection from '../sections/ObjectAPISection';
 import WorkflowSection from '../sections/WorkflowSection';
 import styles from './index.module.css';
 export default function Home() {
@@ -15,11 +15,11 @@ export default function Home() {
         <section className={styles.section}>
           <FeatureListSection />
         </section>
+        <section className={styles.section}>
+          <ObjectAPISection />
+        </section>
         <section className={styles.sectionDark}>
           <WorkflowSection />
-        </section>
-        <section className={styles.section}>
-          <TechnologiesSection />
         </section>
       </main>
     </Layout>

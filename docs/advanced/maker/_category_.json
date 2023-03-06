@@ -1,8 +1,8 @@
 {
-  "label": "Custom Templates",
+  "label": "Write SDK Templates",
   "position": 1,
   "link": {
     "type": "generated-index",
-    "description": "Custom SDKs to adapt individual software integration needs."
+    "description": "Write custom SDKs to adapt to your individual software integration needs."
   }
 }
