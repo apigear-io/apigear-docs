@@ -24,7 +24,7 @@ interface Counter {
 For example to generate a C++ 14 SDK from the demo API definition just run the following command.
 
 ```bash
-apigear generate expert -i demo.idl -o tmp -t template-cpp14
+apigear generate expert -i demo.idl -o tmp -t apigear-io/template-cpp14
 ```
 
 The `expert` mode is used to generate code from an IDL file. The `-i` option specifies the input file. The `-o` option specifies the output directory. The `-t` option specifies the template to use. The `template-cpp14` template is used to generate C++ 14 code.
