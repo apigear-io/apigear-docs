@@ -8,7 +8,7 @@ The `apigear` command line tool supports all features of the ApiGear platform. I
 
 ## Installation
 
-The `apigear` command line tool is available for Linux, MacOS and Windows. It can be installed from the [release page](https://github.com/apigear-io/cli-releases/releases).
+The `apigear` command line tool is available for Linux, MacOS and Windows. It can be installed from the [release page](https://github.com/apigear-io/cli/releases).
 
 ## Update
 
