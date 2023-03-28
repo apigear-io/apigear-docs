@@ -43,7 +43,7 @@ Typical actions are
 - `$signal` - emits a signal from the simulation
   - `- $signal: { shutdown: { timeout: 5 } }` 
   - similar to `emit signal('shutdown', { timeout: 5} )`
-- `$return` - returns a value from an operation: 
+- `$return` - returns a result from an operation: 
   - `- $return: { count: 1 }` 
   - similar to `return { count: 1 }`
 
@@ -63,11 +63,11 @@ sequence:
       - name: increment
         actions: # list of actions
           - $set: { count: 1 }
-          - $signal: { shutdown: { timeout: 5 } }
+          - $signal: { shutdown: [ 5 ] }
       - name: clear
         actions:
           - $set: { count: 0 }
-          - $signal: { shutdown: { timeout: 5 } }
+          - $signal: { shutdown: [ 5 ] } }
 ```
 
 The interval defined the tick and on each tick a step is running. If loops is true then the playbook will start again after finished.

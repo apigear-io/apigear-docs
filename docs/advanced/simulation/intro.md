@@ -41,7 +41,7 @@ interfaces:
     operation:
       - name: say:
         actions:
-          - $return { value: "Hello World" }
+          - $return { result: "Hello World" }
 ```
 
 This is a simple scenario which imitate a `demo.Counter` and `demo.Echo` interface.
