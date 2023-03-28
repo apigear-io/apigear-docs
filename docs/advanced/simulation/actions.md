@@ -4,9 +4,7 @@ sidebar_position: 3
 
 # Actions Reference
 
-A action is a command to the simulation to change a value or to communicate a change. 
-
-An action is an object with a key of the action command and a object value as the action arguments.
+An action is a command for the simulation engine to change a value or to communicate a change. The action is an object with a key of the action command and a object value as the action arguments. Actiosn are part of scenario documents.
 
 ```yaml
 $command: { options }
