@@ -55,6 +55,15 @@ $signal: { shutdown: [ 5 ] }  x
 ```
 
 
+:::note
+To directly emit a signal from the client it is possible to use invoke operation, but with a `$signal.` prefix of the signal name. For example to emit the `shutdown` signal from the client it can be done like this:
+
+```go
+client.invoke("$signal.shutdown", [ 5 ])
+```
+This will send the invoke message to the simulation and the simulation will emit the signal. There is no return value from the invoke operation.
+:::
+
 ## `$return`
 
 The `$return` action returns a result from an operation. The default case it returns the result from the default interface. The value to return is given in the result key of the action object.
