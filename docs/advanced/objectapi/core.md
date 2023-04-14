@@ -70,8 +70,8 @@ For example an integer array can be noted like this:
 ```yaml
 properties:
   - name: names
-    type: array
-    items: string
+    array: true
+    type: string
 ```
 
 If an array does contain a symbol as containing type, then the symbol name can be used in the items key.
@@ -79,8 +79,8 @@ If an array does contain a symbol as containing type, then the symbol name can b
 ```yaml
 properties:
   - name: messages
-    type: array
-    items: Message
+    array: true
+    type: Message
 ```
 
 Primitive types are always start with a lower case character and symbols always with an upper case character.
@@ -105,9 +105,8 @@ properties:
   - name: msg1
     type: Message
   - name: msg2
-    type: array
-    items: struct
-    symbol: Message
+    array: true
+    type: Message
 ```
 
 Outside the module, the module itself needs to be imported and the type needs to be used with its fully qualified name
