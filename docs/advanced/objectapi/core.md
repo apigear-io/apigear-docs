@@ -57,8 +57,8 @@ The general types available to ObjectAPI are:
 Data types can be re-presented in different forms in different programming languages. They all need to be convertible to JSON data types on request.
 
 - `bool` - A simple boolean value (true or false)
-- `int` - A signed integer value
-- `float` - A floating point value
+- `int`, `int32`, `int64` - A signed integer value
+- `float`, `float32`, `float64` - A floating point value
 - `string` - A string value
 
 ## Arrays
@@ -70,8 +70,8 @@ For example an integer array can be noted like this:
 ```yaml
 properties:
   - name: names
-    type: array
-    items: string
+    type: string
+    array: true
 ```
 
 If an array does contain a symbol as containing type, then the symbol name can be used in the items key.
@@ -79,8 +79,8 @@ If an array does contain a symbol as containing type, then the symbol name can b
 ```yaml
 properties:
   - name: messages
-    type: array
-    items: Message
+    type: Message
+    array: true
 ```
 
 Primitive types are always start with a lower case character and symbols always with an upper case character.
@@ -105,9 +105,8 @@ properties:
   - name: msg1
     type: Message
   - name: msg2
-    type: array
-    items: struct
-    symbol: Message
+    type: Message
+    array: true
 ```
 
 Outside the module, the module itself needs to be imported and the type needs to be used with its fully qualified name

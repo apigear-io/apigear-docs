@@ -40,20 +40,16 @@ A type can be either a primitive type or a complex type. A complex type can be a
 
 A primitive type can be one of the following:
 
-- `int` : integer value
-- `float` : floating point value
-- `string` : string value
 - `bool` : boolean value
+- `int`, `int32`, `int64` : integer value
+- `float`, `float32`, `float64` : floating point value
+- `string` : string value
 
 A complex type can be one of the following:
 
 - name of an interface
 - name of an enumeration
 - name of a structure
-
-:::tip
-Currently we do not support sub-types (e.g. int32, int64, ...). We will add this in the future.
-:::
 
 To define arrays of a type just append the `[]` to the type.
 
@@ -77,7 +73,7 @@ A data structure is a message which can be used to send complex information betw
 
 ```go
 struct name {
-    field-name : type
+    fieldName : type
 }
 ```
 
