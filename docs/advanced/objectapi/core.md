@@ -48,9 +48,9 @@ properties:
 
 The general types available to ObjectAPI are:
 
-- Primitives (`bool`, `int`, `float`, `string`)
-- Containers (`arrays`)
-- Complex (`structures`, `enumerations`)
+- Primitive Types: `bool`, `int`, `int32`, `int64`, `float`, `float32`, `float64`, `string`
+- Container Types: `arrays`
+- Complex Types : `structures`, `enumerations`
 
 ## Primitives
 
