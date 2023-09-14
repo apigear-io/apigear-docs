@@ -27,10 +27,10 @@ The resulting simplified typescript code could look like this.
 ```js
 // org.demos.js
 class Echo {
-  message: string = ""
+  message: string = "";
 }
-const echo = new Echo()
-echo.message = "foo"
+const echo = new Echo();
+echo.message = "foo";
 ```
 
 ## Protocol Flow
@@ -38,7 +38,7 @@ echo.message = "foo"
 First the local object needs to be linked to a remote object.
 
 ```js
---> [ LINK, "org.demos.Echo"]
+--> [ LINK, "org.demos.Echo", CHECKSUM]
 ```
 
 Now the local object receive initial property list, which is automatically send after the link message.
@@ -49,28 +49,24 @@ Now the local object receive initial property list, which is automatically send 
 
 After the init message out local object is fully populated and all properties have valid values.
 
-
-
 When a property is changed on the local object, for example from "hello" to "foo", a `SET_PROPERTY` message is send.
 
-
 ```js
---> [ SET_PROPERTY, "org.demos.Echo/message", "foo"]
+--> [ SET_PROPERTY, "org.demos.Echo", "message", "foo"]
 ```
 
 The remote object will then set the property and notify all linked objects about the changes using a `PROPERTY_CHANGE` message, including the original sender.
 
 ```js
-<-- [ PROPERTY_CHANGE, "org.demos.Echo/message", "foo"]
+<-- [ PROPERTY_CHANGE, "org.demos.Echo", "message", "foo"]
 ```
-
 
 ## Sequence Diagram
 
-After an object is linked propertie will be synced across all linked clients.
+After an object is linked properties will be synced across all linked clients.
 
 ```mermaid
 sequenceDiagram
-Sink->Source: [SET_PROPERTY:int, PropertyId:string, Value:json]
-Source->Sink: [PROPERTY_CHANGED:int, PropertyId:string, Value:json]
+Sink->Source: [SET_PROPERTY:int, ObjectId:string, MemberId:string, Value:json]
+Source->Sink: [PROPERTY_CHANGED:int, ObjectId:string, MemberId:string, Value:json]
 ```
