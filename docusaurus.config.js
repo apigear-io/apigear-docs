@@ -162,7 +162,7 @@ const config = {
             items: [
               {
                 label: 'Privacy Policy',
-                href: 'https://www.apigear.io/imprint',
+                href: 'https://www.epicgames.com/site/en-US/privacypolicy',
               },
               {
                 label: 'Terms of Service',
