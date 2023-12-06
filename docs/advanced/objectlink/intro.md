@@ -46,25 +46,23 @@ The client and server needs to know their transport and encoding in advance. The
 
 ## Message Formats
 
-| Direction | Message           | Value | Format                                 |
-| --------- | ----------------- | ----- | -------------------------------------- |
-| `->`      | `LINK`            | 10    | [ MsgType, ObjectId ]                  |
-| `<-`      | `INIT`            | 11    | [ MsgType, ObjectId, Dict ]            |
-| `->`      | `UNLINK`          | 12    | [ MsgType, ObjectId ]                  |
-| `->`      | `SET_PROPERTY`    | 20    | [ MsgType, PropertyId, Value ]         |
-| `<-`      | `PROPERTY_CHANGE` | 21    | [ MsgType, ObjectId, Value ]           |
-| `->`      | `INVOKE`          | 30    | [ MsgType, RequestID, MethodId, Args ] |
-| `<-`      | `INVOKE_REPLY`    | 31    | [ MsgType, RequestID, Value ]          |
-| `<-`      | `SIGNAL`          | 40    | [ MsgType, SignalId, Args ]            |
-| `<-`      | `ERROR`           | 50    | [ MsgType, MsgType, RequestID, Error ] |
+| Direction | Message           | Value | Format                                           |
+| --------- | ----------------- | ----- | ------------------------------------------------ |
+| `->`      | `LINK`            | 10    | [ MsgType, ObjectId ]                            |
+| `<-`      | `INIT`            | 11    | [ MsgType, ObjectId, KWargs ]                    |
+| `->`      | `UNLINK`          | 12    | [ MsgType, ObjectId ]                            |
+| `->`      | `SET_PROPERTY`    | 20    | [ MsgType, ObjectId, MemberId, Value ]           |
+| `<-`      | `PROPERTY_CHANGE` | 21    | [ MsgType, ObjectId, MemberId, Value ]           |
+| `->`      | `INVOKE`          | 30    | [ MsgType, RequestID, ObjectId, MemberId, Args ] |
+| `<-`      | `INVOKE_REPLY`    | 31    | [ MsgType, RequestID, Value ]                    |
+| `<-`      | `SIGNAL`          | 40    | [ MsgType, ObjectId, MemberId, Args ]            |
+| `<-`      | `ERROR`           | 50    | [ MsgType, MsgType, RequestID, Error ]           |
 
 - `MsgType`: integer value of message type
-- `ObjectId`: a string identifying the resource as module and object name (e.g. `"demo.Calc"`)
-- `Dict`: A JSON dictionary, e.g. `{ "count": 0}`
+- `ObjectId`: a string identifying the object (e.g. `"demo.Calc"`)
+- `MemberId`: a string identifying the member of the object (e.g. `"count"`)
+- `KWArgs`: A JSON dictionary, e.g. `{ "count": 0}`
 - `Args`: A JSON array, e.g. `[ 1, 2 ]`
-- `PropertyId`: A ObjectID with a property path (e.g. `"demo.Calc/count"`)
 - `Value`: Any valid JSON value including JSON arrays or objects
-- `MethodId`: A ObjectID with a method path (e.g. `"demo.Calc/increment"`)
 - `RequestId`: A unique integer value identifying the request during the connection. Typically a value incremented by one on each request and starting by 1 and then reset to 1 by max value.
-- `SignalId`: A ObjectID with a signal path (e.g. `"demo.Calc/shutdown"`)
 - `Error`: A string describing the error
