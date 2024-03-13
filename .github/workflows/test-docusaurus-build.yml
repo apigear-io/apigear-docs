@@ -1,0 +1,24 @@
+name: Test docusaurus build
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: install dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - run: npx --yes docusaurus-mdx-checker 
+      - run: npm ci
+      - run: npm run build
