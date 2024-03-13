@@ -212,7 +212,7 @@ We might offer a "2" version of a language filter in the future (e.g. `cppReturn
 
 These are the common filters for all languages
 
-### **{lang}Return**
+### **\{lang}Return**
 
 Takes and typed element and returns the type declaration of the type
 
@@ -225,7 +225,7 @@ Takes and typed element and returns the type declaration of the type
   ```
   
 
-### **{lang}Param**
+### **\{lang}Param**
 
 Takes a typed element and returns the function parameter declaration
 
@@ -241,7 +241,7 @@ Takes a typed element and returns the function parameter declaration
   {{ end }}
   ```
 
-### **{lang}Params**
+### **\{lang}Params**
 
 Takes an operation and return the lists of function parameters
 
@@ -253,7 +253,7 @@ Takes an operation and return the lists of function parameters
 {{ end }}
 ```
 
-### **{lang}Default**
+### **\{lang}Default**
 
 Takes a typed element and returns default value
 
@@ -268,7 +268,7 @@ Takes a typed element and returns default value
 {{ end }}
 ```
 
-### **{lang}}Vars**
+### **\{lang}Vars**
 
 Takes a list of types and creates variable names for them
 
@@ -276,7 +276,7 @@ Takes a list of types and creates variable names for them
 {{ cppVars "" .Properties }}
 ```
 
-### **{lang}Var**
+### **\{lang}Var**
 
 Takes a typed element and creates a variable name for it
 
@@ -284,7 +284,7 @@ Takes a typed element and creates a variable name for it
 {{ cppVar "" .Property }}
 ```
 
-### **{lang}Type**
+### **\{lang}Type**
 
 Takes a typed element and returns the type declaration of the type
 
