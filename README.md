@@ -1,6 +1,6 @@
 # ApiGear documentation site
 
-This is the source code for the ApiGear documentation site. It is built using docusaurus. The site is hosted on Github Pages and is available at https://docs.apigear.io.
+This is the source code for the ApiGear documentation site. It is built using docusaurus. The site is hosted on Github Pages and is available at https:/apigear.io.
 
 ## Getting Started
 
