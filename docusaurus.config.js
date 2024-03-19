@@ -59,7 +59,11 @@ const config = {
         //   trackingID: 'G-D2X4N3X4K7',
         //   anonymizeIP: true,
         // },
-        blog: false,
+        blog: {
+          showReadingTime: true,
+          blogSidebarCount: 'ALL',
+          blogSidebarTitle: 'All our posts',
+        },
       }),
     ],
   ],
@@ -86,7 +90,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://apigear.io/blog',
+            to: 'blog',
             label: 'Blog',
             position: 'left'
           },
@@ -148,8 +152,8 @@ const config = {
             title: 'More',
             items: [
               {
+                to: 'blog',
                 label: 'Blog',
-                href: 'https://www.apigear.io/blog',
               },
               {
                 label: 'GitHub',
