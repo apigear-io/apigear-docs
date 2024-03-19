@@ -5,8 +5,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ApiGear for API driven software integration',
-  tagline: 'Open source tooling for API driven code generation based on ObjectAPI',
+  title: 'The future of API driven workflows',
+  tagline: 'Design your APIs and generate your SDKs with ease.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here

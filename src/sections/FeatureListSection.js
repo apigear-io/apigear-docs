@@ -3,23 +3,23 @@ import FeatureList from '../components/FeatureList';
 
 const items = [
   {
-    title: 'Use our technology SDKs',
-    description: 'Use one of our SDKs to integrate your software with our API. We support a wide range of programming languages and frameworks.',
-    imageDark: '/img/use.png',
-    imageLight: '/img/use.png',
+    title: 'Accelerate your integration story',
+    description: 'Ease your software integration using an API driven approach based on an object model.',
+    imageDark: '/img/accelerate_dark.png',
+    imageLight: '/img/accelerate_light.png',
 
   },
   {
-    title: 'Write custom SDKs',
-    description: 'Write your own SDKs for your software. We provide a set of tools to help you generate your own SDKs. You can also use our SDKs as a template to write your own.',
-    imageDark: '/img/customize.png',
-    imageLight: '/img/customize.png',
+    title: 'Simulate Service Backends',
+    description: 'Simulate your service backends using our built-in simulator and unlock your integration. The simulator can be used for testing and development.',
+    imageDark: '/img/unlock_dark.png',
+    imageLight: '/img/unlock_light.png',
   },
   {
-    title: 'Contribute to our SDKs',
-    description: 'Contribute to our SDKs and help us improve them. We are always looking for new contributors to help us improve our SDKs.',
-    imageDark: '/img/contribute.png',
-    imageLight: '/img/contribute.png',
+    title: 'Analyze software behavior ',
+    description: 'Analyze your software behavior using the built-in analytics. API analytics tracks the usage of your APIs and provides insights into the usage patterns.',
+    imageDark: '/img/insights_dark.png',
+    imageLight: '/img/insights_light.png',
   },
 ];
 
