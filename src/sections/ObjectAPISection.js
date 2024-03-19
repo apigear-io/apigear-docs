@@ -1,5 +1,5 @@
 import React from "react";
-import TextLeft from "../components/TextLeft";
+import TextRight from "../components/TextRight";
 
 const item = {
     title: 'The ObjectAPI IDL matches your mindset',
@@ -11,6 +11,6 @@ const item = {
 
 export default function ObjectAPISection() {
     return (
-        <TextLeft item={item} />
+        <TextRight item={item} />
     );
 }
