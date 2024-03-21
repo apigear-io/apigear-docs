@@ -2,8 +2,8 @@
   "label": "API Monitoring",
   "position": 2,
   "link": {
-    "type": "generated-index",
-    "description": "API monitoring"
+    "type": "doc",
+    "id": "advanced/monitor/intro"
   },
   "customProps": {
     "description": "API monitoring"
