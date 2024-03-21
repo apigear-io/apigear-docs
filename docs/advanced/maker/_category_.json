@@ -2,7 +2,7 @@
   "label": "Write SDK Templates",
   "position": 1,
   "link": {
-    "type": "generated-index",
-    "description": "Write custom SDKs to adapt to your individual software integration needs."
+    "type": "doc",
+    "id": "advanced/maker/intro"
   }
 }

@@ -2,7 +2,7 @@
   "label": "Desktop Studio",
   "position": 4,
   "link": {
-    "type": "generated-index",
-    "description": "Desktop Studio to manage APIs and Solutions"
+    "type": "doc",
+    "id": "studio/intro"
   }
 }

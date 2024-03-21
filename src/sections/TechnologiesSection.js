@@ -7,7 +7,7 @@ const item = {
   action: 'View SDKs',
   imageDark: '/img/technologies_dark.png',
   imageLight: '/img/technologies_light.png',
-  link: '/docs/category/sdk-templates',
+  link: '/docs/sdk/intro',
 };
 
 export default function TechnologiesSection() {
