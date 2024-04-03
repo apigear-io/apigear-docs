@@ -67,6 +67,14 @@ const config = {
       }),
     ],
   ],
+  plugins: [
+    [
+      require.resolve('docusaurus-lunr-search'),
+      {
+        highlightResult: true
+      }
+    ]
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
