@@ -6,7 +6,7 @@ Asks question in the GitHub discussion forum or issue tracker.
 
 * [Slack Discussions](https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw)
 * [GitHub Discussions](https://github.com/orgs/apigear-io/discussions)
-* [GitHub Issues](https://github.com/orgs/apigear-io/cli/issues)
+* [GitHub Issues](https://github.com/apigear-io/cli/issues)
 
 ## How to report a bug
 
@@ -19,7 +19,7 @@ Report a bug in the GitHub issue tracker. Please include the following informati
 
 
 
-* [GitHub Issues](https://github.com/orgs/apigear-io/cli/issues)
+* [GitHub Issues](https://github.com/apigear-io/cli/issues)
 
 
 ## How to request a feature
@@ -31,4 +31,4 @@ Request a feature in the GitHub issue tracker. Please include the following info
 * Alternatives considered
 
 
-* [GitHub Issues](https://github.com/orgs/apigear-io/cli/issues)
+* [GitHub Issues](https://github.com/apigear-io/cli/issues)
