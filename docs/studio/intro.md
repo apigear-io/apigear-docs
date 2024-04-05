@@ -10,7 +10,7 @@ It allows users to work with APIs, SDKs and API traffic in a single application.
 
 ## Installation
 
-The desktop studio is available for Linux, MacOS and Windows. It can be installed from the [release page](https://github.com/apigear-io/studio-releases/releases).
+The desktop studio is available for Linux, MacOS and Windows. It can be installed from the [release page](https://github.com/apigear-io/studio/releases).
 
 ## Update
 

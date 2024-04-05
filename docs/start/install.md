@@ -8,7 +8,7 @@ ApiGear comes with a Studio and a CLI. The Studio is a graphical tool to create 
 
 ## Install Apigear Studio
 
-ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/apigear-io/studio-releases/releases). Studio is available for Mac, Windows and Linux.
+ApiGear Studio can be downloaded from [Github Releases Site](https://github.com/apigear-io/studio/releases). Studio is available for Mac, Windows and Linux.
 
 After installation you can start the ApiGear Studio.
 
@@ -16,6 +16,6 @@ As ApiGear Studio is still in early access version there are no certificates yet
 
 ## Install ApiGear CLI
 
-ApiGear CLI is a command line tool to generate code from API modules. It is available for Mac, Windows and Linux. You can download the latest version from [Github Releases Site](https://github.com/apigear-io/cli-releases/releases).
+ApiGear CLI is a command line tool to generate code from API modules. It is available for Mac, Windows and Linux. You can download the latest version from [Github Releases Site](https://github.com/apigear-io/cli/releases).
 
 The CLI provides all features of the Studio.
