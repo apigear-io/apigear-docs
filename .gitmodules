@@ -1,3 +1,6 @@
 [submodule "template-docs/template-unreal"]
 	path = template-docs/template-unreal
 	url = git@github.com:apigear-io/template-unreal.git
+[submodule "template-docs/template-cpp14"]
+	path = template-docs/template-cpp14
+	url = git@github.com:apigear-io/template-cpp14.git
