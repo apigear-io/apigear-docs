@@ -42,6 +42,7 @@ const config = {
   [
     'static',
     'template-docs/template-unreal/docs/static',
+    'template-docs/template-cpp14/docs/static'
   ],
 
   presets: [
@@ -85,6 +86,15 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'template-cpp14',
+        path: 'template-docs/template-cpp14/docs/docs',
+        routeBasePath: 'template-cpp14/docs',
+        sidebarPath: undefined,
+      },
+    ],
+    [
       require.resolve('docusaurus-lunr-search'),
       {
         highlightResult: true
@@ -113,6 +123,7 @@ const config = {
             position: 'left',
             items: [
               {type: 'doc', docId: 'intro', label: 'ApiGear Core'},
+              {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14'},
               {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
             ],
           },
