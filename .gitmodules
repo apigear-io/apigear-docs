@@ -1,0 +1,3 @@
+[submodule "template-docs/template-unreal"]
+	path = template-docs/template-unreal
+	url = git@github.com:apigear-io/template-unreal.git

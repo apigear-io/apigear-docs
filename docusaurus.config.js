@@ -37,7 +37,12 @@ const config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
 
-
+  // need to add path to template static files
+  staticDirectories: 
+  [
+    'static',
+    'template-docs/template-unreal/docs/static',
+  ],
 
   presets: [
     [
@@ -46,6 +51,8 @@ const config = {
       ({
         debug: true,
         docs: {
+          // id: 'docs', // omitted => default instance
+          routeBasePath: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
@@ -68,6 +75,15 @@ const config = {
     ],
   ],
   plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'template-unreal',
+        path: 'template-docs/template-unreal/docs/docs',
+        routeBasePath: 'template-unreal/docs',
+        sidebarPath: undefined,
+      },
+    ],
     [
       require.resolve('docusaurus-lunr-search'),
       {
@@ -92,10 +108,13 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
+            type: 'dropdown',
+            label: 'Topics',
             position: 'left',
-            label: 'Docs',
+            items: [
+              {type: 'doc', docId: 'intro', label: 'ApiGear Core'},
+              {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
+            ],
           },
           {
             to: 'blog',
