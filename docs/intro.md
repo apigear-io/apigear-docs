@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# ApiGear Core
 
 ApiGear provides a new and unique digital workflow for software integration. It is a fresh approach to software development that is focused on the idea of API driven workflow. It allows teams to develop software driven products without friction by providing an integrated workflow with enhanced monitoring and simulation capabilities.
 
