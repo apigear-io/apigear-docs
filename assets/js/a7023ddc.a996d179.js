@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkapigear=self.webpackChunkapigear||[]).push([[9267],{8289:a=>{a.exports=JSON.parse('[{"label":"api","permalink":"/blog/tags/api","count":1},{"label":"idl","permalink":"/blog/tags/idl","count":1}]')}}]);
