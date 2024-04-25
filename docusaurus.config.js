@@ -42,7 +42,8 @@ const config = {
   [
     'static',
     'template-docs/template-unreal/docs/static',
-    'template-docs/template-cpp14/docs/static'
+    'template-docs/template-cpp14/docs/static',
+    'template-docs/template-qt6/docs/static'
   ],
 
   presets: [
@@ -95,6 +96,15 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'template-qt6',
+        path: 'template-docs/template-qt6/docs/docs',
+        routeBasePath: 'template-qt6/docs',
+        sidebarPath: undefined,
+      },
+    ],
+    [
       require.resolve('docusaurus-lunr-search'),
       {
         highlightResult: true
@@ -125,6 +135,7 @@ const config = {
               {type: 'doc', docId: 'intro', label: 'ApiGear Core'},
               {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14'},
               {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
+              {type: 'doc', docsPluginId: 'template-qt6', docId: 'intro', label: 'Template Qt6'},
             ],
           },
           {
