@@ -2,6 +2,8 @@
 sidebar_position: 1
 ---
 
+hello
+
 # Installation
 
 ApiGear comes with a Studio and a CLI. The Studio is a graphical tool to create and edit API modules. The CLI is a command line tool to generate code from API modules. It allows to manage SDK templates, API project creation, code generation, API monitoring and API simulation.
