@@ -7,3 +7,6 @@
 [submodule "template-docs/template-qt6"]
 	path = template-docs/template-qt6
 	url = git@github.com:apigear-io/template-qtcpp.git
+[submodule "template-docs/template-python"]
+	path = template-docs/template-python
+	url = https://github.com/apigear-io/template-python.git

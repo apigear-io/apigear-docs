@@ -43,7 +43,8 @@ const config = {
     'static',
     'template-docs/template-unreal/docs/static',
     'template-docs/template-cpp14/docs/static',
-    'template-docs/template-qt6/docs/static'
+    'template-docs/template-qt6/docs/static',
+    'template-docs/template-python/docs/static'
   ],
 
   presets: [
@@ -105,6 +106,15 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'template-python',
+        path: 'template-docs/template-python/docs/docs',
+        routeBasePath: 'template-python/docs',
+        sidebarPath: undefined,
+      },
+    ],
+    [
       require.resolve('docusaurus-lunr-search'),
       {
         highlightResult: true
@@ -136,6 +146,7 @@ const config = {
               {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14'},
               {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
               {type: 'doc', docsPluginId: 'template-qt6', docId: 'intro', label: 'Template Qt6'},
+              {type: 'doc', docsPluginId: 'template-python', docId: 'intro', label: 'Template Python'},
             ],
           },
           {
