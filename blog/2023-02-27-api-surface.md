@@ -3,10 +3,7 @@ title: "API surface for objects"
 description: "Overview of a typical API surface for objects in an IDL."
 slug: api-surface
 tags: ["api", "idl"]
-authors:
-  - name: "Jürgen Ryannel"
-    title: "Lead Programmer"
-    image_url: https://avatars.githubusercontent.com/u/636357?v=4
+authors: [JürgenRyannel]
 ---
 
 An API surface is the public interface of an object which is exposed to users of the object. The API surface is defined by an IDL and defines the contract between the user and the implementer of an object. 

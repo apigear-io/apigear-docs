@@ -3,10 +3,7 @@ title: Designing an interface definition language
 description: "This article describes the design of the interface definition language (IDL) for the object API."
 slug: design-idl
 tags: ["api", "idl"]
-authors:
-  - name: "Jürgen Ryannel"
-    title: "Lead Programmer"
-    image_url: https://avatars.githubusercontent.com/u/636357?v=4
+authors: [JürgenRyannel]
 draft: true
 ---
 
