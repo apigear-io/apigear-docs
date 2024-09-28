@@ -138,11 +138,15 @@ const config = {
         },
         items: [
           {
+            type: 'doc',
+            docId: 'intro',
+            label: 'Docs'
+          },
+          {
             type: 'dropdown',
-            label: 'Topics',
+            label: 'Templates',
             position: 'left',
             items: [
-              {type: 'doc', docId: 'intro', label: 'ApiGear Core'},
               {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14'},
               {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
               {type: 'doc', docsPluginId: 'template-qt6', docId: 'intro', label: 'Template Qt6'},
