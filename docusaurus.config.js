@@ -166,7 +166,7 @@ const config = {
           },
           {
             label: 'GitHub',
-            href: 'https://github.com/apigear-io/apigear-docs',
+            href: 'https://github.com/apigear-io',
             position: 'right',
           },
         ],
