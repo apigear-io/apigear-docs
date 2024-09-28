@@ -31,7 +31,7 @@ export default function DocTopicBadge({
         ThemeClassNames.docs.docVersionBadge,
         'badge badge--secondary',
       )}>
-      Topic: {topicLabel}
+      Docs: {topicLabel}
     </span>
   );
 }
