@@ -216,6 +216,14 @@ const config = {
             title: 'More',
             items: [
               {
+                label: 'Download CLI',
+                href: 'https://github.com/apigear-io/cli/releases/latest',
+              },
+              {
+                label: 'Download Studio',
+                href: 'https://github.com/apigear-io/studio/releases/latest',
+              },
+              {
                 to: 'blog',
                 label: 'Blog',
               },
