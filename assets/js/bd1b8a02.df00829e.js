@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkapigear=self.webpackChunkapigear||[]).push([[1775],{76467:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/idl","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
