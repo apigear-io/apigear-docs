@@ -187,11 +187,11 @@ const config = {
               },
               {
                 label: 'Getting Started',
-                to: '/docs/start/first_steps',
+                to: '/docs/quick-start',
               },
               {
                 label: 'Installation',
-                to: '/docs/start/install',
+                to: '/docs/quick-start#1-install-the-code-generator',
               },
             ],
           },
