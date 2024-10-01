@@ -22,7 +22,7 @@ ApiGear provides two powerful tools: a Studio and a Command Line Interface (CLI)
 
 ApiGear Studio is available for macOS, Windows, and Linux. You can download it from the [ApiGear Studio GitHub releases page](https://github.com/apigear-io/studio/releases/latest).
 
-For more detailed information on ApiGear Studio, refer to the dedicated [studio documentation](/docs/studio/intro).
+For more detailed information on ApiGear Studio, refer to the dedicated [studio documentation](/docs/tools/studio/intro).
 
 ### Install ApiGear CLI
 
@@ -30,7 +30,7 @@ The ApiGear CLI is a versatile command-line tool for generating code from API mo
 
 The CLI offers all the features available in the Studio.
 
-For more detailed information on the ApiGear CLI, consult the dedicated [CLI documentation](/docs/cli/intro).
+For more detailed information on the ApiGear CLI, consult the dedicated [CLI documentation](/docs/tools/cli/intro).
 
 ## 2. Obtain the Template
 

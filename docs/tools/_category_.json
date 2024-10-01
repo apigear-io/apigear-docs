@@ -1,0 +1,9 @@
+{
+  "label": "Tools",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "ApiGear provides two powerful tools: a Studio and a Command Line Interface (CLI)"
+  }
+}

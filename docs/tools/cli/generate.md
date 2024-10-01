@@ -6,7 +6,7 @@ sidebar_position: 2
 
 The `apigear` command line tool can be used to generate code from an API definition with a `generate` command.
 The API should be description in a module file(s). The generation is based on SDK templates which are available in a central registry or a local template provided with relative path. You can have the solution file in which you choose modules, technologies (templates) and features for them or you can use quick generation option, without the solution file providing all those information as arguments to a `generate` command.
-You can define your modules in yaml or idl. See more details for [defining api](TODO).
+You can define your modules in yaml or idl. See more details for [defining an API](/docs/objectapi/modules).
 
 
 The following examples shows how to generate code for a demo API definition.
