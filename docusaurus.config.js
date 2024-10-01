@@ -61,6 +61,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/apigear-io/apigear-docs/edit/main/',
+          showLastUpdateTime: true,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -87,6 +88,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-unreal/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -98,6 +100,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-cpp14/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -109,6 +112,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-qtcpp/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -120,6 +124,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-python/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: true,
       },
     ],
     [
@@ -135,7 +140,6 @@ const config = {
     ({
       docs: {
         sidebar: {
-          hideable: true,
           autoCollapseCategories: true,
         },
       },
@@ -200,12 +204,16 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'Getting Started',
+                label: 'Quick Start',
                 to: '/docs/quick-start',
               },
               {
                 label: 'Installation',
                 to: '/docs/quick-start#1-install-the-code-generator',
+              },
+              {
+                label: 'Guide',
+                to: '/docs/guide/intro',
               },
             ],
           },
