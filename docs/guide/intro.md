@@ -26,7 +26,7 @@ You now have an empty project without any APIs. To add APIs to the project:
 
 The view will change to the "API Modules" view, where you can see all your API modules and manage them. To edit an API, click the "Edit" icon, which will open the API editor (typically Visual Studio Code).
 
-You can now edit and save the API Module. The structure and semantics of API modules are defined in the [ObjectAPI Specification](/docs/advanced/objectapi/intro).
+You can now edit and save the API Module. The structure and semantics of API modules are defined in the [ObjectAPI Specification](/docs/objectapi/intro).
 
 ## Installing Code Templates
 
@@ -46,7 +46,7 @@ The ApiGear Studio and the CLI detect the specified template in the [solution do
 A solution links API modules with a technology template. It can contain several targets of code generation. For example, you can generate both a C++ SDK and a Python SDK from the same API modules. Templates also support different features, such as `http` or `olink` support. The supported features vary for each template.
 
 :::tip
-The [ObjectAPI Mapping](/docs/advanced/objectapi/mapping) document describes how different APIs are mapped to various transports and protocols.
+The [ObjectAPI Mapping](/docs/advanced/protocols/mapping) document describes how different APIs are mapped to various transports and protocols.
 :::
 
 To create a solution:
