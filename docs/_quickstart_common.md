@@ -149,7 +149,7 @@ Alternatively, you can use the Studio to create a new project and modify the two
 
 ### Solution File
 
-Create a [solution](/docs/start/first_steps#create-a-solution) file.
+Create a [solution](/docs/guide/intro#creating-a-solution) file.
 The example below specifies:
 
 - Module files in _line 8_, here the `helloworld.module.yaml` module with the `Hello` API
