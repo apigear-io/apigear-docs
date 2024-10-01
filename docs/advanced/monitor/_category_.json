@@ -1,6 +1,6 @@
 {
-  "label": "API Monitoring",
-  "position": 2,
+  "label": "API Monitoring (experimental)",
+  "position": 3,
   "link": {
     "type": "doc",
     "id": "advanced/monitor/intro"
