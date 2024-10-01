@@ -36,48 +36,62 @@ For more detailed information on the ApiGear CLI, consult the dedicated [CLI doc
 
 There are several methods to obtain the template: installation via the Studio, installation via the CLI, or cloning/downloading from GitHub.
 
+:::tip This step is optional
+The ApiGear Studio and the CLI detect the specified template in the [solution document](#solution-file) and install it automatically.
+:::
+
+<details>
+  <summary>Optional steps (click to expand)</summary>
 ### Installation via CLI
 
-When using the CLI, only the highlighted line needs to be executed. You can verify the successful installation using the `template list` command.
+When using the CLI, only the highlighted line needs to be executed. You can verify the successful installation using the `template cache` command.
 
 <Tabs groupId="current-template" queryString>
   <TabItem value="template-unreal" label="Unreal Engine">
 ```bash
-$ apigear template install apigear-io/template-unreal
-$ apigear template list
-list of templates from registry and cache
-name                       | installed | registry | url
-apigear-io/template-unreal | true      | true     | https://github.com/apigear-io/template-unreal.git
+# highlight-next-line
+$ apigear template install apigear-io/template-unreal@v3.2.2
+$ apigear template cache
+list of templates from the local cache
+
+source                            | url                                               | installed | latest
+apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | <sha1>    | v3.2.2
 ...
 ```
   </TabItem>
   <TabItem value="template-cpp14" label="C++14">
 ```bash
-$ apigear template install apigear-io/template-cpp14
-$ apigear template list
-list of templates from registry and cache
-name                       | installed | registry | url
-apigear-io/template-cpp14  | true      | true     | https://github.com/apigear-io/template-cpp14.git
+# highlight-next-line
+$ apigear template install apigear-io/template-cpp14@v3.6.0
+$ apigear template cache
+list of templates from the local cache
+
+source                            | url                                               | installed | latest
+apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | <sha1>    | v3.6.0
 ...
 ```
   </TabItem>
   <TabItem value="template-qtcpp" label="Qt6">
 ```bash
-$ apigear template install apigear-io/template-qtcpp
-$ apigear template list
-list of templates from registry and cache
-name                       | installed | registry | url
-apigear-io/template-qtcpp  | true      | true     | https://github.com/apigear-io/template-qtcpp.git
+# highlight-next-line
+$ apigear template install apigear-io/template-qtcpp@v0.4.0
+$ apigear template cache
+list of templates from the local cache
+
+source                            | url                                               | installed | latest
+apigear-io/template-qtcpp@v0.4.0  | https://github.com/apigear-io/template-qtcpp.git  | <sha1>    | v0.4.0
 ...
 ```
   </TabItem>
   <TabItem value="template-python" label="Python">
 ```bash
-$ apigear template install apigear-io/template-python
-$ apigear template list
-list of templates from registry and cache
-name                       | installed | registry | url
-apigear-io/template-python | true      | true     | https://github.com/apigear-io/template-python.git
+# highlight-next-line
+$ apigear template install apigear-io/template-python@v1.0.0
+$ apigear template cache
+list of templates from the local cache
+
+source                            | url                                               | installed | latest
+apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-python.git | <sha1>    | v1.0.0
 ...
 ```
   </TabItem>
@@ -141,6 +155,8 @@ If you need to inspect or modify the template's source code, cloning or download
 
 You can then configure the solution file to use your template by providing the relative path from the solution file to the template directory.
 
+</details>
+
 ## 3. Set Up the Project
 
 A typical project requires two files: a solution file specifying the APIs and the template to use, and at least one API module file. Ideally, both should be placed in a folder named `apigear`, adjacent to each other.
@@ -170,7 +186,7 @@ targets:
     inputs:
       - helloworld.module.yaml
     output: ../ue_docs
-    template: apigear-io/template-unreal
+    template: apigear-io/template-unreal@v3.2.2
     force: true
     features:
       - stubs
@@ -188,7 +204,7 @@ targets:
     inputs:
       - helloworld.module.yaml
     output: ../cpp_hello_world
-    template: apigear-io/template-cpp14
+    template: apigear-io/template-cpp14@v3.6.0
     force: true
     features:
       - stubs
@@ -206,7 +222,7 @@ targets:
     inputs:
       - helloworld.module.yaml
     output: ../qt_hello_world
-    template: apigear-io/template-qtcpp
+    template: apigear-io/template-qtcpp@v0.4.0
     force: true
     features:
       - stubs
@@ -224,7 +240,7 @@ targets:
     inputs:
       - helloworld.module.yaml
     output: ../py_hello_world
-    template: apigear-io/template-python
+    template: apigear-io/template-python@v1.0.0
     force: true
     features:
       - stubs
@@ -234,6 +250,10 @@ targets:
 
 :::tip Targets
 You can extend this solution file with additional targets, each for a different technology with a different template. The `module.yaml` file is technology-independent and can be used with any template.
+:::
+
+:::tip Template Version
+We highly recommend specifying the exact version of the template. Otherwise, a newer version will be automatically downloaded and used for code generation. This can lead to unexpected behavior if file structures or code changes in the template.
 :::
 
 :::note
