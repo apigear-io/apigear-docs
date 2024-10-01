@@ -37,7 +37,7 @@ Like all modern development tools, ApiGear fully supports an agile development a
 
 ### 1. Define API
 
-Following the _API-first approach_, you begin by defining your [ObjectAPI module](/docs/advanced/objectapi/modules). This can be accomplished using either the [ApiGear Studio](/docs/studio/intro) or the [ApiGear CLI](/docs/cli/intro). An API module is a concise document that adheres to the ObjectAPI specification.
+Following the _API-first approach_, you begin by defining your [ObjectAPI module](/docs/objectapi/modules). This can be accomplished using either the [ApiGear Studio](/docs/studio/intro) or the [ApiGear CLI](/docs/cli/intro). An API module is a concise document that adheres to the ObjectAPI specification.
 
 ### 2. Generate SDK
 
