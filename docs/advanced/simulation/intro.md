@@ -12,6 +12,12 @@ A simulation is a virtual representation of a service. It can be used to test, d
 
 A simulation server is a server which hosts one or more simulations in form fo scenarios. It can be used to test, demonstrate or develop applications without the need to have the actual service available.
 
+:::note Beta
+
+The **simulation** server is in beta and will gain new and improved functionality soon.
+
+:::
+
 ## What is a simulation scenario?
 
 A simulation scenario is a set of interfaces and their properties, operations, signals which can be loaded into a simulation server. A scenario can react to operations and can also be used to change properties or send signals.

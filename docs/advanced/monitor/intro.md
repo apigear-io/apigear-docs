@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 # Introduction
@@ -7,6 +7,12 @@ sidebar_position: 1
 ## What is API Monitoring?
 
 API Monitoring is a feature that allows you to monitor the usage of your API. It allows you to detect anomalies and to see how your API is used during runtime. This is especially useful during development and testing.
+
+:::warning Experimental
+
+The **monitoring** is experimental and not all templates support this feature.
+
+:::
 
 ## How does it work?
 

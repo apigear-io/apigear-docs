@@ -1,6 +1,6 @@
 {
-  "label": "API Simulation",
-  "position": 3,
+  "label": "API Simulation (beta)",
+  "position": 2,
   "link": {
     "type": "doc",
     "id": "advanced/simulation/intro"
