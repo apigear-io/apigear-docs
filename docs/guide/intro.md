@@ -30,15 +30,20 @@ You can now edit and save the API Module. The structure and semantics of API mod
 
 ## Installing Code Templates
 
-To create your first SDK from API modules, you need to install Code Templates and create a configuration file called a solution.
+To create your first SDK from API modules, you can install Code Templates and create a configuration file called a solution.
 
 In the "Templates" view, you'll see all templates available from the ApiGear cloud. Install templates by clicking the "Install" button. The templates will be installed in a local folder on your drive.
 
 The name of a template will be used later when creating an SDK from the API modules.
 
+:::tip This step is optional
+The ApiGear Studio and the CLI detect the specified template in the [solution document](#creating-a-solution) and install it automatically.
+:::
+
+
 ## Creating a Solution
 
-A solution links API modules with an SDK. It can contain several targets of code generation. For example, you can generate both a C++ SDK and a Python SDK from the same API modules. Templates also support different features, such as `http` or `olink` support. The supported features vary for each template.
+A solution links API modules with a technology template. It can contain several targets of code generation. For example, you can generate both a C++ SDK and a Python SDK from the same API modules. Templates also support different features, such as `http` or `olink` support. The supported features vary for each template.
 
 :::tip
 The [ObjectAPI Mapping](/docs/advanced/objectapi/mapping) document describes how different APIs are mapped to various transports and protocols.
