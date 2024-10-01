@@ -85,6 +85,8 @@ const config = {
         path: 'template-docs/template-unreal/docs/docs',
         routeBasePath: 'template-unreal/docs',
         sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-unreal/edit/main/docs/docs/${docPath}`,
       },
     ],
     [
@@ -94,6 +96,8 @@ const config = {
         path: 'template-docs/template-cpp14/docs/docs',
         routeBasePath: 'template-cpp14/docs',
         sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-cpp14/edit/main/docs/docs/${docPath}`,
       },
     ],
     [
@@ -103,6 +107,8 @@ const config = {
         path: 'template-docs/template-qt6/docs/docs',
         routeBasePath: 'template-qt6/docs',
         sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-qtcpp/edit/main/docs/docs/${docPath}`,
       },
     ],
     [
@@ -112,6 +118,8 @@ const config = {
         path: 'template-docs/template-python/docs/docs',
         routeBasePath: 'template-python/docs',
         sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-python/edit/main/docs/docs/${docPath}`,
       },
     ],
     [
