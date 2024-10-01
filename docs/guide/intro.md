@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Getting Started
+# Guide
 
 ObjectAPI and ApiGear tooling are open-source projects designed to enhance the current software integration process. ObjectAPI enables teams to create descriptions of their software interfaces and generate ready-to-use integration SDKs. These SDKs come pre-configured with support for monitoring, logging, tracing, and simulation of interface calls.
 
