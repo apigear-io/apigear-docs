@@ -50,5 +50,5 @@ When this scenario is loaded into the simulation server a client can just call t
 
 ## What is a simulation protocol?
 
-A simulation protocol is a way to interact with a simulation server. It defines how to call operations, how to get the state of an interface and how to trigger sequences. The simulation server currently supports the ObjectLink protocol which is available in the [ObjectLink](/docs/advanced/objectlink/intro) section.
+A simulation protocol is a way to interact with a simulation server. It defines how to call operations, how to get the state of an interface and how to trigger sequences. The simulation server currently supports the ObjectLink protocol which is available in the [ObjectLink](/docs/advanced/protocols/objectlink/intro) section.
 
