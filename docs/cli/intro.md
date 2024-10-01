@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Introduction
 
 The `apigear` command line tool supports all features of the ApiGear platform. It can be used to manage SDKs from APIs, monitor API traffic and simulate API calls. It is the main tool to interact with the ApiGear platform and well suited for developers and CI/CD pipelines.
