@@ -10,6 +10,12 @@ ObjectAPI consist of modules, interfaces and properties, operations and signals.
 
 Due to the nature of HTTP being a uni-directional protocol,we can not simply model the bid-directional nature of an object communication over to HTTP. Especially the property updates and signals are difficult to map to HTTP actions.
 
+:::warning Experimental
+
+The **HTTP** mapping is experimental and not all templates support this feature.
+
+:::
+
 ## ObjectAPI Mapping
 
 - **module**: Is a namespace and does not map directly.
