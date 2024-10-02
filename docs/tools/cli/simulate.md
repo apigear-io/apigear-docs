@@ -44,22 +44,4 @@ apigear simulate run demo.scenario.yaml
 ```
 
  It will load the simulation scenario from the `demo.scenario.yaml` file. The simulation server will listen for API calls. The simulation server by default is "127.0.0.1:4333". To change the address use the `--addr` option. <br />
- The example simulates a server side and normally the API calls will come from a running API client. It is also possible to simulate client side and feed API calls using the `feed` command.
-
-The following example shows how to feed API calls to the simulation server using a new line delimited json document (`NDJSON`).
-
-```json
-{ "method": "simu.state", "params": { "symbol": "demo.Counter" }}
-{ "method": "simu.call", "params": { "symbol": "demo.Counter/increment", "data": { "step": 1 } }}
-{ "method": "simu.call", "params": { "symbol": "demo.Counter/decrement", "data": { "step": 2 } }}
-{ "method": "simu.state", "params": { "symbol": "demo.Counter", "data": { "count": 4 } }}
-{ "method": "simu.state", "params": { "symbol": "demo.Counter" }}
-```
-
-To feed the API calls to the simulation server just run the following command. By default simulation client tries to connect "ws://127.0.0.1:4333/ws". To change use --adr option with a string that describes your desired host address.
-
-```bash
-apigear simulate feed demo.ndjson
-```
-
-This will send the API calls to the simulation server. The simulation server will print the API calls to the console.
+ The example simulates a server side and normally the API calls will come from a running API client. 
