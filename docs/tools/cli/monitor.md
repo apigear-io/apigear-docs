@@ -1,10 +1,19 @@
 ---
 sidebar_position: 4
+label: "API Monitoring (experimental)"
 ---
 
 # API Monitoring
 
-API Monitoring is a feature that allows you to monitor the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users.
+API Monitoring is a feature that allows you to monitor the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users. 
+
+:::warning Experimental
+
+The **monitoring** is experimental and not all templates support this feature.
+
+:::
+ Make sure you are generating `monitor` feature, and wrap your implementation with it.<br />
+ For more information about this feature check [monitor documentation](docs/advanced/monitor/intro).
 
 ## Quick API Monitoring
 
@@ -14,26 +23,6 @@ API Monitoring is a feature of the ApiGear platform. It allows to monitor the tr
 apigear monitor run
 ```
 
-This will start the API monitoring server. The server will listen on port 5555. To change the port use the `--port` option.
+This will start the API monitoring server. By default the server will listen on "127.0.0.1:5555" address. To change the it use the `--addr` option with address and port of your choice.
 
-The monitoring server will listen for API calls. Normally the API events will come from a running API client. It is also possible to feed API events using the `feed` command.
-
-The following example shows how to feed API event to the monitor using a new line delimited json document (`NDJSON`).
-
-```json
-// demo.ndjson
-{ "id": "1", "kind": "call", "symbol": "demo.Counter/increment" }
-{ "id": "2", "kind": "state", "symbol": "demo.Counter", "props": { "count": 99 } } }
-```
-
-```bash
-apigear monitor feed demo.ndjson
-```
-
-This will send the API calls to the monitoring server. The monitoring server will print the API calls to the console.
-
-:::tip
-
-Currently the monitoring server does not store the API calls. This will be added in a future release with a playback feature.
-
-:::
+The monitoring server will listen for API calls. Normally the API events will come from a running API client.
