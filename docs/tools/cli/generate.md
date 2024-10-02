@@ -26,7 +26,7 @@ interface Counter {
 For example to generate a C++ 14 SDK from the demo API definition just run the following command. You can check [available templates](template.md#list-available-templates) from command line tool.
 
 ```bash
-apigear generate expert -i demo.idl -o tmp -t apigear-io/template-cpp14 -f stubs
+apigear generate expert -i demo.idl -o tmp -t apigear-io/template-cpp14 -f olink
 ```
 
 The `expert` mode is used to generate code from module files.<br />
