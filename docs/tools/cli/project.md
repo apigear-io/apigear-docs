@@ -1,42 +1,52 @@
 # Project Management
 
-The `project` command allows you to manage your projects. Projects are a collection of APIs and SDKs. You can create, list, delete and switch between projects.
+The `project` command allows you to manage your projects. Projects are a collection of APIs stored in module files and solution file with desired generation configuration.
+You can create, list, add files for your projects.
 
 ## Create a new project
 
-To create a project use the `new` command.
+To create a project use the `create` command.
 
 ```bash
-apigear project new <project-name>
+apigear project create -d <project-name>
 ```
+you can prefix a project name with a path in which you'd like your project to be created.
 
-## List recent projects
+This command creates a folder with the apigear files in it:
+- `module` an example file type with the example interface description
+- `solution` a solution file used for generation configuration
+- `simulation` with example simulation for the example interface
 
-To list all projects use the `list` command.
+## Project info
+
+Gives basic project information along with list of files in this project.
 
 ```bash
-apigear project list
+apigear project info <project>
 ```
 
-It will show the recently used projects first.
+## Show recent projects
 
-## Delete a project
-
-To delete a project use the `delete` command.
+Lists all the recently used projects
 
 ```bash
-apigear project delete <project-name>
+apigear project recent
 ```
+## Edit project
 
-## Switch between projects
-
-To switch between projects use the `switch` command.
+Use the `edit` command to open all your project files in your default editor.
 
 ```bash
-apigear project switch <project-name>
+apigear project edit <project-name>
 ```
 
-It will switch the current project to the specified project.
+## Open project in studio
+
+To open project in studio use the `open` command.
+
+```bash
+apigear project open <project-name>
+```
 
 ## Project configuration
 
@@ -51,44 +61,41 @@ The `project` command stores the project configuration in the `<project>/.apigea
 
 The `folder` property specifies the folder where the project configuration is stored. The default value is `apigear`.
 
-## Create documents in the project folder
+## Add a File
 
-The `create` command allows you to create documents in the project folder. The following documents can be created: API Modules, API Solutions and API Scenarios.
+The `add` command allows you to create documents in the project
 
 ```bash
-apigear create <document-type> <document-name>
+apigear project <document-type> <document-name>
 ```
 
 The document will be created in the `apigear` folder of the current project. The `document-type` can be one of the following values: `module`, `solution` or `scenario`.
+To choose a project directory (by default it uses current directory) us `-p your-path-to-project` argument.
 
 ## Pack a Project
 
-The `pack` command allows you to pack a project. It will create a zip file containing all project documents.
+The `pack` command allows you to pack a project. It will create an archive  file containing all project documents.
 
 ```bash
-apigear project pack <project-name>
+apigear project pack -d <project-name>
 ```
 
 ## Share a Project
 
-The `share` command allows you to share a project. It will create a zip file containing all project documents and upload it to the ApiGear platform.
+The `share` command allows you to share a project. It will create an archive file containing all project documents and upload it to the ApiGear platform.
 
 ```bash
 apigear project share <project-name>
 ```
 
-:::tip
-This feature is currently not available and will be added in a future release.
+:::note
+This feature is currently not available and will be added in a future.
 :::
 
 ## Import a Project
 
-The `import` command allows you to import a project. It will download a zip file containing all project documents from the ApiGear platform and unpack it.
+The `import` command allows you to import a project form a github repository.
 
 ```bash
-apigear project import <project-name>
+apigear project import <source> -t <project-name>
 ```
-
-:::tip
-This feature is currently not available and will be added in a future release.
-:::
