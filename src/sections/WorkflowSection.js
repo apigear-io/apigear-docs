@@ -9,7 +9,7 @@ export default function WorkflowSection() {
         action: 'More about the workflow',
         imageDark: '/img/devcycle_dark.svg',
         imageLight: '/img/devcycle_light.svg',
-        link: '/docs/intro',
+        link: '/docs/',
     };
     return (
         <TextRight item={item} />
