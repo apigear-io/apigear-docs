@@ -42,6 +42,7 @@ const config = {
   [
     'static',
     'template-docs/template-unreal/docs/static',
+    'template-docs/template-cpp17/docs/static',
     'template-docs/template-cpp14/docs/static',
     'template-docs/template-qt6/docs/static',
     'template-docs/template-python/docs/static'
@@ -94,15 +95,27 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'template-cpp17',
+        path: 'template-docs/template-cpp17/docs/docs',
+        routeBasePath: 'template-cpp17/docs',
+        sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-cpp17/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: true,
+      },
+     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'template-cpp14',
         path: 'template-docs/template-cpp14/docs/docs',
         routeBasePath: 'template-cpp14/docs',
         sidebarPath: undefined,
-        editUrl: ({docPath}) =>
-          `https://github.com/apigear-io/template-cpp14/edit/main/docs/docs/${docPath}`,
+        editUrl: ({ docPath }) =>
+            `https://github.com/apigear-io/template-cpp14/edit/main/docs/docs/${docPath}`,
         showLastUpdateTime: true,
       },
-    ],
+     ],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -165,7 +178,8 @@ const config = {
             label: 'Templates',
             position: 'left',
             items: [
-              {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14'},
+              {type: 'doc', docsPluginId: 'template-cpp17', docId: 'intro', label: 'Template C++17'},
+              {type: 'doc', docsPluginId: 'template-cpp14', docId: 'intro', label: 'Template C++14 (Maintenance)'},
               {type: 'doc', docsPluginId: 'template-unreal', docId: 'intro', label: 'Template Unreal Engine'},
               {type: 'doc', docsPluginId: 'template-qt6', docId: 'intro', label: 'Template Qt6'},
               {type: 'doc', docsPluginId: 'template-python', docId: 'intro', label: 'Template Python'},
