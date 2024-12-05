@@ -14,3 +14,6 @@
 	path = template-docs/template-python
 	url = git@github.com:apigear-io/template-python.git
 	branch = main
+[submodule "template-docs/template-cpp17"]
+	path = template-docs/template-cpp17
+	url = https://github.com/apigear-io/template-cpp17
