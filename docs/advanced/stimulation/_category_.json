@@ -1,0 +1,8 @@
+{
+  "label": "API Stimulation",
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "advanced/stimulation/intro"
+  }
+}
