@@ -12,33 +12,18 @@ The simulation server can be called using the ObjectLink protocol.
 
 In the following we will use always our counter example which looks like this:
 
-```yaml
-schema: apigear.module/1.0
-name: demo
-version: "1.0"
+```js
+module demo
 
-interfaces:
-  - name: Counter
-    properties:
-      - name: count
-        type: int
-    operations:
-      - name: increment
-        params:
-          - name: step
-            type: int
-      - name: decrement
-        params:
-          - name: step
-            type: int
-  - name: Echo
-    operations:
-      - name: say
-        params:
-          - name: message
-            type: string
-        return:
-          - type: string
+interface Counter {
+    count: int
+    increment(step: int)
+    decrement(step: int)
+}
+
+interface Echo {
+    say(message: string): string
+}
 ```
 
 We can identify an operation using an URI like this `demo.Counter/increment` and a service like this `demo.Counter`.
