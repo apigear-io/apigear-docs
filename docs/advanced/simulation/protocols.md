@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-# Network Protocol
+# Simulation Protocol
 
 The simulation framework allows client to simulate interfaces using a simulation server. A client receives simulated responses or behavior based on a provided scenario document. 
 
