@@ -29,40 +29,36 @@ interface Counter {
 The counter example shows a simple interface which can be used to increment or decrement a reactive counter. The stimulation file will look like this:
 
 ```javascript
-// counter.stim.js
+// counter_client.js
 
+const url = "ws://localhost:5555/ws"
+const channel =$createChannel(url)
 // create a client based on module and interface name and provide initial properties
-const counter = $createClient("demo.Counter", { count: 0 });
+const counter = channel.createClient("demo.Counter", { count: 0 });
 
 // trigger the increment operation
-counter.increment();
+counter.callMethod("increment")
 
 // trigger the decrement operation
-counter.decrement();
+counter.callMethod("decrement")
 
-function main() {
+function main() { // main is auto run on script execution
   for (let i = 0; i < 10; i++) {
-    counter.increment();
-    counter.decrement();
+    counter.callMethod("increment")
+    counter.callMethod("decrement")
   }
 }
 ```
 
-To run the stimulation file we need to start the server and and run a service or a simulation file.
+To run the stimulation file we need to start a remote service
 
 ## Running the stimulation
 
-To run the server we need to start the server first.
-```
-apigear serve
-```
-
-This will run all services (e.g. simulation, monitoring, etc.) and the message bus service.
 
 We will use a simulation file to simulate a service. 
 
 ```
-apigear sim run counter.sim.js
+apigear sim run counter_service.js
 ```
 
 This will run the simulation and provide the simulation interface to the client.
@@ -70,7 +66,8 @@ This will run the simulation and provide the simulation interface to the client.
 Now we can run the stimulation file:
 
 ```
-apigear stim run counter.stim.js
+// run simulation client but don't create a server
+apigear sim run counter_client.js --no-serve
 ```
 
 This will run the stimulation file and trigger the operations on the simulation interface.
