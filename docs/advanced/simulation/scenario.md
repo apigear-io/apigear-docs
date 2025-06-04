@@ -40,19 +40,19 @@ The simulation file will look like this:
 // counter.sim.js
 
 // create a service based on module and interface name and provide initial properties
-const counter = $createActor("demo.Counter", { count: 0 });
+const counter = $createService("demo.Counter", { count: 0 });
 
 // react to changes of the count property
-counter.$onProperty("count", function(value) {
+counter.$.onProperty("count", function(value) {
   console.log("count changed to " + value);
 });
 
 counter.increment = function() {
-  this.count++;
+  counter.count++;
 };
 
 counter.decrement = function() {
-  this.count--;
+  counter.count--;
 };
 
 // a main function which will be called when the simulation is started
@@ -69,7 +69,7 @@ You run the simulation by starting the server and then run the simulation file. 
 
 ```sh
 # run a smimulation and start the server
-$ apigear sim run counter.sim.js --serve
+$ apigear sim run counter.sim.js
 ```
 
 

@@ -6,9 +6,9 @@ sidebar_position: 1
 
 ## Why?
 
-Simulation of services helps to predict the data and behavior of services through virtual actors. Simulation is used to diagnose problems and to test otherwise difficult to establish behavior. A typical use case is to enable designers to run a user interface without being depending or to wait for a service implementation. This gets even more important when the service runs on embedded or automotive systems where hardware access is often limited.
+Simulation of services helps to predict the data and behavior of services through virtual objects. Simulation is used to diagnose problems and to test otherwise difficult to establish behavior. A typical use case is to enable designers to run a user interface without being depending or to wait for a service implementation. This gets even more important when the service runs on embedded or automotive systems where hardware access is often limited.
 
-An actor is a virtual entity that can be created and destroyed and it has state and behavior as well notifies the world of changes. Actors are accessed through a protocol adapter that is implemented by the simulation server.
+An object is a virtual entity that can be created and destroyed and it has state and behavior as well notifies the world of changes. Objects are accessed through a protocol adapter that is implemented by the simulation server.
 
 The simulation shares the same API as a production service and can be used to validate the use of an API without having to implement the actual service. The simulation is interchangeable with a real service and can be used in the same way.
 
@@ -32,13 +32,13 @@ The counter example shows a simple interface which can be used to increment or d
 
 
 ```javascript
-// counter.sim.js
+// counter.js
 
 // create a service based on module and interface name and provide initial properties
-const counter = $createActor("demo.Counter", { count: 0 });
+const counter = $createService("demo.Counter", { count: 0 });
 
 // react to changes of the count property
-counter.$on("count", function(value) {
+counter.$.on("count", function(value) {
   console.log("count changed to " + value);
 });
 
@@ -46,12 +46,12 @@ counter.$on("count", function(value) {
 // provide an implementation for the increment operation
 counter.increment = function() {
   // modify the count property, this will trigger the count property change event
-  this.count++;
+  counter.count++;
 };
 
 // provide an implementation for the decrement operation
 counter.decrement = function() {
-  this.count--;
+  counter.count--;
 };
 
 // provide an autorun function which will be called when the simulation is started
@@ -75,18 +75,10 @@ graph LR
 
 ## Running the simulation
 
-To run the combined server we need to start the server first:
-
-```
-apigear serve
-```
-
-This will run all services (e.g. simulation, monitoring, etc.) and the message bus service. This server is automatically started when you use the studio application.
-
 To run the simulation file we now can use the following command: 
 
 ```
-apigear sim run counter.sim.js
+apigear sim run counter.js
 ```
 
 This contact the server and sends the simulation file to the simulation server and runs it. The simulation server will create actors and run the main function, if available. Now the simulation server waits for API calls from the client.

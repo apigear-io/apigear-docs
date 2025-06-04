@@ -45,7 +45,7 @@ interface TempSensor {
 
 ```js
 // Heater control system simulation
-const heater = $createActor("heating.Heater", {
+const heater = $createService("heating.Heater", {
     isOn: false,
     power: 2000, // watts
     temperature: 20.0, // celsius
@@ -53,13 +53,13 @@ const heater = $createActor("heating.Heater", {
     minTemp: 15.0
 });
 
-const thermostat = $createActor("heating.Thermostat", {
+const thermostat = $createService("heating.Thermostat", {
     targetTemperature: 22.0,
     tolerance: 0.5,
     mode: 'auto' // 'auto' or 'manual'
 });
 
-const tempSensor = $createActor("heating.TempSensor", {
+const tempSensor = $createService("heating.TempSensor", {
     currentTemperature: 20.0,
     updateInterval: 1000, // ms
     lastUpdate: Date.now()
@@ -67,39 +67,39 @@ const tempSensor = $createActor("heating.TempSensor", {
 
 // Heater methods
 heater.turnOn = function () {
-    if (!this.isOn) {
-        this.isOn = true;
+    if (!heater.isOn) {
+        heater.isOn = true;
         console.log("Heater turned ON");
     }
 }
 
 heater.turnOff = function () {
-    if (this.isOn) {
-        this.isOn = false;
+    if (heater.isOn) {
+        heater.isOn = false;
         console.log("Heater turned OFF");
     }
 }
 
 heater.updateTemperature = function (deltaTime) {
-    if (this.isOn) {
+    if (heater.isOn) {
         // Simple temperature increase model
         // Temperature rises faster when difference to max temp is larger
-        const heatIncrease = (this.maxTemp - this.temperature) * 0.1;
-        this.temperature += heatIncrease * (deltaTime / 1000);
+        const heatIncrease = (heater.maxTemp - heater.temperature) * 0.1;
+        heater.temperature += heatIncrease * (deltaTime / 1000);
     } else {
         // Natural cooling model
         // Temperature falls faster when difference to ambient temp is larger
-        const cooling = (this.temperature - tempSensor.currentTemperature) * 0.05;
-        this.temperature -= cooling * (deltaTime / 1000);
+        const cooling = (heater.temperature - tempSensor.currentTemperature) * 0.05;
+        heater.temperature -= cooling * (deltaTime / 1000);
     }
 }
 
 // Thermostat methods
 thermostat.setTargetTemperature = function (temp) {
     if (temp >= heater.minTemp && temp <= heater.maxTemp) {
-        this.targetTemperature = temp;
+        thermostat.targetTemperature = temp;
         console.log(`Target temperature set to ${temp}°C`);
-        this.checkTemperature();
+        thermostat.checkTemperature();
     } else {
         console.log(`Temperature ${temp}°C is outside allowed range`);
     }
@@ -107,8 +107,8 @@ thermostat.setTargetTemperature = function (temp) {
 
 thermostat.checkTemperature = function () {
     const currentTemp = tempSensor.currentTemperature;
-    const lowerBound = this.targetTemperature - this.tolerance;
-    const upperBound = this.targetTemperature + this.tolerance;
+    const lowerBound = thermostat.targetTemperature - thermostat.tolerance;
+    const upperBound = thermostat.targetTemperature + thermostat.tolerance;
 
     if (currentTemp < lowerBound) {
         heater.turnOn();
@@ -119,10 +119,10 @@ thermostat.checkTemperature = function () {
 
 thermostat.setMode = function (newMode) {
     if (newMode === 'auto' || newMode === 'manual') {
-        this.mode = newMode;
+        thermostat.mode = newMode;
         console.log(`Thermostat mode set to ${newMode}`);
         if (newMode === 'auto') {
-            this.checkTemperature();
+            thermostat.checkTemperature();
         }
     }
 }
@@ -130,17 +130,17 @@ thermostat.setMode = function (newMode) {
 // Temperature sensor methods
 tempSensor.update = function () {
     const now = Date.now();
-    const deltaTime = now - this.lastUpdate;
-    this.lastUpdate = now;
+    const deltaTime = now - tempSensor.lastUpdate;
+    tempSensor.lastUpdate = now;
 
     // Update current temperature based on heater's influence
-    const heatTransfer = (heater.temperature - this.currentTemperature) * 0.1;
-    this.currentTemperature += heatTransfer * (deltaTime / 1000);
+    const heatTransfer = (heater.temperature - tempSensor.currentTemperature) * 0.1;
+    tempSensor.currentTemperature += heatTransfer * (deltaTime / 1000);
 
     // Add some random fluctuation
-    this.currentTemperature += (Math.random() - 0.5) * 0.1;
+    tempSensor.currentTemperature += (Math.random() - 0.5) * 0.1;
 
-    console.log(`Current temperature: ${this.currentTemperature.toFixed(1)}°C`);
+    console.log(`Current temperature: ${tempSensor.currentTemperature.toFixed(1)}°C`);
 
     if (thermostat.mode === 'auto') {
         thermostat.checkTemperature();
@@ -149,15 +149,15 @@ tempSensor.update = function () {
 
 function main() {
     // Set up monitoring
-    heater.$onProperty("isOn", function (isOn) {
+    heater.$.onProperty("isOn", function (isOn) {
         console.log(`Heater state changed to: ${isOn ? "ON" : "OFF"}`);
     });
 
-    tempSensor.$onProperty("currentTemperature", function (temp) {
+    tempSensor.$.onProperty("currentTemperature", function (temp) {
         console.log(`Temperature sensor reading: ${temp.toFixed(1)}°C`);
     });
 
-    thermostat.$onProperty("targetTemperature", function (temp) {
+    thermostat.$.onProperty("targetTemperature", function (temp) {
         console.log(`Target temperature changed to: ${temp.toFixed(1)}°C`);
     });
 
@@ -222,21 +222,21 @@ const ball = $createActor("game.Ball", {
 
 
 ball.move = function () {
-    console.log("moving", JSON.stringify(this.$getState()));
-    this.pos = { x: this.pos.x + this.vel.x, y: this.pos.y + this.vel.y };
-    this.vel = { x: this.vel.x + this.acc.x, y: this.vel.y + this.acc.y };
+    console.log("moving", JSON.stringify(ball.$.getProperties()));
+    ball.pos = { x: ball.pos.x + ball.vel.x, y: ball.pos.y + ball.vel.y };
+    ball.vel = { x: ball.vel.x + ball.acc.x, y: ball.vel.y + ball.acc.y };
 };
 
 
-ball.$onProperty("pos", function (value) {
+ball.$.onProperty("pos", function (value) {
     console.log("pos changed", JSON.stringify(value));
 });
 
-ball.$onProperty("vel", function (value) {
+ball.$.onProperty("vel", function (value) {
     console.log("vel changed", JSON.stringify(value));
 });
 
-ball.$onProperty("acc", function (value) {
+ball.$.onProperty("acc", function (value) {
     console.log("acc changed", JSON.stringify(value));
 });
 
@@ -245,6 +245,6 @@ function main() {
     for (let i = 0; i < 10; i++) {
         ball.move();
     }
-    console.log("done", JSON.stringify(ball.$getState()));
+    console.log("done", JSON.stringify(ball.$.getProperties()));
 }
 ```
