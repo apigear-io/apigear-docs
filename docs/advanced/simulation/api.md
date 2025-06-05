@@ -24,7 +24,7 @@ The examples demonstrate how to interact with the simulation server using the Ja
 ### $createService
 
 ```ts
-$world.createService(name:string, properties: {})
+$createService(name:string, properties: {})
 ```
 
 Creates a service with the given name and properties and returns the service object. If an service with the given name already exists, it is returned.
