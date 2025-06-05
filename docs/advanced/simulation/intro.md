@@ -65,7 +65,7 @@ function main() {
 
 To run the simulation we need to start the server and then run the simulation file. The server will then start the simulation and provide the simulation interface to the client.
 
-The simulkation template will genertae a simulation stub as also typescript type definitions to provide a better developer experience.
+The simulation template will generate a simulation stub as also typescript type definitions to provide a better developer experience.
 
 ```mermaid
 graph LR
