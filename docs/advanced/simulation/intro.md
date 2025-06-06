@@ -4,6 +4,13 @@ sidebar_position: 1
 
 # Service Simulation
 
+:::warning Beta
+
+  The **simulation** is beta and may still change
+
+:::
+
+
 ## Why?
 
 Simulation of services helps to predict the data and behavior of services through virtual objects. Simulation is used to diagnose problems and to test otherwise difficult to establish behavior. A typical use case is to enable designers to run a user interface without being depending or to wait for a service implementation. This gets even more important when the service runs on embedded or automotive systems where hardware access is often limited.

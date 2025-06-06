@@ -1,5 +1,11 @@
 # API Stimulation
 
+:::warning Experimental
+
+The **stimulation** is experimental and may not work yet fully
+
+:::
+
 ## Why?
 
 Stimulation allows to trigger sequences of operations or data changes on a service. This is useful to test the behavior of a service or to simulate a user interaction.
