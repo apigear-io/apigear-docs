@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkapigear=self.webpackChunkapigear||[]).push([[9720],{39720:(e,a,r)=>{r.d(a,{createArchitectureServices:()=>c.S});var c=r(49936);r(19369)}}]);

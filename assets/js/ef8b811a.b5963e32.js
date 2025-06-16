@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkapigear=self.webpackChunkapigear||[]).push([[8947],{6600:e=>{e.exports=JSON.parse('{"authors":[{"name":"J\xfcrgen Ryannel","title":"Lead Programmer","imageURL":"https://avatars.githubusercontent.com/u/636357?v=4","key":"J\xfcrgenRyannel","page":null,"count":1}]}')}}]);
