@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## Heating Example
 
-The heating example uses the proxy api with `$createActor` to simulate a simple heating control system. The system consists of three actors: a heater, a thermostat, and a temperature sensor. The heater can be turned on and off, and it influences the temperature in the room. The thermostat can set a target temperature and switch between auto and manual mode. The temperature sensor reads the current temperature and updates it based on the heater's influence.
+The heating example simulates a simple heating control system. The system consists of three services: a heater, a thermostat, and a temperature sensor. The heater can be turned on and off, and it influences the temperature in the room. The thermostat can set a target temperature and switch between auto and manual mode. The temperature sensor reads the current temperature and updates it based on the heater's influence.
 
 ### API Definition
 
@@ -65,41 +65,43 @@ const tempSensor = $createService("heating.TempSensor", {
     lastUpdate: Date.now()
 });
 
-// Heater methods
+// Heater methods using natural API
 heater.turnOn = function () {
-    if (!heater.isOn) {
-        heater.isOn = true;
+    if (!this.isOn) {
+        this.isOn = true;
         console.log("Heater turned ON");
+        this.emit('stateChanged', true);
     }
 }
 
 heater.turnOff = function () {
-    if (heater.isOn) {
-        heater.isOn = false;
+    if (this.isOn) {
+        this.isOn = false;
         console.log("Heater turned OFF");
+        this.emit('stateChanged', false);
     }
 }
 
 heater.updateTemperature = function (deltaTime) {
-    if (heater.isOn) {
+    if (this.isOn) {
         // Simple temperature increase model
         // Temperature rises faster when difference to max temp is larger
-        const heatIncrease = (heater.maxTemp - heater.temperature) * 0.1;
-        heater.temperature += heatIncrease * (deltaTime / 1000);
+        const heatIncrease = (this.maxTemp - this.temperature) * 0.1;
+        this.temperature += heatIncrease * (deltaTime / 1000);
     } else {
         // Natural cooling model
         // Temperature falls faster when difference to ambient temp is larger
-        const cooling = (heater.temperature - tempSensor.currentTemperature) * 0.05;
-        heater.temperature -= cooling * (deltaTime / 1000);
+        const cooling = (this.temperature - tempSensor.currentTemperature) * 0.05;
+        this.temperature -= cooling * (deltaTime / 1000);
     }
 }
 
-// Thermostat methods
+// Thermostat methods using natural API
 thermostat.setTargetTemperature = function (temp) {
     if (temp >= heater.minTemp && temp <= heater.maxTemp) {
-        thermostat.targetTemperature = temp;
+        this.targetTemperature = temp;
         console.log(`Target temperature set to ${temp}°C`);
-        thermostat.checkTemperature();
+        this.checkTemperature();
     } else {
         console.log(`Temperature ${temp}°C is outside allowed range`);
     }
@@ -107,8 +109,8 @@ thermostat.setTargetTemperature = function (temp) {
 
 thermostat.checkTemperature = function () {
     const currentTemp = tempSensor.currentTemperature;
-    const lowerBound = thermostat.targetTemperature - thermostat.tolerance;
-    const upperBound = thermostat.targetTemperature + thermostat.tolerance;
+    const lowerBound = this.targetTemperature - this.tolerance;
+    const upperBound = this.targetTemperature + this.tolerance;
 
     if (currentTemp < lowerBound) {
         heater.turnOn();
@@ -119,28 +121,28 @@ thermostat.checkTemperature = function () {
 
 thermostat.setMode = function (newMode) {
     if (newMode === 'auto' || newMode === 'manual') {
-        thermostat.mode = newMode;
+        this.mode = newMode;
         console.log(`Thermostat mode set to ${newMode}`);
         if (newMode === 'auto') {
-            thermostat.checkTemperature();
+            this.checkTemperature();
         }
     }
 }
 
-// Temperature sensor methods
+// Temperature sensor methods using natural API
 tempSensor.update = function () {
     const now = Date.now();
-    const deltaTime = now - tempSensor.lastUpdate;
-    tempSensor.lastUpdate = now;
+    const deltaTime = now - this.lastUpdate;
+    this.lastUpdate = now;
 
     // Update current temperature based on heater's influence
-    const heatTransfer = (heater.temperature - tempSensor.currentTemperature) * 0.1;
-    tempSensor.currentTemperature += heatTransfer * (deltaTime / 1000);
+    const heatTransfer = (heater.temperature - this.currentTemperature) * 0.1;
+    this.currentTemperature += heatTransfer * (deltaTime / 1000);
 
     // Add some random fluctuation
-    tempSensor.currentTemperature += (Math.random() - 0.5) * 0.1;
+    this.currentTemperature += (Math.random() - 0.5) * 0.1;
 
-    console.log(`Current temperature: ${tempSensor.currentTemperature.toFixed(1)}°C`);
+    console.log(`Current temperature: ${this.currentTemperature.toFixed(1)}°C`);
 
     if (thermostat.mode === 'auto') {
         thermostat.checkTemperature();
@@ -148,17 +150,22 @@ tempSensor.update = function () {
 }
 
 function main() {
-    // Set up monitoring
-    heater.$.onProperty("isOn", function (isOn) {
+    // Set up monitoring using natural API
+    heater.on("isOn", function (isOn) {
         console.log(`Heater state changed to: ${isOn ? "ON" : "OFF"}`);
     });
 
-    tempSensor.$.onProperty("currentTemperature", function (temp) {
+    tempSensor.on("currentTemperature", function (temp) {
         console.log(`Temperature sensor reading: ${temp.toFixed(1)}°C`);
     });
 
-    thermostat.$.onProperty("targetTemperature", function (temp) {
+    thermostat.on("targetTemperature", function (temp) {
         console.log(`Target temperature changed to: ${temp.toFixed(1)}°C`);
+    });
+    
+    // Listen to custom signal
+    heater.on('stateChanged', function(state) {
+        console.log(`Heater state signal: ${state ? "ON" : "OFF"}`);
     });
 
     // Initial setup
@@ -182,7 +189,7 @@ function main() {
 
 ## Ball Animation Example
 
-The ball animation example uses the proxy api with `$createActor` to simulate a simple ball animation. The system consists of a ball actor that moves around the screen based on its velocity and acceleration. The ball bounces off the walls and changes color when it hits the edges.
+The ball animation example simulates a simple ball physics system. The ball has position, velocity, and acceleration properties. The ball moves around based on its velocity and acceleration, demonstrating the natural API for property updates and signal emissions.
 
 ### API Definition
 
@@ -199,52 +206,216 @@ interface Ball {
     vel: Vec2D
     acc: Vec2D
     move()
+    reset()
 }
 ```
 
-## Simulation Script
+### Simulation Script
 
-```ts
-
-class Vec2D {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
-
-const ball = $createActor("game.Ball", {
+```js
+// Ball physics simulation using natural API
+const ball = $createService("game.Ball", {
     pos: { x: 0, y: 0 },
     vel: { x: 1, y: 1 },
     acc: { x: 1, y: 1 },
 });
 
-
-ball.move = function () {
-    console.log("moving", JSON.stringify(ball.$.getProperties()));
-    ball.pos = { x: ball.pos.x + ball.vel.x, y: ball.pos.y + ball.vel.y };
-    ball.vel = { x: ball.vel.x + ball.acc.x, y: ball.vel.y + ball.acc.y };
+// Define move method using natural API with 'this'
+ball.move = function() {
+    const acc = this.acc;
+    const vel = this.vel;
+    const pos = this.pos;
+    
+    // Calculate new position and velocity
+    const newPos = { x: pos.x + vel.x, y: pos.y + vel.y };
+    const newVel = { x: vel.x + acc.x, y: vel.y + acc.y };
+    
+    // Update properties using natural assignment
+    this.pos = newPos;
+    this.vel = newVel;
+    
+    // Emit movement signal
+    this.emit('moved', newPos);
 };
 
+// Reset method
+ball.reset = function() {
+    this.pos = { x: 0, y: 0 };
+    this.vel = { x: 1, y: 1 };
+    this.emit('reset');
+}
 
-ball.$.onProperty("pos", function (value) {
-    console.log("pos changed", JSON.stringify(value));
+// Monitor property changes using natural API
+ball.on("pos", function (value) {
+    console.log("Position changed:", JSON.stringify(value));
 });
 
-ball.$.onProperty("vel", function (value) {
-    console.log("vel changed", JSON.stringify(value));
+ball.on("vel", function (value) {
+    console.log("Velocity changed:", JSON.stringify(value));
 });
 
-ball.$.onProperty("acc", function (value) {
-    console.log("acc changed", JSON.stringify(value));
+ball.on("acc", function (value) {
+    console.log("Acceleration changed:", JSON.stringify(value));
+});
+
+// Listen to custom signals
+ball.on('moved', function(newPos) {
+    console.log(`Ball moved to: (${newPos.x}, ${newPos.y})`);
+});
+
+ball.on('reset', function() {
+    console.log('Ball was reset to initial position');
 });
 
 function main() {
-    console.log("running");
-    for (let i = 0; i < 10; i++) {
+    console.log("=== Ball Physics Simulation ===");
+    
+    // Access raw properties when needed
+    console.log("Initial state:", JSON.stringify(ball.$.getProperties()));
+    
+    // Run simulation
+    for (let i = 0; i < 5; i++) {
+        console.log(`\nStep ${i + 1}:`);
         ball.move();
     }
-    console.log("done", JSON.stringify(ball.$.getProperties()));
+    
+    // Access final state through raw API
+    console.log("\nFinal state:", JSON.stringify(ball.$.getProperties()));
+    
+    // Demonstrate reset
+    console.log("\nResetting ball...");
+    ball.reset();
+    
+    // Direct property access
+    console.log("Position after reset:", JSON.stringify(ball.pos));
+    console.log("Velocity after reset:", JSON.stringify(ball.vel));
 }
 ```
+
+## Vehicle Dashboard Example
+
+This example demonstrates a more complex simulation with multiple interconnected services representing a vehicle dashboard system.
+
+### Simulation Script
+
+```js
+const state = $createService("vehicle.State", {
+    location: { x: 0, y: 0 },
+    speed: 0,
+    rpm: 0,
+    fuelLevel: 50,
+    fuelLevelWarning: false,
+    temperature: 20,
+    overheatWarning: false
+});
+
+const indicators = $createService("vehicle.Indicators", {
+    checkEngine: false,
+    oilPressure: false,
+    battery: false,
+    airbag: false,
+    brake: false,
+    seatbelt: false,
+    tractionControl: false,
+    highBeam: false
+});
+
+const commands = $createService("vehicle.Commands", {});
+
+// Command methods using natural API
+commands.turnOn = function () {
+    const order = ['checkEngine', 'oilPressure', 'battery', 'brake', 'seatbelt', 'tractionControl', 'highBeam'];
+    let index = 0;
+    const interval = setInterval(function() {
+        if (index < order.length) {
+            const indicator = order[index];
+            indicators[indicator] = true;
+            console.log(`Turned on ${indicator}`);
+            index++;
+        } else {
+            clearInterval(interval);
+            commands.emit('allIndicatorsOn');
+        }
+    }, 200);
+}
+
+commands.turnOff = function () {
+    // Turn off all indicators using direct property access
+    indicators.checkEngine = false;
+    indicators.oilPressure = false;
+    indicators.battery = false;
+    indicators.airbag = false;
+    indicators.brake = false;
+    indicators.seatbelt = false;
+    indicators.tractionControl = false;
+    indicators.highBeam = false;
+    this.emit('allIndicatorsOff');
+}
+
+// Add method to state service for speed updates
+state.accelerate = function(amount = 10) {
+    this.speed += amount;
+    this.rpm = Math.min(8000, this.speed * 100);
+    
+    // Update fuel consumption
+    this.fuelLevel = Math.max(0, this.fuelLevel - amount * 0.01);
+    this.fuelLevelWarning = this.fuelLevel < 10;
+    
+    // Update temperature
+    this.temperature = Math.min(120, this.temperature + amount * 0.1);
+    this.overheatWarning = this.temperature > 100;
+}
+
+function main() {
+    // Set up event monitoring with natural API
+    state.on('speed', function(speed) {
+        console.log(`Speed: ${speed} km/h`);
+    });
+    
+    state.on('fuelLevelWarning', function(warning) {
+        if (warning) {
+            console.log('⚠️  Low fuel warning!');
+        }
+    });
+    
+    state.on('overheatWarning', function(warning) {
+        if (warning) {
+            console.log('⚠️  Engine overheating!');
+        }
+    });
+    
+    commands.on('allIndicatorsOn', function() {
+        console.log('All indicators checked');
+    });
+    
+    // Monitor specific indicator
+    indicators.on("checkEngine", function (value) {
+        console.log("Check engine indicator:", value ? "ON" : "OFF");
+    });
+    
+    // Run startup sequence
+    commands.turnOn();
+    
+    // Simulate driving
+    let drivingInterval = setInterval(function() {
+        state.accelerate();
+        if (state.speed >= 120 || state.fuelLevel <= 0) {
+            clearInterval(drivingInterval);
+            console.log('Stopping simulation');
+            commands.turnOff();
+        }
+    }, 500);
+}
+```
+
+## Key Features of the Natural API
+
+The examples above demonstrate the key features of the new natural API:
+
+1. **Direct Property Access**: Properties can be read and written directly using dot notation
+2. **Automatic `this` Binding**: Methods automatically receive the service proxy as `this`
+3. **Unified Event Handling**: The `on()` method handles both property changes and custom signals
+4. **Signal Emission**: Use `this.emit()` to emit custom signals from within methods
+5. **Raw API Access**: When needed, access the underlying service object via `service.$`
+
+This natural API provides a more intuitive JavaScript development experience while maintaining full compatibility with the ObjectLink protocol.
