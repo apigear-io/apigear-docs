@@ -45,20 +45,20 @@ The counter example shows a simple interface which can be used to increment or d
 const counter = $createService("demo.Counter", { count: 0 });
 
 // react to changes of the count property
-counter.$.on("count", function(value) {
+counter.on("count", function(value) {
   console.log("count changed to " + value);
 });
 
 
 // provide an implementation for the increment operation
 counter.increment = function() {
-  // modify the count property, this will trigger the count property change event
-  counter.count++;
+  // modify the count property using 'this', this will trigger the count property change event
+  this.count++;
 };
 
 // provide an implementation for the decrement operation
 counter.decrement = function() {
-  counter.count--;
+  this.count--;
 };
 
 // provide an autorun function which will be called when the simulation is started
@@ -90,7 +90,9 @@ apigear sim run counter.js
 
 This contact the server and sends the simulation file to the simulation server and runs it. The simulation server will create actors and run the main function, if available. Now the simulation server waits for API calls from the client.
 
-Now you need a client to connect to the simulation server over ObjectLink and trigger the simulation, or you can use the stimulation tool to trigger the simulation.
+Now you need a client to connect to the simulation server over ObjectLink and trigger the simulation. You can either:
+- Build a client using one of the ObjectLink client SDKs
+- Use the [stimulation tool](/docs/advanced/stimulation/intro) to create JavaScript-based test clients
 
 
 ## Simulation Protocol

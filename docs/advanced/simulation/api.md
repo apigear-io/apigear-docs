@@ -37,169 +37,230 @@ $getService(name:string)
 
 Returns the service with the given name. If no service with the given name exists, it will be created.
 
-### $listServices
+### $quit
 
 ```ts
-$listServices()
+$quit()
 ```
 
-Returns the list of service names in the simulation.
+Cleanly shuts down the simulation engine. This function:
+- Disconnects all active channels
+- Closes the simulation engine
+- Exits the simulation script
 
-### $destroyService
+This is useful for gracefully terminating long-running simulations or when specific conditions are met.
 
-```ts
-$destroyService(name:string)
+```js
+// Example: Stop simulation after a condition
+if (temperature > 100) {
+    console.log("Overheating detected, stopping simulation");
+    $quit();
+}
 ```
-
-Deletes the service with the given name from the simulation.
 
 ## Service
 
 A service is a virtual entity that can be created and destroyed and it has state and behavior as well notifies changes. services are accessed through a protocol adapter that is implemented by the simulation server.
 
-services can be created using the `$createservice` method.
+Services can be created using the `$createService` method.
 
-Services support properties, to be accessed using the `.$.getProperty` and `.$.setProperty` methods and to be notified of changes using the `.$.onProperty` method. To return all properties of an service use the `.$.getProperties` method. 
+Services support properties through a natural JavaScript API using proxies. Properties can be accessed and modified directly, and changes can be monitored using the `.on()` method.
 
-The following example creates an service with the given name and state and returns the service. If an service with the given name already exists, it is returned.
+The following example creates a service with the given name and state and returns the service. If a service with the given name already exists, it is returned.
 
 ```js
-// creates an service with the given name and state
+// creates a service with the given name and state
 const counter = $createService("counter", { count: 0 });
 
-counter.$.setProperty("count", 10);
-console.log(counter.getProperty("count")); // 10
+// Direct property access and modification
+counter.count = 10;
+console.log(counter.count); // 10
 
-counter.$.onProperty("count", function (value) {
+// Monitor property changes
+counter.on("count", function (value) {
     console.log("count changed", value);
 });
-counter.$.setProperty("count", value + 1);
+counter.count = 11;
 // prints "count changed 11"
+
+// Access the raw service object when needed
+console.log(counter.$.getProperties()); // { count: 11 }
 ```
 
 ### Properties
 
-#### service.$.setProperty
+#### Direct Property Access
+
+Services use JavaScript proxies to provide natural property access:
 
 ```js
-service.$.setProperty(name: string, value: any)
+// Get property value
+const value = service.propertyName;
+
+// Set property value
+service.propertyName = newValue;
 ```
 
-Set the value of a property on the service.
-
-#### service.$.getProperty
+#### service.on
 
 ```js
-service.$.getProperty(name: string): any
+service.on(name: string, callback: (value: any) => void)
 ```
 
-Get the value of a property on the service.
-
-#### service.$.onProperty
-
-```js
-service.$.onProperty(name: string, callback: (value: any) => void)
-```
-
-Register a callback to be called when the value of a property changes.
+Register a callback to be called when a property changes or a signal is emitted.
 
 Unregister the callback by calling the returned unsubscribe function.
 
 ```js
-const counter = $createService("counter");
-const unsubscribe = counter.$.onProperty("count", function (value) {
+const counter = $createService("counter", { count: 10 });
+const unsubscribe = counter.on("count", function (value) {
     console.log("count changed", value);
 });
-counter.$.setProperty("count", value + 1);
+counter.count = 11;
 // prints "count changed 11"
 
 unsubscribe();
 ```
 
-#### service.$.getProperties
+#### Raw Service Access
+
+When you need access to the underlying service object, use the `$` property:
 
 ```js
-service.$.getProperties(): string[]
+// Access raw service methods
+service.$.getProperties()  // Returns all properties as an object
+service.$.setProperties({ prop1: value1, prop2: value2 })  // Set multiple properties
+service.$.hasProperty(name)  // Check if property exists
+service.$.getProperty(name)  // Get property value (alternative to direct access)
+service.$.setProperty(name, value)  // Set property value (alternative to direct access)
 ```
-
-#### service.$.setProperties
-
-```ts
-service.$.setProperties(properties: {})
-```
-
-Set the properties on the service.
-
-#### service.$.getProperties
-
-```ts
-service.$.getProperties(): {}
-```
-
-Get the properties on the service.
 
 
 ### Methods
 
-#### service.$.onMethod
+#### Natural Method Definition
 
-```ts
-service.$.onMethod(name: string, fn: (...args): any)
+Methods are defined by assigning functions to service properties. The function automatically receives the service proxy as `this`:
+
+```js
+const counter = $createService("counter", { count: 0 });
+
+// Define a method with automatic 'this' binding
+counter.increment = function() {
+    this.count++;  // 'this' refers to the service proxy
+    this.emit('incremented', this.count);  // Can emit signals
+};
+
+// Call the method
+counter.increment();
 ```
 
-Set method on the service.
+#### Raw Method Access
 
-#### service.$.getMethod
+When needed, you can access methods through the raw service object:
 
-```ts
-service.$.getMethod(name: string): (...args) => any
+```js
+// Check if method exists
+service.$.hasMethod("methodName")  // Returns boolean
+
+// Get method reference
+service.$.getMethod("methodName")  // Returns the function
+
+// Call method through raw API
+service.$.callMethod("methodName", arg1, arg2)  // Calls with arguments
 ```
-
-Get method on the service.
-
-#### service.$.hasMethod
-
-```ts
-service.$.hasMethod(name: string): boolean
-```
-
-Check if the service has a method.
-
-#### service.$.callMethod
-
-```ts
-service.$.callMethod(name: string, ...args): any
-```
-
-Call a method on the service.
 
 
 ### Signals
 
-#### service.$.onSignal
-
-```ts
-service.$.onSignal(name: string, callback: (...args) => void)
-```
-
-Register a callback to be called when a signal is emitted.
-
-Unregister the callback by calling the returned unsubscribe function.
+#### service.emit
 
 ```js
-const counter = createService("counter");
-const unsubscribe = counter.$.onSignal("incremented", function (args) {
-    console.log("incremented signal", args);
-});
-counter.$.emitSignal("incremented", 1);
-// prints "incremented signal 1"
-unsubscribe(); // unregister the callback
-```
-
-#### service.$.emitSignal
-
-```ts   
-service.$.emitSignal(name: string, ...args)
+service.emit(name: string, ...args)
 ```
 
 Emit a signal on the service.
+
+```js
+const counter = $createService("counter", { count: 0 });
+
+// Define a method that emits a signal
+counter.reset = function() {
+    this.count = 0;
+    this.emit('resetted');  // Emit signal with no arguments
+    this.emit('stateChanged', this.count);  // Emit with arguments
+};
+```
+
+#### Listening to Signals
+
+Use the same `on` method to listen for both property changes and signals:
+
+```js
+const counter = $createService("counter", { count: 0 });
+
+// Listen to custom signals
+const unsubscribe = counter.on("resetted", function () {
+    console.log("Counter was reset");
+});
+
+counter.on("stateChanged", function (newValue) {
+    console.log("State changed to:", newValue);
+});
+
+// Trigger the signals
+counter.reset();
+// prints "Counter was reset"
+// prints "State changed to: 0"
+
+unsubscribe(); // unregister the callback
+```
+
+#### Raw Signal Access
+
+For direct signal manipulation through the raw API:
+
+```js
+service.$.onSignal(name, callback)  // Register signal listener
+service.$.emitSignal(name, ...args)  // Emit signal
+```
+
+## Async Operations
+
+The simulation environment provides basic async support through:
+
+### setTimeout
+
+```js
+setTimeout(callback, delay)
+```
+
+Schedules a function to be called after a specified delay (in milliseconds).
+
+```js
+// Example: Delayed state change
+setTimeout(function() {
+    heater.temperature = 25;
+    console.log("Temperature updated after delay");
+}, 1000);  // Execute after 1 second
+
+// Example: Sequential operations in vehicle example
+const interval = setInterval(function() {
+    indicators[indicator] = true;
+    console.log(`Turned on ${indicator}`);
+}, 200);
+```
+
+Note: The simulation environment currently supports `setTimeout` and `setInterval` but not `setImmediate`, `clearTimeout`, or `clearInterval`.
+
+## Console Output
+
+Standard console methods are available for debugging and output:
+
+```js
+console.log("Info message");
+console.warn("Warning message");
+console.error("Error message");
+```
+
+All console output is integrated with the simulation server's logging system.
