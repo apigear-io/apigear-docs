@@ -4,12 +4,6 @@ sidebar_position: 1
 
 # Service Simulation
 
-:::warning Beta
-
-  The **simulation** is beta and may still change
-
-:::
-
 
 ## Why?
 
