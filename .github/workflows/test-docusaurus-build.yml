@@ -18,7 +18,7 @@ jobs:
       - name: install dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
       - run: npx --yes docusaurus-mdx-checker 
       - run: npm ci
