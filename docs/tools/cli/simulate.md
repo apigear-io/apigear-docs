@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: ApiGear CLI Simulator – Test and Mock APIs Locally without hardware
+sidebar_label: API Simulation and Stimulation
+description: Simulate APIs without writing code. Use the ApiGear CLI to mock, test, and validate your API workflows without hardware.
+keywords: [api,simulator,cli]
 ---
 
 # API Simulation and Stimulation

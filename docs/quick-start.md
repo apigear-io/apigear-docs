@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+title: Quick Start – Generate APIs for Qt, Unreal & C++
+sidebar_label: Quick Start
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

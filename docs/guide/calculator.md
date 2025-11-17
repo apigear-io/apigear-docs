@@ -1,5 +1,9 @@
 ---
 sidebar_position: 3
+title: Build a Calculator API with ApiGear – Step-by-Step Guide
+sidebar_label: Calculator API Demo
+description: Create and simulate a Calculator API in minutes using ApiGear’s model-driven generator.
+keywords: [calculator, api]
 ---
 
 # Calculator API Demo
