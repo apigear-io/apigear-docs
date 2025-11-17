@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkapigear=globalThis.webpackChunkapigear||[]).push([[6366],{86366:(e,a,r)=>{r.d(a,{createArchitectureServices:()=>c.S});var c=r(38980);r(87960)}}]);

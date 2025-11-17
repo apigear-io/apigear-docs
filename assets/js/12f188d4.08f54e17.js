@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkapigear=globalThis.webpackChunkapigear||[]).push([[1125],{35903:a=>{a.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"template-cpp14"}')}}]);
