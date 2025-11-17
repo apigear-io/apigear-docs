@@ -1,0 +1,8 @@
+{
+  "label": "Message Streams",
+  "position": 5,
+  "link": {
+    "type": "doc",
+    "id": "advanced/streams/intro"
+  }
+}
