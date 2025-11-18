@@ -4,26 +4,29 @@ sidebar_position: 2
 
 # Record
 
-To record ObjectLink message streams, ApiGear provides tools that capture and store these messages in real-time. This is particularly useful for debugging and analyzing the behavior of distributed systems.
+To record ObjectLink message streams, ApiGear provides tools that capture and store these messages in real-time. This functionality is particularly useful for debugging and analyzing the behavior of distributed systems.
 
-Temporal recording happens automatically when a API traces are send to a monitoring endpoint. The monitoring endpoint captures the ObjectLink messages and stores them in a structured format by device id.
+## Automatic Recording
 
-:::note
+Recording happens automatically when API traces are sent to a monitoring endpoint. The monitoring endpoint captures the ObjectLink messages and stores them in a structured format organized by device ID.
 
-   Ensure that your API monitoring is configured to send ObjectLink messages to the correct monitoring endpoint.
+:::note Configuration
 
-   ```
-   http://localhost:5555/monitor/123/
-   ```
+Ensure that your API monitoring is configured to send ObjectLink messages to the correct monitoring endpoint.
 
-   123 is the device id for which the messages are recorded. Each device id should have its own recording. Please check your API tracing settings to ensure that ObjectLink messages are being sent to the correct monitoring endpoint.
+```
+http://localhost:5555/monitor/123/
+```
+
+In this example, `123` is the device ID for which messages are recorded. Each device ID should have its own recording session. Verify your API tracing settings to ensure ObjectLink messages are being sent to the correct monitoring endpoint.
 
 :::
 
+## Getting Started
 
-To start a recording you neeed to start apigear in the server mode using `apigear serve` command. The monitoring endpoint will be available at `http://localhost:5555/monitor/{device_id}/` by default.
+To start recording, you need to start ApiGear in server mode using the `apigear serve` command. The monitoring endpoint will be available at `http://localhost:5555/monitor/{device_id}/` by default.
 
-Then you can start sending ObjectLink messages to the monitoring endpoint using your ObjectLink client or API monitoring tool.
+Once the server is running, you can start sending ObjectLink messages to the monitoring endpoint using your ObjectLink client or API monitoring tool.
 
 ```mermaid
 sequenceDiagram
@@ -34,30 +37,40 @@ sequenceDiagram
     monitor->>storage: Record Messages (by device id)
 ```
 
-:::note
+:::note Storage and Retention
 
-    Recorded streams are stored and have a retention period after which they may be deleted. Ensure to export or replay important recordings before they expire.
+Recorded streams are stored with a retention period, after which they may be automatically deleted. Export or replay important recordings before they expire.
 
-    To see the list of recorded streams you can list the recordings using apigear streams command:
+To view all recorded streams, use:
 
-    ```bash
-    apigear streams ls
-    ```
+```bash
+apigear streams ls
+```
 
-    Internally we are using an embedded NATS server to handle the recording and storage of ObjectLink messages.
+ApiGear uses an embedded NATS server internally to handle the recording and storage of ObjectLink messages.
 
 :::
 
 
-## Export
+## Export Recordings
 
-You can export recorded streams to share them with others or for backup purposes. Use the following command to export a recorded stream by device id:
+You can export recorded streams for sharing with team members or for backup purposes.
+
+### Export by Device ID
 
 ```bash
 apigear streams export --device <device_id> --output <file_path>
 ```
 
-This will create a file at the specified output path containing the recorded stream data. When using the device id, the latest session for that device id will be exported. To export a specific session, you can use the session id instead of the device id.
+This command creates a file at the specified output path containing the recorded stream data. When using a device ID, the latest session for that device will be exported.
+
+### Export by Session ID
+
+To export a specific session, use the session ID instead:
+
+```bash
+apigear streams export --session <session_id> --output <file_path>
+```
 
 ```mermaid
 sequenceDiagram
@@ -68,7 +81,7 @@ sequenceDiagram
     storage->>file: Write to File (exported stream)
 ```
 
-## Import 
+## Import Recordings
 
 You can import previously exported streams to replay them later. Use the following command to import a stream from a file:
 
@@ -76,7 +89,7 @@ You can import previously exported streams to replay them later. Use the followi
 apigear streams import --input <file_path>
 ```
 
-This will read the stream data from the specified file and store it for later replay under the original device id and session id.
+This command reads the stream data from the specified file and stores it for later replay using the original device ID and session ID.
 
 ```mermaid
 sequenceDiagram
@@ -87,8 +100,8 @@ sequenceDiagram
     server->>storage: Store Recording (by device id and session id)
 ```
 
-:::note
+:::note File Format
 
-    Exported streams are stored using an envelope format which includes metadata about the recording such as device id, session id, and timestamps.
+Exported streams use an envelope format that includes metadata about the recording, such as device ID, session ID, and timestamps.
 
 :::
