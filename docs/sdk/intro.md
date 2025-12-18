@@ -2,16 +2,79 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# SDK Templates
 
-ApiGear comes with a collection of SDK templates which allows our users to create code interfaces but also complete SDKs from the API Modules.
+ApiGear provides a collection of SDK templates that transform your API definitions into production-ready code for various programming languages and platforms.
 
-A template is a transformation of a group of API modules into source code for your software project.
+Each template generates clean interfaces, data structures, and build system support based on your API modules. Templates can be configured with different features and scale with your project as you add more API modules.
 
-All template SDKs can scale with your project by adding more API modules. A command line tool will support you with merging the updated SDK code.
+## Available Templates
 
-These templates can be configured by enabling and disabling certain features. Also SDKs are build on top of certain ObjectAPI profiles, which enable or disable certain language features. A user will get a warning when an API uses features not available in the configured language profile.
+### C++17
 
-An SDK will come with all build and test related dependencies and ready to use for your project. The SDK scales with your requirements by adding more API modules which are automatically added to the build infrastructure and tests.
+Modern C++17 SDK with CMake and Conan support. Generates abstract interfaces, data structures, and full build infrastructure.
 
-ApiGear offers currently several SDKs for major programming languages and technologies and more will come over time.
+**Features:** API interfaces, scaffolding, OLink protocol, MQTT support, monitoring
+
+[View C++17 Documentation →](/template-cpp17/docs/intro)
+
+---
+
+### C++14
+
+C++14 compliant SDK for projects requiring older compiler support. Currently in maintenance mode.
+
+**Features:** API interfaces, scaffolding, CMake, Conan, test support
+
+[View C++14 Documentation →](/template-cpp14/docs/intro)
+
+---
+
+### Qt6
+
+Qt6/QML SDK generating CMake-based libraries and QtQuick plugins. Ideal for Qt-based desktop and embedded applications.
+
+**Features:** API interfaces, scaffolding, QML integration, OLink protocol, monitoring
+
+[View Qt6 Documentation →](/template-qt6/docs/intro)
+
+---
+
+### Unreal Engine
+
+Unreal Engine 5 SDK generating Blueprints and C++ classes. Perfect for game development and interactive applications.
+
+**Features:** API interfaces, scaffolding, Blueprint support, OLink protocol, monitoring
+
+[View Unreal Documentation →](/template-unreal/docs/intro)
+
+---
+
+### Python
+
+Python SDK generating modules with clean interfaces and type hints. Suitable for backend services and scripting.
+
+**Features:** API interfaces, scaffolding, test support, OLink protocol
+
+[View Python Documentation →](/template-python/docs/intro)
+
+---
+
+## Template Features
+
+All templates support common features that can be enabled or disabled:
+
+| Feature | Description |
+|---------|-------------|
+| **API** | Generates interface definitions and data structures |
+| **Scaffold** | Creates a complete project with build system and tests |
+| **OLink** | Enables remote object communication protocol |
+| **MQTT** | Adds MQTT messaging support (select templates) |
+| **Monitor** | Integrates with ApiGear monitoring tools |
+
+## Getting Started
+
+1. Define your API using the [ObjectAPI format](/docs/objectapi/intro)
+2. Create a [solution file](/docs/guide/quick-start#solution-file) specifying your template
+3. Run the code generator using [CLI](/docs/cli/intro) or [Studio](/docs/studio/intro)
+4. Follow the generated README for build and integration instructions

@@ -188,19 +188,14 @@ const config = {
             ],
           },
           {
-            to: 'blog',
-            label: 'Blog',
-            position: 'left'
-          },
-          {
-            label: 'Slack Discussions',
-            href: 'https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw',
-            position: 'right',
-          },
-          {
-            label: 'Github Discussions',
-            href: 'https://github.com/orgs/apigear-io/discussions',
-            position: 'right',
+            type: 'dropdown',
+            label: 'Resources',
+            position: 'left',
+            items: [
+              {to: 'blog', label: 'Blog'},
+              {to: '/help', label: 'Help & Support'},
+              {href: 'https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw', label: 'Slack Community'},
+            ],
           },
           {
             label: 'GitHub',
@@ -221,57 +216,49 @@ const config = {
               },
               {
                 label: 'Quick Start',
-                to: '/docs/quick-start',
+                to: '/docs/guide/quick-start',
               },
               {
                 label: 'Installation',
-                to: '/docs/quick-start#1-install-the-code-generator',
+                to: '/docs/guide/quick-start#1-install-the-code-generator',
               },
               {
                 label: 'Guide',
-                to: '/docs/guide/intro',
+                to: '/docs/guide/quick-start',
               },
             ],
           },
           {
-            title: 'Community',
+            title: 'Resources',
             items: [
               {
-                label: 'Slack Discussions',
+                label: 'Blog',
+                to: 'blog',
+              },
+              {
+                label: 'Help & Support',
+                to: '/help',
+              },
+              {
+                label: 'Slack Community',
                 href: 'https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw',
               },
-              {
-                label: 'Github Discussions',
-                href: 'https://github.com/orgs/apigear-io/discussions',
-              },
-              {
-                label: 'Help',
-                href: '/docs/community/help',
-              },
             ],
           },
           {
-            title: 'More',
+            title: 'Downloads',
             items: [
               {
-                label: 'Download CLI',
+                label: 'CLI',
                 href: 'https://github.com/apigear-io/cli/releases/latest',
               },
               {
-                label: 'Download Studio',
+                label: 'Desktop Studio',
                 href: 'https://github.com/apigear-io/studio/releases/latest',
-              },
-              {
-                to: 'blog',
-                label: 'Blog',
               },
               {
                 label: 'GitHub',
                 href: 'https://github.com/apigear-io',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/apigear',
               },
             ],
           },

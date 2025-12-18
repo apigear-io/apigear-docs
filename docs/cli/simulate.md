@@ -1,194 +1,365 @@
 ---
 sidebar_position: 3
-title: ApiGear CLI Simulator – Test and Mock APIs Locally without hardware
-sidebar_label: API Simulation and Stimulation
-description: Simulate APIs without writing code. Use the ApiGear CLI to mock, test, and validate your API workflows without hardware.
-keywords: [api,simulator,cli]
+title: Scripting Support
+sidebar_label: Scripting Support
 ---
 
-# API Simulation and Stimulation
+# Scripting Support
 
-API Simulation is when a script simulates the behavior of an ApiGear API. API Stimulation is when a script drives the implementation of an ApiGear API. Simulation is great for consumers of APIs, sich as user interfaces or CLIs to validate their implementation without having access to the finished API implementation and with greater flexibility. An API Stimulation is great when you implement and API and want to drive your implementation for validation.
+The CLI provides JavaScript-based scripting for both simulating services (scripted backends) and driving services (scripted clients). This enables testing, prototyping, and validation without compiled code.
 
-## API Simulation
+## Commands
 
-API Simulation is a feature that allows you to simulate the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users. The simulation is based on [olink protocol](/docs/protocols/objectlink/intro), you need your application to use Object Link version of implementation to be able to receive the simulation data. Check your templates for `olink` feature for more information.
-See [simulation documentation](/docs/simulation/intro) for more info.
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `simulate run` | `sim r` | Run a scripted backend |
+| `simulate feed` | `sim f` | Feed simulation data from file |
+| `stimulate run` | `stim r` | Run a scripted client |
 
-:::note Beta
+## Scripted Backends (Simulation)
 
-The **simulation** server is in beta and will gain new and improved functionality soon.
+Simulate your service to test client code before the real backend exists.
 
-:::
+### Basic Usage
 
-### Quick API Simulation
+```bash
+apigear sim run scenario.js
+```
 
-API Simulation is a feature of the ApiGear platform. It allows to simulate the behavior of an API. The `apigear` command line tool can be used to simulate an API. The following example shows how to simulate the demo API.
+### Options
 
-API simulation is based on a simulation script. The following example shows how to create a simulation script for the [demo API](generate) used for code generation example. 
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--fn` | Function to run on startup | `main` |
+| `--watch` | Watch script for changes | `false` |
+| `--nats-server` | NATS server URL | `nats://localhost:4222` |
 
-```js
-// demo.script.js
+### Watch Mode
 
+Automatically reload when the script changes:
+
+```bash
+apigear sim run scenario.js --watch
+```
+
+### Example Script
+
+```javascript
+// counter.js
 const counter = $createService("demo.Counter", { count: 0 });
+
 counter.increment = function() {
     counter.count++;
-    return counter;
+    return counter.count;
 }
 
 counter.decrement = function() {
     counter.count--;
-    return counter;
+    return counter.count;
 }
 
-// use the "$" scope to access the bare methods
+// React to property changes
 counter.$.onProperty("count", function(value) {
-    console.log("count is", value)
-})
-
+    console.log("count changed to", value);
+});
 
 function main() {
-    console.log("main function is run automatically when script is loaded")
-    counter.increment()
+    console.log("Counter service started");
+    console.log("Initial count:", counter.count);
 }
 ```
 
-Now we can run the simulation server using the following command. This scenario does not include a main function to run on startup. It simulates the operations on interface and provides initial state for properties. For steps simulation see [scenario documentation](/docs/simulation/intro).
+Run it:
 
 ```bash
 apigear sim run counter.js
 ```
 
- It will load the simulation scenario from the `counter.js` file. The simulation server will listen for API calls. The simulation server by default is "127.0.0.1:4333". To change the address use the `--addr` option. <br />
- The example simulates a server side and normally the API calls will come from a running API client. 
+The server listens on `ws://localhost:4333/ws` by default.
 
- ### Service API
+## Scripted Clients (Stimulation)
 
- The service API is a proxy API, which means it is shaped after the data you place inside. 
+Drive your running service with scripted API calls.
 
- For example when you define a property using `demo.$.setProperty("count", 10)` the proxy will have a `count` property.
+### Basic Usage
 
- ```
- demo = $createService("demo", { city: "Paris"})
- // access the bare API to set another property
- demo.$.setProperty("count", 10)
- demo.count = 11
- demo.count++
- console.log(demo.count)
- ```
-
- ### Bare Service API
-
-
-
- ```ts
- const demo = $createBareService(name, props)
- demo.setProperty(key, value)
- demo.getProperty(key)
- demo.onProperty(key, callback)
-
- demo.setMethod(name, callback)
- demo.getMethod(name): calback
- demo.callMethod(name, args)
-
- demo.emitSignal(name, args)
- demo.onSignal(name, callback)
- ```
-
-The bare API is accesssible using the `$` scope in a regular service.
-
-```ts
-const demo = $createService(name, props)
-// accessing the bare API
-demo.$.setProperty(key, value)
+```bash
+apigear stim run client.js
 ```
 
+### Options
 
-### Ball Exampple
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--fn` | Function to run on startup | `main` |
+| `--watch` | Watch script for changes | `false` |
 
-Base on this API
+### Example Script
 
-```ts
-module demo
+```javascript
+// client.js
+const channel = $createChannel("ws://localhost:4333/ws");
+const counter = channel.createClient("demo.Counter");
 
-struct Vec2D {
-    x: float,
-    y: float
-}
-
-interface Ball {
-    pos: Vec2D
-    vel: Vec2D
-    acc: Vec2D
-    move()
-}
-```
-
-
-We can create a simulation for this
-
-```ts
-const ball = $createService("demo.Ball", {
-    pos: { x: 0, y: 0 },
-    vel: { x: 1, y: 1 },
-    acc: { x: 1, y: 1 },
-});
-
-
-ball.move = function() {
-    var acc = ball.acc;
-    var vel = ball.vel;
-    var pos = ball.pos;
-    var newPos = { x: pos.x + vel.x, y: pos.y + vel.y };
-    var newVel = { x: vel.x + acc.x, y: vel.y + acc.y };
-    ball.pos += newPos;
-    ball.vel = newVel;
-};
-
-    
-ball.$.onProperty("pos", function (value) {
-    console.log("pos changed", JSON.stringify(value));
-});
-
-ball.$.onProperty("vel", function (value) {
-    console.log("vel changed", JSON.stringify(value));
-});
-
-ball.$.onProperty("acc", function (value) {
-    console.log("acc changed", JSON.stringify(value));
+// Monitor property changes
+counter.onProperty("count", function(value) {
+    console.log("count is now:", value);
 });
 
 function main() {
-    console.log("start");
-    for (let i = 0; i < 10; i++) {
-        ball.move()
+    console.log("Client started");
+
+    // Call remote methods
+    for (let i = 0; i < 5; i++) {
+        counter.callMethod("increment");
     }
-    console.log("finish", JSON.stringify(ball.$.getProperties()));
+
+    console.log("Done");
+}
+```
+
+Run it:
+
+```bash
+apigear stim run client.js
+```
+
+## Service API
+
+Create simulated services with the `$createService` function.
+
+### Creating a Service
+
+```javascript
+const service = $createService("module.Interface", {
+    // Initial property values
+    propertyName: initialValue
+});
+```
+
+### Properties
+
+```javascript
+// Set property
+service.count = 10;
+
+// Get property
+console.log(service.count);
+
+// Using bare API
+service.$.setProperty("count", 10);
+service.$.getProperty("count");
+
+// React to changes
+service.$.onProperty("count", function(value) {
+    console.log("count changed:", value);
+});
+```
+
+### Methods
+
+```javascript
+// Define method implementation
+service.increment = function() {
+    service.count++;
+    return service.count;
+};
+
+// Using bare API
+service.$.setMethod("increment", function() {
+    return service.count++;
+});
+```
+
+### Signals
+
+```javascript
+// Emit signal
+service.$.emitSignal("countChanged", [service.count]);
+
+// Listen for signals
+service.$.onSignal("countChanged", function(args) {
+    console.log("Signal received:", args);
+});
+```
+
+## Client API
+
+Connect to remote services with the `$createChannel` function.
+
+### Creating a Channel
+
+```javascript
+// Default address
+const channel = $createChannel();
+
+// Custom address
+const channel = $createChannel("ws://localhost:5555/ws");
+```
+
+### Creating a Client
+
+```javascript
+const client = channel.createClient("module.Interface");
+```
+
+### Calling Methods
+
+```javascript
+client.callMethod("methodName");
+client.callMethod("methodName", arg1, arg2);
+```
+
+### Monitoring Properties
+
+```javascript
+client.onProperty("propertyName", function(value) {
+    console.log("Property changed:", value);
+});
+```
+
+### Listening for Signals
+
+```javascript
+client.onSignal("signalName", function(args) {
+    console.log("Signal received:", args);
+});
+```
+
+## Global Functions
+
+Available in all scripts:
+
+| Function | Description |
+|----------|-------------|
+| `$createService(name, props)` | Create a simulated service |
+| `$createBareService(name, props)` | Create service with bare API only |
+| `$createChannel(url?)` | Create client channel |
+| `$quit()` | Exit the script |
+| `console.log(...)` | Print to console |
+| `setTimeout(fn, ms)` | Delayed execution |
+| `setInterval(fn, ms)` | Repeated execution |
+
+## Feeding Data
+
+Feed pre-recorded data to simulation:
+
+```bash
+apigear sim feed events.ndjson
+```
+
+### Feed Options
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--addr` | Server address | `ws://127.0.0.1:4333/ws` |
+| `--repeat` | Times to repeat | `1` |
+| `--sleep` | Delay between messages | `100ms` |
+| `--batch` | Messages per batch | `1` |
+
+### NDJSON Format
+
+```json
+{"type":"property","interface":"demo.Counter","property":"count","value":0}
+{"type":"method","interface":"demo.Counter","method":"increment"}
+{"type":"signal","interface":"demo.Counter","signal":"countChanged","args":[1]}
+```
+
+## Complex Example
+
+A physics simulation with position, velocity, and acceleration:
+
+```javascript
+// ball.js
+const ball = $createService("demo.Ball", {
+    pos: { x: 0, y: 0 },
+    vel: { x: 1, y: 1 },
+    acc: { x: 0.1, y: 0.1 }
+});
+
+ball.move = function() {
+    // Update velocity
+    ball.vel = {
+        x: ball.vel.x + ball.acc.x,
+        y: ball.vel.y + ball.acc.y
+    };
+
+    // Update position
+    ball.pos = {
+        x: ball.pos.x + ball.vel.x,
+        y: ball.pos.y + ball.vel.y
+    };
+
+    return ball.pos;
+};
+
+ball.reset = function() {
+    ball.pos = { x: 0, y: 0 };
+    ball.vel = { x: 1, y: 1 };
+};
+
+ball.$.onProperty("pos", function(value) {
+    console.log("Position:", JSON.stringify(value));
+});
+
+function main() {
+    console.log("Ball simulation started");
+
+    // Run 10 steps
+    for (let i = 0; i < 10; i++) {
+        ball.move();
+    }
+
+    console.log("Final state:", JSON.stringify(ball.$.getProperties()));
     $quit();
 }
 ```
 
-## API Stimulation
+## Use Cases
 
-API Stimulation requires a connection to an external service using the ObjectLink protocol. For this we fist neeed to create a channel to stream the data and then on the stream create the client to interacte with the remote service.
+### Client Development
 
-```ts
-const url = "ws://localhost:5555/ws"
-// tries to connect to remote server
-const channel = $createChannel(url)
-// links to the demo.Ball service
-const ball = channel.createClient("demo.Ball")
-// calls the remote method "move"
-ball.callMethod("move")
+Test UI code against a simulated backend:
+
+```bash
+# Start simulation
+apigear sim run backend.js
+
+# Run your client application
+./my-client-app
+```
+
+### Load Testing
+
+Drive your service with repeated calls:
+
+```bash
+apigear stim run load-test.js
+```
+
+```javascript
+// load-test.js
+const channel = $createChannel();
+const service = channel.createClient("demo.Service");
 
 function main() {
-    for (let i = 0; i < 10; i++) {
-        ball.callMethod("move")
+    for (let i = 0; i < 1000; i++) {
+        service.callMethod("process", { id: i });
     }
 }
 ```
 
+### Integration Testing
 
+Verify service behavior:
 
+```bash
+apigear sim run mock-service.js &
+apigear stim run test-client.js
+```
 
- 
+## Related Documentation
+
+- [Scripted Backends](/docs/scripting/backends/intro) — Detailed backend scripting
+- [Scripted Clients](/docs/scripting/clients/intro) — Detailed client scripting
+- [ObjectLink Protocol](/docs/protocols/objectlink/intro) — Communication protocol
