@@ -1,5 +1,5 @@
 diff --git a/README.md b/README.md
-index 8e577391..eff97f97 100644
+index 8e577391..ecfef1de 100644
 --- a/README.md
 +++ b/README.md
 @@ -22,7 +22,7 @@ We aim for full feature parity between usage from within Blueprints or UE C++.
@@ -7,7 +7,7 @@ index 8e577391..eff97f97 100644
  > In modern architectures these two sides are often distributed in a network. Therefore the plugin can also connect to remote services as a *network client*.
  >
 -> Furthermore, the plugin can also be connected as *simulation client* to *ApiGear*s simulation tools. [More information](https://docs.apigear.io/docs/advanced/simulation/intro)
-+> Furthermore, the plugin can also be connected as *simulation client* to *ApiGear*s simulation tools. [More information](https://docs.apigear.io/docs/simulation/intro)
++> Furthermore, the plugin can also be connected as *simulation client* to *ApiGear*s simulation tools. [More information](https://docs.apigear.io/docs/scripting/backends/intro)
  ### Compatibility
  
  The generated plugin code is regularly tested in these configurations:

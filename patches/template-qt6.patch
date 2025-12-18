@@ -1,5 +1,5 @@
 diff --git a/docs/docs/features/features.md b/docs/docs/features/features.md
-index 0b00529..d0c0958 100644
+index 0b00529..d167d6a 100644
 --- a/docs/docs/features/features.md
 +++ b/docs/docs/features/features.md
 @@ -12,7 +12,7 @@ This template generates code for [*Qt*](https://www.qt.io/) projects. In order t
@@ -7,7 +7,7 @@ index 0b00529..d0c0958 100644
  
  ### Code generation
 -Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/tools/cli/generate) or the [Studio](/docs/tools/studio/intro) tools.
-+Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
++Follow the documentation for the [code generation](/docs/guide/quick-start) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
  Or try first the [quick start guide](../quickstart/index.md) which shows how to prepare api and generate code out of it.
  
  :::tip
@@ -38,7 +38,7 @@ index a9c1e73..4208e88 100644
  ## File overview for module
   
 diff --git a/docs/docs/features/olink.md b/docs/docs/features/olink.md
-index a320207..3caebfd 100644
+index a320207..da0ddae 100644
 --- a/docs/docs/features/olink.md
 +++ b/docs/docs/features/olink.md
 @@ -14,7 +14,7 @@ import Figure from '../figure'
@@ -76,28 +76,37 @@ index a320207..3caebfd 100644
 + The simulation server is integrated into the [ApiGear studio](/docs/studio/intro) and the [CLI](/docs/cli/simulate).
   
 - For simulating you will use [simulation scenarios](/docs/advanced/simulation/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
-+ For simulating you will use [simulation scenarios](/docs/simulation/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
++ For simulating you will use [simulation scenarios](/docs/scripting/backends/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
  
 -See more on [simulation](/docs/advanced/simulation/intro).
-+See more on [simulation](/docs/simulation/intro).
++See more on [simulation](/docs/scripting/backends/intro).
  
  ### Prepare your application
  Make sure you are using OlinkClient as your `Hello` object, either:
 diff --git a/docs/docs/quickstart/index.md b/docs/docs/quickstart/index.md
-index 9ad6b30..da8503b 100644
+index 9ad6b30..d8c0061 100644
 --- a/docs/docs/quickstart/index.md
 +++ b/docs/docs/quickstart/index.md
+@@ -7,7 +7,7 @@ import QuickStartCommon from "@site/docs/_quickstart_common.md"
+ 
+ The Quick-Start guide explains how to, in few steps, get from an API to a functional *Qt* plugin.
+ Steps 1 and 3 are universal for other technologies. In the step 2 you will choose a concrete *Qt* template.
+-For more general information about first steps with ApiGear [First Steps](/docs/guide/intro)
++For more general information about first steps with ApiGear [First Steps](/docs/guide/quick-start)
+ 
+ The quick start enables only basic features: the [api](features/api.md) generation and simple [stub](features/stubs.md) implementation.
+ For all available features check the [overview](features/features.md).
 @@ -53,7 +53,7 @@ For the pure virtual interface see the [pure C++ template](/template-cpp14/docs/
  :::
  
  :::note
 -For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/advanced/simulation/intro) explained.
-+For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/simulation/intro) explained.
++For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/scripting/backends/intro) explained.
  :::
  
  ### Create and run an example
 diff --git a/goldenmaster/README.md b/goldenmaster/README.md
-index 4879ae8..96d9488 100644
+index 4879ae8..1603c1c 100644
 --- a/goldenmaster/README.md
 +++ b/goldenmaster/README.md
 @@ -38,4 +38,4 @@ See https://apigear-io.github.io/template-qtcpp/ for more information
@@ -105,9 +114,9 @@ index 4879ae8..96d9488 100644
  Use the olink feature to prepare an olink client adapters and use it with your implementation of backend. (See olink client examples, set up proper server address).
  Use a simulation server to make single changes of an api manually or load simulation scenarios to feed your application automatically with desired behavior.
 -See https://docs.apigear.io/docs/advanced/simulation/intro
-+See https://docs.apigear.io/docs/simulation/intro
++See https://docs.apigear.io/docs/scripting/backends/intro
 diff --git a/templates/README.md b/templates/README.md
-index 4879ae8..96d9488 100644
+index 4879ae8..1603c1c 100644
 --- a/templates/README.md
 +++ b/templates/README.md
 @@ -38,4 +38,4 @@ See https://apigear-io.github.io/template-qtcpp/ for more information
@@ -115,4 +124,4 @@ index 4879ae8..96d9488 100644
  Use the olink feature to prepare an olink client adapters and use it with your implementation of backend. (See olink client examples, set up proper server address).
  Use a simulation server to make single changes of an api manually or load simulation scenarios to feed your application automatically with desired behavior.
 -See https://docs.apigear.io/docs/advanced/simulation/intro
-+See https://docs.apigear.io/docs/simulation/intro
++See https://docs.apigear.io/docs/scripting/backends/intro
