@@ -1,5 +1,5 @@
 diff --git a/docs/docs/features/features.md b/docs/docs/features/features.md
-index e2baad9..c9dfbe2 100644
+index e2baad9..9785bcc 100644
 --- a/docs/docs/features/features.md
 +++ b/docs/docs/features/features.md
 @@ -11,7 +11,7 @@ This template generates code for [*Python*](https://www.python.org/) projects. I
@@ -7,7 +7,7 @@ index e2baad9..c9dfbe2 100644
  
  ### Code generation
 -Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/tools/cli/generate) or the [Studio](/docs/tools/studio/intro) tools.
-+Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
++Follow the documentation for the [code generation](/docs/guide/quick-start) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
  Or try first the [quick start guide](../quickstart/index.md) which shows how to prepare api and generate code out of it.
  
  :::tip
@@ -21,15 +21,24 @@ index e2baad9..c9dfbe2 100644
      - `examples/mqtt/server.py` that shows usage of your services in mqtt server adapter.
      - `examples/mqtt/client.py` that shows usage of your interfaces in mqtt client adapter.
 diff --git a/docs/docs/quickstart/index.md b/docs/docs/quickstart/index.md
-index b59a32c..21fa2cf 100644
+index b59a32c..d3bd80e 100644
 --- a/docs/docs/quickstart/index.md
 +++ b/docs/docs/quickstart/index.md
+@@ -7,7 +7,7 @@ import QuickStartCommon from "@site/docs/_quickstart_common.md"
+ 
+ The Quick-Start guide explains how to, in few steps, get from an API to a functional *Python* plugin.
+ Steps 1 and 3 are universal for other technologies. In the step 2 you will choose a concrete *Python* template.
+-For more general information about first steps with ApiGear [First Steps](/docs/guide/intro)
++For more general information about first steps with ApiGear [First Steps](/docs/guide/quick-start)
+ 
+ The quick start enables only basic features: the api(TBD) generation and simple stub(TBD) implementation.
+ For all available features check the [overview](features/features.md).
 @@ -55,7 +55,7 @@ Check the extended features to see how to use your API over the network.
  :::
  
  :::note
 -For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/advanced/simulation/intro) explained.
-+For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/simulation/intro) explained.
++For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/scripting/backends/intro) explained.
  :::
  
  ### Create and run an example

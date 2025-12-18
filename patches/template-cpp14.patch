@@ -1,5 +1,5 @@
 diff --git a/docs/docs/features/features.md b/docs/docs/features/features.md
-index c661b4d..6fe820d 100644
+index c661b4d..9596cc2 100644
 --- a/docs/docs/features/features.md
 +++ b/docs/docs/features/features.md
 @@ -20,7 +20,7 @@ Basic c++ knowledge is necessary.
@@ -7,7 +7,7 @@ index c661b4d..6fe820d 100644
  ### Code generation
  
 -Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/tools/cli/generate) or the [Studio](/docs/tools/studio/intro) tools.
-+Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
++Follow the documentation for the [code generation](/docs/guide/quick-start) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
  Or try first the [quick start guide](../quickstart/index.md) which shows how to prepare api and generate code out of it.
  
  :::tip
@@ -41,7 +41,7 @@ index 3693edb..1fc4967 100644
  ## File overview for module
  
 diff --git a/docs/docs/features/olink.md b/docs/docs/features/olink.md
-index cf537e4..7f3412e 100644
+index cf537e4..a563a90 100644
 --- a/docs/docs/features/olink.md
 +++ b/docs/docs/features/olink.md
 @@ -13,7 +13,7 @@ import Figure from '../figure'
@@ -79,23 +79,45 @@ index cf537e4..7f3412e 100644
 +The simulation server is integrated into the [ApiGear studio](/docs/studio/intro) and the [CLI](/docs/cli/simulate).
  
 -For simulating you will use [simulation scenarios](/docs/advanced/simulation/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
-+For simulating you will use [simulation scenarios](/docs/simulation/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
++For simulating you will use [simulation scenarios](/docs/scripting/backends/scenario) They allow to define sequences of actions. The actions can change the property values of the service or emit signals. The scenarios can be written using a YAML schema.
  
 -See more on [simulation](/docs/advanced/simulation/intro).
-+See more on [simulation](/docs/simulation/intro).
++See more on [simulation](/docs/scripting/backends/intro).
  
  ### Prepare your application
  
+diff --git a/docs/docs/intro.md b/docs/docs/intro.md
+index 8aea34f..8cb680f 100644
+--- a/docs/docs/intro.md
++++ b/docs/docs/intro.md
+@@ -4,7 +4,7 @@ sidebar_position: 1
+ 
+ # Template C++ 14 (Maintenance)
+ 
+-This is the documentation for the _cpp14_ template for the [ApiGear](/docs/guide/intro) code generator.
++This is the documentation for the _cpp14_ template for the [ApiGear](/docs/guide/quick-start) code generator.
+ This template is in maintenance mode. The development moved to template for _cpp17_ template and it is recommended to use it for new project.
+ 
+ It is split in several parts:
 diff --git a/docs/docs/quickstart/index.md b/docs/docs/quickstart/index.md
-index 51fff46..8f5a08f 100644
+index 51fff46..cef73fb 100644
 --- a/docs/docs/quickstart/index.md
 +++ b/docs/docs/quickstart/index.md
+@@ -8,7 +8,7 @@ import QuickStartCommon from "@site/docs/_quickstart_common.md"
+ The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
+ 
+ Steps one and two are universal for other technologies. In the step two you will choose a concrete _cpp14_ template.
+-For more general information about first steps with ApiGear [First Steps](/docs/guide/intro)
++For more general information about first steps with ApiGear [First Steps](/docs/guide/quick-start)
+ 
+ The quick start enables only basic features: the [api](features/api.md) generation and simple [stub](features/stubs.md) implementation.
+ For all available features check the [overview](features/features.md).
 @@ -56,7 +56,7 @@ Check our "examples" with all features enabled to get more working examples.
  :::
  
  :::note
 -For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/advanced/simulation/intro) explained.
-+For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/simulation/intro) explained.
++For the simulation check [the olink feature](features/olink.md) which provides middle layer on your code side and the [simulation](/docs/scripting/backends/intro) explained.
  :::
  
  ### Create and run an example
