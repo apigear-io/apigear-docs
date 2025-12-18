@@ -6,7 +6,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Define Once, Generate Everywhere',
-  tagline: 'Turn API definitions into production-ready C++, Qt, Unreal, and Python SDKs — with built-in simulation and monitoring.',
+  tagline: 'Turn API definitions into production-ready C++, Qt, Unreal, and Python SDKs — with scripted backends and monitoring.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -64,7 +64,7 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/apigear-io/apigear-docs/edit/main/',
-          showLastUpdateTime: true,
+          showLastUpdateTime: false,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -91,7 +91,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-unreal/edit/main/docs/docs/${docPath}`,
-        showLastUpdateTime: true,
+        showLastUpdateTime: false,
       },
     ],
     [
@@ -103,7 +103,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-cpp17/edit/main/docs/docs/${docPath}`,
-        showLastUpdateTime: true,
+        showLastUpdateTime: false,
       },
      ],
     [
@@ -115,7 +115,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({ docPath }) =>
             `https://github.com/apigear-io/template-cpp14/edit/main/docs/docs/${docPath}`,
-        showLastUpdateTime: true,
+        showLastUpdateTime: false,
       },
      ],
     [
@@ -127,7 +127,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-qtcpp/edit/main/docs/docs/${docPath}`,
-        showLastUpdateTime: true,
+        showLastUpdateTime: false,
       },
     ],
     [
@@ -139,7 +139,7 @@ const config = {
         sidebarPath: undefined,
         editUrl: ({docPath}) =>
           `https://github.com/apigear-io/template-python/edit/main/docs/docs/${docPath}`,
-        showLastUpdateTime: true,
+        showLastUpdateTime: false,
       },
     ],
     [

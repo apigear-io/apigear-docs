@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <Layout
       title={`API Code Generator for C++, Qt, Unreal & Python`}
-      description="Generate production-ready SDKs from API definitions. One YAML spec, multiple native implementations with simulation and monitoring.">
+      description="Generate production-ready SDKs from API definitions. One YAML spec, multiple native implementations with scripted backends and monitoring.">
       <HeroSection />
       <main>
         <section className={styles.section}>

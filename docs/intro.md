@@ -39,12 +39,35 @@ interface Thermostat {
 
 ## Why ApiGear?
 
-- **Stateful by design** — Properties with change notifications, not just request/response
-- **One source of truth** — Define your API once, generate for multiple platforms
-- **Developer-friendly** — IDL syntax that looks like code, not configuration
-- **Production-ready output** — Generated code includes stubs, tests, and build files
-- **Built-in simulation** — Test against simulated backends before they exist
-- **API monitoring** — Debug with real-time visibility into every call
+### Designed for Real Systems
+
+- **Stateful by design** — Properties with change notifications, not just request/response. This is how real systems work in automotive, gaming, and IoT.
+- **Protocol agnostic** — Your API definition is independent of transport. Generate code that works over WebSockets, IPC, or custom protocols without changing your interface.
+- **Built for complex domains** — Trusted in automotive HMI, game engines, industrial IoT, and embedded systems where reliability and performance matter.
+
+### Accelerate Development
+
+- **Parallel development** — Frontend and backend teams work simultaneously. UI developers use simulated backends while services are still being built.
+- **Eliminate integration bugs** — No more mismatched types, missing fields, or API drift. The generated code guarantees both sides speak the same language.
+- **Reduce boilerplate by 80%** — Stop writing repetitive serialization, networking, and observer code. Focus on business logic instead.
+
+### One Source of Truth
+
+- **Define once, generate everywhere** — A single API definition produces native SDKs for C++, Qt, Unreal Engine, Python, and more.
+- **Consistent patterns** — Every generated SDK follows the same architecture. Learn one, understand all.
+- **Version your APIs** — Track API evolution in git. Review changes in pull requests. Roll back when needed.
+
+### Production-Ready Output
+
+- **Complete, buildable code** — Not just interfaces, but stubs, tests, build files, and examples. Run your first test minutes after generation.
+- **Built-in simulation** — Test against scripted backends before real services exist. Validate edge cases, error handling, and timing scenarios.
+- **Real-time monitoring** — Debug with visibility into every property change, method call, and signal across your system.
+
+### Extensible & Open
+
+- **Open source** — Backed by Epic Games. Inspect the code, contribute improvements, or fork for your needs.
+- **Write your own templates** — Need a custom target platform? The template system is fully extensible with Jinja2.
+- **Active community** — Get help on Slack, discuss on GitHub, or contribute to the ecosystem.
 
 ## How does it work?
 

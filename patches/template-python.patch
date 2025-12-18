@@ -1,0 +1,35 @@
+diff --git a/docs/docs/features/features.md b/docs/docs/features/features.md
+index e2baad9..c9dfbe2 100644
+--- a/docs/docs/features/features.md
++++ b/docs/docs/features/features.md
+@@ -11,7 +11,7 @@ This template generates code for [*Python*](https://www.python.org/) projects. I
+ Basic understanding of *Python* is required.
+ 
+ ### Code generation
+-Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/tools/cli/generate) or the [Studio](/docs/tools/studio/intro) tools.
++Follow the documentation for the [code generation](/docs/guide/intro) in general and [CLI](/docs/cli/generate) or the [Studio](/docs/studio/intro) tools.
+ Or try first the [quick start guide](../quickstart/index.md) which shows how to prepare api and generate code out of it.
+ 
+ :::tip
+@@ -36,7 +36,7 @@ Features generate a view model for the `api`. This can be used to implement a wo
+ 
+ ### Extended
+ Features can be used in combination with `api` and add more functionality on top, like the simulation
+-- [olink] TBD - provides a client and server adapters for each interface, that can be connected to any of the other technology templates with support for [ObjectLink](/docs/advanced/protocols/objectlink/intro). Use this feature to connect with ApiGear simulation tools.
++- [olink] TBD - provides a client and server adapters for each interface, that can be connected to any of the other technology templates with support for [ObjectLink](/docs/protocols/objectlink/intro). Use this feature to connect with ApiGear simulation tools.
+ - [MQTT] TBD - provides minimal working adapters for MQTT client and service side for each interfaces. Check also MQTT in other technology templates that supports it. Also examples are provided:
+     - `examples/mqtt/server.py` that shows usage of your services in mqtt server adapter.
+     - `examples/mqtt/client.py` that shows usage of your interfaces in mqtt client adapter.
+diff --git a/docs/docs/quickstart/index.md b/docs/docs/quickstart/index.md
+index b59a32c..21fa2cf 100644
+--- a/docs/docs/quickstart/index.md
++++ b/docs/docs/quickstart/index.md
+@@ -55,7 +55,7 @@ Check the extended features to see how to use your API over the network.
+ :::
+ 
+ :::note
+-For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/advanced/simulation/intro) explained.
++For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/simulation/intro) explained.
+ :::
+ 
+ ### Create and run an example
