@@ -2,7 +2,7 @@
 
 ## How to get help
 
-Asks question in the GitHub discussion forum or issue tracker.
+Ask questions in the GitHub discussion forum or issue tracker.
 
 * [Slack Discussions](https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw)
 * [GitHub Discussions](https://github.com/orgs/apigear-io/discussions)

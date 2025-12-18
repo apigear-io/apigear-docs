@@ -3,25 +3,48 @@ sidebar_position: 1
 slug: /
 ---
 
-# ApiGear Core
+# ApiGear
 
-ApiGear introduces a novel and efficient digital workflow for software integration. This innovative approach to software development centers on an API-driven methodology, enabling teams to develop software-driven products seamlessly. By providing an integrated workflow with enhanced monitoring and simulation capabilities, ApiGear significantly reduces friction in the development process.
+ApiGear generates native SDKs from **stateful API definitions**. Define your interfaces once using ObjectAPI, then generate production-ready code for C++, Qt, Unreal Engine, or Python.
 
-## What is ApiGear?
+## Stateful APIs for Real-World Systems
 
-ApiGear is a comprehensive suite of tools and services that empowers development teams to create detailed descriptions of their software interfaces and generate ready-to-use integration SDKs. These SDKs come pre-configured with advanced features, including monitoring, logging, tracing, and simulation of interface calls, streamlining the development process.
+Unlike REST or RPC specifications that model stateless requests, ObjectAPI models interfaces as **objects with observable state** — properties that change over time, methods to call, and signals (events) pushed from server to client.
 
-## What is an API?
+This matches how systems actually work in automotive, gaming, IoT, and embedded domains where state matters.
 
-An API (Application Programming Interface) is a set of definitions that describe how software components communicate with each other. It serves as a contract between these components, specifying the data structures and behaviors they should exhibit. In essence, an API provides a clear description of software interfaces, facilitating seamless integration and interaction between different parts of a system.
+```go
+interface Thermostat {
+    temperature: float       // property: observable state
+    setTarget(float temp)    // operation: method call
+    signal overheated()      // signal: server-pushed event
+}
+```
 
-## What is an API Module?
+## In 3 Steps
 
-An API module is a structured description of an API. It is a document that encapsulates the API's specifications, detailing the software interfaces. A collection of these modules defines a complete software system, with each module serving as a fundamental building block. API modules can be transformed into SDKs using ApiGear Studio and the ApiGear CLI, streamlining the development process.
+1. **Define your API** using the ObjectAPI IDL or YAML format
+2. **Run the generator** with your chosen template (C++14, C++17, Qt6, Unreal, Python)
+3. **Get complete, buildable code** — interfaces, stubs, tests, and build files
 
-## What is an API SDK?
+## Key Concepts
 
-An API SDK (Software Development Kit) is a set of software components that directly reflect the content of an API module. It allows developers to focus on API usage rather than implementation details. The SDK serves as a ready-to-use integration component, facilitating the seamless incorporation of the software system with other systems or applications.
+| Term | What it means |
+|------|---------------|
+| **ObjectAPI** | A specification for stateful, object-oriented APIs with properties, operations, and signals |
+| **IDL Format** | A concise, developer-friendly syntax for writing APIs (auto-converts to YAML) |
+| **YAML Format** | The canonical format for API modules |
+| **Solution File** | A config file specifying which modules to generate and which template to use |
+| **Template** | A code generator for a specific platform (e.g., `template-cpp17`, `template-unreal`) |
+
+## Why ApiGear?
+
+- **Stateful by design** — Properties with change notifications, not just request/response
+- **One source of truth** — Define your API once, generate for multiple platforms
+- **Developer-friendly** — IDL syntax that looks like code, not configuration
+- **Production-ready output** — Generated code includes stubs, tests, and build files
+- **Built-in simulation** — Test against simulated backends before they exist
+- **API monitoring** — Debug with real-time visibility into every call
 
 ## How does it work?
 
@@ -38,7 +61,7 @@ Like all modern development tools, ApiGear fully supports an agile development a
 
 ### 1. Define API
 
-Following the _API-first approach_, you begin by defining your [ObjectAPI module](/docs/objectapi/modules). This can be accomplished using either the [ApiGear Studio](/docs/tools/studio/intro) or the [ApiGear CLI](/docs/tools/cli/intro). An API module is a concise document that adheres to the ObjectAPI specification.
+Following the _API-first approach_, you begin by defining your [ObjectAPI module](/docs/objectapi/modules). This can be accomplished using either the [ApiGear Studio](/docs/studio/intro) or the [ApiGear CLI](/docs/cli/intro). An API module is a concise document that adheres to the ObjectAPI specification.
 
 ### 2. Generate SDK
 

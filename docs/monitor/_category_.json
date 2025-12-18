@@ -1,9 +1,9 @@
 {
-  "label": "API Monitoring (experimental)",
-  "position": 3,
+  "label": "API Monitoring",
+  "position": 10,
   "link": {
     "type": "doc",
-    "id": "advanced/monitor/intro"
+    "id": "monitor/intro"
   },
   "customProps": {
     "description": "API monitoring"

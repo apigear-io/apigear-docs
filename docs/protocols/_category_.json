@@ -1,8 +1,8 @@
 {
   "label": "Protocols",
-  "position": 4,
+  "position": 12,
   "link": {
     "type": "doc",
-    "id": "advanced/protocols/mapping"
+    "id": "protocols/mapping"
   }
 }

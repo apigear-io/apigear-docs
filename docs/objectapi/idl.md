@@ -4,11 +4,18 @@ sidebar_position: 6
 
 # ObjectAPI IDL
 
-The ObjectAPI IDL can be used in parallel to the ObjectAPI JSON Schema. In fact the IDL is transformed to the JSON schema and then processed by the same tools.
+The ObjectAPI IDL is a **developer-friendly syntax** for defining APIs. It looks like a programming language, making it intuitive to read and write.
 
-Vice versa the JSON schema can be transformed to the IDL.
+## IDL vs YAML
 
-The IDL does more look like an actual developer language. It is more verbose and more powerful. It allows to define more complex types and to define more complex APIs.
+| Aspect | IDL Format | YAML Format |
+|--------|-----------|-------------|
+| **Syntax** | Code-like, concise | Structured, explicit |
+| **Best for** | Authoring by hand | Programmatic generation |
+| **File extension** | `.idl` | `.module.yaml` |
+| **Tooling** | Auto-converts to YAML | Canonical format |
+
+Both formats are **fully equivalent** — the IDL is automatically transformed to YAML internally. Use whichever you prefer.
 
 ```go
 module demo 1.0

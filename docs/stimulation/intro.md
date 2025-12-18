@@ -1,10 +1,4 @@
-# API Stimulation
-
-:::warning Experimental
-
-The **stimulation** is experimental and may not work yet fully
-
-:::
+# Scripted Clients
 
 ## Why?
 

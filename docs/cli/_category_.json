@@ -1,8 +1,8 @@
 {
   "label": "Command Line (CLI)",
-  "position": 1,
+  "position": 4,
   "link": {
     "type": "doc",
-    "id": "intro"
+    "id": "cli/intro"
   }
 }

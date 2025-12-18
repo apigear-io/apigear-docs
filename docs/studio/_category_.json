@@ -1,8 +1,8 @@
 {
   "label": "Desktop Studio",
-  "position": 2,
+  "position": 5,
   "link": {
     "type": "doc",
-    "id": "intro"
+    "id": "studio/intro"
   }
 }

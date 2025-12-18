@@ -12,8 +12,8 @@ API Simulation is when a script simulates the behavior of an ApiGear API. API St
 
 ## API Simulation
 
-API Simulation is a feature that allows you to simulate the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users. The simulation is based on [olink protocol](/docs/advanced/protocols/objectlink/intro), you need your application to use Object Link version of implementation to be able to receive the simulation data. Check your templates for `olink` feature for more information.
-See [simulation documentation](/docs/advanced/simulation/intro) for more info.
+API Simulation is a feature that allows you to simulate the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users. The simulation is based on [olink protocol](/docs/protocols/objectlink/intro), you need your application to use Object Link version of implementation to be able to receive the simulation data. Check your templates for `olink` feature for more information.
+See [simulation documentation](/docs/simulation/intro) for more info.
 
 :::note Beta
 
@@ -53,7 +53,7 @@ function main() {
 }
 ```
 
-Now we can run the simulation server using the following command. This scenario does not include a main function to run on startup. It simulates the operations on interface and provides initial state for properties. For steps simulation see [scenario documentation](/docs/advanced/simulation/intro).
+Now we can run the simulation server using the following command. This scenario does not include a main function to run on startup. It simulates the operations on interface and provides initial state for properties. For steps simulation see [scenario documentation](/docs/simulation/intro).
 
 ```bash
 apigear sim run counter.js
