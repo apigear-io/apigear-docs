@@ -4,12 +4,223 @@ sidebar_position: 2
 
 # Code Generation
 
-The `apigear` command line tool can be used to generate code from an API definition with a `generate` command.
-The API should be description in a module file(s). The generation is based on SDK templates which are available in a central registry or a local template provided with relative path. You can have the solution file in which you choose modules, technologies (templates) and features for them or you can use quick generation option, without the solution file providing all those information as arguments to a `generate` command.
-You can define your modules in yaml or idl. See more details for [defining an API](/docs/objectapi/modules).
+The `generate` command creates SDKs from ObjectAPI definitions using templates. It supports solution-based generation for project workflows and expert mode for fine-grained control.
 
+## Commands
 
-The following examples shows how to generate code for a demo API definition.
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `generate solution` | `gen sol`, `g s` | Generate from a solution file |
+| `generate expert` | `gen x` | Generate with explicit options |
+
+## Solution-Based Generation
+
+The recommended approach uses a solution file that defines inputs, outputs, templates, and features.
+
+### Basic Usage
+
+```bash
+apigear generate solution apigear/demo.solution.yaml
+```
+
+### Solution File Format
+
+```yaml
+schema: "apigear.solution/1.0"
+name: my_project
+version: "1.0.0"
+
+targets:
+  - name: cpp_sdk
+    inputs:
+      - myapi.module.yaml
+    output: ../generated/cpp
+    template: apigear-io/template-cpp14@v3.6.0
+    force: true
+    features:
+      - api
+      - stubs
+      - olink
+```
+
+### Solution Options
+
+| Field | Description |
+|-------|-------------|
+| `name` | Target identifier |
+| `inputs` | List of module files (YAML or IDL) |
+| `output` | Output directory (relative to solution file) |
+| `template` | Template name with optional version |
+| `force` | Overwrite existing files (default: false) |
+| `features` | List of template features to enable |
+
+### Watch Mode
+
+Automatically regenerate when the solution file changes:
+
+```bash
+apigear generate solution demo.solution.yaml --watch
+```
+
+### Force Overwrite
+
+Override the solution's `force` setting:
+
+```bash
+apigear generate solution demo.solution.yaml --force
+```
+
+## Expert Mode
+
+For quick generation without a solution file, use expert mode with explicit options.
+
+### Basic Usage
+
+```bash
+apigear generate expert -i demo.module.yaml -o output -t apigear-io/template-cpp14
+```
+
+### Expert Options
+
+| Flag | Short | Description | Default |
+|------|-------|-------------|---------|
+| `--input` | `-i` | Input module files (required) | `["apigear"]` |
+| `--output` | `-o` | Output directory (required) | `"out"` |
+| `--template` | `-t` | Template to use (required) | `"tpl"` |
+| `--features` | `-f` | Features to enable | `["all"]` |
+| `--force` | — | Overwrite existing files | `false` |
+| `--watch` | — | Watch for changes | `false` |
+
+### Multiple Inputs
+
+```bash
+apigear generate expert \
+  -i api/user.module.yaml \
+  -i api/inventory.module.yaml \
+  -o generated \
+  -t apigear-io/template-cpp14
+```
+
+### Enabling Features
+
+```bash
+apigear generate expert \
+  -i demo.module.yaml \
+  -o output \
+  -t apigear-io/template-cpp14 \
+  -f api \
+  -f stubs \
+  -f olink
+```
+
+### Using Local Templates
+
+Point to a local template directory:
+
+```bash
+apigear generate expert \
+  -i demo.module.yaml \
+  -o output \
+  -t ./my-custom-template
+```
+
+## Template Versioning
+
+### Latest Version
+
+Without a version specifier, the latest version is used:
+
+```bash
+apigear generate expert -t apigear-io/template-cpp14 ...
+```
+
+### Specific Version
+
+Pin to a specific version using `@version`:
+
+```bash
+apigear generate expert -t apigear-io/template-cpp14@v3.6.0 ...
+```
+
+```yaml
+# In solution file
+template: apigear-io/template-cpp14@v3.6.0
+```
+
+:::tip
+Always specify versions in production to ensure reproducible builds.
+:::
+
+## Multiple Targets
+
+A solution can generate multiple SDKs from the same API:
+
+```yaml
+targets:
+  - name: cpp_sdk
+    inputs:
+      - myapi.module.yaml
+    output: ../generated/cpp
+    template: apigear-io/template-cpp14@v3.6.0
+    features:
+      - api
+      - stubs
+
+  - name: python_sdk
+    inputs:
+      - myapi.module.yaml
+    output: ../generated/python
+    template: apigear-io/template-python@v1.0.0
+    features:
+      - api
+      - stubs
+
+  - name: unreal_sdk
+    inputs:
+      - myapi.module.yaml
+    output: ../generated/unreal
+    template: apigear-io/template-unreal@v3.2.2
+    features:
+      - api
+      - stubs
+```
+
+## Common Features
+
+Most templates support these features:
+
+| Feature | Description |
+|---------|-------------|
+| `api` | Generate interface definitions |
+| `stubs` | Generate implementation stubs |
+| `scaffold` | Generate complete project structure |
+| `olink` | Enable ObjectLink protocol support |
+| `mqtt` | Enable MQTT protocol support |
+| `monitor` | Enable API monitoring |
+
+Check individual template documentation for available features.
+
+## Input Formats
+
+### YAML Format
+
+```yaml
+# demo.module.yaml
+schema: apigear.module/1.0
+name: demo
+version: "1.0.0"
+
+interfaces:
+  - name: Counter
+    properties:
+      - name: count
+        type: int
+    operations:
+      - name: increment
+      - name: decrement
+```
+
+### IDL Format
 
 ```go
 // demo.idl
@@ -22,44 +233,68 @@ interface Counter {
 }
 ```
 
-## Quick Code Generation
-For example to generate a C++ 14 SDK from the demo API definition just run the following command. You can check [available templates](template.md#list-available-templates) from command line tool.
+Both formats can be used interchangeably in inputs.
+
+## Output Structure
+
+Generated output follows the template's structure. A typical C++ output:
+
+```
+generated/
+├── CMakeLists.txt
+├── demo/
+│   ├── api/
+│   │   ├── counter.h
+│   │   └── counter.cpp
+│   ├── implementation/
+│   │   ├── counter.h
+│   │   └── counter.cpp
+│   └── olink/
+│       ├── counter_service.h
+│       └── counter_client.h
+└── README.md
+```
+
+## CI/CD Usage
 
 ```bash
-apigear generate expert -i demo.idl -o tmp -t apigear-io/template-cpp14 -f olink
+# Install specific template version
+apigear template install apigear-io/template-cpp14@v3.6.0
+
+# Generate with pinned versions
+apigear generate solution apigear/solution.yaml
+
+# Check exit code
+if [ $? -ne 0 ]; then
+  echo "Generation failed"
+  exit 1
+fi
 ```
 
-The `expert` mode is used to generate code from module files.<br />
-The `-i` option specifies the input module files separated with comma.<br />
-The `-o` option specifies the output directory.<br />
-The `-t` option specifies the template to use. The `apigear-io/template-cpp14` template is used to generate C++ 14 code.<br />
-The `-f` option can be used to provide features. Check each teamplate documentation to see available features. <br />
+## Troubleshooting
 
-If the template does not point to a local directory the template will be downloaded from the template registry and installed in a local cache directory (if not already installed).<br />
+### Template Not Found
 
-By default the latest version of the template is used. To use a specific version of the template add the version to the template name using the `@<version>` syntax.
-
-## Solution based Code Generation
-
-To streamline the code generation you can create a configuration file called solution. The following example shows how to create a configuration file for the C++ 14 SDK.
-
-```yaml
-# solution.yaml
-targets:
-  - name: cpp14
-    inputs:
-      - demo.idl
-    output: demo_project
-    template: apigear-io/template-cpp14
+```
+Error: template not found: apigear-io/template-cpp14
 ```
 
-The `targets` section defines a set of inputs, an output directory for each template.<br />
-The `inputs` section defines the module files with API descriptions. List here all the files necessary for the generation. <br />
-The `output` section defines the output directory for the layer.<br />
-The `template` defines the template used for code generation. You can provide the template version adding `@<version>` to a template.<br />
-
-To generate the code from the solution just run the following command.
-
+Install the template first:
 ```bash
-apigear generate solution solution.yaml
+apigear template install apigear-io/template-cpp14
 ```
+
+### Invalid Module
+
+```
+Error: invalid module: demo.module.yaml
+```
+
+Validate the module:
+```bash
+apigear spec check demo.module.yaml
+```
+
+### Output Directory Exists
+
+By default, existing files are not overwritten. Use `--force` or set `force: true` in the solution.

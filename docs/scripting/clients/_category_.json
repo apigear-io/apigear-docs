@@ -1,8 +1,8 @@
 {
   "label": "Scripted Clients",
-  "position": 11,
+  "position": 3,
   "link": {
     "type": "doc",
-    "id": "stimulation/intro"
+    "id": "scripting/clients/intro"
   }
 }

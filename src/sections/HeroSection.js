@@ -8,7 +8,7 @@ export default function HeroSection() {
     const item = {
         title: siteConfig.title,
         tagline: siteConfig.tagline,
-        link: '/docs/quick-start',
+        link: '/docs/guide/quick-start',
         message: 'Get Started',
     };
     return (

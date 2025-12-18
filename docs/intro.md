@@ -3,7 +3,7 @@ sidebar_position: 1
 slug: /
 ---
 
-# ApiGear
+# Introduction
 
 ApiGear generates native SDKs from **stateful API definitions**. Define your interfaces once using ObjectAPI, then generate production-ready code for C++, Qt, Unreal Engine, or Python.
 
@@ -71,7 +71,7 @@ interface Thermostat {
 
 ## How does it work?
 
-The following steps provide a high-level overview of the ApiGear workflow. For more detailed information, please refer to our [Quick Start](/docs/quick-start) section.
+The following steps provide a high-level overview of the ApiGear workflow. For more detailed information, please refer to our [Quick Start](/docs/guide/quick-start) section.
 
 ### Development Cycle Overview
 

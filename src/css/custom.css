@@ -10,14 +10,14 @@
    CSS Variables - Light Theme
    ============================================ */
 :root {
-  /* Primary Colors - Sophisticated Teal */
-  --ifm-color-primary: #00b894;
-  --ifm-color-primary-dark: #00a383;
-  --ifm-color-primary-darker: #009a7c;
-  --ifm-color-primary-darkest: #007f66;
-  --ifm-color-primary-light: #00cda5;
-  --ifm-color-primary-lighter: #00d6ac;
-  --ifm-color-primary-lightest: #1aebbd;
+  /* Primary Colors - ApiGear Red */
+  --ifm-color-primary: #dc2626;
+  --ifm-color-primary-dark: #c62222;
+  --ifm-color-primary-darker: #bb2020;
+  --ifm-color-primary-darkest: #9a1a1a;
+  --ifm-color-primary-light: #e54040;
+  --ifm-color-primary-lighter: #e84d4d;
+  --ifm-color-primary-lightest: #ef7373;
 
   /* Background & Surface */
   --ifm-background-color: #fafbfc;
@@ -35,7 +35,7 @@
   --custom-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --custom-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
   --custom-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  --custom-shadow-glow: 0 0 40px rgba(0, 184, 148, 0.15);
+  --custom-shadow-glow: 0 0 40px rgba(220, 38, 38, 0.15);
 
   /* Typography */
   --ifm-font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -51,11 +51,11 @@
   --ifm-global-radius: 0.5rem;
 
   /* Code Blocks */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 184, 148, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(220, 38, 38, 0.1);
   --prism-background-color: #1e1e2e;
 
   /* Custom Gradients */
-  --custom-gradient-primary: linear-gradient(135deg, #00b894 0%, #00d4aa 50%, #00e6c3 100%);
+  --custom-gradient-primary: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
   --custom-gradient-surface: linear-gradient(180deg, #fafbfc 0%, #f0f3f6 100%);
   --custom-gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 
@@ -63,21 +63,21 @@
   --custom-accent-purple: #805ad5;
   --custom-accent-blue: #3182ce;
   --custom-accent-orange: #dd6b20;
-  --custom-accent-pink: #d53f8c;
+  --custom-accent-teal: #00b894;
 }
 
 /* ============================================
    CSS Variables - Dark Theme
    ============================================ */
 [data-theme='dark'] {
-  /* Primary Colors */
-  --ifm-color-primary: #00e6b8;
-  --ifm-color-primary-dark: #00cfa6;
-  --ifm-color-primary-darker: #00c49d;
-  --ifm-color-primary-darkest: #00a281;
-  --ifm-color-primary-light: #1aebca;
-  --ifm-color-primary-lighter: #33edd0;
-  --ifm-color-primary-lightest: #66f2dc;
+  /* Primary Colors - ApiGear Red (lighter for dark mode) */
+  --ifm-color-primary: #f87171;
+  --ifm-color-primary-dark: #ef4444;
+  --ifm-color-primary-darker: #dc2626;
+  --ifm-color-primary-darkest: #b91c1c;
+  --ifm-color-primary-light: #fca5a5;
+  --ifm-color-primary-lighter: #fecaca;
+  --ifm-color-primary-lightest: #fee2e2;
 
   /* Background & Surface */
   --ifm-background-color: #0d1117;
@@ -95,14 +95,14 @@
   --custom-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --custom-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --custom-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-  --custom-shadow-glow: 0 0 60px rgba(0, 230, 184, 0.2);
+  --custom-shadow-glow: 0 0 60px rgba(248, 113, 113, 0.2);
 
   /* Code Blocks */
-  --docusaurus-highlighted-code-line-bg: rgba(0, 230, 184, 0.15);
+  --docusaurus-highlighted-code-line-bg: rgba(248, 113, 113, 0.15);
   --prism-background-color: #0d1117;
 
   /* Custom Gradients */
-  --custom-gradient-primary: linear-gradient(135deg, #00b894 0%, #00e6b8 50%, #33edd0 100%);
+  --custom-gradient-primary: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
   --custom-gradient-surface: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
   --custom-gradient-hero: linear-gradient(135deg, #0d1117 0%, #1c2128 50%, #161b22 100%);
 }
@@ -232,13 +232,13 @@ a.button--primary {
   background: var(--custom-gradient-primary) !important;
   color: #ffffff !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: var(--custom-shadow-md), 0 0 20px rgba(0, 184, 148, 0.3);
+  box-shadow: var(--custom-shadow-md), 0 0 20px rgba(220, 38, 38, 0.3);
 }
 
 .button--primary:hover,
 a.button--primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--custom-shadow-lg), 0 0 30px rgba(0, 184, 148, 0.4);
+  box-shadow: var(--custom-shadow-lg), 0 0 30px rgba(220, 38, 38, 0.4);
   color: #ffffff !important;
   text-decoration: none;
 }
@@ -278,8 +278,8 @@ a.button--primary:hover {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(rgba(0, 184, 148, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 184, 148, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
 }
@@ -292,12 +292,12 @@ a.button--primary:hover {
   right: -20%;
   width: 80%;
   height: 150%;
-  background: radial-gradient(ellipse at center, rgba(0, 184, 148, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
 [data-theme='dark'] .hero::after {
-  background: radial-gradient(ellipse at center, rgba(0, 230, 184, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(248, 113, 113, 0.1) 0%, transparent 70%);
 }
 
 /* ============================================
@@ -321,13 +321,13 @@ a.button--primary:hover {
 }
 
 .menu__link--active {
-  background: rgba(0, 184, 148, 0.1);
+  background: rgba(220, 38, 38, 0.1);
   color: var(--ifm-color-primary);
   font-weight: 600;
 }
 
 .menu__link--active:hover {
-  background: rgba(0, 184, 148, 0.15);
+  background: rgba(220, 38, 38, 0.15);
 }
 
 .menu__list-item-collapsible {
@@ -344,13 +344,9 @@ a.button--primary:hover {
   opacity: 1;
 }
 
-/* Category labels */
+/* Category labels - consistent with regular links */
 .theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  color: var(--custom-text-muted);
+  font-weight: 500;
 }
 
 /* ============================================
@@ -449,8 +445,8 @@ div[class*='codeBlockTitle'] {
 }
 
 .alert--success {
-  --ifm-alert-background-color: rgba(0, 184, 148, 0.1);
-  --ifm-alert-border-color: rgba(0, 184, 148, 0.3);
+  --ifm-alert-background-color: rgba(34, 197, 94, 0.1);
+  --ifm-alert-border-color: rgba(34, 197, 94, 0.3);
 }
 
 .admonition-heading h5 {
@@ -635,7 +631,7 @@ tr:hover td {
    Selection
    ============================================ */
 ::selection {
-  background: rgba(0, 184, 148, 0.3);
+  background: rgba(220, 38, 38, 0.3);
   color: inherit;
 }
 

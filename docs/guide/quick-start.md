@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 title: Quick Start – Generate APIs for Qt, Unreal & C++
 sidebar_label: Quick Start
 ---
