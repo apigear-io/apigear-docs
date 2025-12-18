@@ -1,8 +1,8 @@
 {
   "label": "Write SDK Templates",
-  "position": 1,
+  "position": 8,
   "link": {
     "type": "doc",
-    "id": "advanced/maker/intro"
+    "id": "maker/intro"
   }
 }

@@ -182,6 +182,6 @@ The ObjectLink REPL is particularly useful for:
 
 ## Related Documentation
 
-- [ObjectLink Protocol](/docs/advanced/protocols/objectlink/intro) - Complete protocol specification
-- [API Generation](/docs/tools/cli/generate) - Generate ObjectLink-enabled SDKs
-- [API Monitoring](/docs/tools/cli/monitor) - Monitor ObjectLink traffic
+- [ObjectLink Protocol](/docs/protocols/objectlink/intro) - Complete protocol specification
+- [API Generation](/docs/cli/generate) - Generate ObjectLink-enabled SDKs
+- [API Monitoring](/docs/cli/monitor) - Monitor ObjectLink traffic

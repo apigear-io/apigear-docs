@@ -46,7 +46,7 @@ The ApiGear Studio and the CLI detect the specified template in the [solution do
 A solution links API modules with a technology template. It can contain several targets of code generation. For example, you can generate both a C++ SDK and a Python SDK from the same API modules. Templates also support different features, such as `http` or `olink` support. The supported features vary for each template.
 
 :::tip
-The [ObjectAPI Mapping](/docs/advanced/protocols/mapping) document describes how different APIs are mapped to various transports and protocols.
+The [ObjectAPI Mapping](/docs/protocols/mapping) document describes how different APIs are mapped to various transports and protocols.
 :::
 
 To create a solution:

@@ -86,10 +86,10 @@ This contact the server and sends the simulation file to the simulation server a
 
 Now you need a client to connect to the simulation server over ObjectLink and trigger the simulation. You can either:
 - Build a client using one of the ObjectLink client SDKs
-- Use the [stimulation tool](/docs/advanced/stimulation/intro) to create JavaScript-based test clients
+- Use the [stimulation tool](/docs/stimulation/intro) to create JavaScript-based test clients
 
 
 ## Simulation Protocol
 
-The underlying simulation protocol is the way to interact with a simulation server. It defines how to call operations, how to get the state of an interface and how to trigger sequences. The simulation server currently supports the ObjectLink protocol which is available in the [ObjectLink](/docs/advanced/protocols/objectlink/intro) section.
+The underlying simulation protocol is the way to interact with a simulation server. It defines how to call operations, how to get the state of an interface and how to trigger sequences. The simulation server currently supports the ObjectLink protocol which is available in the [ObjectLink](/docs/protocols/objectlink/intro) section.
 

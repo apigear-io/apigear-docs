@@ -1,19 +1,14 @@
 ---
 sidebar_position: 4
-label: "API Monitoring (experimental)"
+label: "API Monitoring"
 ---
 
 # API Monitoring
 
-API Monitoring is a feature that allows you to monitor the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users. 
+API Monitoring is a feature that allows you to monitor the behavior of an API. This is useful for testing, demonstration, and development. It decouples the interface implementation from the interface users.
 
-:::warning Experimental
-The **monitoring** is experimental and not all templates support this feature.
-
-
-:::
- Make sure you are generating `monitor` feature, and wrap your implementation with it.<br />
- For more information about this feature check [monitor documentation](/docs/advanced/monitor/intro).
+Make sure you are generating `monitor` feature, and wrap your implementation with it.<br />
+ For more information about this feature check [monitor documentation](/docs/monitor/intro).
 
 ## Quick API Monitoring
 

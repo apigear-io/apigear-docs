@@ -5,14 +5,23 @@ import HeroSection from '../sections/HeroSection';
 import WorkflowSection from '../sections/WorkflowSection';
 import TechnologiesSection from '../sections/TechnologiesSection';
 import ObjectAPISection from '../sections/ObjectAPISection';
+import UseCasesSection from '../sections/UseCasesSection';
+import CodeExampleSection from '../sections/CodeExampleSection';
 import styles from './index.module.css';
+
 export default function Home() {
   return (
     <Layout
-      title={`Design your APIs and generate code`}
-      description="Design your API and generate code">
+      title={`API Code Generator for C++, Qt, Unreal & Python`}
+      description="Generate production-ready SDKs from API definitions. One YAML spec, multiple native implementations with simulation and monitoring.">
       <HeroSection />
       <main>
+        <section className={styles.section}>
+          <CodeExampleSection />
+        </section>
+        <section className={styles.section}>
+          <UseCasesSection />
+        </section>
         <section className={styles.section}>
           <FeatureListSection />
         </section>

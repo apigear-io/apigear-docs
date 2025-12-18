@@ -1,0 +1,97 @@
+.section {
+    padding: 3rem 0;
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: var(--ifm-color-emphasis-600);
+    font-size: 1.1rem;
+}
+
+.codeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.inputSection,
+.outputSection {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.label {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--ifm-color-emphasis-700);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.codeBlock {
+    margin: 0 !important;
+}
+
+.arrow {
+    font-size: 2.5rem;
+    color: var(--ifm-color-primary);
+    font-weight: bold;
+}
+
+.outputList {
+    background: var(--ifm-card-background-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.outputItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--ifm-color-emphasis-100);
+}
+
+.outputItem:last-child {
+    border-bottom: none;
+}
+
+.outputIcon {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.outputText {
+    font-family: var(--ifm-font-family-monospace);
+    font-size: 0.9rem;
+}
+
+@media screen and (max-width: 768px) {
+    .codeContainer {
+        flex-direction: column;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+
+    .inputSection,
+    .outputSection {
+        width: 100%;
+        max-width: none;
+    }
+}
