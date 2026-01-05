@@ -194,7 +194,7 @@ const config = {
             items: [
               {to: 'blog', label: 'Blog'},
               {to: '/help', label: 'Help & Support'},
-              {href: 'https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw', label: 'Slack Community'},
+              {href: 'https://join.slack.com/t/apigear/shared_invite/zt-3mjx0cl9y-8zWn~ufJnzXCl5aaPjXEfg', label: 'Slack Community'},
             ],
           },
           {
@@ -241,7 +241,7 @@ const config = {
               },
               {
                 label: 'Slack Community',
-                href: 'https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw',
+                href: 'https://join.slack.com/t/apigear/shared_invite/zt-3mjx0cl9y-8zWn~ufJnzXCl5aaPjXEfg',
               },
             ],
           },

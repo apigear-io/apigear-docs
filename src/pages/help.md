@@ -15,7 +15,7 @@ The best way to get help is to connect with other ApiGear users and the developm
 
 ### Slack Community
 
-Our **[Slack workspace](https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw)** is the most active place for discussions. Here you can:
+Our **[Slack workspace](https://join.slack.com/t/apigear/shared_invite/zt-3mjx0cl9y-8zWn~ufJnzXCl5aaPjXEfg)** is the most active place for discussions. Here you can:
 
 - Ask questions and get answers from experienced users
 - Share your projects and get feedback
@@ -23,7 +23,7 @@ Our **[Slack workspace](https://join.slack.com/t/apigear/shared_invite/zt-1s28cy
 - Stay updated on new features and releases
 - Connect directly with the ApiGear team
 
-[Join Slack →](https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw)
+[Join Slack →](https://join.slack.com/t/apigear/shared_invite/zt-3mjx0cl9y-8zWn~ufJnzXCl5aaPjXEfg)
 
 ---
 

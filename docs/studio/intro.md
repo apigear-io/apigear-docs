@@ -100,4 +100,4 @@ Studio opens API files in your preferred code editor. Configure the editor comma
 
 - **Documentation** — Click the Help button in the header or visit [apigear.io/docs](https://apigear.io/docs)
 - **Issues** — Report bugs at [github.com/apigear-io/studio/issues](https://github.com/apigear-io/studio/issues)
-- **Community** — Join the discussion on [Slack](https://join.slack.com/t/apigear/shared_invite/zt-1s28cyfme-ohvlpZd3nUxHN0uRIFeKXw)
+- **Community** — Join the discussion on [Slack](https://join.slack.com/t/apigear/shared_invite/zt-3mjx0cl9y-8zWn~ufJnzXCl5aaPjXEfg)
