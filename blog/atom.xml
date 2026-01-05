@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://apigear.io/blog</id>
-    <title>The future of API driven workflows Blog</title>
+    <title>Define Once, Generate Everywhere Blog</title>
     <updated>2023-02-27T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://apigear.io/blog"/>
-    <subtitle>The future of API driven workflows Blog</subtitle>
+    <subtitle>Define Once, Generate Everywhere Blog</subtitle>
     <icon>https://apigear.io/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[API surface for objects]]></title>
