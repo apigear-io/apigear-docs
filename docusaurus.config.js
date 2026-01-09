@@ -153,6 +153,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        { name: 'og:type', content: 'website' },
+        { name: 'og:site_name', content: 'ApiGear Documentation' },
+      ],
       docs: {
         sidebar: {
           autoCollapseCategories: true,
