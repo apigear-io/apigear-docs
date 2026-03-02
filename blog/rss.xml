@@ -4,10 +4,50 @@
         <title>Define Once, Generate Everywhere Blog</title>
         <link>https://apigear.io/blog</link>
         <description>Define Once, Generate Everywhere Blog</description>
-        <lastBuildDate>Mon, 27 Feb 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 02 Mar 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[AI Meets API Design: MCP-Powered SDK Generation]]></title>
+            <link>https://apigear.io/blog/ai-meets-api-design-mcp</link>
+            <guid>https://apigear.io/blog/ai-meets-api-design-mcp</guid>
+            <pubDate>Mon, 02 Mar 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Connect ApiGear to your AI coding assistant via MCP and generate complete SDKs from API descriptions — right from your editor.]]></description>
+            <content:encoded><![CDATA[<p>What if you could describe an API in plain English and your AI assistant would design the interface, validate it, and generate a production-ready SDK — all without leaving your editor?</p>
+<p>That's exactly what happens when you connect ApiGear to your AI coding assistant via MCP. No spec syntax to learn, no CLI commands to memorize. You describe what you need, and your assistant handles the rest — from API design to generated code.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mcp-in-30-seconds">MCP in 30 Seconds<a href="https://apigear.io/blog/ai-meets-api-design-mcp#mcp-in-30-seconds" class="hash-link" aria-label="Direct link to MCP in 30 Seconds" title="Direct link to MCP in 30 Seconds" translate="no">​</a></h2>
+<p><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer" class="">MCP</a> (Model Context Protocol) is an open standard that lets AI assistants call external tools directly. Think of it as giving your AI hands to work with real developer tools. ApiGear ships an MCP server that exposes its full code generation pipeline — so any MCP-compatible assistant (Claude, Cursor, and others) can validate specs, pick templates, and generate SDKs on your behalf.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="from-plain-english-to-a-working-sdk">From Plain English to a Working SDK<a href="https://apigear.io/blog/ai-meets-api-design-mcp#from-plain-english-to-a-working-sdk" class="hash-link" aria-label="Direct link to From Plain English to a Working SDK" title="Direct link to From Plain English to a Working SDK" translate="no">​</a></h2>
+<p>It starts with a simple request:</p>
+<blockquote>
+<p>"I need a counter API with a count property and increment/decrement operations."</p>
+</blockquote>
+<p>Your AI assistant fetches the ApiGear module schema via MCP, understands the structure, and writes a valid API module for you:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">schema</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> apigear.module/1.0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> demo</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">"1.0"</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">interfaces</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> Counter</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">properties</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> count</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token key atrule" style="color:#00a4db">type</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> int</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">operations</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> increment</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> decrement</span><br></span></code></pre></div></div>
+<p>You didn't write that. You didn't need to know the spec format. The assistant looked up the schema, drafted the module, and validated it — all through ApiGear's MCP tools.</p>
+<p>Now take it one step further:</p>
+<blockquote>
+<p>"Generate a Unreal Engine SDK into the <code>out/</code> folder."</p>
+</blockquote>
+<p>The assistant selects the right template and generates a fully scaffolded project — interfaces, stubs, build files — without you typing a single command.</p>
+<p>This is the full loop: natural language to validated API spec to generated SDK. You describe what you want at each step, and the assistant handles the rest. Need to add a new operation? Just say so. Want to switch from Unreal Engine to C++ or Python? Ask. The assistant re-validates and regenerates.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="set-it-up-in-one-minute">Set It Up in One Minute<a href="https://apigear.io/blog/ai-meets-api-design-mcp#set-it-up-in-one-minute" class="hash-link" aria-label="Direct link to Set It Up in One Minute" title="Direct link to Set It Up in One Minute" translate="no">​</a></h2>
+<p>Add ApiGear as an MCP server in your AI tool. For Claude Code, it's a single command:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">claude mcp add apigear -- apigear mcp</span><br></span></code></pre></div></div>
+<p>That's it. Your AI assistant now has access to ApiGear's full generation pipeline — spec validation, template browsing, and SDK generation — all through natural conversation. See the <a class="" href="https://apigear.io/docs/cli/mcp">MCP Server documentation</a> for the full list of available tools and setup options for other clients.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="try-it-yourself">Try It Yourself<a href="https://apigear.io/blog/ai-meets-api-design-mcp#try-it-yourself" class="hash-link" aria-label="Direct link to Try It Yourself" title="Direct link to Try It Yourself" translate="no">​</a></h2>
+<ol>
+<li class=""><a class="" href="https://apigear.io/docs/cli/intro#installation">Install ApiGear</a></li>
+<li class=""><a class="" href="https://apigear.io/docs/cli/mcp#setup">Register the MCP server</a> with your AI assistant</li>
+<li class="">Ask your assistant to design an API from a plain English description — and generate an SDK</li>
+</ol>
+<p>No spec syntax to memorize. No commands to look up. Just describe your API and let the assistant do the rest.</p>]]></content:encoded>
+            <category>mcp</category>
+            <category>ai</category>
+            <category>sdk</category>
+            <category>code-generation</category>
+        </item>
         <item>
             <title><![CDATA[API surface for objects]]></title>
             <link>https://apigear.io/blog/api-surface</link>
