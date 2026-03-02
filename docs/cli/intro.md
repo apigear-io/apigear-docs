@@ -1,5 +1,9 @@
 ---
 sidebar_position: 1
+title: ApiGear CLI – API-Driven SDK Generation and Simulation
+sidebar_label: Introduction
+description: Install and use the ApiGear CLI to generate production-ready SDKs, simulate APIs, monitor traffic, and integrate with AI assistants via MCP.
+keywords: [apigear, cli, sdk generation, code generation, api simulation, api monitoring, objectlink, mcp]
 ---
 
 # Introduction
@@ -84,6 +88,7 @@ apigear monitor run
 | `stimulate` | `stim` | Run scripted client stimulations |
 | `monitor` | `mon`, `m` | Monitor API traffic |
 | `olink` | `ol` | Interactive ObjectLink REPL |
+| `mcp` | — | Start MCP server for AI assistants |
 | `spec` | — | Validate API specifications |
 | `config` | `cfg`, `c` | Manage configuration |
 | `serve` | — | Start combined server |
@@ -214,3 +219,4 @@ apigear template install --help
 - [API Simulation](simulate) — Run scripted backends
 - [API Monitoring](monitor) — Monitor API traffic
 - [ObjectLink REPL](olink) — Interactive protocol testing
+- [MCP Server](mcp) — AI assistant integration via Model Context Protocol
