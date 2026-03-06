@@ -95,6 +95,18 @@ apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-pytho
 ...
 ```
   </TabItem>
+  <TabItem value="template-java" label="Java">
+```bash
+# highlight-next-line
+$ apigear template install apigear-io/template-java@v1.0.0
+$ apigear template cache
+list of templates from the local cache
+
+source                           | url                                              | installed | latest
+apigear-io/template-java@v1.0.0 | https://github.com/apigear-io/template-java.git  | <sha1>    | v1.0.0
+...
+```
+  </TabItem>
 </Tabs>
 
 ### Installation via Studio
@@ -121,6 +133,11 @@ Installing the template through the Studio is straightforward:
 1. Open an existing project or create a new one
 2. Navigate to the `Templates` tab
 3. Click `Install` on the `apigear-io/template-python` entry
+  </TabItem>
+  <TabItem value="template-java" label="Java">
+1. Open an existing project or create a new one
+2. Navigate to the `Templates` tab
+3. Click `Install` on the `apigear-io/template-java` entry
   </TabItem>
 </Tabs>
 
@@ -149,6 +166,11 @@ If you need to inspect or modify the template's source code, cloning or download
   <TabItem value="template-python" label="Python">
   ```bash
   $ git clone https://github.com/apigear-io/template-python.git
+  ```
+  </TabItem>
+  <TabItem value="template-java" label="Java">
+  ```bash
+  $ git clone https://github.com/apigear-io/template-java.git
   ```
   </TabItem>
 </Tabs>
@@ -244,6 +266,24 @@ targets:
     force: true
     features:
       - stubs
+```
+  </TabItem>
+  <TabItem value="template-java" label="Java">
+
+```yaml title="helloworld.solution.yaml" showLineNumbers
+schema: "apigear.solution/1.0"
+name: hello_world_example
+version: "0.1.0"
+
+targets:
+  - name: java_hello_world
+    inputs:
+      - helloworld.module.yaml
+    output: ../java_hello_world
+    template: apigear-io/template-java@v1.0.0
+    force: true
+    features:
+      - api
 ```
   </TabItem>
 </Tabs>
