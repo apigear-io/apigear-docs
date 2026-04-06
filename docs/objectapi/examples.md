@@ -14,7 +14,7 @@ name: org.example
 version: "1.0"
 info:
   title: "Counter API"
-  description: A counter module develope
+  description: A counter module to demonstrate basic interface patterns
 
 interfaces:
   - name: Counter
@@ -33,18 +33,19 @@ A radio tuner with a current station and a station list. It can operate on diffe
 
 ```yaml
 schema: apigear.module/1.0
-module: entertainment.tuner
-version: 1.0
+name: entertainment.tuner
+version: "1.0"
 
 interfaces:
   - name: Tuner
-    description: A tuner service to manages tuner stations
+    description: A tuner service to manage tuner stations
     properties:
       - name: currentStation
         type: Station
         description: current selected station
       - name: stationList
-        type: Station[]
+        type: Station
+        array: true
         description: list of current available stations
     operations:
       - name: nextStation
@@ -55,20 +56,19 @@ interfaces:
         description: update current station
         params:
           - name: stationId
-          - type: id
+            type: int
 
 structs:
   - name: Station
     fields:
       - name: stationId
-        type: id
+        type: int
         description: station id
       - name: name
         type: string
         description: station name
       - name: modified
         type: string
-        format: date-time
         description: station last time modified
 
 enums:
@@ -97,17 +97,17 @@ The weather station uses a more compact YAML format to display the current tempe
 
 ```yaml
 schema: apigear.module/1.0
-module: sensors.weatherstation
-version: 2.5
+name: sensors.weatherstation
+version: "2.5"
 
 interfaces:
   - name: WeatherStation
-  - properties:
+    properties:
       - { name: temperature, type: float }
       - { name: lastError, type: Error }
-  - operations:
+    operations:
       - { name: reset }
-  - signals:
+    signals:
       - name: error
         params:
           - { name: error, type: Error }
