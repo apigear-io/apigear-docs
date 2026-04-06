@@ -12,7 +12,9 @@ A calculator allows you to enter numbers and calculate a new value based on diff
 
 A typical frontend would show a field to display the current total value and a grid of numbers from 0 to 9 as well as a grid for the operations `+`, `-`, `*`, `/` and the `clear` action.
 
-<alert>In addition to the explanation below we also created some real modules for different languages and example applications. Please check out our [demos over at github](https://github.com/apigear-io/objectapi-demos/tree/master/calc) </alert>
+:::tip
+In addition to the explanation below we also created some real modules for different languages and example applications. Please check out our [demos over at GitHub](https://github.com/apigear-io/objectapi-demos/tree/master/calc).
+:::
 
 ## Defining an API Module
 
@@ -46,9 +48,9 @@ interfaces:
   - name: Calculator
     operations:
       - name: add
-          params:
-            - name: a
-              type: int
+        params:
+          - name: a
+            type: int
 ```
 
 Let's add the rest of the calculator operations and the clear action.
@@ -119,7 +121,7 @@ To implement the interface we derive from the abstract calculator and implement 
 ```python
 
 # import our generated interfaces
-import org_daily
+import demo_calc
 
 class Calculator(demo_calc.AbstractCalculator):
   def add(a: int):
