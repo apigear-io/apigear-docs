@@ -22,20 +22,18 @@ Most API specifications (OpenAPI, gRPC/protobuf) are designed for stateless requ
 
 ObjectAPI models APIs the way programmers naturally think about objects — with **properties** (state), **operations** (methods), and **signals** (events).
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                    REST / RPC                           │
-│  Client ──request──► Server ──response──► Client        │
-│         (stateless, request/response only)              │
-└─────────────────────────────────────────────────────────┘
+```mermaid
+graph LR
+    subgraph "REST / RPC (stateless)"
+        C1[Client] -->|request| S1[Server]
+        S1 -->|response| C1
+    end
 
-┌─────────────────────────────────────────────────────────┐
-│                    ObjectAPI                            │
-│  Client ◄──property changes──► Server                   │
-│         ◄──────signals────────                          │
-│         ───operation calls───►                          │
-│         (stateful, bidirectional)                       │
-└─────────────────────────────────────────────────────────┘
+    subgraph "ObjectAPI (stateful, bidirectional)"
+        C2[Client] <-->|property changes| S2[Server]
+        S2 -->|signals| C2
+        C2 -->|operation calls| S2
+    end
 ```
 
 ## The Three Pillars
