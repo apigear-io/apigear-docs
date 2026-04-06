@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+title: "ObjectAPI IDL – Developer-Friendly API Syntax"
+description: "Write APIs using the ObjectAPI IDL, a concise code-like syntax that auto-converts to YAML. Covers modules, interfaces, structs, enums, and imports."
+keywords: [objectapi, idl, api syntax, code generation]
 ---
 
 # ObjectAPI IDL

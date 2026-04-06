@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "ObjectLink Lifecycle – Link, Init & Unlink"
+description: "Manage the ObjectLink object lifecycle with LINK, INIT, and UNLINK messages. Learn how remote objects are linked and initialized with property state."
+keywords: [objectlink, lifecycle, link, init, unlink, remote objects]
 ---
 
 # Lifecycle

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Simulation Scenarios – Define API Test Data"
+description: "Write simulation scenarios in JavaScript to define API endpoint behavior. Configure actors with properties, operation handlers, and signal emitters."
+keywords: [apigear, simulation scenarios, javascript, test data, actors]
 ---
 
 # Simulation Scenarios

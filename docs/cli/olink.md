@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+title: "ObjectLink REPL – Interactive API Testing"
+description: "Use the ObjectLink REPL to connect to servers, link remote objects, invoke methods, set properties, and observe signals interactively over WebSocket."
+keywords: [apigear, objectlink, repl, websocket, testing]
 ---
 
 # ObjectLink REPL

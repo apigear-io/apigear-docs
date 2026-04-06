@@ -1,3 +1,9 @@
+---
+title: "Project Management – Create & Manage API Projects"
+description: "Create, edit, and manage ApiGear projects. Set up API modules, solution files, and simulation scenarios from the command line."
+keywords: [apigear, project management, cli, api project]
+---
+
 # Project Management
 
 The `project` command allows you to manage your projects. Projects are a collection of APIs stored in module files and solution file with desired generation configuration.

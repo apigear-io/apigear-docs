@@ -1,3 +1,9 @@
+---
+title: "Scripted Clients – Drive APIs with JavaScript"
+description: "Use JavaScript client scripts to trigger operation sequences and data changes on remote services via the ObjectLink protocol."
+keywords: [apigear, scripted clients, stimulation, javascript, objectlink, testing]
+---
+
 # Scripted Clients
 
 ## Why?

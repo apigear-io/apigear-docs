@@ -1,5 +1,8 @@
 ---
 sidebar_position: 8
+title: "HTTP Mapping – ObjectAPI to HTTP/RPC Binding"
+description: "Map ObjectAPI interfaces to HTTP endpoints using an RPC model. Covers property, operation, and signal mapping with JSON payloads."
+keywords: [objectapi, http mapping, rpc, rest api, json]
 ---
 
 # HTTP Mapping

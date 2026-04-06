@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Template Tutorial – Build a TypeScript Generator"
+description: "Step-by-step tutorial to create an SDK template that generates TypeScript interfaces from ObjectAPI definitions. Covers rules, templates, and solution setup."
+keywords: [apigear, template tutorial, typescript, code generation, getting started]
 ---
 
 # Quick Start

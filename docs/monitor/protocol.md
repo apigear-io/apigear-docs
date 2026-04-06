@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Monitoring Protocol – HTTP Tracing Format"
+description: "The API Monitor protocol uses HTTP POST to report property changes, operation calls, and signals to the embedded monitoring server."
+keywords: [apigear, monitoring protocol, http tracing, api analytics]
 ---
 
 # Monitoring Protocol

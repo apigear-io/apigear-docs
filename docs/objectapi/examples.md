@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: "ObjectAPI Examples – Counter, Radio Tuner & Weather Station"
+description: "Complete ObjectAPI YAML examples including a Counter, Radio Tuner with structs and enums, and a Weather Station with signals."
+keywords: [objectapi, examples, counter, yaml]
 ---
 
 # API Examples

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "SDK Templates – C++, Qt, Unreal, Python & More"
+description: "Browse available SDK templates for code generation. Includes C++17, Qt 6, Unreal Engine, Python, Go, Rust, and TypeScript with protocol and monitoring support."
+keywords: [apigear, sdk templates, c++, qt, unreal engine, python, go, rust, typescript]
 ---
 
 # SDK Templates

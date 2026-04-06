@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Studio Quick Start – Your First API Project"
+description: "Get started with ApiGear Studio. Create a project, define API modules, configure code generation, and monitor API traffic in the desktop IDE."
+keywords: [apigear studio, quick start, tutorial, desktop ide, getting started]
 ---
 
 # Quick Start

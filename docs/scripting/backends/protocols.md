@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: "Simulation Protocol – ObjectLink Integration"
+description: "How the simulation framework uses the ObjectLink protocol to serve simulated API responses to clients over network connections."
+keywords: [apigear, simulation protocol, objectlink, ipc, client-server]
 ---
 
 # Simulation Protocol

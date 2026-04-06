@@ -1,5 +1,8 @@
 ---
 sidebar_position: 7
+title: "ObjectLink Error Messages & Error Codes"
+description: "ObjectLink error message format and error codes. Covers error handling for link, invoke, set-property, and signal operations."
+keywords: [objectlink, error handling, error codes, protocol errors]
 ---
 
 # Error Messages

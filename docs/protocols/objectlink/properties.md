@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: "ObjectLink Properties – State Synchronization"
+description: "Synchronize object properties between local and remote objects. Covers SET_PROPERTY and PROPERTY_CHANGE messages for real-time state updates."
+keywords: [objectlink, properties, state synchronization, property change, reactive]
 ---
 
 # Property Synchronization

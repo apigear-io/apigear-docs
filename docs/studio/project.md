@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "Studio Project Management – Create & Organize APIs"
+description: "Create, open, and manage API projects in ApiGear Studio. Organize modules, solutions, and scenarios within the project workspace."
+keywords: [apigear studio, project management, workspace, api project]
 ---
 
 # Project Management

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+title: "Template Filters – Text Transformation Functions"
+description: "Reference for template filters that transform text in SDK templates. Covers case conversion (snake, camel, pascal), path helpers, and string utilities."
+keywords: [apigear, template filters, text transformation, snake case, camel case, go templates]
 ---
 
 # Filter Reference

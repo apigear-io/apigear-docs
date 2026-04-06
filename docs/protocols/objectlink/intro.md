@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "ObjectLink Protocol – Stateful IPC over Network"
+description: "ObjectLink is an IPC protocol that links local objects to remote objects over network connections, synchronizing properties, operations, and signals."
+keywords: [objectlink, ipc protocol, network, state synchronization, websocket]
 ---
 
 # Introduction

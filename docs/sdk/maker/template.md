@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "Template Primer – Go Text Template Syntax"
+description: "Learn the Go text/template syntax used in ApiGear SDK templates. Covers variables, loops, conditionals, functions, and template composition."
+keywords: [apigear, go templates, template syntax, text template, code generation]
 ---
 
 # Template Primer

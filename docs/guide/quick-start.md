@@ -2,6 +2,8 @@
 sidebar_position: 1
 title: Quick Start – Generate APIs for Qt, Unreal & C++
 sidebar_label: Quick Start
+description: "Generate your first SDK in 5 minutes. Install ApiGear, define an API module, configure a solution file, and generate C++, Qt, Unreal Engine, or Python code."
+keywords: [apigear, quick start, tutorial, code generation, c++, qt, unreal, python]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

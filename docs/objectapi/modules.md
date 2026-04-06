@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "ObjectAPI Modules – Interfaces, Structs & Enums"
+description: "Define API modules with interfaces (properties, operations, signals), data structures, and enumerations using the ObjectAPI specification."
+keywords: [objectapi, modules, interfaces, properties, operations, signals, structs, enums]
 ---
 
 # API Modules

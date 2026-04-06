@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: "Symbol Reference – Template Data Model"
+description: "Reference for all symbols available in SDK templates. Covers System, Module, Interface, Structure, Enumeration, and their properties."
+keywords: [apigear, symbol reference, template data model, interfaces, modules, structs]
 ---
 
 # Symbol Reference

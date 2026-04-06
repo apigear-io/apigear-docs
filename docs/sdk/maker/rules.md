@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+title: "Rules Document – Template Configuration & Features"
+description: "Define code generation rules with features, file output targets, and template-to-source mappings. Control which files are generated and when."
+keywords: [apigear, rules document, template configuration, features, code generation rules]
 ---
 
 # Rules Document

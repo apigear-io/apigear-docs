@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Code Generation – Solution & Expert Mode"
+description: "Generate SDKs from ObjectAPI definitions using solution files or expert mode. Covers CLI flags, solution file format, features, and error handling."
+keywords: [apigear, code generation, cli, solution file, sdk generation]
 ---
 
 # Code Generation

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "Template Maker – Create Custom SDK Templates"
+description: "Create and customize SDK templates for ApiGear code generation. Adapt existing templates or build new ones for your technology stack."
+keywords: [apigear, template maker, custom templates, code generation, sdk development]
 ---
 
 # Introduction
