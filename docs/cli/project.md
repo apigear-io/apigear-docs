@@ -80,18 +80,6 @@ The `pack` command allows you to pack a project. It will create an archive  file
 apigear project pack -d <project-name>
 ```
 
-## Share a Project
-
-The `share` command allows you to share a project. It will create an archive file containing all project documents and upload it to the ApiGear platform.
-
-```bash
-apigear project share <project-name>
-```
-
-:::note
-This feature is currently not available and will be added in a future.
-:::
-
 ## Import a Project
 
 The `import` command allows you to import a project form a github repository.
