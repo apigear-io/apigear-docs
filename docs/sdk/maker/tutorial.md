@@ -46,7 +46,7 @@ mkdir myproject && cd myproject
 mkdir mytemplate && cd mytemplate
 ```
 
-First we create our toot project folder called `myproject` and inside out template folder called `mytemplate`. Insie the `mytemplate` folder we place a rules document (`rules.yaml`) and an templates folder for our template documents.
+First we create our root project folder called `myproject` and inside our template folder called `mytemplate`. Inside the `mytemplate` folder we place a rules document (`rules.yaml`) and a templates folder for our template documents.
 
 The folder structure will look like this.
 
@@ -69,7 +69,7 @@ features:
           - { source: module.ts.tpl, target: {{.Module.Name}}.ts }
 ```
 
-The `module.ts.tpl` file inside the `template/templates` folder can be empty initially, we fill it up later.
+The `module.ts.tpl` file inside the `mytemplate/templates` folder can be empty initially, we fill it up later.
 
 Now our basic template project is ready, it's time to link it up with an ApiGear Studio API project.
 
@@ -115,7 +115,7 @@ schema: "apigear.solution/1.0"
 name: demo
 version: "0.1"
 
-layers:
+targets:
   - name: demo
     output: ../output
     inputs:
@@ -134,7 +134,7 @@ myproject/
   apigear/
     demo.module.yaml
     demo.solution.yaml
-  template/
+  mytemplate/
     rules.yaml
     templates/
       module.ts.tpl
@@ -149,7 +149,7 @@ myproject/
   apigear/
     demo.module.yaml
     demo.solution.yaml
-  template/
+  mytemplate/
     rules.yaml
     templates/
       module.ts.tpl
@@ -177,8 +177,8 @@ The rules document already takes care that for each API module one typescript do
 
 ## Typescript Template
 
-Inside our `module.ts.liquid` template document each interface in the module shall be an typescript interface.
-This can be accomplished with the for-loop from the liquidjs template engine.
+Inside our `module.ts.tpl` template document each interface in the module shall be an typescript interface.
+This can be accomplished with the for-loop from the Go template engine.
 
 ```
 {{ range .Module.Interfaces }}
@@ -237,7 +237,7 @@ operations:
         type: int
 ```
 
-If you would run the solution again you would no see a change as we currently not handle these parameters. We need to update the template document (`module.ts.liquid`) first to handle the parameters using the params filter.
+If you would run the solution again you would not see a change as we currently do not handle these parameters. We need to update the template document (`module.ts.tpl`) first to handle the parameters using the params filter.
 
 ```
 {{ range .Operations }}
