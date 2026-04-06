@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "Scripting – JavaScript-Based API Simulation & Testing"
+description: "Use JavaScript scripting to simulate API backends and drive API clients. Test, prototype, and demo without compiled code or deployed services."
+keywords: [apigear, scripting, javascript, simulation, testing, prototyping]
 ---
 
 # Scripting

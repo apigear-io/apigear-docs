@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "ObjectAPI – Stateful API Specification"
+description: "ObjectAPI is a specification for defining stateful, object-oriented APIs with properties, operations, and signals for C++, Qt, Unreal Engine, and Python."
+keywords: [objectapi, api specification, stateful api, code generation, properties, operations, signals]
 ---
 
 # Introduction

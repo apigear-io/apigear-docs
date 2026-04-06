@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "SDK Templates – Install, List & Manage Templates"
+description: "Manage SDK templates for code generation. Install from the registry, list cached templates, and search for available templates."
+keywords: [apigear, templates, sdk, install, registry]
 ---
 
 # SDK Templates

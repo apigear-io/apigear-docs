@@ -1,5 +1,8 @@
 ---
 sidebar_position: 5
+title: "API Monitoring – Real-Time Traffic Inspection"
+description: "Monitor API traffic in real-time using the ApiGear CLI. View property changes, operation calls, and signals from your generated SDK applications."
+keywords: [apigear, monitoring, api traffic, debugging]
 ---
 
 # API Monitoring

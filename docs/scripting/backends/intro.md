@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "Service Simulation – Virtual API Backends"
+description: "Simulate API services with JavaScript to test client code without real backends. Create virtual objects with state, behavior, and change notifications."
+keywords: [apigear, simulation, virtual service, mock backend, javascript]
 ---
 
 # Service Simulation

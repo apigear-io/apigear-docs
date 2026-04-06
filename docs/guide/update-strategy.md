@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+title: "Update Strategy – Managing Generated Code"
+description: "Strategies for managing generated code updates when your API evolves. Understand the force flag, protected files, and merge approaches."
+keywords: [apigear, update strategy, code generation, api evolution]
 ---
 
 # Update Strategy

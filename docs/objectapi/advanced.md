@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+title: "Advanced ObjectAPI – Meta Information & Compact YAML"
+description: "Advanced ObjectAPI concepts including document info blocks, meta annotations for custom code generation, and compact YAML writing format."
+keywords: [objectapi, meta, advanced, compact yaml]
 ---
 
 # Advanced Concepts

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+title: "Generator-Based Simulation – Auto-Generate Scenarios"
+description: "Auto-generate simulation scenarios from API definitions. Quickly scaffold mock backends for large APIs without writing simulation code by hand."
+keywords: [apigear, simulation generator, auto-generate, scaffolding, mock]
 ---
 
 # Generator Based Simulation

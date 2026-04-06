@@ -1,5 +1,8 @@
 ---
 sidebar_position: 7
+title: "Protocol Mappings – REST, RPC & Message Patterns"
+description: "Map ObjectAPI communication patterns to REST, RPC, and message-based protocols. Compare API types and understand how ObjectAPI bridges them."
+keywords: [objectapi, protocol mapping, rest, rpc, message based, api patterns]
 ---
 
 # Protocol Mappings

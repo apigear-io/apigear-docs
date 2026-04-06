@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "API Monitoring – Track Runtime API Usage"
+description: "Monitor API usage in real-time during development and testing. Detect anomalies by tracking property changes, operation calls, and signals."
+keywords: [apigear, api monitoring, runtime, debugging, testing]
 ---
 
 # Introduction

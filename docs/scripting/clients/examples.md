@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Scripted Client Examples – Counter & Heating"
+description: "JavaScript client script examples that connect to remote services. Includes counter increment and heating system control scenarios."
+keywords: [apigear, client examples, javascript, counter, heating, objectlink]
 ---
 
 # Examples

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 1
+title: "ApiGear Studio – Desktop IDE for API Development"
+description: "ApiGear Studio is a desktop application for designing APIs, generating SDKs, running simulations, and monitoring API traffic in one integrated environment."
+keywords: [apigear studio, desktop app, api design, sdk generation, monitoring]
 ---
 
 # Introduction

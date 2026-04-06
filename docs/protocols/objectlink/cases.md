@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "ObjectLink Use Cases – Services, Sensors & UI"
+description: "ObjectLink use cases including embedded service sharing, sensor-to-dashboard linking, and UI-to-service layer communication across platforms."
+keywords: [objectlink, use cases, embedded, services, ipc, cross-platform]
 ---
 
 # Use Cases

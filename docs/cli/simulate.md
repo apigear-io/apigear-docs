@@ -1,7 +1,9 @@
 ---
 sidebar_position: 4
-title: Scripting Support
+title: "API Simulation – Script & Scenario-Based Testing"
 sidebar_label: Scripting Support
+description: "Simulate API backends with JavaScript scripts or YAML scenarios. Test your application against mock data before real services exist."
+keywords: [apigear, simulation, mock api, testing, javascript, scenarios]
 ---
 
 # Scripting Support

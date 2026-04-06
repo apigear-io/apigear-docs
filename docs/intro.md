@@ -1,6 +1,8 @@
 ---
 sidebar_position: 1
 slug: /
+description: "ApiGear generates native SDKs from stateful API definitions using ObjectAPI. Generate production-ready code for C++, Qt, Unreal Engine, and Python."
+keywords: [apigear, sdk generation, code generation, objectapi, c++, qt, unreal engine, python]
 ---
 
 # Introduction

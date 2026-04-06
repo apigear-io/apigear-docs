@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "ObjectAPI Foundation – Data Types & Document Format"
+description: "Learn the ObjectAPI document format, primitive types (bool, int, float, string), arrays, complex types, and cross-module imports."
+keywords: [objectapi, data types, primitives, arrays, structs, enums, api format]
 ---
 
 # API Foundation

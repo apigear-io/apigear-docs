@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+title: "Simulation Examples – Heating, Ball Animation & Vehicle Dashboard"
+description: "Complete simulation examples including a heating control system with thermostat logic, a ball physics animation, and a vehicle dashboard with multiple services."
+keywords: [apigear, simulation examples, heating, ball animation, vehicle dashboard, javascript]
 ---
 
 # Simulation Examples

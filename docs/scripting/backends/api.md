@@ -1,5 +1,8 @@
 ---
 sidebar_position: 3
+title: "Simulation JavaScript API Reference"
+description: "JavaScript API reference for the simulation server. Covers actors, property handling, operation callbacks, signal emission, and timer functions."
+keywords: [apigear, simulation api, javascript, actors, properties, signals]
 ---
 
 # JavaScript API

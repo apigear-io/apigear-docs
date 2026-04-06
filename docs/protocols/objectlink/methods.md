@@ -1,5 +1,8 @@
 ---
 sidebar_position: 4
+title: "ObjectLink Methods – Remote Method Invocation"
+description: "Invoke methods on remote objects using the ObjectLink protocol. Covers INVOKE and INVOKE_REPLY message format with request IDs."
+keywords: [objectlink, methods, remote invocation, rpc, invoke]
 ---
 
 # Method Invokation

@@ -1,5 +1,8 @@
 ---
 sidebar_position: 6
+title: "ObjectLink Signals – Server-Side Event Notification"
+description: "Receive server-side event notifications through ObjectLink signals. Signals push events from remote objects to all linked local objects."
+keywords: [objectlink, signals, events, notifications, server push]
 ---
 
 # Server Side Signals

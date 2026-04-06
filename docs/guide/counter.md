@@ -1,5 +1,8 @@
 ---
 sidebar_position: 2
+title: "Counter API Demo – Define and Simulate Your First API"
+description: "Walk through building a coffee counter API with ApiGear. Define an ObjectAPI module, configure a solution, generate code, and simulate the backend."
+keywords: [apigear, counter api, tutorial, objectapi, simulation, code generation]
 ---
 
 # Counter API Demo
