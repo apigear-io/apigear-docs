@@ -37,7 +37,7 @@ YAML allows a compact format for single line information. This allows us to shor
 structs:
   - name: Error
     fields:
-      - name: message,
+      - name: message
         type: string
       - name: code
         type: int
