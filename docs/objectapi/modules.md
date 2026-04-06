@@ -10,7 +10,7 @@ A module is a namespace for ObjectAPI symbols like interfaces, structures and en
 
 A module is identified by its `name` and `version`. The module name should be typically lowercase and words separated by `.`, like a reverse URI notation `org.example`.
 
-A module can have an additional `info` block to describe in more detailed the module information.
+A module can have an additional `info` block to describe in more detail the module information.
 
 Typically a module consist of the `apigear.interfaces` version declaration, the module name and version, the list of interfaces, structures and signals.
 
@@ -134,7 +134,7 @@ interfaces:
             type: Message
 ```
 
-Data structure can be identified just be identified its name.
+A data structure is identified by its name.
 
 Data structures can be nested by using the type name of the nested type. In some programming languages care needs to be taken by the order of declaration.
 

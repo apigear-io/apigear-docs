@@ -28,7 +28,7 @@ Other files can be added which contain meta information for the API modules. The
 
 - `*.module.meta.yaml` | `*.module.meta.json` - ObjectAPI meta information injected into the relevant APIs.
 
-So if a module is name `org.example` the ObjectAPI document should be called `org.example.module.yaml`
+So if a module is named `org.example` the ObjectAPI document should be called `org.example.module.yaml`
 
 :::tip
 Outside of the ObjectAPI specification a solution document format is described which binds several modules together and links them to a code template for code generation.
@@ -54,7 +54,7 @@ The general types available to ObjectAPI are:
 
 ## Primitives
 
-Data types can be re-presented in different forms in different programming languages. They all need to be convertible to JSON data types on request.
+Data types can be represented in different forms in different programming languages. They all need to be convertible to JSON data types on request.
 
 - `bool` - A simple boolean value (true or false)
 - `int`, `int32`, `int64` - A signed integer value
@@ -83,7 +83,7 @@ properties:
     array: true
 ```
 
-Primitive types are always start with a lower case character and symbols always with an upper case character.
+Primitive types always start with a lower case character and symbols always with an upper case character.
 
 :::tip
 The code templates will change the casing based on the target language preferences.
