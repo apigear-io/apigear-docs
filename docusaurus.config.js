@@ -147,7 +147,23 @@ const config = {
       {
         highlightResult: true
       }
-    ]
+    ],
+    [
+      '@signalwire/docusaurus-plugin-llms-txt',
+      {
+        content: {
+          enableMarkdownFiles: true,
+          enableLlmsFullTxt: true,
+          includeDocs: true,
+          includeBlog: true,
+          includePages: false,
+          excludeRoutes: ['/__docusaurus/**'],
+        },
+        siteTitle: 'ApiGear Documentation',
+        siteDescription: 'ApiGear generates native SDKs from stateful API definitions. Define interfaces once using ObjectAPI, then generate production-ready code for C++, Qt, Unreal Engine, or Python.',
+        depth: 2,
+      }
+    ],
   ],
 
   themeConfig:
