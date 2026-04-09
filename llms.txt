@@ -1,0 +1,190 @@
+# ApiGear Documentation
+
+> ApiGear generates native SDKs from stateful API definitions. Define interfaces once using ObjectAPI, then generate production-ready code for C++, Qt, Unreal Engine, or Python.
+
+
+## blog
+
+Blog
+
+- [Blog](/blog.md): Blog
+
+### ai-meets-api-design-mcp
+
+Connect ApiGear to your AI coding assistant via MCP and generate complete SDKs from API descriptions — right from your editor.
+
+- [AI Meets API Design: MCP-Powered SDK Generation](/blog/ai-meets-api-design-mcp.md): Connect ApiGear to your AI coding assistant via MCP and generate complete SDKs from API descriptions — right from your editor.
+
+### api-surface
+
+Overview of a typical API surface for objects in an IDL.
+
+- [API surface for objects](/blog/api-surface.md): Overview of a typical API surface for objects in an IDL.
+
+### archive
+
+Archive
+
+- [Archive](/blog/archive.md): Archive
+
+### authors
+
+- [Authors](/blog/authors.md)
+
+### tags
+
+- [Tags](/blog/tags.md)
+- [One post tagged with "ai"](/blog/tags/ai.md)
+- [One post tagged with "api"](/blog/tags/api.md)
+- [One post tagged with "code-generation"](/blog/tags/code-generation.md)
+- [One post tagged with "idl"](/blog/tags/idl.md)
+- [One post tagged with "mcp"](/blog/tags/mcp.md)
+- [One post tagged with "sdk"](/blog/tags/sdk.md)
+
+## template-cpp14
+
+
+### docs
+
+- [Features](/template-cpp14/docs/features.md): This guide explains how to use the generated code, what are the available features and their benefits.
+- [API Feature](/template-cpp14/docs/features/api.md): The feature api is the bare minimum for code generation. The feature will generate:
+- [Conan package manager](/template-cpp14/docs/features/conan.md): With this feature you we generate a conan support for your project. It helps with packaging and to managing dependencies for different platforms, OSs, compilers, architecture, cross-builds. Read more about conan and its all benefits here.
+- [Monitor](/template-cpp14/docs/features/monitor.md): Use the monitor feature to examine the interface calls, state and signals during runtime. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI version.
+- [MQTT](/template-cpp14/docs/features/mqtt.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the MQTT protocol.
+- [Olink](/template-cpp14/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications using the same or different technologies (check all of our templates).
+- [Stubs](/template-cpp14/docs/features/stubs.md): The feature stubs adds:
+- [Template C++ 14 (Maintenance)](/template-cpp14/docs/intro.md): This is the documentation for the cpp14 template for the ApiGear code generator.
+- [Quick-Start](/template-cpp14/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
+
+## template-cpp17
+
+
+### docs
+
+- [Features](/template-cpp17/docs/features.md): This guide explains how to use the generated code, what are the available features and their benefits.
+- [API Feature](/template-cpp17/docs/features/api.md): The feature api is the bare minimum for code generation. The feature will generate:
+- [Conan package manager](/template-cpp17/docs/features/conan.md): With this feature you we generate a conan support for your project. It helps with packaging and to managing dependencies for different platforms, OSs, compilers, architecture, cross-builds. Read more about conan and its all benefits here.
+- [Monitor](/template-cpp17/docs/features/monitor.md): Use the monitor feature to examine the interface calls, state and signals during runtime. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI version.
+- [MQTT](/template-cpp17/docs/features/mqtt.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the MQTT protocol.
+- [NATS](/template-cpp17/docs/features/nats.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the NATS protocol.
+- [Olink](/template-cpp17/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications using the same or different technologies (check all of our templates).
+- [Stubs](/template-cpp17/docs/features/stubs.md): The feature stubs adds:
+- [Template C++ 17](/template-cpp17/docs/intro.md): This is the documentation for the cpp17 template for the ApiGear code generator.
+- [Quick-Start](/template-cpp17/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
+
+## template-python
+
+
+### docs
+
+- [Features](/template-python/docs/features.md): This guide explains how to use the generated code, what are the available features and  their benefits.
+- [MQTT](/template-python/docs/features/mqtt.md): This is an experimental feature. It contains smallest working set of functionalities to adapt the generated interface for using over the network with MQTT protocol.
+- [Template Python](/template-python/docs/intro.md): This is the documentation for the Python template.
+- [Quick-Start](/template-python/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Python plugin.
+
+## template-qt6
+
+
+### docs
+
+- [Features](/template-qt6/docs/features.md): This guide explains how to use the generated code, what are the available features and  their benefits.
+- [API](/template-qt6/docs/features/api.md): The feature api is the bare minimum for the code generation. What you receive is:
+- [Monitor](/template-qt6/docs/features/monitor.md): Use our monitor feature to examine the interface calls, state and signals. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI application(/docs/cli/intro).
+- [MQTT](/template-qt6/docs/features/mqtt.md): This is an experimental feature. It contains smallest working set of functionalities to adapt the generated interface for using over the network with MQTT protocol.
+- [Olink](/template-qt6/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications in the same or different technologies (check all of our templates).
+- [QML Plugin](/template-qt6/docs/features/qmlplugin.md): With this feature you can use a qml version of your interface as a [Qml plugin](https://doc.qt.io/qtcreator/creator-qml-modules-with-plugins.html.
+- [Stubs](/template-qt6/docs/features/stubs.md): The feature stubs adds:
+- [Template Qt6](/template-qt6/docs/intro.md): This is the documentation for the Qt6 template.
+- [Quick-Start](/template-qt6/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Qt plugin.
+
+## template-unreal
+
+
+### docs
+
+- [Features](/template-unreal/docs/features.md): Overview of ApiGear Unreal Engine template features: Core API generation, stub implementations, OLink networking, Message Bus IPC, and runtime monitoring.
+- [API Feature](/template-unreal/docs/features/api.md): Generate Unreal Engine interfaces, structs, and enums from API definitions. Full Blueprint and C++ support with property change notifications and async operations.
+- [Monitor](/template-unreal/docs/features/monitor.md): Trace API calls, property changes, and signals at runtime. View live debugging data in ApiGear Studio or CLI for Unreal Engine interfaces.
+- [Message Bus](/template-unreal/docs/features/msgbus.md): Use Unreal Engine's built-in Message Bus for IPC between Unreal applications. Zero-config local communication for editor tools and distributed systems.
+- [OLink](/template-unreal/docs/features/olink.md): Connect Unreal Engine to remote services via ObjectLink WebSocket protocol. Client and server adapters for cross-platform communication and simulation.
+- [Stubs](/template-unreal/docs/features/stubs.md): Generate ready-to-use stub implementations as Unreal Engine GameInstance Subsystems. Includes test fixtures and property change notifications.
+- [Template Unreal Engine](/template-unreal/docs/intro.md): Generate Unreal Engine plugins from API definitions with full Blueprint and C++ support. Create production-ready code with OLink networking, Message Bus IPC, and monitoring.
+- [Quick-Start](/template-unreal/docs/quickstart.md): Step-by-step guide to generate Unreal Engine plugins from YAML API definitions. Learn to create Blueprint and C++ interfaces with ApiGear code generator.
+
+## docs
+
+ApiGear generates native SDKs from stateful API definitions using ObjectAPI. Generate production-ready code for C++, Qt, Unreal Engine, and Python.
+
+- [Introduction](/docs.md): ApiGear generates native SDKs from stateful API definitions using ObjectAPI. Generate production-ready code for C++, Qt, Unreal Engine, and Python.
+
+### cli
+
+- [Code Generation](/docs/cli/generate.md): Generate SDKs from ObjectAPI definitions using solution files or expert mode. Covers CLI flags, solution file format, features, and error handling.
+- [Introduction](/docs/cli/intro.md): Install and use the ApiGear CLI to generate production-ready SDKs, simulate APIs, monitor traffic, and integrate with AI assistants via MCP.
+- [MCP Server](/docs/cli/mcp.md): Use the ApiGear MCP server to expose SDK generation, template management, and spec validation as tools for Claude Code, Cursor, and other AI assistants.
+- [API Monitoring](/docs/cli/monitor.md): Monitor API traffic in real-time using the ApiGear CLI. View property changes, operation calls, and signals from your generated SDK applications.
+- [ObjectLink REPL](/docs/cli/olink.md): Use the ObjectLink REPL to connect to servers, link remote objects, invoke methods, set properties, and observe signals interactively over WebSocket.
+- [Project Management](/docs/cli/project.md): Create, edit, and manage ApiGear projects. Set up API modules, solution files, and simulation scenarios from the command line.
+- [Scripting Support](/docs/cli/simulate.md): Simulate API backends with JavaScript scripts or YAML scenarios. Test your application against mock data before real services exist.
+- [SDK Templates](/docs/cli/template.md): Manage SDK templates for code generation. Install from the registry, list cached templates, and search for available templates.
+
+### guide
+
+- [Calculator API Demo](/docs/guide/calculator.md): Create and simulate a Calculator API in minutes using ApiGear’s model-driven generator.
+- [Counter API Demo](/docs/guide/counter.md): Walk through building a coffee counter API with ApiGear. Define an ObjectAPI module, configure a solution, generate code, and simulate the backend.
+- [Quick Start](/docs/guide/quick-start.md): Generate your first SDK in 5 minutes. Install ApiGear, define an API module, configure a solution file, and generate C++, Qt, Unreal Engine, or Python code.
+- [Update Strategy](/docs/guide/update-strategy.md): Strategies for managing generated code updates when your API evolves. Understand the force flag, protected files, and merge approaches.
+
+### monitor
+
+- [Introduction](/docs/monitor/intro.md): Monitor API usage in real-time during development and testing. Detect anomalies by tracking property changes, operation calls, and signals.
+- [Monitoring Protocol](/docs/monitor/protocol.md): The API Monitor protocol uses HTTP POST to report property changes, operation calls, and signals to the embedded monitoring server.
+
+### objectapi
+
+- [Advanced Concepts](/docs/objectapi/advanced.md): Advanced ObjectAPI concepts including document info blocks, meta annotations for custom code generation, and compact YAML writing format.
+- [API Foundation](/docs/objectapi/core.md): Learn the ObjectAPI document format, primitive types (bool, int, float, string), arrays, complex types, and cross-module imports.
+- [API Examples](/docs/objectapi/examples.md): Complete ObjectAPI YAML examples including a Counter, Radio Tuner with structs and enums, and a Weather Station with signals.
+- [ObjectAPI IDL](/docs/objectapi/idl.md): Write APIs using the ObjectAPI IDL, a concise code-like syntax that auto-converts to YAML. Covers modules, interfaces, structs, enums, and imports.
+- [Introduction](/docs/objectapi/intro.md): ObjectAPI is a specification for defining stateful, object-oriented APIs with properties, operations, and signals for C++, Qt, Unreal Engine, and Python.
+- [API Modules](/docs/objectapi/modules.md): Define API modules with interfaces (properties, operations, signals), data structures, and enumerations using the ObjectAPI specification.
+
+### protocols
+
+- [HTTP Mapping](/docs/protocols/http/mapping_http.md): Map ObjectAPI interfaces to HTTP endpoints using an RPC model. Covers property, operation, and signal mapping with JSON payloads.
+- [Protocol Mappings](/docs/protocols/mapping.md): Map ObjectAPI communication patterns to REST, RPC, and message-based protocols. Compare API types and understand how ObjectAPI bridges them.
+- [Use Cases](/docs/protocols/objectlink/cases.md): ObjectLink use cases including embedded service sharing, sensor-to-dashboard linking, and UI-to-service layer communication across platforms.
+- [Error Messages](/docs/protocols/objectlink/errors.md): ObjectLink error message format and error codes. Covers error handling for link, invoke, set-property, and signal operations.
+- [Introduction](/docs/protocols/objectlink/intro.md): ObjectLink is an IPC protocol that links local objects to remote objects over network connections, synchronizing properties, operations, and signals.
+- [Lifecycle](/docs/protocols/objectlink/lifecycle.md): Manage the ObjectLink object lifecycle with LINK, INIT, and UNLINK messages. Learn how remote objects are linked and initialized with property state.
+- [Method Invokation](/docs/protocols/objectlink/methods.md): Invoke methods on remote objects using the ObjectLink protocol. Covers INVOKE and INVOKE_REPLY message format with request IDs.
+- [Property Synchronization](/docs/protocols/objectlink/properties.md): Synchronize object properties between local and remote objects. Covers SET_PROPERTY and PROPERTY_CHANGE messages for real-time state updates.
+- [Server Side Signals](/docs/protocols/objectlink/signals.md): Receive server-side event notifications through ObjectLink signals. Signals push events from remote objects to all linked local objects.
+
+### scripting
+
+- [JavaScript API](/docs/scripting/backends/api.md): JavaScript API reference for the simulation server. Covers actors, property handling, operation callbacks, signal emission, and timer functions.
+- [Simulation Examples](/docs/scripting/backends/examples.md): Complete simulation examples including a heating control system with thermostat logic, a ball physics animation, and a vehicle dashboard with multiple services.
+- [Service Simulation](/docs/scripting/backends/intro.md): Simulate API services with JavaScript to test client code without real backends. Create virtual objects with state, behavior, and change notifications.
+- [Simulation Protocol](/docs/scripting/backends/protocols.md): How the simulation framework uses the ObjectLink protocol to serve simulated API responses to clients over network connections.
+- [Simulation Scenarios](/docs/scripting/backends/scenario.md): Write simulation scenarios in JavaScript to define API endpoint behavior. Configure actors with properties, operation handlers, and signal emitters.
+- [Generator Based Simulation](/docs/scripting/backends/solution.md): Auto-generate simulation scenarios from API definitions. Quickly scaffold mock backends for large APIs without writing simulation code by hand.
+- [Examples](/docs/scripting/clients/examples.md): JavaScript client script examples that connect to remote services. Includes counter increment and heating system control scenarios.
+- [Scripted Clients](/docs/scripting/clients/intro.md): Use JavaScript client scripts to trigger operation sequences and data changes on remote services via the ObjectLink protocol.
+- [Scripting](/docs/scripting/intro.md): Use JavaScript scripting to simulate API backends and drive API clients. Test, prototype, and demo without compiled code or deployed services.
+
+### sdk
+
+- [SDK Templates](/docs/sdk/intro.md): Browse available SDK templates for code generation. Includes C++17, Qt 6, Unreal Engine, Python, Go, Rust, and TypeScript with protocol and monitoring support.
+- [Filter Reference](/docs/sdk/maker/filters.md): Reference for template filters that transform text in SDK templates. Covers case conversion (snake, camel, pascal), path helpers, and string utilities.
+- [Introduction](/docs/sdk/maker/intro.md): Create and customize SDK templates for ApiGear code generation. Adapt existing templates or build new ones for your technology stack.
+- [Rules Document](/docs/sdk/maker/rules.md): Define code generation rules with features, file output targets, and template-to-source mappings. Control which files are generated and when.
+- [Symbol Reference](/docs/sdk/maker/symbols.md): Reference for all symbols available in SDK templates. Covers System, Module, Interface, Structure, Enumeration, and their properties.
+- [Template Primer](/docs/sdk/maker/template.md): Learn the Go text/template syntax used in ApiGear SDK templates. Covers variables, loops, conditionals, functions, and template composition.
+- [Quick Start](/docs/sdk/maker/tutorial.md): Step-by-step tutorial to create an SDK template that generates TypeScript interfaces from ObjectAPI definitions. Covers rules, templates, and solution setup.
+
+### studio
+
+- [Introduction](/docs/studio/intro.md): ApiGear Studio is a desktop application for designing APIs, generating SDKs, running simulations, and monitoring API traffic in one integrated environment.
+- [Project Management](/docs/studio/project.md): Create, open, and manage API projects in ApiGear Studio. Organize modules, solutions, and scenarios within the project workspace.
+- [Quick Start](/docs/studio/quickstart.md): Get started with ApiGear Studio. Create a project, define API modules, configure code generation, and monitor API traffic in the desktop IDE.
