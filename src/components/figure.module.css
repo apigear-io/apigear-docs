@@ -1,0 +1,87 @@
+.figure {
+  margin: 0;
+  padding: 0;
+  cursor: zoom-in;
+}
+
+.content {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 8px;
+  display: block;
+}
+
+.content > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.caption {
+  margin-top: 4px;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.lifted {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lifted .content {
+  width: 90vw;
+  height: 85vh;
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mermaid wraps its SVG in a div with class "docusaurus-mermaid-container".
+   Stretch any direct-child div so its SVG can scale to the full content area. */
+.lifted .content > div {
+  width: 100%;
+  height: 100%;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mermaid emits <svg width="100%" style="max-width: <intrinsic>px"> with useMaxWidth:true.
+   The inline style wins over class CSS without !important, capping the diagram at its
+   intrinsic pixel width. Override here so the SVG actually fills the modal box;
+   viewBox + preserveAspectRatio="xMidYMid meet" handle aspect-ratio preservation. */
+.lifted .content svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+.lifted .content > img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lifted .caption {
+  color: #fff;
+  margin-top: 12px;
+  font-size: 1em;
+}
