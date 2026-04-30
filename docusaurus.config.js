@@ -354,6 +354,7 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+        additionalLanguages: ['java', 'cpp', 'csharp', 'kotlin', 'python', 'rust', 'go', 'ini', 'toml', 'gradle', 'groovy'],
       },
     }),
 
