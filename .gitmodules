@@ -17,3 +17,7 @@
 [submodule "template-docs/template-cpp17"]
 	path = template-docs/template-cpp17
 	url = https://github.com/apigear-io/template-cpp17
+[submodule "template-docs/template-java"]
+	path = template-docs/template-java
+	url = https://github.com/apigear-io/template-java.git
+	branch = main
