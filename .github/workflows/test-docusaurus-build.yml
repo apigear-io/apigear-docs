@@ -20,6 +20,18 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npx --yes docusaurus-mdx-checker 
+      - name: mdx check (served content only)
+        run: |
+          set -e
+          for dir in docs blog src/pages \
+              template-docs/template-unreal/docs/docs \
+              template-docs/template-cpp17/docs/docs \
+              template-docs/template-cpp14/docs/docs \
+              template-docs/template-qt6/docs/docs \
+              template-docs/template-python/docs/docs \
+              template-docs/template-java/docs/docs; do
+            echo "=== $dir ==="
+            npx --yes docusaurus-mdx-checker --cwd "$dir"
+          done
       - run: npm ci
       - run: npm run build
