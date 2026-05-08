@@ -178,6 +178,33 @@ const config = {
         depth: 2,
       }
     ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          { from: '/docs/advanced/protocols/objectlink/intro', to: '/docs/protocols/objectlink/intro' },
+          { from: '/docs/advanced/objectlink/intro',           to: '/docs/protocols/objectlink/intro' },
+          { from: '/docs/advanced/maker/tutorial',             to: '/docs/sdk/maker/tutorial' },
+          { from: '/docs/advanced/maker/template',             to: '/docs/sdk/maker/template' },
+          { from: '/docs/advanced/simulation/intro',           to: '/docs/scripting/intro' },
+          { from: '/docs/advanced/simulation/scenario',        to: '/docs/scripting/backends/scenario' },
+          { from: '/docs/advanced/simulation/examples',        to: '/docs/scripting/backends/examples' },
+          { from: '/docs/advanced/stimulation/intro',          to: '/docs/scripting/intro' },
+          { from: '/docs/sdk/python-sdk',                      to: '/template-python/docs/intro' },
+          { from: '/docs/sdk/cpp14-sdk',                       to: '/template-cpp14/docs/intro' },
+          { from: '/docs/sdk/typescript-sdk',                  to: '/docs/sdk/intro' },
+          { from: '/docs/tools/studio/intro',                  to: '/docs/studio/intro' },
+          { from: '/docs/tools/studio/project',                to: '/docs/studio/project' },
+          { from: '/docs/tools/cli/intro',                     to: '/docs/cli/intro' },
+          { from: '/docs/tools/cli/simulate',                  to: '/docs/cli/simulate' },
+          { from: '/docs/tools/cli/template',                  to: '/docs/cli/template' },
+          { from: '/docs/tools/cli/olink',                     to: '/docs/cli/olink' },
+          { from: '/docs/quick-start',                         to: '/docs/guide/quick-start' },
+          { from: '/docs/guide/intro',                         to: '/docs/guide/quick-start' },
+          { from: '/docs/community/help',                      to: '/help' },
+        ],
+      },
+    ],
   ],
 
   themeConfig:
