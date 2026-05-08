@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /*?current-template=
+Disallow: /*?ref=
+
+Sitemap: https://apigear.io/sitemap.xml
