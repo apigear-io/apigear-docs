@@ -19,3 +19,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /tmp
+
+# Agent / Claude working files — never publish, never commit
+/.claude/
+/.playwright-mcp/
+/docs/plans/

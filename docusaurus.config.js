@@ -61,6 +61,7 @@ const config = {
           // id: 'docs', // omitted => default instance
           routeBasePath: 'docs',
           sidebarPath: require.resolve('./sidebars.js'),
+          exclude: ['plans/**', '**/_*.md', '**/_*.mdx'],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
