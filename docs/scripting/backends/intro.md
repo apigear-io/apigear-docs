@@ -17,10 +17,16 @@ To explain the concept we will use a simple example.
 ```
 module demo
 
+
+
 interface Counter {
+
   count: int
+
   increment()
+
   decrement()
+
 }
 ```
 
@@ -29,32 +35,60 @@ The counter example shows a simple interface which can be used to increment or d
 ```
 // counter.js
 
+
+
 // create a service based on module and interface name and provide initial properties
+
 const counter = $createService("demo.Counter", { count: 0 });
 
+
+
 // react to changes of the count property
+
 counter.on("count", function(value) {
+
   console.log("count changed to " + value);
+
 });
 
 
+
+
+
 // provide an implementation for the increment operation
+
 counter.increment = function() {
+
   // modify the count property using 'this', this will trigger the count property change event
+
   this.count++;
+
 };
+
+
 
 // provide an implementation for the decrement operation
+
 counter.decrement = function() {
+
   this.count--;
+
 };
 
+
+
 // provide an autorun function which will be called when the simulation is started
+
 function main() {
+
   for (let i = 0; i < 10; i++) {
+
     counter.increment();
+
     counter.decrement();
+
   }
+
 }
 ```
 

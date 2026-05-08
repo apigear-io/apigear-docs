@@ -5,11 +5,18 @@ Most examples in the API documentation are based on an API definition for a coun
 ```
 module demo
 
+
+
 interface Counter {
+
     count: int
+
     increment()
+
     reset()
+
     signal resetted()
+
 }
 ```
 
@@ -47,9 +54,13 @@ This is useful for gracefully terminating long-running simulations or when speci
 
 ```
 // Example: Stop simulation after a condition
+
 if (temperature > 100) {
+
     console.log("Overheating detected, stopping simulation");
+
     $quit();
+
 }
 ```
 
@@ -65,20 +76,35 @@ The following example creates a service with the given name and state and return
 
 ```
 // creates a service with the given name and state
+
 const counter = $createService("counter", { count: 0 });
 
+
+
 // Direct property access and modification
+
 counter.count = 10;
+
 console.log(counter.count); // 10
 
+
+
 // Monitor property changes
+
 counter.on("count", function (value) {
+
     console.log("count changed", value);
+
 });
+
 counter.count = 11;
+
 // prints "count changed 11"
 
+
+
 // Access the raw service object when needed
+
 console.log(counter.$.getProperties()); // { count: 11 }
 ```
 
@@ -90,9 +116,13 @@ Services use JavaScript proxies to provide natural property access:
 
 ```
 // Get property value
+
 const value = service.propertyName;
 
+
+
 // Set property value
+
 service.propertyName = newValue;
 ```
 
@@ -108,11 +138,18 @@ Unregister the callback by calling the returned unsubscribe function.
 
 ```
 const counter = $createService("counter", { count: 10 });
+
 const unsubscribe = counter.on("count", function (value) {
+
     console.log("count changed", value);
+
 });
+
 counter.count = 11;
+
 // prints "count changed 11"
+
+
 
 unsubscribe();
 ```
@@ -123,10 +160,15 @@ When you need access to the underlying service object, use the `$` property:
 
 ```
 // Access raw service methods
+
 service.$.getProperties()  // Returns all properties as an object
+
 service.$.setProperties({ prop1: value1, prop2: value2 })  // Set multiple properties
+
 service.$.hasProperty(name)  // Check if property exists
+
 service.$.getProperty(name)  // Get property value (alternative to direct access)
+
 service.$.setProperty(name, value)  // Set property value (alternative to direct access)
 ```
 
@@ -139,13 +181,22 @@ Methods are defined by assigning functions to service properties. The function a
 ```
 const counter = $createService("counter", { count: 0 });
 
+
+
 // Define a method with automatic 'this' binding
+
 counter.increment = function() {
+
     this.count++;  // 'this' refers to the service proxy
+
     this.emit('incremented', this.count);  // Can emit signals
+
 };
 
+
+
 // Call the method
+
 counter.increment();
 ```
 
@@ -155,12 +206,19 @@ When needed, you can access methods through the raw service object:
 
 ```
 // Check if method exists
+
 service.$.hasMethod("methodName")  // Returns boolean
 
+
+
 // Get method reference
+
 service.$.getMethod("methodName")  // Returns the function
 
+
+
 // Call method through raw API
+
 service.$.callMethod("methodName", arg1, arg2)  // Calls with arguments
 ```
 
@@ -177,11 +235,18 @@ Emit a signal on the service.
 ```
 const counter = $createService("counter", { count: 0 });
 
+
+
 // Define a method that emits a signal
+
 counter.reset = function() {
+
     this.count = 0;
+
     this.emit('resetted');  // Emit signal with no arguments
+
     this.emit('stateChanged', this.count);  // Emit with arguments
+
 };
 ```
 
@@ -192,19 +257,35 @@ Use the same `on` method to listen for both property changes and signals:
 ```
 const counter = $createService("counter", { count: 0 });
 
+
+
 // Listen to custom signals
+
 const unsubscribe = counter.on("resetted", function () {
+
     console.log("Counter was reset");
+
 });
+
+
 
 counter.on("stateChanged", function (newValue) {
+
     console.log("State changed to:", newValue);
+
 });
 
+
+
 // Trigger the signals
+
 counter.reset();
+
 // prints "Counter was reset"
+
 // prints "State changed to: 0"
+
+
 
 unsubscribe(); // unregister the callback
 ```
@@ -215,6 +296,7 @@ For direct signal manipulation through the raw API:
 
 ```
 service.$.onSignal(name, callback)  // Register signal listener
+
 service.$.emitSignal(name, ...args)  // Emit signal
 ```
 
@@ -232,15 +314,25 @@ Schedules a function to be called after a specified delay (in milliseconds).
 
 ```
 // Example: Delayed state change
+
 setTimeout(function() {
+
     heater.temperature = 25;
+
     console.log("Temperature updated after delay");
+
 }, 1000);  // Execute after 1 second
 
+
+
 // Example: Sequential operations in vehicle example
+
 const interval = setInterval(function() {
+
     indicators[indicator] = true;
+
     console.log(`Turned on ${indicator}`);
+
 }, 200);
 ```
 
@@ -252,7 +344,9 @@ Standard console methods are available for debugging and output:
 
 ```
 console.log("Info message");
+
 console.warn("Warning message");
+
 console.error("Error message");
 ```
 

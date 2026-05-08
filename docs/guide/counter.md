@@ -18,15 +18,25 @@ Now we enter the API definition into the API editor field and save the content.
 
 ```
 schema: apigear.module/1.0
+
 name: demo.daily
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: Counter
+
     properties:
+
       - name: count
+
         type: int
+
     operations:
+
       - name: increment
 ```
 
@@ -41,10 +51,16 @@ The generated code will result in a C++ class with some abstract methods. The AP
 ```
 // counter.h
 
+
+
 void Counter::increment()
+
 {
+
    // add implementation here
+
     count++;
+
 }
 ```
 
@@ -52,16 +68,27 @@ Now, you can use the class in your main function.
 
 ```
 // main.cpp
+
 #include <iostream>
+
 using namespace std;
+
+
 
 #include "counter.h"
 
+
+
 int main(int argc, char**argv) {
+
     Counter counter;
+
     cout << counter.count();
+
     counter.increment();
+
     cout << counter.count();
+
 }
 ```
 
@@ -81,19 +108,33 @@ To write code examples just indent the code snippets
 
 ```
 schema: apigear.module/1.0
+
 name: demo.daily
+
 version: "1.0"
+
 description: A module to demonstrate an API
 
+
+
 interfaces:
+
   - name: Counter
+
     description: An interface to increment a coffee counter
+
     properties:
+
       - name: count
+
         type: int
+
         description: holds the current count value
+
     operations:
+
       - name: increment
+
         description: increments the count value
 ```
 

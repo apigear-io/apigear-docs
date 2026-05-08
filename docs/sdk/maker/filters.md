@@ -14,7 +14,9 @@ Where `.` is the current context and `.Module` is the module object from the cur
 
 ```
 {{ range .Module.Interfaces }}
+
   {{ snake .Name }}
+
 {{ end }}
 ```
 
@@ -30,7 +32,9 @@ Converts a string to snake case - (lower, title, upper) case with underscores
 
 ```
   {{snake "org.demo"}} => org_demo
+
   {{Snake "org.demo"}} => Org_Demo
+
   {{SNAKE "org.demo"}} => ORG_DEMO
 ```
 
@@ -40,7 +44,9 @@ Converts a string to camel case - (lower, title, upper) case with first letter l
 
 ```
 {{camel "org.demo"}} => orgDemo
+
 {{Camel "org.demo"}} => OrgDemo
+
 {{CAMEL "org.demo"}} => ORGDEMO
 ```
 
@@ -50,7 +56,9 @@ Converts a string to dot case - (lower, title, upper) case with dots
 
 ```
 {{dot "org.demo"}} => org.demo
+
 {{Dot "org.demo"}} => Org.Demo
+
 {{DOT "org.demo"}} => ORG.DEMO
 ```
 
@@ -60,7 +68,9 @@ Converts a string to kebap case - (lower, title, upper) case with dashes
 
 ```
 {{kebap "org.demo"}} => org-demo
+
 {{Kebap "org.demo"}} => Org-Demo
+
 {{KEBAP "org.demo"}} => ORG-DEMO
 ```
 
@@ -70,7 +80,9 @@ Converts a string to path case - (lower, title, upper) case with slashes
 
 ```
 {{path "org.demo"}} => org/demo
+
 {{Path "org.demo"}} => Org/Demo
+
 {{PATH "org.demo"}} => ORG/DEMO
 ```
 
@@ -112,7 +124,9 @@ Returns the first character of a string as lower, unchanged, upper case
 
 ```
 {{first "org.demo"}} => o
+
 {{First "org.demo"}} => o
+
 {{FIRST "org.demo"}} => O
 ```
 
@@ -154,7 +168,9 @@ Converts an integer to words (lower, title and upper case)
 
 ```
 {{int2word 1}} => one
+
 {{Int2Word 1}} => One
+
 {{INT2WORD 1}} => ONE
 ```
 
@@ -180,9 +196,13 @@ extracts major, minor, build version from a version string
 
 ```
 {{$v := version "1.2.3"}}
+
 {{$v}} => 1.2.3
+
 {{$v.Major}} => 1
+
 {{$v.Minor}} => 2
+
 {{$v.Build}} => 3
 ```
 
@@ -196,7 +216,9 @@ A typical usage could look like this:
 
 ```
 {{ range .Operations }}
+
   {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+
 {{ end }}
 ```
 
@@ -214,9 +236,13 @@ Takes and typed element and returns the type declaration of the type
 
 ```
 {{ range .Module.Interfaces }}
+
 {{ range .Operations }}
+
   {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+
 {{ end }}
+
 {{ end }}
 ```
 
@@ -226,13 +252,21 @@ Takes a typed element and returns the function parameter declaration
 
 ```
 {{ range .Module.Interfaces }}
+
 {{ range .Operations }}
+
   {{ cppReturn "" .Return }} {{ camel .Name }}(
+
     {{ range $i, $p := .Params }}
+
       {{ if $i }}, {{ end }}
+
     {{ cppParam "" $p }}
+
     {{ end }});
+
 {{ end }}
+
 {{ end }}
 ```
 
@@ -242,9 +276,13 @@ Takes an operation and return the lists of function parameters
 
 ```
 {{ range .Module.Interfaces }}
+
 {{ range .Operations }}
+
   {{ cppReturn "" .Return }} {{ camel .Name }}({{ cppParams "" .Params }});
+
 {{ end }}
+
 {{ end }}
 ```
 
@@ -254,12 +292,19 @@ Takes a typed element and returns default value
 
 ```
 {{ range .Module.Interfaces }}
+
 {{ $class := .Name }}
+
 {{ range .Operations }}
+
   {{ cppReturn "" .Return }} {{$class}}::{{ camel .Name }}({{ cppParams "" .Params }}) {
+
     return {{ cppDefault "" .Return }};
+
   }
+
 {{ end }}
+
 {{ end }}
 ```
 

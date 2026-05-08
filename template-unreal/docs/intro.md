@@ -8,3 +8,4 @@ The documentation is split into the following sections:
 
 * [Quick-Start](/template-unreal/docs/quickstart.md?current-template=template-unreal) is the easiest way to get started
 * [Features](/template-unreal/docs/features.md) explains the available code generator features, what code is generated, and how to use it
+* [Licensing & Author Info](/template-unreal/docs/features/licensing.md) covers license files, SPDX headers, and customizing author metadata in generated plugins

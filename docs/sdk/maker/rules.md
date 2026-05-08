@@ -10,7 +10,9 @@ A feature is declared by name inside the features root tag.
 
 ```
 features:
+
   - name: feature1
+
   - name: feature2
 ```
 
@@ -18,7 +20,9 @@ A feature can contain a prefix target path as also a scope for documents.
 
 ```
 features:
+
   - name: feature1
+
     prefix: {{module.name}}/
 ```
 
@@ -36,9 +40,13 @@ Needs allows to define a dependency between features. For example the `scaffold`
 
 ```
 features:
+
   - name: api
+
   - name: scaffold
+
     needs:
+
       - api
 ```
 
@@ -48,22 +56,39 @@ A scope defined the context for the template for language for the defined docume
 
 ```
 features:
+
   - name: feature1
+
     scopes:
+
       - match: system
+
         documents:
+
           - { source: system.go, target: system.go }
+
       - match: module
+
         documents:
+
           - { source: module.go, target: module.go }
+
       - match: interface
+
         documents:
+
           - { source: interface.go, target: interface.go }
+
       - match: struct
+
         documents:
+
           - { source: struct.go, target: struct.go }
+
       - match: enum
+
         documents:
+
           - { source: enum.go, target: enum.go }
 ```
 

@@ -56,8 +56,11 @@ The `project` command stores the project configuration in the `<project>/.apigea
 
 ```
 # .apigear
+
 {
+
     "folder": "apigear",
+
 }
 ```
 

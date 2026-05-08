@@ -35,7 +35,9 @@ A typical template folder structure looks like this
 
 ```
 first/
+
     rules.yaml
+
     templates/welcome.txt.tpl
 ```
 
@@ -43,11 +45,17 @@ The rules document is a YAML document and lists all template file and how they s
 
 ```
 features:
+
   - name: default
+
     scopes:
+
       - match: system
+
         documents:
+
           - source: welcome.txt.tpl
+
             target: welcome.txt
 ```
 
@@ -67,14 +75,23 @@ You could think of the underlying logic of a rules document like this (using a p
 
 ```
 system = ...
+
 write_system_documents()
+
 for module in system.modules:
+
     write_module_documents()
+
     for interface in module.interfaces:
+
         write_interface_documents()
+
     for struct in module.structs:
+
         write_struct_documents()
+
     for enum in module.enums:
+
         write_enum_documents()
 ```
 
@@ -82,34 +99,63 @@ Here is a more elaborate example of a rules document:
 
 ```
 # rules.yaml
+
 features:
+
   - name: default
+
     scopes:
+
       - match: system
+
         documents:
+
           - source: system.md.tpl
+
             target: system.md
+
       - match: module
+
         documents:
+
           - source: module.md.tpl
+
             target: {{.Module.Name}}.md
+
       - match: interface:
+
         documents:
+
           - source: interface.md.tpl
+
             target: {{.Interface.Name}}.md
+
       - match: struct
+
         documents:
+
           - source: struct.md.tpl
+
             target: {{.Struct.Name}}.md
+
       - match: enum
+
         documents:
+
           - source: enum.md.tpl
+
             target: {{.Enum.Name}}.md
+
   - name: summary
+
     scopes:
+
       - match: system
+
         documents:
+
           - source: summary.md.tpl
+
             target: summary.md
 ```
 

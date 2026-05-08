@@ -24,33 +24,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -58,20 +86,35 @@ The following file structure is generated in the `IoWorldImplementation` module:
 
 ```
 📂IoWorld/Source/IoWorldImplementation
+
  ┣ 📂Private
+
  ┃ ┣ 📂Implementation
+
  ┃ ┃ ┗ 📜IoWorldHello.cpp
+
  ┃ ┣ 📂Tests
+
  ┃ ┃ ┣ 📜IoWorldHelloImpl.spec.cpp
+
  ┃ ┃ ┣ 📜IoWorldHelloImplFixture.h
+
  ┃ ┃ ┗ 📜IoWorldHelloImplFixture.cpp
+
  ┃ ┗ 📂Generated
+
  ┃   ┗ 📜IoWorldImplementation.cpp
+
  ┣ 📂Public
+
  ┃ ┗ 📂IoWorld
+
  ┃   ┣ 📂Implementation
+
  ┃   ┃ ┗ 📜IoWorldHello.h
+
  ┃   ┗ 📜IoWorldImplementation.h
+
  ┗ 📜IoWorldImplementation.Build.cs
 ```
 
@@ -106,9 +149,13 @@ Operations are generated with empty implementations for you to fill in:
 
 ```
 int32 UIoWorldHelloImplementation::Say(const FIoWorldMessage& Msg, EIoWorldWhen When)
+
 {
+
     // Add your business logic here
+
     return ProcessMessage(Msg, When);
+
 }
 ```
 
@@ -120,13 +167,21 @@ The abstract base class provides async wrappers that automatically call your syn
 
 ```
 // Your implementation only needs the synchronous method
+
 int32 UIoWorldHelloImplementation::Say(const FIoWorldMessage& Msg, EIoWorldWhen When)
+
 {
+
     // Your business logic here
+
     return ProcessMessage(Msg);
+
 }
 
+
+
 // Callers can use async variants - they automatically call Say() on a thread pool
+
 TFuture<int32> Future = Hello->SayAsync(Msg, EIoWorldWhen::IWW_Now);
 ```
 
@@ -134,20 +189,35 @@ If you need custom async behavior (e.g., for operations that are naturally async
 
 ```
 // Override for custom async behavior
+
 TFuture<int32> UIoWorldHelloImplementation::SayAsync(const FIoWorldMessage& Msg, EIoWorldWhen When)
+
 {
+
     // Custom async implementation
+
     TPromise<int32> Promise;
+
     TFuture<int32> Future = Promise.GetFuture();
 
+
+
     // Start async work
+
     AsyncTask(ENamedThreads::AnyBackgroundThreadNormalTask, [this, Msg, When, Promise = MoveTemp(Promise)]() mutable
+
     {
+
         int32 Result = DoAsyncWork(Msg, When);
+
         Promise.SetValue(Result);
+
     });
 
+
+
     return Future;
+
 }
 ```
 
@@ -165,12 +235,19 @@ To emit a signal from your implementation, use the Publisher:
 
 ```
 void UIoWorldHelloImplementation::SomeInternalMethod()
+
 {
+
     FIoWorldMessage Msg;
+
     Msg.content = TEXT("Something happened");
 
+
+
     // Emit the signal via Publisher
+
     _GetPublisher()->BroadcastJustSaidSignal(Msg);
+
 }
 ```
 
@@ -195,13 +272,22 @@ PublicDependencyModuleNames.AddRange(new string[] { "IoWorldImplementation" });
 ```
 #include "IoWorld/Implementation/IoWorldHello.h"
 
+
+
 // From any UObject with access to the world
+
 UIoWorldHelloImplementation* Hello = GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
+
 if (Hello)
+
 {
+
     FIoWorldMessage Msg;
+
     Msg.content = TEXT("Hello");
+
     Hello->Say(Msg, EIoWorldWhen::IWW_Now);
+
 }
 ```
 
@@ -209,12 +295,19 @@ Using `TScriptInterface` for interface-based access:
 
 ```
 #include "IoWorld/Generated/api/IoWorldHelloInterface.h"
+
 #include "IoWorld/Implementation/IoWorldHello.h"
 
+
+
 TScriptInterface<IIoWorldHelloInterface> Hello =
+
     GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
 
+
+
 // Now use through the interface
+
 Hello->SetLast(Msg);
 ```
 
@@ -251,11 +344,17 @@ The fixture provides access to the implementation through `GetImplementation()`.
 
 ```
 It("MyCustomTest", [this]()
+
 {
+
     FIoWorldMessage Msg;
+
     Msg.content = TEXT("Test");
+
     int32 Result = ImplFixture->GetImplementation()->Say(Msg, EIoWorldWhen::IWW_Now);
+
     TestEqual(TEXT("Expected result"), Result, ExpectedValue);
+
 });
 ```
 
@@ -271,13 +370,21 @@ Override the `Initialize` method from the abstract base class for setup:
 
 ```
 void UIoWorldHelloImplementation::Initialize(FSubsystemCollectionBase& Collection)
+
 {
+
     Super::Initialize(Collection);
 
+
+
     // Initialize default values
+
     Last.content = TEXT("Default");
 
+
+
     // Set up any required connections or resources
+
 }
 ```
 
@@ -287,9 +394,14 @@ Override `Deinitialize` to clean up resources:
 
 ```
 void UIoWorldHelloImplementation::Deinitialize()
+
 {
+
     // Clean up connections, timers, etc.
 
+
+
     Super::Deinitialize();
+
 }
 ```

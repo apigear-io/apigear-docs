@@ -16,10 +16,15 @@ Only ObjectAPI, name, version are mandatory. The other identifiers are optional.
 
 ```
 schema: apigear.module/1.0
+
 name: org.example
+
 version: "1.0"
+
 interfaces:
+
 structs:
+
 enums:
 ```
 
@@ -31,10 +36,15 @@ The interface itself is identified by its `name` inside a module.
 
 ```
 schema: apigear.module/1.0
+
 name: "org.example"
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: MyInterface
 ```
 
@@ -44,10 +54,15 @@ Each property has a `name` and a `type` as also `description` and additional `me
 
 ```
 # ...
+
 interfaces:
+
   - name: MyInterface
+
     properties:
+
       - name: value
+
         type: int
 ```
 
@@ -59,13 +74,21 @@ Ideally you design your operations in a way that they can be divided into comman
 
 ```
 # ...
+
 interfaces:
+
   - name: MyInterface
+
     operations:
+
       - name: command
+
         description: A command does not have a return type
+
       - name: query
+
         type: string
+
         description: A query returns data
 ```
 
@@ -73,14 +96,23 @@ Operation can have parameter arguments
 
 ```
 # ...
+
 interfaces:
+
   - name: MyInterface
+
     operations:
+
       - name: command
+
         params:
+
           - name: step
+
             type: int
+
         return:
+
           type: int
 ```
 
@@ -92,12 +124,19 @@ A signal allows the interface to notify the outside world about events happening
 
 ```
 # ...
+
 interfaces:
+
   - name: MyInterface
+
     signals:
+
       - name: error
+
         params:
+
           - name: code
+
             type: int
 ```
 
@@ -107,10 +146,15 @@ A structure represents a data structure which can be used for communication. The
 
 ```
 # ...
+
 structs:
+
   - name: Message
+
     fields:
+
       - name: msg
+
         type: string
 ```
 
@@ -118,15 +162,25 @@ A data structure does not contain any operations or signals. A data structure is
 
 ```
 # ...
+
 interfaces:
+
   - name: MessageSender
+
     properties:
+
       - name: lastMessage
+
         type: Message
+
     operations:
+
       - name: send
+
         params:
+
           - name: msg
+
             type: Message
 ```
 
@@ -140,15 +194,25 @@ Enumerations and Flags are value types, which allow a user to use a defined numb
 
 ```
 enums:
+
   - name: Status
+
     members:
+
       - name: None
+
         value: 0
+
       - name: Loading
+
         value: 1
+
       - name: Ready
+
         value: 2
+
       - name: Error
+
         value: 3
 ```
 
@@ -156,11 +220,17 @@ The values are optional and when missing the value is counted incrementally from
 
 ```
 enums:
+
   - name: Status
+
     members:
+
       - name: None
+
       - name: Loading
+
       - name: Ready
+
       - name: Error
 ```
 
@@ -168,9 +238,14 @@ An enumeration is also a symbol and can be used by its name to identify its type
 
 ```
 # ...
+
 interfaces:
+
   - name: MyInterface
+
     properties:
+
       - name: status
+
         type: Status # references the Status enumeration
 ```

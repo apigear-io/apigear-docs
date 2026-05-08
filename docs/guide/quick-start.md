@@ -47,41 +47,65 @@ When using the CLI, only the highlighted line needs to be executed. You can veri
 
 ```
 $ apigear template install apigear-io/template-unreal@v3.2.2
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | <sha1>    | v3.2.2
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-cpp14@v3.6.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | <sha1>    | v3.6.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-qtcpp@v0.4.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-qtcpp@v0.4.0  | https://github.com/apigear-io/template-qtcpp.git  | <sha1>    | v0.4.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-python@v1.0.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-python.git | <sha1>    | v1.0.0
+
 ...
 ```
 
@@ -165,17 +189,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: ue_docs
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../ue_docs
+
     template: apigear-io/template-unreal@v3.2.2
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -183,17 +219,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: cpp_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../cpp_hello_world
+
     template: apigear-io/template-cpp14@v3.6.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -201,17 +249,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: qt_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../qt_hello_world
+
     template: apigear-io/template-qtcpp@v0.4.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -219,17 +279,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../py_hello_world
+
     template: apigear-io/template-python@v1.0.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -253,33 +325,61 @@ helloworld.module.yaml
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -291,6 +391,7 @@ The following snippet demonstrates how to run the CLI and provides an example ou
 
 ```
 $ apigear generate solution apigear/helloworld.solution.yaml
+
 10:52:20 INF generated 21 files in 30ms. (20 write, 0 skip, 1 copy) topic=gen
 ```
 

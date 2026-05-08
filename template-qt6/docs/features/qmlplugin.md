@@ -10,33 +10,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -44,20 +72,35 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ...
+
  ┃ ┃ ┣ 📂qmlplugin
+
  ┃ ┃ ┃  ┣ 📜apifactory.cpp
+
  ┃ ┃ ┃  ┣ 📜apifactory.h
+
  ┃ ┃ ┃  ┗ 📜CMakeLists.txt
+
  ┃ ┃ ┃  ┣ 📜qml_api.cpp
+
  ┃ ┃ ┃  ┣ 📜qml_api.h
+
  ┃ ┃ ┃  ┣ 📜qmlhello.cpp
+
  ┃ ┃ ┃  ┣ 📜qmlhello.h
 ```
 
@@ -71,12 +114,19 @@ Files `📜qml_api.h` and `📜qml_api.cpp` contain:
 
 ```
 struct ForeignWhen : public QObject
+
 {
+
     Q_OBJECT
+
     QML_FOREIGN(When)
+
     QML_NAMED_ELEMENT(IoWorldWhen)
+
     QML_UNCREATABLE("This is enum class")
+
     QML_ADDED_IN_VERSION(1,0)
+
 };
 ```
 
@@ -84,12 +134,19 @@ struct ForeignWhen : public QObject
 
 ```
 class IO_WORLD_QML_EXPORT MessageFactory : public QObject {
+
     Q_OBJECT
+
     QML_ADDED_IN_VERSION(1,0)
+
     QML_NAMED_ELEMENT(IoWorldMessageFactory)
+
     QML_SINGLETON
+
 public:
+
     Q_INVOKABLE io_world::Message create(QString in_content);
+
 };
 ```
 
@@ -109,16 +166,27 @@ qmlhello.h
 
 ```
 class IO_WORLD_QML_EXPORT QMLHello : public AbstractHello
+
 {
+
     Q_OBJECT
+
     QML_NAMED_ELEMENT(IoWorldHello)
+
     ...
+
     Q_PROPERTY(Message last READ last WRITE setLast NOTIFY lastChanged)
+
     ...
+
     Q_INVOKABLE int say(const Message& msg, When::WhenEnum when) override;
+
     ...
+
 Q_SIGNALS:
+
     void lastChanged(const Message& last);
+
 }
 ```
 
@@ -132,14 +200,24 @@ To use QMLHello you just need to create an instance of it in your QML code with 
 
 ```
 import QtQuick 2.15
+
 import QtQuick.Layouts 1.2
+
 import io_world 1.0
 
+
+
 ApplicationWindow {
+
     id: appWindow
+
     visible: true
+
     width: 300
+
     height: 300
+
+
 
     IoWorldHello { id: qmlIoWorldHello }
 ```
@@ -155,19 +233,34 @@ io\_world/customfactory.h
 ```
 #pragma once
 
+
+
 #include "io_world/api/iapifactory.h"
+
 // #include "your CustomHello header file"
+
 #include <QtCore>
 
+
+
 class CustomFactory : public QObject, public IApiFactory
+
 {
+
 public:
+
     CustomFactory(..., QObject *parent = nullptr); //provide any extra resources your factory needs.
 
+
+
     std::shared_ptr<AbstractHello> createHello(QObject *parent = nullptr) override
+
     {
+
         return make_shared<CustomHello>(...); // provide any resource your CustomHello needs.
+
     }
+
 };
 ```
 
@@ -177,24 +270,43 @@ main.cpp
 
 ```
 #include "io_world/api/apifactory.h"
+
 #include "io_world/customfactory.h"
 
+
+
 #include <QtCore>
+
 #include <QGuiApplication>
+
 #include <QQmlApplicationEngine>
+
+
 
 int main(int argc, char *argv[]){
 
+
+
     io_world::CustomFactory io_worldFactory();
+
     // Setting the CustomFactory as a global factory. From now, each qml object will create backend with it.
+
     io_world::ApiFactory::set(&io_worldFactory); 
 
+
+
     // Starting your application after setting the factory.
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+
     QGuiApplication app(argc, argv);
+
     QQmlApplicationEngine engine;
 
+
+
     engine.load(url);
+
     ...
 ```
 
@@ -214,7 +326,9 @@ If you run your application outside of *Qt Creator* you need to add the import p
 
 ```
     QGuiApplication app(argc, argv);
+
     QQmlApplicationEngine engine;
+
     app.addLibraryPath(the-directory);
 ```
 

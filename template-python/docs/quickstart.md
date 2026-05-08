@@ -2,7 +2,7 @@
 
 The Quick-Start guide explains how to, in few steps, get from an API to a functional *Python* plugin. Steps 1 and 3 are universal for other technologies. In the step 2 you will choose a concrete *Python* template. For more general information about first steps with ApiGear [First Steps](/docs/guide/quick-start.md)
 
-The quick start enables only basic features: the api(TBD) generation and simple stub(TBD) implementation. For all available features check the [overview](/template-python/docs/features.md).
+The quick start enables only the basic features: the `api` generation and the `scaffold` skeleton with stub implementations you can fill in. For all available features check the [overview](/template-python/docs/features.md).
 
 ## 1. Install the Code Generator[​](#1-install-the-code-generator "Direct link to 1. Install the Code Generator")
 
@@ -47,41 +47,65 @@ When using the CLI, only the highlighted line needs to be executed. You can veri
 
 ```
 $ apigear template install apigear-io/template-unreal@v3.2.2
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | <sha1>    | v3.2.2
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-cpp14@v3.6.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | <sha1>    | v3.6.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-qtcpp@v0.4.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-qtcpp@v0.4.0  | https://github.com/apigear-io/template-qtcpp.git  | <sha1>    | v0.4.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-python@v1.0.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-python.git | <sha1>    | v1.0.0
+
 ...
 ```
 
@@ -165,17 +189,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: ue_docs
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../ue_docs
+
     template: apigear-io/template-unreal@v3.2.2
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -183,17 +219,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: cpp_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../cpp_hello_world
+
     template: apigear-io/template-cpp14@v3.6.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -201,17 +249,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: qt_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../qt_hello_world
+
     template: apigear-io/template-qtcpp@v0.4.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -219,17 +279,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../py_hello_world
+
     template: apigear-io/template-python@v1.0.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -253,33 +325,61 @@ helloworld.module.yaml
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -291,6 +391,7 @@ The following snippet demonstrates how to run the CLI and provides an example ou
 
 ```
 $ apigear generate solution apigear/helloworld.solution.yaml
+
 10:52:20 INF generated 21 files in 30ms. (20 write, 0 skip, 1 copy) topic=gen
 ```
 
@@ -315,17 +416,31 @@ With the output directory set as in example, both *ApiGear* files reside in an `
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ┣ 📜helloworld.solution.yaml
+
  ┃ ┗ 📜helloworld.module.yaml
+
  ┣ 📂py_hello_world
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
- ┃ ┃ ┗ 📂implementation
- ┃ ┗ 📜CMakeLists.txt
+
+ ┃ ┃ ┗ 📂impl
+
+ ┃ ┣ 📂utils
+
+ ┃ ┣ 📜Makefile
+
+ ┃ ┣ 📜README.md
+
+ ┃ ┗ 📜requirements.txt
 ```
 
-Using the solution file from the previous paragraph the code will be generated in the `py_hello_world` folder. With subfolder for each module, here `io_world` as the name of module (defined in line 2 of `helloworld.module.yaml`). It contains both features generated: a basic api and a stub implementation.
+Using the solution file from the previous paragraph the code will be generated in the `py_hello_world` folder. With subfolder for each module, here `io_world` as the name of module (defined in line 2 of `helloworld.module.yaml`). It contains both features generated: the `api` and the `scaffold` skeleton with stub implementations.
 
 note
 
@@ -337,7 +452,7 @@ tip
 
 It is recommended to install the dependencies in a virtual environment(venv).
 
-The 'api.py' contains all definitions of the enums and structs for your module, as well as the abstract base classes for your Interfaces. From now on you can simply import the api or the stub implementation modules and use it. For more details on generated features please check api(TBD), stubs (TBD).
+The `api.py` contains all definitions of the enums and structs for your module, as well as the abstract base classes for your interfaces. From now on you can simply import the `api` module or the scaffolded implementation modules and use them. For more details on the generated features see the [features overview](/template-python/docs/features.md).
 
 tip
 
@@ -345,7 +460,7 @@ Check the extended features to see how to use your API over the network.
 
 note
 
-For the simulation check the olink feature(TBD) which provides middle layer on your code side and the [simulation](/docs/scripting/backends/intro.md) explained.
+For simulation, see the [`olink` feature](/template-python/docs/features.md#extended), which provides a middle layer on your code side, and the [simulation docs](/docs/scripting/backends/intro.md).
 
 ### Create and run an example[​](#create-and-run-an-example "Direct link to Create and run an example")
 
@@ -353,49 +468,94 @@ Prepare an `examples` folder in the `hello-world/py_hello_world` directory with 
 
 ```
 import asyncio
+
 import os
+
 import sys
 
+
+
 #add context - path to modules
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
+
+
 import io_world.api
+
 import io_world.impl
 
+
+
 def main():
+
     myHelloInstance = io_world.impl.Hello()
 
+
+
     # Try out properties: subscribe for changes
+
     def handle_last_changed(message):
+
          print("last property changed ")
+
          print(message)
+
     myHelloInstance.on_last_changed += handle_last_changed
+
     
+
     # and ask for change.
+
     messageForProperty = io_world.api.Message()
+
     messageForProperty.content = "New message";
+
     myHelloInstance.set_last(messageForProperty);
 
+
+
     # Check the signals with subscribing for its change
+
     def handle_just_said(message):
+
          print("justSaid signal emitted ")
+
          print(message)
+
     myHelloInstance.on_just_said += handle_just_said
 
+
+
     # and emit one.
+
     messageForSignal = io_world.api.Message()
+
     messageForSignal.content = "Message from signal";
+
     myHelloInstance._just_said(messageForSignal);
 
+
+
     # Play around executing operations, maybe they emit signals? or change the properties?
+
     method_result = myHelloInstance.say(io_world.api.Message(), io_world.api.When.NOW);
+
     print("Method result")
+
     print(method_result)
+
     myHelloInstance.on_last_changed -= handle_last_changed
+
     myHelloInstance.on_just_said -= handle_just_said
 
+
+
 if __name__ == '__main__':
+
     main()
+
+
 
 }
 ```

@@ -10,33 +10,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -44,26 +72,47 @@ The files for conan will be generated for project:
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ...
+
  ┃ ┃ ┗ 📜conanfile.py
+
  ┃ ┣ 📂examples
+
  ┃ ┃ ┣ 📂 app
+
  ┃ ┃ ┃ ...
+
  ┃ ┃ ┃ ┗ 📜conanfile.txt
+
  ┃ ┃ ... 
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂conan
+
  ┃ ┃ ┃ ┃ ┣ 📂test_package
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜conanfile.py
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜main.cpp
+
  ┃ ┃ ┃ ┃ ┗ 📜conanfile.py
+
  ┣ 📂scripts
+
  ┃ ┣ 📜test_conan.bat
+
  ┃ ┣ 📜test_conan.sh
 ```
 

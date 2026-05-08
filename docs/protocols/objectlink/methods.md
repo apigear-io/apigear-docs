@@ -9,13 +9,22 @@ To model methods in ApiGear you define an interface with operations.
 ```
 name: org.demos
 
+
+
 interfaces:
+
   - name: Echo
+
     operations:
+
       - name: say
+
         params:
+
         - name: msg
+
           type: string
+
         type: string
 ```
 
@@ -23,12 +32,19 @@ The operations will be generated as methods of the object. This will look simpli
 
 ```
 // org.demos.js
+
 class Echo {
+
   async say(msg: string): string
+
 }
 
+
+
 const echo = new Echo()
+
 console.log(echo.say("hello"))
+
 $> hello
 ```
 

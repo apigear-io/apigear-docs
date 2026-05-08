@@ -36,18 +36,32 @@ A concise, developer-friendly syntax that looks like a programming language:
 ```
 module org.example 1.0
 
+
+
 interface Thermostat {
+
     // Properties (state)
+
     temperature: float      // current temperature
+
     targetTemp: float       // desired temperature
+
     isHeating: bool         // heating active?
 
+
+
     // Operations (methods)
+
     setTarget(float temp)
+
     reset()
 
+
+
     // Signals (events)
+
     signal overheated(float temp)
+
 }
 ```
 
@@ -57,23 +71,41 @@ The same API in YAML — used internally and for programmatic generation:
 
 ```
 schema: apigear.module/1.0
+
 name: org.example
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: Thermostat
+
     properties:
+
       - { name: temperature, type: float }
+
       - { name: targetTemp, type: float }
+
       - { name: isHeating, type: bool }
+
     operations:
+
       - name: setTarget
+
         params:
+
           - { name: temp, type: float }
+
       - name: reset
+
     signals:
+
       - name: overheated
+
         params:
+
           - { name: temp, type: float }
 ```
 

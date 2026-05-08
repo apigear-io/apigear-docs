@@ -23,19 +23,33 @@ apigear generate solution apigear/demo.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: my_project
+
 version: "1.0.0"
 
+
+
 targets:
+
   - name: cpp_sdk
+
     inputs:
+
       - myapi.module.yaml
+
     output: ../generated/cpp
+
     template: apigear-io/template-cpp14@v3.6.0
+
     force: true
+
     features:
+
       - api
+
       - stubs
+
       - olink
 ```
 
@@ -91,9 +105,13 @@ apigear generate expert -i demo.module.yaml -o output -t apigear-io/template-cpp
 
 ```
 apigear generate expert \
+
   -i api/user.module.yaml \
+
   -i api/inventory.module.yaml \
+
   -o generated \
+
   -t apigear-io/template-cpp14
 ```
 
@@ -101,11 +119,17 @@ apigear generate expert \
 
 ```
 apigear generate expert \
+
   -i demo.module.yaml \
+
   -o output \
+
   -t apigear-io/template-cpp14 \
+
   -f api \
+
   -f stubs \
+
   -f olink
 ```
 
@@ -115,8 +139,11 @@ Point to a local template directory:
 
 ```
 apigear generate expert \
+
   -i demo.module.yaml \
+
   -o output \
+
   -t ./my-custom-template
 ```
 
@@ -140,6 +167,7 @@ apigear generate expert -t apigear-io/template-cpp14@v3.6.0 ...
 
 ```
 # In solution file
+
 template: apigear-io/template-cpp14@v3.6.0
 ```
 
@@ -153,31 +181,57 @@ A solution can generate multiple SDKs from the same API:
 
 ```
 targets:
+
   - name: cpp_sdk
+
     inputs:
+
       - myapi.module.yaml
+
     output: ../generated/cpp
+
     template: apigear-io/template-cpp14@v3.6.0
+
     features:
+
       - api
+
       - stubs
+
+
 
   - name: python_sdk
+
     inputs:
+
       - myapi.module.yaml
+
     output: ../generated/python
+
     template: apigear-io/template-python@v1.0.0
+
     features:
+
       - api
+
       - stubs
 
+
+
   - name: unreal_sdk
+
     inputs:
+
       - myapi.module.yaml
+
     output: ../generated/unreal
+
     template: apigear-io/template-unreal@v3.2.2
+
     features:
+
       - api
+
       - stubs
 ```
 
@@ -202,17 +256,29 @@ Check individual template documentation for available features.
 
 ```
 # demo.module.yaml
+
 schema: apigear.module/1.0
+
 name: demo
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Counter
+
     properties:
+
       - name: count
+
         type: int
+
     operations:
+
       - name: increment
+
       - name: decrement
 ```
 
@@ -220,12 +286,19 @@ interfaces:
 
 ```
 // demo.idl
+
 module demo 1.0
 
+
+
 interface Counter {
+
     count: int
+
     increment()
+
     decrement()
+
 }
 ```
 
@@ -237,17 +310,29 @@ Generated output follows the template's structure. A typical C++ output:
 
 ```
 generated/
+
 ├── CMakeLists.txt
+
 ├── demo/
+
 │   ├── api/
+
 │   │   ├── counter.h
+
 │   │   └── counter.cpp
+
 │   ├── implementation/
+
 │   │   ├── counter.h
+
 │   │   └── counter.cpp
+
 │   └── olink/
+
 │       ├── counter_service.h
+
 │       └── counter_client.h
+
 └── README.md
 ```
 
@@ -255,15 +340,25 @@ generated/
 
 ```
 # Install specific template version
+
 apigear template install apigear-io/template-cpp14@v3.6.0
 
+
+
 # Generate with pinned versions
+
 apigear generate solution apigear/solution.yaml
 
+
+
 # Check exit code
+
 if [ $? -ne 0 ]; then
+
   echo "Generation failed"
+
   exit 1
+
 fi
 ```
 

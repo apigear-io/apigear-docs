@@ -22,33 +22,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -118,21 +146,38 @@ This graph shows the full folder structure which is generated for `all` features
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ┣ 📜helloworld.solution.yaml
+
  ┃ ┗ 📜helloworld.module.yaml
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┣ 📂examples
+
  ┃ ┃ ┣ 📂olinkclient
+
  ┃ ┃ ┣ 📂olinkserver
+
  ┃ ┃ ┣ 📂qml
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┣ 📂implementation
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┣ 📂olink
+
  ┃ ┃ ┗ 📂plugin
+
  ┃ ┣ 📂thirdparty
+
  ┃ ┗ 📜CMakeLists.txt
 ```

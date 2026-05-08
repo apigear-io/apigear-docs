@@ -36,9 +36,13 @@ Download the latest release for your platform from the [GitHub releases page](ht
 
 ```
 # Download and extract
+
 curl -L https://github.com/apigear-io/cli/releases/latest/download/apigear-darwin-amd64.tar.gz | tar xz
 
+
+
 # Move to PATH
+
 sudo mv apigear /usr/local/bin/
 ```
 
@@ -46,9 +50,13 @@ sudo mv apigear /usr/local/bin/
 
 ```
 # Download and extract
+
 curl -L https://github.com/apigear-io/cli/releases/latest/download/apigear-linux-amd64.tar.gz | tar xz
 
+
+
 # Move to PATH
+
 sudo mv apigear /usr/local/bin/
 ```
 
@@ -60,18 +68,31 @@ Download the `.exe` file from the releases page and add it to your PATH.
 
 ```
 # Check installation
+
 apigear version
 
+
+
 # Create a new project
+
 apigear project create -d my-api-project
 
+
+
 # Generate code from a solution
+
 apigear generate solution apigear/demo.solution.yaml
 
+
+
 # Start simulation server
+
 apigear sim run apigear/demo.scenario.js
 
+
+
 # Monitor API traffic
+
 apigear monitor run
 ```
 
@@ -164,7 +185,9 @@ View schema for document types:
 
 ```
 apigear spec schema --type module
+
 apigear spec schema --type solution
+
 apigear spec schema --type rules
 ```
 
@@ -174,13 +197,21 @@ Access experimental commands with the `x` command:
 
 ```
 # Convert between formats
+
 apigear x json2yaml file.json
+
 apigear x yaml2json file.yaml
+
 apigear x yaml2idl api.module.yaml
+
 apigear x idl2yaml api.idl
 
+
+
 # WebSocket testing
+
 apigear x wsecho --address :8080
+
 apigear x wscat --url ws://localhost:8080
 ```
 
@@ -190,12 +221,19 @@ The CLI is designed for automation:
 
 ```
 # Non-interactive update
+
 apigear update --force
 
+
+
 # Generate with specific template version
+
 apigear generate solution solution.yaml
 
+
+
 # Watch mode for development
+
 apigear generate solution solution.yaml --watch
 ```
 
@@ -205,7 +243,9 @@ Get help for any command:
 
 ```
 apigear --help
+
 apigear generate --help
+
 apigear template install --help
 ```
 

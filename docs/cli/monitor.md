@@ -55,14 +55,23 @@ Applications send events to the monitor via HTTP POST:
 
 ```
 POST http://localhost:5555/monitor/{source}
+
 Content-Type: application/json
 
+
+
 {
+
   "type": "method",
+
   "interface": "demo.Counter",
+
   "method": "increment",
+
   "args": [],
+
   "timestamp": "2024-01-15T10:30:00Z"
+
 }
 ```
 
@@ -74,15 +83,25 @@ Monitor events follow this structure:
 
 ```
 {
+
   "type": "property|method|signal",
+
   "interface": "module.Interface",
+
   "property": "propertyName",
+
   "method": "methodName",
+
   "signal": "signalName",
+
   "value": {},
+
   "args": [],
+
   "result": {},
+
   "timestamp": "2024-01-15T10:30:00Z"
+
 }
 ```
 
@@ -90,10 +109,15 @@ Monitor events follow this structure:
 
 ```
 {
+
   "type": "property",
+
   "interface": "demo.Counter",
+
   "property": "count",
+
   "value": 42
+
 }
 ```
 
@@ -101,11 +125,17 @@ Monitor events follow this structure:
 
 ```
 {
+
   "type": "method",
+
   "interface": "demo.Counter",
+
   "method": "increment",
+
   "args": [],
+
   "result": 43
+
 }
 ```
 
@@ -113,10 +143,15 @@ Monitor events follow this structure:
 
 ```
 {
+
   "type": "signal",
+
   "interface": "demo.Counter",
+
   "signal": "countChanged",
+
   "args": [43]
+
 }
 ```
 
@@ -173,8 +208,11 @@ apigear monitor feed events.ndjson --batch 5
 
 ```
 {"type":"property","interface":"demo.Counter","property":"count","value":0}
+
 {"type":"method","interface":"demo.Counter","method":"increment","args":[]}
+
 {"type":"property","interface":"demo.Counter","property":"count","value":1}
+
 {"type":"signal","interface":"demo.Counter","signal":"countChanged","args":[1]}
 ```
 
@@ -184,15 +222,25 @@ Enable monitoring in generated SDKs by including the `monitor` feature:
 
 ```
 # solution.yaml
+
 targets:
+
   - name: cpp_sdk
+
     inputs:
+
       - demo.module.yaml
+
     output: ../generated
+
     template: apigear-io/template-cpp14
+
     features:
+
       - api
+
       - stubs
+
       - monitor  # Enable monitoring
 ```
 
@@ -204,13 +252,17 @@ In your application, configure the monitor endpoint:
 
 ```
 // C++ example
+
 auto monitor = ApiGear::Monitor::create("http://localhost:5555/monitor/my-app");
+
 auto counter = Counter::create(monitor);
 ```
 
 ```
 # Python example
+
 monitor = apigear.Monitor("http://localhost:5555/monitor/my-app")
+
 counter = Counter(monitor=monitor)
 ```
 
@@ -222,9 +274,13 @@ Watch API calls during development:
 
 ```
 # Terminal 1: Start monitor
+
 apigear monitor run --pretty
 
+
+
 # Terminal 2: Run your application
+
 ./my-app
 ```
 
@@ -234,12 +290,19 @@ Verify expected API behavior:
 
 ```
 # Start monitor and capture output
+
 apigear monitor run > api-events.log &
 
+
+
 # Run test suite
+
 ./run-tests
 
+
+
 # Analyze captured events
+
 cat api-events.log | jq '.interface'
 ```
 
@@ -249,8 +312,11 @@ Feed high-volume test data:
 
 ```
 apigear monitor feed load-test.ndjson \
+
   --repeat 1000 \
+
   --interval 1ms \
+
   --batch 10
 ```
 
@@ -269,12 +335,19 @@ Run simulation and monitor together:
 
 ```
 # Terminal 1: Start simulation server
+
 apigear sim run scenario.js
 
+
+
 # Terminal 2: Start monitor
+
 apigear monitor run --pretty
 
+
+
 # Terminal 3: Run client application
+
 ./my-client
 ```
 
@@ -284,9 +357,13 @@ For distributed systems, use NATS as a message broker:
 
 ```
 # Start NATS server (if not running)
+
 nats-server
 
+
+
 # Start monitor with NATS
+
 apigear monitor run --nats-url nats://localhost:4222
 ```
 

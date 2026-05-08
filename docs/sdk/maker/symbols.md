@@ -6,53 +6,101 @@ And an interface contains properties, operations and signals and structures cont
 
 ```
 type System struct {
+
     Name string
+
     Modules []Module
+
 }
+
+
 
 type Module struct {
+
     Name string
+
     Interfaces []Interface
+
     Structures []Structure
+
     Enumerations []Enumeration
+
 }
+
+
 
 type Interface struct {
+
     Name string
+
     Properties []TypedElement
+
     Operations []Operation
+
     Signals []Signal
+
 }
+
+
 
 type TypedElement struct {
+
     Name string
+
     Type Type
+
 }
+
+
 
 type Operation struct {
+
     Name string
+
     Params []TypedElement
+
     Return Type
+
 }
+
+
 
 type Signal struct {
+
     Name string
+
     Params []TypedElement
+
 }
+
+
 
 type Structure struct {
+
     Name string
+
     Fields []TypedElement
+
 }
+
+
 
 type Enumeration struct {
+
     Name string
+
     Members []ValueElement
+
 }
 
+
+
 type ValueElement struct {
+
     Name string
+
     Value string
+
 }
 ```
 

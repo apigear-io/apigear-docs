@@ -20,15 +20,25 @@ Here is an example of how to add a target for simulation generation:
 
 ````
 # my.solution.yaml
+
 schema: apigear.solution/1.0
+
 targets:
+
   - name: My Simulation
+
     output: sim
+
     inputs:
+
       - counter.yaml # or counter.idl
+
     template: apigear-io/template-simulation/
 
+
+
 ```bash
+
 apigear generate solution my.solution.yaml
 ````
 

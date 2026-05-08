@@ -8,12 +8,19 @@ You can list all templates available in apigear registry using the `apigear temp
 
 ```
 $ apigear template list
+
 template                   | git-url
+
 apigear-io/template-cpp14  | https://github.com/apigear-io/template-cpp14.git
+
 apigear-io/template-go     | https://github.com/apigear-io/template-go.git
+
 apigear-io/template-python | https://github.com/apigear-io/template-python.git
+
 apigear-io/template-qt5    | https://github.com/apigear-io/template-qt5.git
+
 apigear-io/template-qtcpp  | https://github.com/apigear-io/template-qtcpp.git
+
 apigear-io/template-unreal | https://github.com/apigear-io/template-unreal.git
 ```
 
@@ -23,11 +30,17 @@ Use template command with a `cache` parameter to get list of all installed templ
 
 ```
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed                                | latest
+
 apigear-io/template-cpp14@v3.4.0  | https://github.com/apigear-io/template-cpp14.git  | a47fb50405215c520cf40527e1057cd4cc6d5e0e | v3.4.0
+
 apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | 9f262863ddd60858c7db02ff6829a709d88ce1e5 | v3.6.0
+
 apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | da8164860de23b703335f1b96583c5c78609cbe5 | v3.2.2
 ```
 
@@ -47,10 +60,15 @@ You can get information about a template using the `apigear template info` comma
 
 ```
 $ apigear template info apigear-io/template-cpp14
+
 Name:           apigear-io/template-cpp14
+
 URL:            https://github.com/apigear-io/template-cpp14.git
+
 Version:
+
 Latest:         v3.6.0
+
 Versions:       v3.6.0, v3.5.2, v3.5.1, v3.5.0, v3.4.0, v3.3.0, v3.2.0, v3.1.1, v3.1.0, v3.0.0, v2.1.1, v2.1.0-0, v2.1.0
 ```
 

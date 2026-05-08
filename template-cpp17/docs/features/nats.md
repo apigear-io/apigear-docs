@@ -31,33 +31,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -65,28 +93,51 @@ the following file structure is generated. The purpose and content of each file 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂nats
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜natsclient.cpp
+
  ┃ ┃ ┃ ┣ 📜natsclient.h
+
  ┃ ┃ ┃ ┣ 📜natsservice.cpp
+
  ┃ ┃ ┃ ┣ 📜natsservice.h
+
  ┃ ┃ ┃ ┣ ... (helper files)
+
  ┃ ┃ ...
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂generated
+
  ┃ ┃ ┃ ┃ ┣ 📂nats
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloservice.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜helloservice.h
+
  ...
 ```
 
@@ -141,41 +192,77 @@ For this message the `HelloService` will respond with its current state - the `H
 
 ```
 
+
     auto client = std::make_shared<ApiGear::Nats::Client>();
+
     auto testIoWorldHello = IoWorld::Nats::HelloClient::create(client);
 
+
+
     // Try out properties: subscribe for changes
+
     testIoWorldHello->_getPublisher().subscribeToLastChanged([](auto value){ std::cout << " Last " << std::endl; });
 
+
+
     // or ask for change, when objest is ready
+
     auto idSubProp = testIoWorldHello->_subscribeForIsReady(
+
         [testIoWorldHello](bool connected) 
+
         {
+
             if (!connected)
+
             {
+
                 return;
+
             }
+
             IoWorld::Message someMessage("the new content");
+
             testIoWorldHello->setLast(someMessage);
+
         });
-    
-    // Check the signals with subscribing for its change. Signal must be emitted from server side.
-    testIoWorldHello->_getPublisher().subscribeToJustSaid([](const IoWorld::Message& msg){ std::cout << " JustSaid " << std::endl; });
-    
-    // Play around executing your operations
-    auto idSubOperation = testIoWorldHello->_subscribeForIsReady(
-        [testIoWorldHello](bool connected) 
-        {
-            if (!connected)
-            {
-                return;
-            }
-            IoWorld::Message someMessage("Some new content for Say");
-            auto method_result =  testIoWorldHello->say(someMessage, IoWorld::WhenEnum::Soon);
-        });
+
     
 
+    // Check the signals with subscribing for its change. Signal must be emitted from server side.
+
+    testIoWorldHello->_getPublisher().subscribeToJustSaid([](const IoWorld::Message& msg){ std::cout << " JustSaid " << std::endl; });
+
+    
+
+    // Play around executing your operations
+
+    auto idSubOperation = testIoWorldHello->_subscribeForIsReady(
+
+        [testIoWorldHello](bool connected) 
+
+        {
+
+            if (!connected)
+
+            {
+
+                return;
+
+            }
+
+            IoWorld::Message someMessage("Some new content for Say");
+
+            auto method_result =  testIoWorldHello->say(someMessage, IoWorld::WhenEnum::Soon);
+
+        });
+
+    
+
+
+
     //connect
+
     client->connect("nats://localhost:4222");
 ```
 
@@ -211,21 +298,38 @@ Have in mind that the `Hello` implementation is not thread safe by default.
 
 ```
 
+
     auto service = std::make_shared<ApiGear::Nats::Service>();
 
+
+
     // set up modules
+
     std::shared_ptr<IoWorld::IHello> testIoWorldHello = std::make_shared<IoWorld::Hello>();
+
     auto testIoWorldHelloService = IoWorld::Nats::HelloService::create(testIoWorldHello, service);
 
+
+
     // The client property change request will trigger other changes
+
     auto idSubProp = testIoWorldHello->_getPublisher().subscribeToLastChanged(
+
         [testIoWorldHello](auto value)
+
         {
+
             IoWorld::Message someMessage("ServerContent");
+
             testIoWorldHello->say(someMessage, IoWorld::WhenEnum::Never);
+
             auto lastMessage = testIoWorldHello->getLast();
+
             testIoWorldHello->_getPublisher().publishJustSaid(lastMessage);
+
         });
+
+
 
     service->connect("nats://localhost:4222");
 ```

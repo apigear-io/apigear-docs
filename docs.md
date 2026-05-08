@@ -10,9 +10,13 @@ This matches how systems actually work in automotive, gaming, IoT, and embedded 
 
 ```
 interface Thermostat {
+
     temperature: float       // property: observable state
+
     setTarget(float temp)    // operation: method call
+
     signal overheated()      // signal: server-pushed event
+
 }
 ```
 

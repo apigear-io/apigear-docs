@@ -17,14 +17,23 @@ ApiGear's scripting capabilities address these needs with two complementary appr
 
 ```
 ┌─────────────────┐                    ┌─────────────────┐
+
 │                 │                    │                 │
+
 │  Scripted       │◄───── API ────────►│  Scripted       │
+
 │  Clients        │      Calls         │  Backends       │
+
 │                 │                    │                 │
+
 │  (Stimulation)  │                    │  (Simulation)   │
+
 │                 │                    │                 │
+
 └─────────────────┘                    └─────────────────┘
+
      Calls TO                              Responds TO
+
      your service                          your client
 ```
 

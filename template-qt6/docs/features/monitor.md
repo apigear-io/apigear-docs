@@ -10,33 +10,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -44,28 +72,51 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┃ ┣ 📜agentclient.cpp
+
  ┃ ┃ ┃ ┣ 📜agentclient.h
+
  ┃ ┃ ┃ ┗ 📜CMakeLists.txt
+
  ┃ ┃ ...
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┣ 📂implementation
+
  ┃ ┃ ┣ 📂olink
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┃ ┣ 📜agent.cpp
+
  ┃ ┃ ┃ ┣ 📜agent.h
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜tracedapifactory.cpp
+
  ┃ ┃ ┃ ┣ 📜tracedapifactory.h
+
  ┃ ┃ ┃ ┣ 📜hellotraced.cpp
+
  ┃ ┃ ┃ ┗ 📜hellotraced.h
+
  ...
 ```
 
@@ -79,10 +130,15 @@ Files `📜hellotraced.h` and `📜hellotraced.cpp` contain the trace wrapper fo
 
 ```
 class IO_WORLD_MONITOR_EXPORT HelloTraced : public AbstractHello
+
 {
+
     explicit HelloTraced(std::shared_ptr<AbstractHello> impl);
 
+
+
 ...
+
 };
 ```
 
@@ -96,7 +152,9 @@ Files `📜tracedapifactory.h` and `📜tracedapifactory.cpp` contain the Traced
 
 ```
 class IO_WORLD_MONITOR_EXPORT TracedApiFactory : public QObject, public IApiFactory
+
 {
+
     TracedApiFactory(IApiFactory& factory, QObject *parent = nullptr);
 ```
 
@@ -104,13 +162,21 @@ The factory is necessary when you want to use the traced `Hello` object directly
 
 ```
     // Prepare Factory before app is created.
+
     ApiGear::ObjectLink::ClientRegistry client_registry;
+
     ApiGear::ObjectLink::OLinkClient client(client_registry);
+
     io_world::OLinkFactory io_worldOlinkFactory(client);
+
     io_world::TracedApiFactory io_worldTracedOlinkFactory(io_worldOlinkFactory); 
+
     io_world::ApiFactory::set(&io_worldTracedOlinkFactory);
+
     ...
+
     // Connect the client - all qml olink clients will be linked if the server services are already up.
+
     client.connectToHost(QUrl("ws://127.0.0.1:8182"));
 ```
 
@@ -118,20 +184,35 @@ The factory uses the `ApiGear::ObjectLink::OLinkClient` and links the objects wh
 
 ```
 ...
+
 import io_world 1.0
 
+
+
 ApplicationWindow {
+
 ...
+
             Button {
+
             width: 80
+
             height: 80
+
             text: qmlIoWorldHello.last.content
+
             onClicked: {
+
                 qmlIoWorldHello.say(someMessage, someWhen)
+
             }
+
         }
+
     IoWorldHello { id: qmlIoWorldHello }
+
 ...
+
 }
 ```
 
@@ -141,20 +222,35 @@ This feature requires using the classes wrapped with monitor decorators, which c
 
 ```
 
+
 #include "io_world/implementation/hello.h"
+
 #include "io_world/monitor/hellotraced.h"
 
+
+
 #include <QtCore>
+
 #include <memory>
+
+
 
 #include <iostream>
 
+
+
 int main(){
 
+
+
     auto ioWorldHello = std::make_shared<io_world::Hello>();
+
     io_world::HelloTraced ioWorldHelloTraced(ioWorldHello);
 
+
+
     useIoWorldHEllo(ioWorldHelloTraced); // your code that requires io_world::Hello
+
 }
 ```
 

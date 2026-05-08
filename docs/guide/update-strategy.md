@@ -36,13 +36,21 @@ If you prefer a simpler workflow and don't need to preserve manual changes in ge
 
 ```
 targets:
+
   - name: my_target
+
     inputs:
+
       - myapi.module.yaml
+
     output: ../output
+
     template: apigear-io/template-cpp14
+
     force: true  # Always overwrite generated files
+
     features:
+
       - stubs
 ```
 

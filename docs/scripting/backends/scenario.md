@@ -13,10 +13,16 @@ Here is a simple API definition and the corresponding simulation scenario:
 ```
 module demo
 
+
+
 interface Counter {
+
   count: int
+
   increment()
+
   decrement()
+
 }
 ```
 
@@ -29,28 +35,52 @@ The simulation file will look like this:
 ```
 // counter.sim.js
 
+
+
 // create a service based on module and interface name and provide initial properties
+
 const counter = $createService("demo.Counter", { count: 0 });
 
+
+
 // react to changes of the count property
+
 counter.on("count", function(value) {
+
   console.log("count changed to " + value);
+
 });
 
+
+
 counter.increment = function() {
+
   this.count++;
+
 };
+
+
 
 counter.decrement = function() {
+
   this.count--;
+
 };
 
+
+
 // a main function which will be called when the simulation is started
+
 function main() {
+
   for (let i = 0; i < 10; i++) {
+
     counter.increment();
+
     counter.decrement();
+
   }
+
 }
 ```
 
@@ -58,5 +88,6 @@ You run the simulation by starting the server and then run the simulation file. 
 
 ```
 # run a simulation and start the server
+
 $ apigear sim run counter.sim.js
 ```

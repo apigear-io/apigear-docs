@@ -14,10 +14,15 @@ From inside a project we create a new API module called `demo.calc` using the `C
 
 ```
 schema: apigear.module/1.0
+
 name: demo.calc
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: Calculator
 ```
 
@@ -25,9 +30,13 @@ A typical calculator always displays the current value calculated. We will add t
 
 ```
 interfaces:
+
   - name: Calculator
+
     properties:
+
       - name: value
+
         type: int
 ```
 
@@ -37,11 +46,17 @@ We add the first operation `add` to the calculator. It takes one parameter and t
 
 ```
 interfaces:
+
   - name: Calculator
+
     operations:
+
       - name: add
+
         params:
+
           - name: a
+
             type: int
 ```
 
@@ -49,31 +64,57 @@ Let's add the rest of the calculator operations and the clear action.
 
 ```
 schema: apigear.module/1.0
+
 name: demo.calc
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: Calculator
+
     properties:
+
       - name: value
+
         type: int
+
     operations:
+
       - name: add
+
         params:
+
           - name: a
+
             type: int
+
       - name: subtract
+
         params:
+
           - name: a
+
             type: int
+
       - name: multiply
+
         params:
+
           - name: a
+
             type: int
+
       - name: divide
+
         params:
+
           - name: a
+
             type: int
+
       - name: clear
 ```
 
@@ -86,23 +127,42 @@ For our implementation we configure a Python SDK as runner and generate our calc
 ```
 # demo_calc.py
 
+
+
 class AbstractCalculator(object):
+
   def __init__(self):
+
     self.value = 0
 
+
+
   def add(a: int):
+
     raise NotImplementedError
+
+
 
   def subtract(a: int):
+
     raise NotImplementedError
+
+
 
   def multiply(a: int):
+
     raise NotImplementedError
+
+
 
   def divide(a: int):
+
     raise NotImplementedError
 
+
+
   def clear(a: int):
+
     raise NotImplementedError
 ```
 
@@ -112,23 +172,41 @@ To implement the interface we derive from the abstract calculator and implement 
 
 ```
 
+
 # import our generated interfaces
+
 import demo_calc
 
+
+
 class Calculator(demo_calc.AbstractCalculator):
+
   def add(a: int):
+
     self.value += a
 
+
+
   def subtract(a: int):
+
     self.value -= a
 
+
+
   def multiply(a: int):
+
     self.value *= a
 
+
+
   def divide(a: int):
+
     self.value /= a
 
+
+
   def clear(a: int):
+
     self.value = 0
 ```
 

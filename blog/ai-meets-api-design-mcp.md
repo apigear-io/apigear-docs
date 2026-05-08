@@ -32,16 +32,27 @@ Your AI assistant fetches the ApiGear module schema via MCP, understands the str
 
 ```
 schema: apigear.module/1.0
+
 name: demo
+
 version: "1.0"
 
+
+
 interfaces:
+
   - name: Counter
+
     properties:
+
       - name: count
+
         type: int
+
     operations:
+
       - name: increment
+
       - name: decrement
 ```
 

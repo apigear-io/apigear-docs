@@ -10,33 +10,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -44,26 +72,47 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ...
+
  ┃ ┃ ┣ 📂tracer
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜tracer.cpp
+
  ┃ ┃ ┃ ┣ 📜tracer.h
+
  ┃ ┃ ┃ ┗ 📜tracer.test.cpp
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂generated
+
  ┃ ┃ ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜hello.tracedecorator.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜hello.tracedecorator.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜hello.tracer.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜hello.tracer.h
+
  ...
 ```
 
@@ -77,10 +126,15 @@ Files `📜hello.tracedecorator.h` and `📜hello.tracedecorator.cpp` contain th
 
 ```
 class HELLO_WORLD_EXAMPLE_IO_WORLD_EXPORT HelloTraceDecorator : public IHello, public IHelloSubscriber
+
 {
+
     explicit HelloTraceDecorator(IHello& impl, ApiGear::PocoImpl::Tracer& tracer)
 
+
+
 ...
+
 };
 ```
 
@@ -98,19 +152,33 @@ Prepare an application (generate for both examples and monitor features) that us
 
 ```
 
+
 int main(){
+
     ApiGear::PocoImpl::Tracer tracer;
+
     tracer.connect("http://localhost:8182", "testExampleApp");
+
     std::unique_ptr<IoWorld::IHello> helloImplementation = std::make_unique<IoWorld::Hello>();
+
     std::unique_ptr<IoWorld::IHello> tracedHello = IoWorld::HelloTraceDecorator::connect(*helloImplementation, tracer);
 
+
+
     // use your tracedHello as it was Hello implementation, all property changes, and signals and method execution and function calls will be traced.
+
     auto lastMessage = tracedHello->getLast();
+
     tracedHello->say(lastMessage, IoWorld::WhenEnum::Soon);
+
     IoWorld::Message someMessage("the new content");
+
     tracedHello->setLast(someMessage);
+
     tracedHello->_getPublisher().publishJustSaid(someMessage);
+
     return 0;
+
 }
 ```
 

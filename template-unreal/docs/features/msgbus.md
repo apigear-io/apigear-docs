@@ -31,33 +31,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -65,23 +93,41 @@ The following file structure is generated in the `IoWorldMsgBus` module:
 
 ```
 📂IoWorld/Source/IoWorldMsgBus
+
  ┣ 📂Private
+
  ┃ ┣ 📂Generated
+
  ┃ ┃ ┣ 📜IoWorldMsgBus.cpp
+
  ┃ ┃ ┗ 📂MsgBus
+
  ┃ ┃   ┣ 📜IoWorldHelloMsgBusClient.cpp
+
  ┃ ┃   ┗ 📜IoWorldHelloMsgBusAdapter.cpp
+
  ┃ ┗ 📂Tests
+
  ┃   ┣ 📜IoWorldHelloMsgBus.spec.cpp
+
  ┃   ┣ 📜IoWorldHelloMsgBusFixture.h
+
  ┃   ┗ 📜IoWorldHelloMsgBusFixture.cpp
+
  ┣ 📂Public
+
  ┃ ┗ 📂IoWorld
+
  ┃   ┣ 📜IoWorldMsgBus.h
+
  ┃   ┗ 📂Generated/MsgBus
+
  ┃     ┣ 📜IoWorldHelloMsgBusClient.h
+
  ┃     ┣ 📜IoWorldHelloMsgBusAdapter.h
+
  ┃     ┗ 📜IoWorldHelloMsgBusMessages.h
+
  ┗ 📜IoWorldMsgBus.Build.cs
 ```
 
@@ -107,12 +153,19 @@ The client provides methods to manage the connection lifecycle:
 
 ```
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
 void _Connect();
 
-UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
-void _Disconnect();
+
 
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
+void _Disconnect();
+
+
+
+UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
 bool _IsConnected() const;
 ```
 
@@ -124,7 +177,9 @@ The client broadcasts connection status changes through delegates:
 
 ```
 UPROPERTY(BlueprintAssignable, Category = "ApiGear|IoWorld|Hello|Remote", DisplayName = "Connection Status Changed")
+
 FIoWorldHelloConnectionStatusChangedDelegateBP _ConnectionStatusChangedBP;
+
 FIoWorldHelloConnectionStatusChangedDelegate _ConnectionStatusChanged;
 ```
 
@@ -134,6 +189,8 @@ The client tracks round-trip time statistics (current, average, min, max RTT in 
 
 ```
 const FIoWorldHelloStats& Stats = HelloClient->_GetStats();
+
+
 
 HelloClient->_StatsUpdated.AddDynamic(this, &UMyClass::OnStatsUpdated);
 ```
@@ -151,14 +208,25 @@ The client implements the standard `IIoWorldHelloInterface` (see [API documentat
 ```
 #include "IoWorld/Generated/MsgBus/IoWorldHelloMsgBusClient.h"
 
+
+
 UIoWorldHelloMsgBusClient* HelloClient = GetGameInstance()->GetSubsystem<UIoWorldHelloMsgBusClient>();
+
+
 
 HelloClient->_Connect();
 
+
+
 HelloClient->_ConnectionStatusChangedBP.AddDynamic(this, &UMyClass::OnConnectionStatusChanged);
 
+
+
 TScriptInterface<IIoWorldHelloInterface> Hello = HelloClient;
+
 Hello->Say(Msg, EIoWorldWhen::IWW_Now);
+
+
 
 Hello->_GetPublisher()->OnLastChangedBP.AddDynamic(this, &UMyClass::OnLastChanged);
 ```
@@ -185,12 +253,19 @@ The adapter provides methods to control when it accepts client connections:
 
 ```
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
 void _StartListening();
 
-UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
-void _StopListening();
+
 
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
+void _StopListening();
+
+
+
+UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
 bool _IsListening() const;
 ```
 
@@ -200,18 +275,31 @@ The adapter provides delegates to monitor client connections:
 
 ```
 UPROPERTY(BlueprintAssignable, Category = "ApiGear|IoWorld|Hello|Remote", DisplayName = "New client connected")
+
 FIoWorldHelloClientConnectedDelegate _OnClientConnected;
 
+
+
 UPROPERTY(BlueprintAssignable, Category = "ApiGear|IoWorld|Hello|Remote", DisplayName = "Client disconnected")
+
 FIoWorldHelloClientDisconnectedDelegate _OnClientDisconnected;
 
+
+
 UPROPERTY(BlueprintAssignable, Category = "ApiGear|IoWorld|Hello|Remote", DisplayName = "Client timed out")
+
 FIoWorldHelloClientTimeoutDelegate _OnClientTimeout;
 
+
+
 UPROPERTY(BlueprintAssignable, Category = "ApiGear|IoWorld|Hello|Remote", DisplayName = "Clients connected count changed")
+
 FIoWorldHelloClientCountDelegate _OnClientsConnectedCountChanged;
 
+
+
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello|Remote")
+
 const int32 _GetClientsConnectedCount() const;
 ```
 
@@ -221,6 +309,7 @@ The adapter wraps an existing implementation that handles the actual business lo
 
 ```
 UFUNCTION(BlueprintCallable, Category = "ApiGear|IoWorld|Hello")
+
 void _setBackendService(TScriptInterface<IIoWorldHelloInterface> InService);
 ```
 
@@ -228,15 +317,25 @@ void _setBackendService(TScriptInterface<IIoWorldHelloInterface> InService);
 
 ```
 #include "IoWorld/Generated/MsgBus/IoWorldHelloMsgBusAdapter.h"
+
 #include "IoWorld/Implementation/IoWorldHello.h"
+
+
 
 UIoWorldHelloImplementation* LocalHello = GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
 
+
+
 UIoWorldHelloMsgBusAdapter* Adapter = GetGameInstance()->GetSubsystem<UIoWorldHelloMsgBusAdapter>();
+
 Adapter->_setBackendService(LocalHello);
+
 Adapter->_StartListening();
 
+
+
 Adapter->_OnClientConnected.AddDynamic(this, &UMyClass::OnClientConnected);
+
 Adapter->_OnClientDisconnected.AddDynamic(this, &UMyClass::OnClientDisconnected);
 ```
 
@@ -246,8 +345,11 @@ The `msgbus_tests` feature generates test fixtures:
 
 ```
 IoWorld/Source/IoWorldMsgBus/Private/Tests
+
  ├── IoWorldHelloMsgBus.spec.cpp
+
  ├── IoWorldHelloMsgBusFixture.h
+
  └── IoWorldHelloMsgBusFixture.cpp
 ```
 

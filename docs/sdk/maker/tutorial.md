@@ -8,17 +8,29 @@ The goal of this tutorial is to create a template which generates a typescript i
 
 ```
 # demo.module.yaml
+
 schema: "apigear.module/1.0"
+
 name: demo
+
 version: "0.1"
 
+
+
 interfaces:
+
   - name: Counter
+
     properties:
+
       - name: count
+
         type: int
+
     operations:
+
       - name: increment
+
       - name: decrement
 ```
 
@@ -26,10 +38,15 @@ The API shall be transformed into a typescript interface which will finally be l
 
 ```
 // demo.ts
+
 interface Counter {
+
   count: int;
+
   increment(): void;
+
   decrement(): void;
+
 }
 ```
 
@@ -39,6 +56,7 @@ In this project we will create a `mytemplate` template inside a `myproject` toge
 
 ```
 mkdir myproject && cd myproject
+
 mkdir mytemplate && cd mytemplate
 ```
 
@@ -48,8 +66,11 @@ The folder structure will look like this.
 
 ```
 myproject/
+
   mytemplate/
+
     rules.yaml
+
     templates/
 ```
 
@@ -57,11 +78,17 @@ The rules document defines which documents are written based on which API symbol
 
 ```
 # rules.yaml
+
 features:
+
   - name: default
+
     scopes:
+
       - match: module
+
         documents:
+
           - { source: module.ts.tpl, target: {{.Module.Name}}.ts }
 ```
 
@@ -71,9 +98,13 @@ Now our basic template project is ready, it's time to link it up with an ApiGear
 
 ```
 myproject/
+
   mytemplate/
+
     rules.yaml
+
     templates/
+
       module.ts.tpl
 ```
 
@@ -87,17 +118,29 @@ Copy our demo API into the API document.
 
 ```
 # demo.module.yaml
+
 schema: "apigear.module/1.0"
+
 name: demo
+
 version: "0.1"
 
+
+
 interfaces:
+
   - name: Counter
+
     properties:
+
       - name: count
+
         type: int
+
     operations:
+
       - name: increment
+
       - name: decrement
 ```
 
@@ -107,17 +150,29 @@ Open ApiGear Studio and create a solution document also called `demo`, and the c
 
 ```
 # demo.solution.yaml
+
 schema: "apigear.solution/1.0"
+
 name: demo
+
 version: "0.1"
 
+
+
 targets:
+
   - name: demo
+
     output: ../output
+
     inputs:
+
       - demo.module.yaml
+
     template: ../mytemplate
+
     features:
+
       - default
 ```
 
@@ -127,12 +182,19 @@ Your project should look like this now:
 
 ```
 myproject/
+
   apigear/
+
     demo.module.yaml
+
     demo.solution.yaml
+
   mytemplate/
+
     rules.yaml
+
     templates/
+
       module.ts.tpl
 ```
 
@@ -142,14 +204,23 @@ Now we have a basic setup ready.
 
 ```
 myproject/
+
   apigear/
+
     demo.module.yaml
+
     demo.solution.yaml
+
   mytemplate/
+
     rules.yaml
+
     templates/
+
       module.ts.tpl
+
   output/
+
     demo.ts
 ```
 
@@ -159,10 +230,15 @@ Remember we want to create an interface for each interface inside an API module.
 
 ```
 // demo.ts
+
 interface Counter {
+
   count: int;
+
   increment(): void;
+
   decrement(): void;
+
 }
 ```
 
@@ -176,8 +252,11 @@ Inside our `module.ts.tpl` template document each interface in the module shall 
 
 ```
 {{ range .Module.Interfaces }}
+
 interface {{ .Name }} {
+
 }
+
 {{ end }}
 ```
 
@@ -193,14 +272,23 @@ There are still the properties and operations missing from the source code. We c
 
 ```
 {{ range .Module.Interfaces }}
+
 interface {{ .Name }} {
+
   {{ range .Properties }}
+
   {{ .Name }}: {{ tsType . }};
+
   {{ end }}
+
   {{ range .Operations }}
+
   {{ .Name }}(): {{ tsReturn .Return }};
+
   {{ end }}
+
 }
+
 {{ end }}
 ```
 
@@ -208,10 +296,15 @@ This will already add the properties and some simple operations to the source co
 
 ```
 // demo.ts
+
 interface Counter {
+
   count: int;
+
   increment(): void;
+
   decrement(): void;
+
 }
 ```
 
@@ -221,13 +314,21 @@ We first update our API demo module (`demo.module.yaml`) adding parameters to th
 
 ```
 operations:
+
   - name: increment
+
     params:
+
       - name: step
+
         type: int
+
   - name: decrement
+
     params:
+
       - name: step
+
         type: int
 ```
 
@@ -235,7 +336,9 @@ If you would run the solution again you would not see a change as we currently d
 
 ```
 {{ range .Operations }}
+
 {{ .Name }}({{ params .Params }}): {{ tsReturn .Return }};
+
 {{ end }}
 ```
 
@@ -243,10 +346,15 @@ Now running the solution again will update the typescript source code to the fin
 
 ```
 // demo.ts
+
 interface Counter {
+
   count: int;
+
   increment(step: int): void;
+
   decrement(step: int): void;
+
 }
 ```
 

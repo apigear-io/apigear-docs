@@ -134,36 +134,67 @@ Here's a complete example session demonstrating typical ObjectLink REPL usage:
 
 ```
 $ apigear olink
+
 ObjectLink REPL started. Type 'help' for available commands.
 
+
+
 > connect
+
 Connected to ws://localhost:5555/ws
 
+
+
 > link demo.Counter
+
 Linked to demo.Counter
 
+
+
 > get demo.Counter
+
 demo.Counter: {"count": 0}
 
+
+
 > invoke demo.Counter/increment
+
 Method invoked successfully
 
+
+
 > get demo.Counter
+
 demo.Counter: {"count": 1}
 
+
+
 > set demo.Counter/count 5
+
 Property set successfully
 
+
+
 > invoke demo.Counter/increment
+
 Method invoked successfully
 
+
+
 > get demo.Counter
+
 demo.Counter: {"count": 6}
 
+
+
 > unlink demo.Counter
+
 Unlinked from demo.Counter
 
+
+
 > quit
+
 Goodbye!
 ```
 

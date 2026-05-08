@@ -45,41 +45,65 @@ When using the CLI, only the highlighted line needs to be executed. You can veri
 
 ```
 $ apigear template install apigear-io/template-unreal@v3.2.2
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | <sha1>    | v3.2.2
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-cpp14@v3.6.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | <sha1>    | v3.6.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-qtcpp@v0.4.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-qtcpp@v0.4.0  | https://github.com/apigear-io/template-qtcpp.git  | <sha1>    | v0.4.0
+
 ...
 ```
 
 ```
 $ apigear template install apigear-io/template-python@v1.0.0
+
 $ apigear template cache
+
 list of templates from the local cache
 
+
+
 source                            | url                                               | installed | latest
+
 apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-python.git | <sha1>    | v1.0.0
+
 ...
 ```
 
@@ -163,17 +187,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: ue_docs
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../ue_docs
+
     template: apigear-io/template-unreal@v3.2.2
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -181,17 +217,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: cpp_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../cpp_hello_world
+
     template: apigear-io/template-cpp14@v3.6.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -199,17 +247,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: qt_hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../qt_hello_world
+
     template: apigear-io/template-qtcpp@v0.4.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -217,17 +277,29 @@ helloworld.solution.yaml
 
 ```
 schema: "apigear.solution/1.0"
+
 name: hello_world_example
+
 version: "0.1.0"
 
+
+
 targets:
+
   - name: hello_world
+
     inputs:
+
       - helloworld.module.yaml
+
     output: ../py_hello_world
+
     template: apigear-io/template-python@v1.0.0
+
     force: true
+
     features:
+
       - stubs
 ```
 
@@ -251,33 +323,61 @@ helloworld.module.yaml
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -289,6 +389,7 @@ The following snippet demonstrates how to run the CLI and provides an example ou
 
 ```
 $ apigear generate solution apigear/helloworld.solution.yaml
+
 10:52:20 INF generated 21 files in 30ms. (20 write, 0 skip, 1 copy) topic=gen
 ```
 
@@ -313,25 +414,277 @@ For the code generation we assume that both *ApiGear* files reside in an `apigea
 
 ```
 📦ue_docs_example_project
+
  ┣ 📂apigear
+
  ┃ ┣ 📜helloworld.solution.yaml
+
  ┃ ┗ 📜helloworld.module.yaml
+
  ┣ 📂ue_docs
+
  ┃ ┣ 📂Config
+
  ┃ ┣ 📂Content
+
  ┃ ┣ 📂Platforms
+
  ┃ ┣ 📂Plugins
+
  ┃ ┣ 📂Source
+
  ┃ ┗ 📜ue_docs.uproject
 ```
 
 Using the solution file from the previous paragraph the code will be generated in the `ue_docs/Plugins` folder.
+
+Solution `output:` path
+
+The generator writes each module's plugin folder **directly** under `output:` — it does not append `Plugins/` for you. To land plugins under your Unreal project's `Plugins/` directory, set `output: ../ue_docs/Plugins` in your `solution.yaml`. The path you give is the parent of the generated plugin folders (e.g. `IoWorld/`, `ApiGear/`).
 
 Prerequisites
 
 This guide assumes you already have an Unreal Engine project. The generated plugin will be placed in your project's `Plugins` folder.
 
 The generated code can be used with *Blueprints* and *C++*. Make sure to have the generated plugin code in your projects plugins directory as noted in the [previous section](#4-generate-code).
+
+### Hosting the plugin in a fresh UE project[​](#hosting-the-plugin-in-a-fresh-ue-project "Direct link to Hosting the plugin in a fresh UE project")
+
+If you don't have an existing Unreal project (for example, in a CI pipeline or when starting from a clean workspace), the four files below are the minimum needed to host a generated plugin. The example uses the `IoWorld` plugin produced from `io.world.Hello` and references it from a host module called `HelloHost`.
+
+Drop these files next to the `Plugins/` directory you generated into:
+
+```
+📦HelloHost
+
+ ┣ 📂Plugins
+
+ ┃ ┣ 📂ApiGear
+
+ ┃ ┗ 📂IoWorld
+
+ ┣ 📂Source
+
+ ┃ ┣ 📂HelloHost
+
+ ┃ ┃ ┗ 📜HelloHost.Build.cs
+
+ ┃ ┣ 📜HelloHost.Target.cs
+
+ ┃ ┗ 📜HelloHostEditor.Target.cs
+
+ ┗ 📜HelloHost.uproject
+```
+
+#### `HelloHost.uproject`[​](#hellohostuproject "Direct link to hellohostuproject")
+
+HelloHost.uproject
+
+```
+{
+
+    "FileVersion": 3,
+
+    "EngineAssociation": "5.7",
+
+    "Category": "",
+
+    "Description": "ApiGear MQTT5 helloworld host project",
+
+    "Modules": [
+
+        {
+
+            "Name": "HelloHost",
+
+            "Type": "Runtime",
+
+            "LoadingPhase": "Default",
+
+            "AdditionalDependencies": [
+
+                "Engine",
+
+                "IoWorldAPI",
+
+                "IoWorldCore",
+
+                "IoWorldImplementation",
+
+                "IoWorldMQTT",
+
+                "ApiGear",
+
+                "ApiGearMQTT",
+
+                "ApiGearMQTTPaho"
+
+            ]
+
+        }
+
+    ],
+
+    "Plugins": [
+
+        { "Name": "ApiGear", "Enabled": true },
+
+        { "Name": "IoWorld", "Enabled": true }
+
+    ]
+
+}
+```
+
+#### `Source/HelloHost.Target.cs`[​](#sourcehellohosttargetcs "Direct link to sourcehellohosttargetcs")
+
+Source/HelloHost.Target.cs
+
+```
+using UnrealBuildTool;
+
+
+
+public class HelloHostTarget : TargetRules
+
+{
+
+    public HelloHostTarget(TargetInfo Target) : base(Target)
+
+    {
+
+        Type = TargetType.Game;
+
+        DefaultBuildSettings = BuildSettingsVersion.V6;
+
+        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
+
+        ExtraModuleNames.Add("HelloHost");
+
+    }
+
+}
+```
+
+#### `Source/HelloHostEditor.Target.cs`[​](#sourcehellohosteditortargetcs "Direct link to sourcehellohosteditortargetcs")
+
+Source/HelloHostEditor.Target.cs
+
+```
+using UnrealBuildTool;
+
+
+
+public class HelloHostEditorTarget : TargetRules
+
+{
+
+    public HelloHostEditorTarget(TargetInfo Target) : base(Target)
+
+    {
+
+        Type = TargetType.Editor;
+
+        DefaultBuildSettings = BuildSettingsVersion.V6;
+
+        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
+
+        ExtraModuleNames.Add("HelloHost");
+
+    }
+
+}
+```
+
+#### `Source/HelloHost/HelloHost.Build.cs`[​](#sourcehellohosthellohostbuildcs "Direct link to sourcehellohosthellohostbuildcs")
+
+The dependency list is the non-obvious bit. `IoWorldAPI` / `IoWorldCore` / `IoWorldImplementation` are always needed; add `IoWorldMQTT`, `ApiGearMQTT`, and `ApiGearMQTTPaho` only if you generated the `mqtt` feature. Swap in `IoWorldOLink` / `ApiGearOLink` for OLink, or `IoWorldMsgBus` for Message Bus.
+
+Source/HelloHost/HelloHost.Build.cs
+
+```
+using UnrealBuildTool;
+
+
+
+public class HelloHost : ModuleRules
+
+{
+
+    public HelloHost(ReadOnlyTargetRules Target) : base(Target)
+
+    {
+
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        IWYUSupport = IWYUSupport.Full;
+
+
+
+        PublicDependencyModuleNames.AddRange(new string[]
+
+        {
+
+            "Core",
+
+            "CoreUObject",
+
+            "Engine",
+
+            "IoWorldAPI",
+
+            "IoWorldCore",
+
+            "IoWorldImplementation",
+
+            "IoWorldMQTT",
+
+            "ApiGear",
+
+            "ApiGearMQTT",
+
+            "ApiGearMQTTPaho",
+
+            "JsonUtilities",
+
+            "Projects"
+
+        });
+
+
+
+        PrivateDependencyModuleNames.AddRange(new string[] { });
+
+    }
+
+}
+```
+
+You also need a minimal module entry point — two short files next to `HelloHost.Build.cs`:
+
+Source/HelloHost/HelloHost.h
+
+```
+#pragma once
+
+
+
+#include "CoreMinimal.h"
+```
+
+Source/HelloHost/HelloHost.cpp
+
+```
+#include "HelloHost.h"
+
+#include "Modules/ModuleManager.h"
+
+
+
+IMPLEMENT_PRIMARY_GAME_MODULE(FDefaultGameModuleImpl, HelloHost, "HelloHost");
+```
+
+After dropping these files in place, right-click the `.uproject` and choose **Generate Visual Studio project files** (or run UnrealBuildTool's `-projectfiles` command), then build the editor target. The generated plugins compile alongside your host module.
 
 ### Verify Plugin Installation[​](#verify-plugin-installation "Direct link to Verify Plugin Installation")
 
@@ -398,7 +751,9 @@ For most use cases, include all three:
 
 ```
 #include "IoWorld/Implementation/IoWorldHello.h"
+
 #include "IoWorld/Generated/api/IoWorld_data.h"
+
 #include "IoWorld/Generated/api/IoWorldHelloInterface.h"
 ```
 
@@ -412,20 +767,35 @@ ue\_docsGameModeBase.cpp
 
 ```
 #include "ue_docsGameModeBase.h"
+
 #include "IoWorld/Implementation/IoWorldHello.h"
+
 #include "IoWorld/Generated/api/IoWorld_data.h"
+
 #include "IoWorld/Generated/api/IoWorldHelloInterface.h"
 
+
+
 void Aue_docsGameModeBase::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
+
 {
+
     Super::InitGame(MapName, Options, ErrorMessage);
 
+
+
     TScriptInterface<IIoWorldHelloInterface> Hello =
+
         GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
 
+
+
     FIoWorldMessage MyMsg;
+
     MyMsg.content = FString("Hello world");
+
     Hello->Say(MyMsg, EIoWorldWhen::IWW_Now);
+
 }
 ```
 
@@ -436,8 +806,12 @@ Operations with return values have async variants that prevent blocking the game
 ```
 TFuture<int32> Future = Hello->SayAsync(MyMsg, EIoWorldWhen::IWW_Now);
 
+
+
 Future.Next([](const int32& Result) {
+
     UE_LOG(LogTemp, Log, TEXT("Say returned: %d"), Result);
+
 });
 ```
 
@@ -470,9 +844,13 @@ In your class header, declare the callback functions:
 
 ```
 UFUNCTION()
+
 void OnLastChanged(const FIoWorldMessage& Last);
 
+
+
 UFUNCTION()
+
 void OnJustSaid(const FIoWorldMessage& Msg);
 ```
 
@@ -480,6 +858,7 @@ In your implementation, bind to the events:
 
 ```
 Hello->_GetPublisher()->OnLastChangedBP.AddDynamic(this, &UMyClass::OnLastChanged);
+
 Hello->_GetPublisher()->OnJustSaidSignalBP.AddDynamic(this, &UMyClass::OnJustSaid);
 ```
 

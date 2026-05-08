@@ -9,12 +9,20 @@ Signals can be modeled using ApiGear as signals of an interface.
 ```
 name: org.demos
 
+
+
 interfaces:
+
   - name: Echo
+
     signals:
+
       - name: shutdown
+
         params:
+
         - name: timeout
+
           type: int
 ```
 
@@ -22,12 +30,19 @@ The resulting code will look somehow like this and most often will require a lam
 
 ```
 // org.demos.js
+
 class Echo {
+
   onShutdown(callback)	
+
 }
+
 const echo = new Echo()
+
 echo.onShutdown( (timeout) => {
+
 	console.log('timeout: ', timeout);
+
 })
 ```
 

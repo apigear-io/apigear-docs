@@ -11,10 +11,16 @@ In ApiGear properties are described as properties inside an interface.
 ```
 name: org.demos
 
+
+
 interfaces:
+
   - name: Echo
+
     properties:
+
       - name: message
+
         type: string
 ```
 
@@ -22,10 +28,15 @@ The resulting simplified typescript code could look like this.
 
 ```
 // org.demos.js
+
 class Echo {
+
   message: string = ""
+
 }
+
 const echo = new Echo()
+
 echo.message = "foo"
 ```
 

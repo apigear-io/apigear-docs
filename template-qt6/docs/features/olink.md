@@ -26,33 +26,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -60,32 +88,59 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┣ 📂olink
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜olinkclient.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkclient.h
+
  ┃ ┃ ┃ ┣ 📜olinkhost.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkhost.h
+
  ┃ ┃ ┃ ┣ 📜olinkremote.cpp
+
  ┃ ┃ ┃ ┗ 📜olinkremote.h
+
  ┃ ┃ ... 
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┣ 📂implementation
+
  ┃ ┃ ┣ 📂olink
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜olinkfactory.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkfactory.h
+
  ┃ ┃ ┃ ┣ 📜olinkhello.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkhello.h
+
  ┃ ┃ ┃ ┣ 📜olinkhelloadapter.cpp
+
  ┃ ┃ ┃ ┗ 📜olinkhelloadapter.h
+
  ...
 ```
 
@@ -104,12 +159,19 @@ IObjectSink (click to expand)
 
 ```
 class IObjectSink {
+
 public:
+
     virtual std::string olinkObjectName() = 0;
+
     virtual void olinkOnSignal(const std::string& signalId, const nlohmann::json& args) = 0;
+
     virtual void olinkOnPropertyChanged(const std::string& propertyId, const nlohmann::json& value) = 0;
+
     virtual void olinkOnInit(const std::string& objectId, const nlohmann::json& props, IClientNode* node) = 0;
+
     virtual void olinkOnRelease() = 0;
+
 };
 ```
 
@@ -137,24 +199,43 @@ As mentioned earlier you need a network layer, here provided by a `ApiGear::Obje
 
 ```
     // Create a global registry.
+
     ApiGear::ObjectLink::ClientRegistry registry;
+
     // Create a client and make a connection
+
     ApiGear::ObjectLink::OLinkClient client(registry);
+
     client.connectToHost(QUrl("ws://127.0.0.1:8182"));
 
+
+
     // Create your service client and request it linking, which will try to connect with a server side for this object.
+
     auto ioWorldHello = std::make_shared<io_world::OLinkHello>();
+
     client.linkObjectSource(ioWorldHello);
 
+
+
     // use your ioWorldHello as it was Hello implementation
+
     ioWorldHello->say(io_world::Message(), io_world::When::Now);
+
     auto lastMessage = ioWorldHello->last();
+
     auto local_last = io_world::Message();
+
     local_last.m_content = "new message";
+
     ioWorldHello->setLast(local_last);
+
     ioWorldHello->connect(ioWorldHello.get(), &io_world::AbstractHello::justSaid, [](auto& param){qDebug()<< "received just said";});
 
+
+
     // remember to unlink your object if you won't use it anymore.
+
     client.unlinkObjectSource(ioWorldHello->olinkObjectName());
 ```
 
@@ -172,13 +253,21 @@ IObjectSource (click to expand)
 
 ```
 class  IObjectSource {
+
 public:
+
     virtual std::string olinkObjectName() = 0;
+
     virtual nlohmann::json olinkInvoke(const std::string& methodId, const nlohmann::json& args) = 0;
+
     virtual void olinkSetProperty(const std::string& propertyId, const nlohmann::json& value) = 0;
+
     virtual void olinkLinked(const std::string& objectId, IRemoteNode* node) = 0;
+
     virtual void olinkUnlinked(const std::string& objectId) = 0;
+
     virtual nlohmann::json olinkCollectProperties() = 0;
+
 };
 ```
 
@@ -206,27 +295,49 @@ As mentioned earlier you need a network layer, here provided by a `ApiGear::Obje
 
 ```
 
+
     // Prepare the registry, the server, and an object which you want to expose.
+
     ApiGear::ObjectLink::RemoteRegistry registry;
+
     ApiGear::ObjectLink::OLinkHost server(registry);
+
     auto ioWorldHello = std::make_shared<io_world::Hello>();
 
+
+
     // Create your OLinkHelloAdapter and add it to registry.
+
     auto ioWorldOlinkHelloService = std::make_shared<io_world::OLinkHelloAdapter>(registry, ioWorldHello.get());
+
     registry.addSource(ioWorldOlinkHelloService);
 
+
+
     // Start server with source added to registry.
+
     server.listen("localhost", 8182);
 
+
+
     // use your ioWorldHello implementation, all property changes, and signals will be passed to connected OLink clients.
+
     auto lastMessage = ioWorldHello->last();
+
     ioWorldHello->say(lastMessage, io_world::When::Soon);
+
     io_world::Message someMessage;
+
     someMessage.m_content = "the new content";
+
     ioWorldHello->setLast(someMessage); // after this call - if new property is different than current one - all clients will be informed about new value.
+
     emit ioWorldHello->justSaid(someMessage);
 
+
+
     // Remember to remove your ioWorldOlinkHelloService after you finish using it.
+
     registry.removeSource(ioWorldOlinkHelloService->olinkObjectName());
 ```
 
@@ -236,12 +347,19 @@ Files `📜olinkfactory.h` and `📜olinkfactory.cpp` contain the `OLinkFactory`
 
 ```
     // Prepare Factory before app is created.
+
     ApiGear::ObjectLink::ClientRegistry client_registry;
+
     ApiGear::ObjectLink::OLinkClient client(client_registry);
+
     io_world::OLinkFactory io_worldOlinkFactory(client);
+
     io_world::ApiFactory::set(&io_worldOlinkFactory);
+
     ...
+
     // Connect the client - all qml olink clients will be linked if the server services are already up.
+
     client.connectToHost(QUrl("ws://127.0.0.1:8182"));
 ```
 
@@ -249,20 +367,35 @@ The factory uses the `ApiGear::ObjectLink::OLinkClient` and links the objects wh
 
 ```
 ...
+
 import io_world 1.0
 
+
+
 ApplicationWindow {
+
 ...
+
             Button {
+
             width: 80
+
             height: 80
+
             text: qmlIoWorldHello.last.content
+
             onClicked: {
+
                 qmlIoWorldHello.say(someMessage, someWhen)
+
             }
+
         }
+
     IoWorldHello { id: qmlIoWorldHello }
+
 ...
+
 }
 ```
 
@@ -291,44 +424,83 @@ main.cpp (click to expand)
 
 ```
 #include "io_world/api/apifactory.h"
+
 #include "io_world/olink/olinkfactory.h"
+
 #include "io_world/monitor/tracedapifactory.h"
 
+
+
 #include <QtCore>
+
 #include "olink/clientregistry.h"
 
+
+
 #include <QGuiApplication>
+
 #include <QQmlApplicationEngine>
+
+
 
 #include "olink/olinkclient.h"
 
+
+
 #include <memory>
+
 #include <iostream>
+
+
 
 #include <QtPlugin>
 
 
+
+
+
 int main(int argc, char *argv[]){
 
+
+
     // Prepare Factory before app is created.
+
     ApiGear::ObjectLink::ClientRegistry client_registry;
+
     ApiGear::ObjectLink::OLinkClient client(client_registry);
+
     io_world::OLinkFactory io_worldOlinkFactory(client);
+
     io_world::ApiFactory::set(&io_worldOlinkFactory);
 
+
+
     // Create main app
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+
     QGuiApplication app(argc, argv);
+
     QQmlApplicationEngine engine;
+
+
 
     engine.load(url);
 
+
+
     // Connect the client - all qml olink clients will be linked
+
     client.connectToHost(QUrl("ws://127.0.0.1:8182/ws"));
+
+
 
     auto result = app.exec();
 
+
+
     return result;
+
 }
 ```
 
@@ -350,69 +522,134 @@ main.qml(click to expand)
 
 ```
 import QtQuick 2.15
+
 import QtQuick.Layouts 1.2
+
 import QtQuick.Controls 2.15
+
 import io.world 1.0
+
 import io.world.MessageFactorySingleton 1.0
 
+
+
 ApplicationWindow {
+
     id: appWindow
+
     visible: true
+
     width: 300
+
     height: 250
+
     ColumnLayout {
+
         spacing: 10
+
         id: mainLayout
+
         anchors.fill: parent
 
+
+
         Button {
+
             id: button1
+
             Layout.alignment: Qt.AlignCenter
+
             background: Rectangle {
+
                 implicitWidth: 250
+
                 implicitHeight: 50
+
                 radius: 4
+
                 color: "#9ed545"
+
             }
+
             text: "Click to get result of a method"
+
             onClicked: {
+
                 var msg = IoWorldMessageFactory.create()
+
                 msg.content = "some message"
+
                 qmlIoWorldHello.say(msg, IoWorldWhen.New)
+
             }
+
         }
+
         Button {
+
             id: button2
+
             Layout.alignment: Qt.AlignCenter
+
             background: Rectangle {
+
                 implicitWidth: 250
+
                 implicitHeight: 50
+
                 radius: 4
+
                 color: "#9ed545"
+
             }
+
             text: qmlIoWorldHello.last.content
+
             onClicked: {
+
                 console.log("Or events like changing properties or invoking methods")
+
             }
+
         }
+
         Button {
+
             id: button3
+
             Layout.alignment: Qt.AlignCenter
+
             background: Rectangle {
+
                 implicitWidth: 250
+
                 implicitHeight: 50
+
                 radius: 4
+
                 color: "#9ed545"
+
             }
+
             text: "Will show singal message"
+
         }
+
     }
+
     IoWorldHello { id: qmlIoWorldHello
+
         onJustSaid:{
+
             console.log("signal received")
+
             button3.text = msg.content
+
         }
+
     }
+
+
 
 }
 ```
@@ -429,58 +666,111 @@ CMakeLists.txt(click to expand)
 
 ```
 project(QmlExamlple)
+
 cmake_minimum_required(VERSION 3.20)
 
+
+
 # append local binary directory for conan packages to be found
+
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
 
+
+
 set(CMAKE_CXX_STANDARD 14)
+
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+
 set (SOURCES
+
     main.cpp
+
     main.qml
+
     resources.qrc
+
 )
+
+
 
 set(QML_IMPORT_PATH  "${CMAKE_BINARY_DIR}/imports" CACHE STRING "" FORCE)
+
 set(QML2_IMPORT_PATH "${CMAKE_BINARY_DIR}/imports" CACHE STRING "" FORCE)
 
+
+
 add_executable(QmlExamlple
+
     ${SOURCES}
+
 )
 
+
+
 find_package(Qt5 REQUIRED COMPONENTS Core Qml Network WebSockets Gui Quick QuickControls2 QuickWidgets)
+
 find_package(apigear QUIET COMPONENTS olink_qt)
 
+
+
 find_package(apigear QUIET COMPONENTS olink_core)
+
 if(NOT olink_core_FOUND)
+
   # pull objectlink-core-cpp as dependency
+
   message(STATUS "objectlink-core-cpp NOT FOUND, fetching the git repository")
+
   FetchContent_Declare(olink_core
+
       GIT_REPOSITORY https://github.com/apigear-io/objectlink-core-cpp.git
+
       GIT_TAG v0.2.4
+
       GIT_SHALLOW TRUE
+
       EXCLUDE_FROM_ALL FALSE
+
   )
+
   FetchContent_MakeAvailable(olink_core)
+
 endif()
 
 
+
+
+
 find_package(io_world QUIET COMPONENTS io_world_api io_world_impl io_world_olink plugin_io_world io_world_monitor)
+
 target_link_libraries(QmlExamlple
+
     io_world_api
+
     io_world_impl
+
     io_world_olink
+
     plugin_io_world
+
     io_world_monitor
+
 Qt5::Core Qt5::Qml Qt5::WebSockets Qt5::Gui Qt5::Quick Qt5::QuickControls2 Qt5::QuickWidgets
+
 olink_qt
+
 olink_core
+
 )
 
 
+
+
+
 install(TARGETS QmlExamlple
+
         RUNTIME DESTINATION bin COMPONENT Runtime)
 ```
 
@@ -488,9 +778,13 @@ resources.qrc(click to expand)
 
 ```
 <RCC>
+
     <qresource prefix="/">
+
         <file>main.qml</file>
+
     </qresource>
+
 </RCC>
 ```
 
@@ -502,33 +796,61 @@ Scenario(click to expand)
 
 ```
 schema: apigear.scenario/1.0
+
 name: "first scenario"
+
 version: "1.0.0"
+
 #initial properties and setting gunction response
+
 interfaces:
+
   - name: io.world.Hello #( module io.world and interface Hello combination)
+
     properties:
+
       last: {content: "Initial"}
+
     operations:
+
       - name: say
+
         actions:
+
          - $return: { value: 88  }
+
 # sequence of changing properties and emitting signals
+
 sequences:
+
   - name: play with hello
+
     interval: 2000 # 2 seconds
+
     interface: io.world.Hello
+
     loops: 3 
+
     steps: # step is called every 2 secs according to interval
+
       - name: change property
+
         actions: 
+
           - $set: { last: {content: "First Change of Property"} }
+
       - name: emit signal
+
         actions: 
+
           - $signal: { justSaid: [ {content: "First Message"} ] }
+
       - name: change property AND emit signal
+
         actions:
+
           - $set: { last: {content: "Second Change of Property"} }
+
           - $signal: { justSaid: [ {content: "Other Signal"} ] }
 ```
 

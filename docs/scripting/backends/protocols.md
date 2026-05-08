@@ -11,14 +11,24 @@ In the following we will use always our counter example which looks like this:
 ```
 module demo
 
+
+
 interface Counter {
+
     count: int
+
     increment(step: int)
+
     decrement(step: int)
+
 }
 
+
+
 interface Echo {
+
     say(message: string): string
+
 }
 ```
 

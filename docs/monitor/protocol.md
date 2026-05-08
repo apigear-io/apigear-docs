@@ -26,9 +26,13 @@ An API call occurs when the client calls an method. The uri is the module name, 
 
 ```
 {
+
   "type": "call",
+
   "symbol": "${module}.${interface}/${method}",
+
   "data": "${params}"
+
 }
 ```
 
@@ -38,9 +42,13 @@ A state change can be an partial update or a full update of all interface proper
 
 ```
 {
+
   "type": "state",
+
   "symbol": "${module}.${interface}",
+
   "data": "${state}"
+
 }
 ```
 
@@ -50,9 +58,13 @@ For an interface signal the message looks like this
 
 ```
 {
+
   "type": "signal",
+
   "symbol": "${module}.${interface}/${signal}",
+
   "data": "${params}"
+
 }
 ```
 
@@ -68,14 +80,24 @@ The websocket tracing endpoint can be looked up under ApiGear Studio settings pa
 
 ```
 {
+
   "jsonrpc": "2.0",
+
   "method": "trace",
+
   "params": {
+
     "id": "1000230240",
+
     "source": "local-device",
+
     "type": "call",
+
     "symbol": "count.Counter/increment",
+
     "data": {}
+
   }
+
 }
 ```

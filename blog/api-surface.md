@@ -22,9 +22,13 @@ The API surface for an object consists of the following parts:
 
 ```
 interface name {
+
     `prop-name` : type                     // property
+
     `operation-name` ( params ): `type`       // operation
+
     signal `signal-name` ( params )        // signal
+
 }
 ```
 
@@ -32,9 +36,13 @@ For example a heating system could have the following API surface:
 
 ```
 interface HeatingSystem {
+
     temperature: float
+
     setTemperature(float temperature)
+
     signal maxTemperatureReached()
+
 }
 ```
 
@@ -46,7 +54,9 @@ Properties are the state of an object. They can be read and written and notify u
 
 ```
 interface HeatingSystem {
+
     temperature: float
+
 }
 ```
 
@@ -65,7 +75,9 @@ Operations are functions that can be called on an object. They can be synchronou
 
 ```
 interface HeatingSystem {
+
     setTemperature(float temperature)
+
 }
 ```
 
@@ -77,7 +89,9 @@ Signals are events that can be emitted by an object. They can be received by use
 
 ```
 interface HeatingSystem {
+
     signal maxTemperatureReached()
+
 }
 ```
 
@@ -99,8 +113,11 @@ An enumeration is a set of named values. An enumeration is defined as follows:
 
 ```
 enum Enum1 {
+
     value1
+
     value2
+
 }
 ```
 
@@ -112,6 +129,8 @@ A module is a collection of objects, structures and enumerations. A module is de
 
 ```
 module name version
+
+
 
 interface Name {}
 ```

@@ -40,26 +40,47 @@ apigear sim run scenario.js --watch
 
 ```
 // counter.js
+
 const counter = $createService("demo.Counter", { count: 0 });
 
+
+
 counter.increment = function() {
+
     counter.count++;
+
     return counter.count;
+
 }
+
+
 
 counter.decrement = function() {
+
     counter.count--;
+
     return counter.count;
+
 }
 
+
+
 // React to property changes
+
 counter.$.onProperty("count", function(value) {
+
     console.log("count changed to", value);
+
 });
 
+
+
 function main() {
+
     console.log("Counter service started");
+
     console.log("Initial count:", counter.count);
+
 }
 ```
 
@@ -92,23 +113,41 @@ apigear stim run client.js
 
 ```
 // client.js
+
 const channel = $createChannel("ws://localhost:4333/ws");
+
 const counter = channel.createClient("demo.Counter");
 
+
+
 // Monitor property changes
+
 counter.onProperty("count", function(value) {
+
     console.log("count is now:", value);
+
 });
 
+
+
 function main() {
+
     console.log("Client started");
 
+
+
     // Call remote methods
+
     for (let i = 0; i < 5; i++) {
+
         counter.callMethod("increment");
+
     }
 
+
+
     console.log("Done");
+
 }
 ```
 
@@ -126,8 +165,11 @@ Create simulated services with the `$createService` function.
 
 ```
 const service = $createService("module.Interface", {
+
     // Initial property values
+
     propertyName: initialValue
+
 });
 ```
 
@@ -135,18 +177,31 @@ const service = $createService("module.Interface", {
 
 ```
 // Set property
+
 service.count = 10;
 
+
+
 // Get property
+
 console.log(service.count);
 
+
+
 // Using bare API
+
 service.$.setProperty("count", 10);
+
 service.$.getProperty("count");
 
+
+
 // React to changes
+
 service.$.onProperty("count", function(value) {
+
     console.log("count changed:", value);
+
 });
 ```
 
@@ -154,14 +209,23 @@ service.$.onProperty("count", function(value) {
 
 ```
 // Define method implementation
+
 service.increment = function() {
+
     service.count++;
+
     return service.count;
+
 };
 
+
+
 // Using bare API
+
 service.$.setMethod("increment", function() {
+
     return service.count++;
+
 });
 ```
 
@@ -169,11 +233,17 @@ service.$.setMethod("increment", function() {
 
 ```
 // Emit signal
+
 service.$.emitSignal("countChanged", [service.count]);
 
+
+
 // Listen for signals
+
 service.$.onSignal("countChanged", function(args) {
+
     console.log("Signal received:", args);
+
 });
 ```
 
@@ -185,9 +255,13 @@ Connect to remote services with the `$createChannel` function.
 
 ```
 // Default address
+
 const channel = $createChannel();
 
+
+
 // Custom address
+
 const channel = $createChannel("ws://localhost:5555/ws");
 ```
 
@@ -201,6 +275,7 @@ const client = channel.createClient("module.Interface");
 
 ```
 client.callMethod("methodName");
+
 client.callMethod("methodName", arg1, arg2);
 ```
 
@@ -208,7 +283,9 @@ client.callMethod("methodName", arg1, arg2);
 
 ```
 client.onProperty("propertyName", function(value) {
+
     console.log("Property changed:", value);
+
 });
 ```
 
@@ -216,7 +293,9 @@ client.onProperty("propertyName", function(value) {
 
 ```
 client.onSignal("signalName", function(args) {
+
     console.log("Signal received:", args);
+
 });
 ```
 
@@ -255,7 +334,9 @@ apigear sim feed events.ndjson
 
 ```
 {"type":"property","interface":"demo.Counter","property":"count","value":0}
+
 {"type":"method","interface":"demo.Counter","method":"increment"}
+
 {"type":"signal","interface":"demo.Counter","signal":"countChanged","args":[1]}
 ```
 
@@ -265,47 +346,89 @@ A physics simulation with position, velocity, and acceleration:
 
 ```
 // ball.js
+
 const ball = $createService("demo.Ball", {
+
     pos: { x: 0, y: 0 },
+
     vel: { x: 1, y: 1 },
+
     acc: { x: 0.1, y: 0.1 }
+
 });
+
+
 
 ball.move = function() {
+
     // Update velocity
+
     ball.vel = {
+
         x: ball.vel.x + ball.acc.x,
+
         y: ball.vel.y + ball.acc.y
+
     };
+
+
 
     // Update position
+
     ball.pos = {
+
         x: ball.pos.x + ball.vel.x,
+
         y: ball.pos.y + ball.vel.y
+
     };
 
+
+
     return ball.pos;
+
 };
+
+
 
 ball.reset = function() {
+
     ball.pos = { x: 0, y: 0 };
+
     ball.vel = { x: 1, y: 1 };
+
 };
 
+
+
 ball.$.onProperty("pos", function(value) {
+
     console.log("Position:", JSON.stringify(value));
+
 });
 
+
+
 function main() {
+
     console.log("Ball simulation started");
 
+
+
     // Run 10 steps
+
     for (let i = 0; i < 10; i++) {
+
         ball.move();
+
     }
 
+
+
     console.log("Final state:", JSON.stringify(ball.$.getProperties()));
+
     $quit();
+
 }
 ```
 
@@ -317,9 +440,13 @@ Test UI code against a simulated backend:
 
 ```
 # Start simulation
+
 apigear sim run backend.js
 
+
+
 # Run your client application
+
 ./my-client-app
 ```
 
@@ -333,13 +460,21 @@ apigear stim run load-test.js
 
 ```
 // load-test.js
+
 const channel = $createChannel();
+
 const service = channel.createClient("demo.Service");
 
+
+
 function main() {
+
     for (let i = 0; i < 1000; i++) {
+
         service.callMethod("process", { id: i });
+
     }
+
 }
 ```
 
@@ -349,6 +484,7 @@ Verify service behavior:
 
 ```
 apigear sim run mock-service.js &
+
 apigear stim run test-client.js
 ```
 

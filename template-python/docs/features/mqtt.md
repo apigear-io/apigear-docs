@@ -2,7 +2,23 @@
 
 caution
 
-This is an experimental feature. It contains smallest working set of functionalities to adapt the generated interface for using over the network with MQTT protocol. It doesn't include the security. The error handling is minimal. It is not production ready. Please also check issues on github for this template.
+**Experimental — API may change in 1.x; not recommended for production.**
+
+This feature is the smallest working adapter that maps a generated interface onto the MQTT protocol. The following gaps are known and intentional in the current release:
+
+* **No TLS.** The shared client connects in plain TCP. Bring your own `TLSContext` if you need encryption.
+* **No auth or ACL guidance.** No username/password helper, no broker ACL examples, no credential storage pattern.
+* **Minimal error handling.** Network and protocol errors are mostly logged; there is no retry queue, no dead-letter handling, no caller-visible error type.
+* **No reconnect or backoff strategy documented.** The Paho client's network loop is started, but reconnect/backoff/clean-session behavior is not configured for you.
+* **No QoS strategy guidance.** All publishes and subscribes use a fixed QoS of 2. There is no per-topic tuning and no documentation on when to drop to 1 or 0.
+
+Track maturation and file specific issues in the [template-python issue tracker](https://github.com/apigear-io/template-python/issues).
+
+note
+
+Open design questions in the protocol layer are flagged inline in `apigear/mqtt/base.py` (look for `TODO` comments around the `clean_start` flag and the on-connect resubscribe path). They are surfaced here rather than hidden so that downstream users can weigh in before the API solidifies.
+
+To know which files to inspect when filing an issue or reading the code: the protocol-layer client/service implementation lives in `apigear/mqtt/` (shared across all interfaces), and the per-interface client/server adapters live in `{module}/mqtt/sinks.py` and `{module}/mqtt/sources.py`.
 
 This feature purpose is not only to help you introduce MQTT protocol into your project, but also show that an existing protocol can be adapted for sharing your data in your ecosystem. When going through this document you may notice this implementation contains general client/server adapters in 📂hello-world/apigear/mqtt and an interface specific part generated from templates for each interface in 📂hello-world/py\_hello\_world/io\_world/mqtt.<br /><br />This feature provides a *client* and a *server* adapter for your interfaces for the MQTT protocol. It allows you to connect different applications in the same or different technologies (check all of our [templates](/docs/sdk/intro.md)).<br />Use an *Mqtt client* instead of your interface implementation to be able to receive data from remote service.<br />Use an *Mqtt server adapter* to expose your interface implementation as a remote service.<br />
 
@@ -26,33 +42,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -60,24 +104,43 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂py_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┣ 📜base.py
+
  ┃ ┃ ┃ ┣ 📜client.py
+
  ┃ ┃ ┃ ┣ 📜service.py
+
  ┃ ┃ ┃ ┗ 📜__init__.py
+
  ┃ ┃ ┃ 
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┣ 📂impl
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┣ 📜sinks.py
+
  ┃ ┃ ┃ ┣ 📜sources.py
+
  ┃ ┃ ┃ ┗ 📜__init__.py
+
  ...
 ```
 
@@ -133,54 +196,103 @@ HelloClientAdapter is an adapter of you interface to the Mqtt Client (with proto
 
 ```
 import os
+
 import sys
+
 # add context - your relative path from this example to py_hello_world dir e.g. like this
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
+
+
 import apigear.mqtt
+
 import logging
+
 import io_world.mqtt
+
 import io_world.api
 
+
+
 async def main():
+
     # create a mqtt adapter for client side
+
     client = apigear.mqtt.Client("UniqueClientNameForMqttHelloExample")
 
+
+
     # create mqtt interface adapters for client side
+
     mqtt_hello = io_world.mqtt.HelloClientAdapter(client)
+
     await client.connect("localhost", 1883)
 
+
+
     # Subscribe for property changes
+
     def handleProperty(value):
+
         print("received property change");
+
         print(value);
+
     mqtt_hello.on_last_changed += handleProperty
+
     # or ask for change.
+
     local_last = io_world.api.Message();
+
     local_last.content = "New message"
+
     mqtt_hello.set_last(local_last);
+
     
+
     # Check the signals with subscribing for its change
+
     def handleSignal(value):
+
         print("received signal");
+
         print(value);
+
     mqtt_hello.on_just_said += handleSignal
+
     
+
     # Play around executing your operations
+
     message_to_say = io_world.api.Message()
+
     message_to_say.content = "Message to say"
+
     result = mqtt_hello.say(message_to_say, io_world.api.When.NOW)
+
     await result
+
     print("method result")
+
     print(result)    
+
     
+
     input("Press Enter to close")
+
+
 
     client.disconnect()
 
+
+
 if __name__ == '__main__':
+
     loop = asyncio.new_event_loop()
+
     asyncio.set_event_loop(loop)
+
     loop.run_until_complete(main())
 ```
 
@@ -206,38 +318,71 @@ The MQTT service adapters add handlers for all the signals to the local implemen
 
 ```
 import os
+
 import sys
+
 # add context - your relative path from this example to py_hello_world dir e.g. like this
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
 
+
+
 import apigear.mqtt
+
 import io_world.impl
+
 import io_world.mqtt
+
 import io_world.api
 
+
+
 async def main():
+
     service = apigear.mqtt.Service("uniqueServiceIdForHelloService")
+
     source_io_world_hello = io_world.impl.Hello()
+
     serviceAdapter_io_world_hello = io_world.mqtt.HelloServiceAdapter(source_io_world_hello, service)
 
+
+
     await service.connect("localhost", 1883)
+
     
+
     # Set property, the change will be sent to all clients, and local handlers if any.
+
     local_last = io_world.api.Message();
+
     local_last = "New message from server"
+
     source_io_world_hello.set_last(local_last);
 
+
+
     # Emit the signal, it will be sent to all clients
+
     signal_message = io_world.api.Message()
+
     signal_message = "New message from server"
+
     source_io_world_hello._just_said(signal_message)
+
     
+
     input("Press Enter to close")
+
     service.disconnect()
 
+
+
 if __name__ == '__main__':
+
     loop = asyncio.new_event_loop()
+
     asyncio.set_event_loop(loop)
+
     loop.run_until_complete(main())
 ```
 

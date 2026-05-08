@@ -20,7 +20,9 @@ To iterate over a list you can use the `range` keyword. For example to iterate o
 
 ```
 {{ range .Module.Interfaces }}
+
     {{ .Name }}
+
 {{ end }}
 ```
 
@@ -30,9 +32,13 @@ A loop can also be empty and the `else` keyword can be used to define the empty 
 
 ```
 {{ range .Module.Interfaces }}
+
     {{ .Name }}
+
 {{ else }}
+
     No interfaces found
+
 {{ end }}
 ```
 
@@ -40,7 +46,9 @@ To use the index and current element you can
 
 ```
 {{ range $index, $element := .Module.Interfaces }}
+
     {{ $index }}: {{ $element.Name }}
+
 {{ end }}
 ```
 
@@ -52,7 +60,9 @@ To join lists with commas you can use the loop index.
 
 ```
 {{ range $i, $e := .Module.Interfaces }}
+
     {{ if $i}},{{ end }}{{ .Name }}
+
 {{ end }}
 ```
 
@@ -80,7 +90,9 @@ You can use an if-end or if-else-end construct to control the output. For exampl
 
 ```
 {{ if .Name }}
+
     {{ .Name }}
+
 {{ end }}
 ```
 
@@ -88,9 +100,13 @@ or to output a default value if the name is empty:
 
 ```
 {{ if .Name }}
+
     {{ .Name }}
+
 {{ else }}
+
     {{ .Module.Name }}
+
 {{ end }}
 ```
 
@@ -100,7 +116,9 @@ The template language allows to control the white space. For example to remove t
 
 ```
 {{- if .Name }}
+
     {{ .Name }}
+
 {{- end }}
 ```
 
@@ -108,7 +126,9 @@ or to remove the white space after the output:
 
 ```
 {{ if .Name -}}
+
     {{ .Name }}
+
 {{ end }}
 ```
 

@@ -38,7 +38,9 @@ Data fields are added at the same level to describe the data name and type. For 
 
 ```
 properties:
+
   - name: count
+
     type: int
 ```
 
@@ -65,8 +67,11 @@ For example an integer array can be noted like this:
 
 ```
 properties:
+
   - name: names
+
     type: string
+
     array: true
 ```
 
@@ -74,8 +79,11 @@ If an array does contain a symbol as containing type, then the symbol name can b
 
 ```
 properties:
+
   - name: messages
+
     type: Message
+
     array: true
 ```
 
@@ -91,6 +99,7 @@ A symbol is a named element inside a module. This can be either an interface, st
 
 ```
 structs:
+
   - name: Message
 ```
 
@@ -98,10 +107,15 @@ Inside the same module the type can be referenced by the name of the symbol usin
 
 ```
 properties:
+
   - name: msg1
+
     type: Message
+
   - name: msg2
+
     type: Message
+
     array: true
 ```
 
@@ -109,12 +123,19 @@ Outside the module, the module itself needs to be imported and the type needs to
 
 ```
 imports:
+
   - org.example
 
+
+
 interfaces:
+
   - name: Interface1
+
     properties:
+
       - name: msg1
+
         type: org.example.Message
 ```
 

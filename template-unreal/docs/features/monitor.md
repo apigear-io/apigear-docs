@@ -19,33 +19,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -53,24 +81,43 @@ The following file structure is generated:
 
 ```
 📂ApiGear/Source/ApiGear
+
  ┣ 📂Public
+
  ┃ ┗ 📜tracer.h
+
  ┗ 📂Private
+
    ┗ 📜tracer.cpp
 
+
+
 📂IoWorld/Source/IoWorldMonitor
+
  ┣ 📂Private
+
  ┃ ┗ 📂Generated
+
  ┃   ┣ 📜IoWorldMonitor.cpp
+
  ┃   ┗ 📂Monitor
+
  ┃     ┣ 📜IoWorld.trace.h
+
  ┃     ┣ 📜IoWorld.trace.cpp
+
  ┃     ┗ 📜IoWorldHelloLoggingDecorator.cpp
+
  ┣ 📂Public
+
  ┃ ┗ 📂IoWorld
+
  ┃   ┣ 📜IoWorldMonitor.h
+
  ┃   ┗ 📂Generated/Monitor
+
  ┃     ┗ 📜IoWorldHelloLoggingDecorator.h
+
  ┗ 📜IoWorldMonitor.Build.cs
 ```
 
@@ -87,7 +134,11 @@ Configure the tracer in your game initialization:
 ```
 #include "tracer.h"
 
+
+
 UApiGearTracer* Tracer = GetGameInstance()->GetSubsystem<UApiGearTracer>();
+
+
 
 Tracer->Connect(TEXT("ws://localhost:8182/ws"), TEXT("MyUnrealApp"));
 ```
@@ -118,6 +169,7 @@ The decorator extends `UAbstractIoWorldHello` and subscribes to notifications fr
 
 ```
 // Set which implementation to wrap and trace
+
 void setBackendService(TScriptInterface<IIoWorldHelloInterface> InService);
 ```
 
@@ -146,15 +198,25 @@ The logging decorator is a GameInstance Subsystem, so you access it via `GetSubs
 
 ```
 #include "tracer.h"
+
 #include "IoWorld/Generated/Monitor/IoWorldHelloLoggingDecorator.h"
+
 #include "IoWorld/Implementation/IoWorldHello.h"
+
+
 
 UIoWorldHelloImplementation* HelloImpl = GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
 
+
+
 UIoWorldHelloLoggingDecorator* TracedHello = GetGameInstance()->GetSubsystem<UIoWorldHelloLoggingDecorator>();
+
 TracedHello->setBackendService(HelloImpl);
 
+
+
 TScriptInterface<IIoWorldHelloInterface> Hello = TracedHello;
+
 Hello->Say(Msg, EIoWorldWhen::IWW_Now);
 ```
 

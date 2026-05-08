@@ -19,33 +19,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -53,20 +81,35 @@ the following file structure will be generated inside the target folder. The pur
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂generated
+
  ┃ ┃ ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜common.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜datastructs.api.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜datastructs.api.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜hello.api.h
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜io_world.h
+
  .. .
 ```
 
@@ -101,6 +144,7 @@ The interface has:
 
   ```
   virtual void setLast(const Message& last) = 0;
+
   virtual const Message& getLast() const = 0;
   ```
 
@@ -138,10 +182,16 @@ The publisher is responsible for keeping its clients informed about requested ch
 
 ```
 void Hello::setLast(const Message& last)
+
 {
+
     ...
+
     // call the publish function
+
     m_publisher->publishLastChanged(last);
+
+
 
 }
 ```
@@ -152,6 +202,7 @@ Either provide an implementation for `ISubscriber` interface class and use is wi
 
 ```
 void subscribeToAllChanges(IHelloSubscriber& subscriber);
+
 void unsubscribeFromAllChanges(IHelloSubscriber& subscriber);
 ```
 
@@ -161,6 +212,7 @@ The other option is to use the *parallel* system of notification which doesn't r
 
 ```
 long subscribeToLastChanged(HelloLastPropertyCb callback); // returns handleId that needs to be used to unsubscribe
+
 void unsubscribeFromLastChanged(long handleId);
 ```
 
@@ -188,30 +240,55 @@ Below is a small code snippet which shows an example implementation for `IHelloS
 
 ```
 class HelloUser : public IHelloSubscriber
+
 {
+
 public:
+
     HelloUser(IHello& Hello)
+
     : m_Hello(Hello)
+
     {
+
         m_Hello._getPublisher().subscribeToAllChanges(*this);
+
     }
+
      ~HelloUser()
+
      {
+
           m_Hello._getPublisher().unsubscribeFromAllChanges(*this);
+
      }
 
+
+
     void onJustSaid(const Message& /*msg*/) override
+
     {
+
         // do something with msg.
+
     }
 
+
+
     void onLastChanged(const Message& /*last*/) override
+
     {
+
         // do something with last;
+
     }
+
     // Some other functionality.
+
 private:
+
     IHello& m_Hello
+
 }
 ```
 

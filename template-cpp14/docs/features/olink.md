@@ -30,33 +30,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -64,31 +92,57 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┣ 📂olink
+
  ┃ ┃ ┃ ┣ 📂private
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜olinkconnection.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkconnection.h
+
  ┃ ┃ ┃ ┣ 📜olinkhost.cpp
+
  ┃ ┃ ┃ ┣ 📜olinkhost.h
+
  ┃ ┃ ┃ ┣ ... (helper files)
+
  ┃ ┃ ...
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂generated
+
  ┃ ┃ ┃ ┃ ┗ 📂olink
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloservice.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜helloservice.h
+
  ┃ ┣ 📜 Lifecycle for olink client-server implementation.md
+
  ...
 ```
 
@@ -116,12 +170,19 @@ IObjectSink (click to expand)
 
 ```
 class IObjectSink {
+
 public:
+
     virtual std::string olinkObjectName() = 0;
+
     virtual void olinkOnSignal(const std::string& signalId, const nlohmann::json& args) = 0;
+
     virtual void olinkOnPropertyChanged(const std::string& propertyId, const nlohmann::json& value) = 0;
+
     virtual void olinkOnInit(const std::string& objectId, const nlohmann::json& props, IClientNode* node) = 0;
+
     virtual void olinkOnRelease() = 0;
+
 };
 ```
 
@@ -159,28 +220,51 @@ As mentioned earlier you need a network layer, here provided by a `ApiGear::Obje
 
 ```
 ApiGear::ObjectLink::ClientRegistry registry;
+
 ApiGear::ObjectLink::OLinkClient client(registry);
 
+
+
 // Create a global registry.
+
 ApiGear::ObjectLink::ClientRegistry registry;
+
 // Create a client and make a connection
+
 ApiGear::PocoImpl::OlinkConnection client(registry);
+
 // Create your client and request linking, which will try to connect with a server side for this object.
+
 auto ioWorldHello = std::make_shared<IoWorld::olink::HelloClient>();
 
+
+
 client.connectAndLinkObject(ioWorldHello);
+
 client.connectToHost(Poco::URI("ws://localhost:8182"));
 
+
+
 // You can try out properties
+
 auto lastMessage = ioWorldHello->getLast();
+
 // Executing the methods
+
 ioWorldHello->say(lastMessage, IoWorld::WhenEnum::Soon);
+
 IoWorld::Message someMessage("the new content");
+
 ioWorldHello->setLast(someMessage);
+
 // Or subscribe for signals.
+
 ioWorldHello->_getPublisher().subscribeToJustSaid([](auto args) { /*handle the signal*/});
 
+
+
 // remember to unlink your object if you won't use it anymore.
+
 client.unlinkObjectSource(ioWorldHello->olinkObjectName());
 ```
 
@@ -202,13 +286,21 @@ IObjectSource (click to expand)
 
 ```
 class  IObjectSource {
+
 public:
+
     virtual std::string olinkObjectName() = 0;
+
     virtual nlohmann::json olinkInvoke(const std::string& methodId, const nlohmann::json& args) = 0;
+
     virtual void olinkSetProperty(const std::string& propertyId, const nlohmann::json& value) = 0;
+
     virtual void olinkLinked(const std::string& objectId, IRemoteNode* node) = 0;
+
     virtual void olinkUnlinked(const std::string& objectId) = 0;
+
     virtual nlohmann::json olinkCollectProperties() = 0;
+
 };
 ```
 
@@ -236,26 +328,47 @@ As mentioned earlier you need a network layer, here provided by a `ApiGear::Obje
 
 ```
 ApiGear::ObjectLink::RemoteRegistry registry;
+
 auto logFunction = [](auto /*level*/, auto /*msg*/){ };
+
 ApiGear::PocoImpl::OLinkHost testserver(registry,logFunction);
 
+
+
 auto ioWorldHello = std::make_shared<IoWorld::Hello>();
+
 auto ioWorldOlinkHelloService = std::make_shared<IoWorld::olink::HelloService>(ioWorldHello, registry);
+
 registry.addSource(ioWorldOlinkHelloService);
+
 auto portNumber = 8000;
 
+
+
 // Start your server with your service added to registry.
+
 testserver.listen(portNumber);
 
 
+
+
+
 // use your ioWorldHello as it was Hello implementation, all property changes, and signals will be passed to connected OLink clients.
+
 auto lastMessage = ioWorldHello->getLast();
+
 ioWorldHello->say(lastMessage, IoWorld::WhenEnum::Soon);
+
 IoWorld::Message someMessage("the new content");
+
 ioWorldHello->setLast(someMessage); // after this call - if new property is different than current one - all clients will be informed about new value.
+
 testIoWorldHello->_getPublisher().publishJustSaid(someMessage);
 
+
+
 // remember to remove from registry if you won't use it anymore.
+
 registry.removeSource(ioWorldOlinkHelloService->olinkObjectName());
 ```
 
@@ -277,48 +390,91 @@ main.cpp (click to expand)
 
 ```
 #include <iostream>
+
 #include "io_world/generated/olink/helloclient.h"
+
 #include "apigear/olink/olinkconnection.h"
+
 #include "apigear/tracer/tracer.h"
+
 #include "apigear/olink/olinklogadapter.h"
+
 #include "olink/clientregistry.h"
+
 #include "olink/clientnode.h"
+
 #include "apigear/olink/olinkconnection.h"
+
 #include <iostream>
+
+
+
 
 
 using namespace HelloWorldExample;
 
+
+
 int main() {
+
     // Create a global registry.
+
     ApiGear::ObjectLink::ClientRegistry registry;
+
     // Create a client and make a connection
+
     ApiGear::PocoImpl::OlinkConnection client(registry);
+
     // Create your client and request linking, which will try to connect with a server side for this object.
+
     auto ioWorldHello = std::make_shared<IoWorld::olink::HelloClient>();
 
+
+
     client.connectAndLinkObject(ioWorldHello);
+
     client.connectToHost(Poco::URI("ws://localhost:8182"));
 
+
+
     // Or subscribe for signals.
+
     ioWorldHello->_getPublisher().subscribeToJustSaid([](auto& /*args*/) { std::cout << "Just said received" << std::endl; });
+
     ioWorldHello->_getPublisher().subscribeToLastChanged([](auto& /*args*/) { std::cout << "Last Changed" << std::endl; });
 
 
+
+
+
     bool keepRunning = true;
+
     std::string cmd;
+
     do {
+
         std::cout << "Enter command:" << std::endl;
+
         getline(std::cin, cmd);
 
+
+
         if (cmd == "quit") {
+
             keepRunning = false;
+
             client.disconnect();
+
         }
+
     } while (keepRunning);
+
     client.disconnectAndUnlink(ioWorldHello->olinkObjectName());
 
+
+
     return 0;
+
 }
 ```
 
@@ -326,39 +482,73 @@ CMAkeLists.txt (click to expand)
 
 ```
 cmake_minimum_required(VERSION 3.1)
+
 project(OLinkClientSimuExample)
 
+
+
 # append local binary directory for conan packages to be found
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
+
+
 set(CMAKE_CXX_STANDARD 14)
+
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
+
 set (SOURCES
+
     main.cpp
+
 )
+
 add_executable(OLinkClientSimuExample
+
     ${SOURCES}
+
 )
+
+
 
 # ensure maximum compiler support
+
 if(NOT MSVC)
+
   target_compile_options(OLinkClientSimuExample PRIVATE -Wall -Wextra -Wpedantic -Werror -fvisibility=hidden)
+
 else()
+
   target_compile_options(OLinkClientSimuExample PRIVATE /W4 /WX /wd4251)
+
   # disable the warning for getenv - needs better cross platform solution
+
   target_compile_definitions(OLinkClientSimuExample PRIVATE -D_CRT_SECURE_NO_WARNINGS)
+
 endif()
 
+
+
 find_package(io_world QUIET COMPONENTS io_world-core io_world-implementation io_world-monitor io_world-olink)
+
 target_link_libraries(OLinkClientSimuExample
+
     io_world::io_world-core
+
     io_world::io_world-implementation
+
     io_world::io_world-monitor
+
     io_world::io_world-olink
+
 )
 
+
+
 install(TARGETS OLinkClientSimuExample
+
         RUNTIME DESTINATION bin COMPONENT Runtime)
 ```
 
@@ -374,33 +564,61 @@ Scenario(click to expand)
 
 ```
 schema: apigear.scenario/1.0
+
 name: "first scenario"
+
 version: "1.0.0"
+
 #initial properties and setting gunction response
+
 interfaces:
+
   - name: io.world.Hello #( module io.world and interface Hello combination)
+
     properties:
+
       last: {content: "Initial"}
+
     operations:
+
       - name: say
+
         actions:
+
          - $return: { value: 88  }
+
 # sequence of changing properties and emitting signals
+
 sequences:
+
   - name: play with hello
+
     interval: 2000 # 2 seconds
+
     interface: io.world.Hello
+
     loops: 3 
+
     steps: # step is called every 2 secs according to interval
+
       - name: change property
+
         actions: 
+
           - $set: { last: {content: "First Change of Property"} }
+
       - name: emit signal
+
         actions: 
+
           - $signal: { justSaid: [ {content: "First Message"} ] }
+
       - name: change property AND emit signal
+
         actions:
+
           - $set: { last: {content: "Second Change of Property"} }
+
           - $signal: { justSaid: [ {content: "Other Signal"} ] }
 ```
 

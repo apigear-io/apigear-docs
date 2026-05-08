@@ -33,33 +33,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -67,28 +95,51 @@ the following file structure is generated. The purpose and content of each file 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂cpp_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜mqttclient.cpp
+
  ┃ ┃ ┃ ┣ 📜mqttclient.h
+
  ┃ ┃ ┃ ┣ 📜mqttservice.cpp
+
  ┃ ┃ ┃ ┣ 📜mqttservice.h
+
  ┃ ┃ ┃ ┣ ... (helper files)
+
  ┃ ┃ ...
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂modules
+
  ┃ ┃ ┗ 📂io_world
+
  ┃ ┃ ┃ ┣ 📂generated
+
  ┃ ┃ ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloclient.h
+
  ┃ ┃ ┃ ┃ ┃ ┣ 📜helloservice.cpp
+
  ┃ ┃ ┃ ┃ ┃ ┗ 📜helloservice.h
+
  ...
 ```
 
@@ -150,19 +201,33 @@ When a `HelloClient` client receives the message from server that indicates the 
 
 ```
 // Create a client and make a connection
+
 auto mqttclient = std::make_shared<ApiGear::MQTT::Client>("UniqueClientName");
 
+
+
 // set up modules
+
 auto ioWorldHello = std::make_unique<IoWorld::MQTT::HelloClient>(mqttclient);
 
+
+
 // start mqtt connection
+
 mqttclient.connectToHost("tcp://localhost:1883"); // Use the same port number as your broker is using. Typically, without any other settings it is "1883".
 
+
+
 // use your ioWorldHello as it was Hello implementation
+
 ioWorldHello->say(IoWorld::WhenEnum::Soon);
+
 auto lastMessage = ioWorldHello->getLast();
+
 IoWorld::Message someMessage("the new content");
+
 ioWorldHello->setLast(someMessage);
+
 testIoWorldHello->_getPublisher().subscribeToJustSaid([](auto args) { /*handle the signal*/});
 ```
 
@@ -194,17 +259,29 @@ Have in mind that the `Hello` implementation is not thread safe by default.
 
 ```
 auto mqttservice = std::make_shared<ApiGear::MQTT::Service>("ServiceUniqueNameInMqtt");
+
 auto ioWorldHello = std::make_shared<IoWorld::Hello>();
+
 IoWorld::MQTT::HelloService mqttHelloService(ioWorldHello, mqttservice);
 
+
+
 // start mqtt connection
+
 mqttservice->connectToHost("tcp://localhost:1883");
 
+
+
 // use your ioWorldHello as it was Hello implementation, all property changes, and signals will be passed to connected MqttHello clients.
+
 ioWorldHello->say(IoWorld::WhenEnum::Soon);
+
 IoWorld::Message someMessage("the new content");
+
 auto lastMessage = ioWorldHello->getLast();
+
 ioWorldHello->setLast(someMessage); // after this call - if new property is different than current one - all clients will be informed about new value.
+
 testIoWorldHello->_getPublisher().publishJustSaid(someMessage);
 ```
 

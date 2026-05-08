@@ -30,33 +30,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -64,34 +92,63 @@ The following file structure is generated:
 
 ```
 📂ApiGear/Source
+
  ┣ 📂ApiGearOLink
+
  ┃ ┣ 📂Private
+
  ┃ ┃ ┣ 📜OLinkClientConnection.cpp
+
  ┃ ┃ ┣ 📜OLinkHost.cpp
+
  ┃ ┃ ┣ 📜OLinkHostConnection.cpp
+
  ┃ ┃ ┗ 📜OLinkSink.cpp
+
  ┃ ┣ 📂Public
+
  ┃ ┃ ┣ 📜OLinkClientConnection.h
+
  ┃ ┃ ┣ 📜OLinkHost.h
+
  ┃ ┃ ┗ 📜OLinkSink.h
+
  ┃ ┗ 📜apigearolink.Build.cs
+
  ┗ 📂ThirdParty/OLinkProtocolLibrary
 
+
+
 📂IoWorld/Source/IoWorldOLink
+
  ┣ 📂Private
+
  ┃ ┗ 📂Generated
+
  ┃   ┣ 📜IoWorldOLink.cpp
+
  ┃   ┗ 📂OLink
+
  ┃     ┣ 📜IoWorldHelloOLinkClient.cpp
+
  ┃     ┣ 📜IoWorldHelloOLinkAdapter.cpp
+
  ┃     ┣ 📜IoWorldHelloOLinkSource.h
+
  ┃     ┗ 📜IoWorldHelloOLinkSource.cpp
+
  ┣ 📂Public
+
  ┃ ┗ 📂IoWorld
+
  ┃   ┣ 📜IoWorldOLink.h
+
  ┃   ┗ 📂Generated/OLink
+
  ┃     ┣ 📜IoWorldHelloOLinkClient.h
+
  ┃     ┗ 📜IoWorldHelloOLinkAdapter.h
+
  ┗ 📜IoWorldOLink.Build.cs
 ```
 
@@ -136,12 +193,19 @@ Properties are synchronized between client and server:
 
 ```
 // Getter returns the locally cached value (synchronized from server)
+
 FIoWorldMessage UIoWorldHelloOLinkClient::GetLast() const
+
 {
+
     return Last;
+
 }
 
+
+
 // Setter sends a change request to the server
+
 void UIoWorldHelloOLinkClient::SetLast(const FIoWorldMessage& InLast);
 ```
 
@@ -177,14 +241,23 @@ TFuture<int32> UIoWorldHelloOLinkClient::SayAsync(const FIoWorldMessage& Msg, EI
 
 ```
 // Chain a callback (recommended for UI updates)
+
 TFuture<int32> Future = HelloClient->SayAsync(Msg, EIoWorldWhen::IWW_Now);
+
 Future.Next([this](const int32& Result) {
+
     AsyncTask(ENamedThreads::GameThread, [this, Result]() {
+
         UpdateUI(Result);
+
     });
+
 });
 
+
+
 // Fire and forget
+
 HelloClient->SayAsync(Msg, EIoWorldWhen::IWW_Now);
 ```
 
@@ -198,6 +271,7 @@ Signals received from the server are broadcast to local subscribers via the Publ
 
 ```
 // Subscribe to signals using the Publisher
+
 Hello->_GetPublisher()->OnJustSaidSignalBP.AddDynamic(this, &UMyClass::OnJustSaid);
 ```
 
@@ -209,19 +283,33 @@ In your game code or a custom subsystem:
 
 ```
 #include "OLinkClientConnection.h"
+
 #include "IoWorld/Generated/OLink/IoWorldHelloOLinkClient.h"
 
+
+
 // Get or create the connection
+
 UOLinkClientConnection* Connection = NewObject<UOLinkClientConnection>();
+
 Connection->Configure(TEXT("ws://localhost:8182/ws"), false);
+
 Connection->Connect();
 
+
+
 // Get the OLink client (GameInstance subsystem)
+
 UIoWorldHelloOLinkClient* HelloClient = GetGameInstance()->GetSubsystem<UIoWorldHelloOLinkClient>();
+
 HelloClient->UseConnection(Connection);  // Associate with the connection
 
+
+
 // Use as IIoWorldHelloInterface
+
 TScriptInterface<IIoWorldHelloInterface> Hello = HelloClient;
+
 Hello->Say(Msg, EIoWorldWhen::IWW_Now);
 ```
 
@@ -239,7 +327,10 @@ Then access the configured connection:
 ```
 #include "ApiGearConnectionsStore.h"
 
+
+
 UApiGearConnectionsStore* Store = GetGameInstance()->GetSubsystem<UApiGearConnectionsStore>();
+
 UOLinkClientConnection* Connection = Store->GetOLinkConnection(TEXT("MyConnection"));
 ```
 
@@ -256,14 +347,23 @@ The OLink client provides delegates to track when it successfully links to a ser
 
 ```
 // Check if currently subscribed (linked to server)
+
 if (HelloClient->_IsSubscribed())
+
 {
+
     // Client is ready to use
+
 }
 
+
+
 // React to subscription changes
+
 HelloClient->_SubscriptionStatusChanged.AddLambda([](bool bSubscribed) {
+
     UE_LOG(LogTemp, Log, TEXT("Subscription: %s"), bSubscribed ? TEXT("linked") : TEXT("unlinked"));
+
 });
 ```
 
@@ -305,20 +405,36 @@ LocalImpl->_GetPublisher()->BroadcastJustSaidSignal(Msg);
 
 ```
 #include "OLinkHost.h"
+
 #include "IoWorld/Generated/OLink/IoWorldHelloOLinkAdapter.h"
+
 #include "IoWorld/Implementation/IoWorldHello.h"
 
+
+
 // Get your local implementation (GameInstance subsystem)
+
 UIoWorldHelloImplementation* LocalHello = GetGameInstance()->GetSubsystem<UIoWorldHelloImplementation>();
 
+
+
 // Get the OLink host (GameInstance subsystem)
+
 UOLinkHost* Host = GetGameInstance()->GetSubsystem<UOLinkHost>();
+
 Host->Start(8182);  // Listen on port 8182
 
+
+
 // Get the adapter (GameInstance subsystem)
+
 UIoWorldHelloOLinkAdapter* Adapter = GetGameInstance()->GetSubsystem<UIoWorldHelloOLinkAdapter>();
+
 Adapter->setBackendService(LocalHello);  // Note: lowercase 's'
+
 Adapter->setOLinkHost(Host);  // Register with the host
+
+
 
 // Now remote clients can connect and use your implementation
 ```
@@ -329,8 +445,11 @@ The `olink_tests` feature generates test fixtures for OLink functionality:
 
 ```
 📂IoWorld/Source/IoWorldOLink/Private/Tests
+
  ┣ 📜IoWorldHelloOLink.spec.cpp
+
  ┣ 📜IoWorldHelloOLinkFixture.h
+
  ┗ 📜IoWorldHelloOLinkFixture.cpp
 ```
 
@@ -354,13 +473,22 @@ These tests verify:
 ```
 Connection->GetOnConnectionStatusChangedDelegate().AddDynamic(this, &UMyClass::OnConnectionChanged);
 
+
+
 void UMyClass::OnConnectionChanged(bool bConnected)
+
 {
+
     if (!bConnected)
+
     {
+
         // Handle disconnection
+
         UE_LOG(LogTemp, Warning, TEXT("OLink connection lost"));
+
     }
+
 }
 ```
 

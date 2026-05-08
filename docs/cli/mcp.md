@@ -18,12 +18,19 @@ Add the following to your MCP client configuration:
 
 ```
 {
+
   "mcpServers": {
+
     "apigear": {
+
       "command": "apigear",
+
       "args": ["mcp"]
+
     }
+
   }
+
 }
 ```
 

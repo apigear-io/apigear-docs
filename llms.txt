@@ -72,13 +72,26 @@ Archive
 - [Template C++ 17](/template-cpp17/docs/intro.md): This is the documentation for the cpp17 template for the ApiGear code generator.
 - [Quick-Start](/template-cpp17/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
 
+## template-java
+
+
+### docs
+
+- [Features](/template-java/docs/features.md): Overview of ApiGear Java template features: API generation, stub implementations, Android service/client IPC, and JNI bridge.
+- [Android Feature](/template-java/docs/features/android.md): Generate Android Messenger-based service/client architecture for cross-process and cross-app API communication.
+- [API Feature](/template-java/docs/features/api.md): Generate Java interfaces, structs, enums, and abstract base classes from API definitions. Includes async operations, property change listeners, and ready-state management.
+- [JNI Bridge Feature](/template-java/docs/features/jnibridge.md): Generate JNI bridge classes for integrating the Java/Android API with native C++ code, such as Unreal Engine.
+- [Stubs](/template-java/docs/features/stubs.md): Generate ready-to-use stub implementations with property change detection, async operations, and ready-state management.
+- [Template Java](/template-java/docs/intro.md): Generate Java interfaces, Android service/client IPC, and JNI bridge code from API definitions with the ApiGear code generator.
+- [Quick-Start](/template-java/docs/quickstart.md): Step-by-step guide to generate Java interfaces and data types from YAML API definitions using the ApiGear code generator.
+
 ## template-python
 
 
 ### docs
 
 - [Features](/template-python/docs/features.md): This guide explains how to use the generated code, what are the available features and  their benefits.
-- [MQTT](/template-python/docs/features/mqtt.md): This is an experimental feature. It contains smallest working set of functionalities to adapt the generated interface for using over the network with MQTT protocol.
+- [MQTT](/template-python/docs/features/mqtt.md): Experimental — API may change in 1.x; not recommended for production.
 - [Template Python](/template-python/docs/intro.md): This is the documentation for the Python template.
 - [Quick-Start](/template-python/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Python plugin.
 
@@ -102,9 +115,12 @@ Archive
 
 ### docs
 
-- [Features](/template-unreal/docs/features.md): Overview of ApiGear Unreal Engine template features: Core API generation, stub implementations, OLink networking, Message Bus IPC, and runtime monitoring.
+- [Features](/template-unreal/docs/features.md): Overview of ApiGear Unreal Engine template features: Core API generation, stub implementations, OLink networking, MQTT pub/sub, JNI Android communication, Message Bus IPC, and runtime monitoring.
 - [API Feature](/template-unreal/docs/features/api.md): Generate Unreal Engine interfaces, structs, and enums from API definitions. Full Blueprint and C++ support with property change notifications and async operations.
+- [JNI](/template-unreal/docs/features/jni.md): Connect Unreal Engine to Android services via JNI. Adapter and client for cross-platform Unreal Engine and Android communication using the Java template's jnibridge feature.
+- [Licensing and Author Metadata](/template-unreal/docs/features/licensing.md): Generated plugins include MIT LICENSE files and SPDX headers. Customize author metadata in .uplugin descriptors and copyright notices via the meta field.
 - [Monitor](/template-unreal/docs/features/monitor.md): Trace API calls, property changes, and signals at runtime. View live debugging data in ApiGear Studio or CLI for Unreal Engine interfaces.
+- [MQTT](/template-unreal/docs/features/mqtt.md): Connect Unreal Engine to any MQTT broker. Publish and subscribe to topics for IoT, telemetry, and many-to-many communication with non-Unreal peers.
 - [Message Bus](/template-unreal/docs/features/msgbus.md): Use Unreal Engine's built-in Message Bus for IPC between Unreal applications. Zero-config local communication for editor tools and distributed systems.
 - [OLink](/template-unreal/docs/features/olink.md): Connect Unreal Engine to remote services via ObjectLink WebSocket protocol. Client and server adapters for cross-platform communication and simulation.
 - [Stubs](/template-unreal/docs/features/stubs.md): Generate ready-to-use stub implementations as Unreal Engine GameInstance Subsystems. Includes test fixtures and property change notifications.

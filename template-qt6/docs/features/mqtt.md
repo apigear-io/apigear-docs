@@ -20,7 +20,9 @@ The mqtt library is not a part of standard Qt build. You need to install this mo
 
 ```
 cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo  -DCMAKE_CXX_FLAGS_DEBUG="-O2" .
+
 cmake --build . --config RelWithDebInfo
+
 cmake --install . --verbose 
 ```
 
@@ -32,33 +34,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -66,33 +96,61 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┃ ...
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜mqttclient.cpp
+
  ┃ ┃ ┃ ┣ 📜mqttclient.h
+
  ┃ ┃ ┃ ┣ 📜mqttservice.cpp
+
  ┃ ┃ ┃ ┣ 📜mqttservice.h
+
  ┃ ┃ ┃ ┣ ... (helper files)
+
  ┃ ┃ ...
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┣ 📂implementation
+
  ┃ ┃ ┣ 📂monitor
+
  ┃ ┃ ┣ 📂mqtt
+
  ┃ ┃ ┃ ┣ 📜CMakeLists.txt
+
  ┃ ┃ ┃ ┣ 📜mqtt_common.h
+
  ┃ ┃ ┃ ┣ 📜mqttfactory.cpp
+
  ┃ ┃ ┃ ┣ 📜mqttfactory.h
+
  ┃ ┃ ┃ ┣ 📜mqtthello.cpp
+
  ┃ ┃ ┃ ┣ 📜mqtthello.h
+
  ┃ ┃ ┃ ┣ 📜mqtthelloadapter.cpp
+
  ┃ ┃ ┃ ┗ 📜mqtthelloadapter.h
+
  ...
 ```
 
@@ -148,18 +206,31 @@ MqttHello is an adapter of QtMqtt (with protcol and network layer implementation
 
 ```
     // Create a client and make a connection
+
     ApiGear::Mqtt::Client client("UniqueClientName");
+
     client.connectToHost("localhost", 1883); // Use the same port number as your broker is using. Typically, without any other settings it is "1883".
 
+
+
     // Create your service client.
+
     auto ioWorldHello = std::make_shared<io_world::MqttHello>(client);
 
+
+
     // use your ioWorldHello as it was Hello implementation
+
     ioWorldHello->say(io_world::Message(), io_world::When::Now);
+
     auto lastMessage = ioWorldHello->last();
+
     auto local_last = io_world::Message();
+
     local_last.m_content = "new message";
+
     ioWorldHello->setLast(local_last);
+
     ioWorldHello->connect(ioWorldHello.get(), &io_world::AbstractHello::justSaid, [](auto& param){qDebug()<< "received just said";});
 ```
 
@@ -185,20 +256,35 @@ As mentioned earlier, this is an adapter of QtMqtt (with protcol and network lay
 
 ```
 
+
     // Prepare the Mqtt Service Adapter and an object which you want to expose.
+
     ApiGear::Mqtt::ServiceAdapter service("ServiceUniqueNameInMqtt");
+
     service.connectToHost("localhost", 1883);  // Use the same port number as your broker is using. Typically, without any other settings it is "1883".
+
     auto ioWorldHello = std::make_shared<io_world::Hello>();
 
+
+
     // Create your MqttHelloAdapter and add it to registry.
+
     auto ioWorldMqttHelloService = std::make_shared<io_world::MqttHelloAdapter>(service, ioWorldHello);
 
+
+
     // use your ioWorldHello implementation, all property changes, and signals will be passed to connected MqttHello clients.
+
     auto lastMessage = ioWorldHello->last();
+
     ioWorldHello->say(lastMessage, io_world::When::Soon);
+
     io_world::Message someMessage;
+
     someMessage.m_content = "the new content";
+
     ioWorldHello->setLast(someMessage); // after this call - if new property is different than current one - all clients will be informed about new value.
+
     emit ioWorldHello->justSaid(someMessage);
 ```
 
@@ -208,10 +294,16 @@ Files `📜mqttfactory.h` and `📜mqttfactory.cpp` contain the `MqttFactory` wh
 
 ```
     // Prepare Factory before app is created.
+
     ApiGear::Mqtt::Client client("UniqueClientForQmlExample");
+
     io_world::MqttFactory io_worldMqttFactory(client);
+
     io_world::ApiFactory::set(&io_worldMqttFactory);
+
     ...
+
+
 
     client.connectToHost("localhost", 1883);
 ```
@@ -220,20 +312,35 @@ The factory uses the `ApiGear::ObjectLink::OLinkClient` and links the objects wh
 
 ```
 ...
+
 import io_world 1.0
 
+
+
 ApplicationWindow {
+
 ...
+
             Button {
+
             width: 80
+
             height: 80
+
             text: qmlIoWorldHello.last.content
+
             onClicked: {
+
                 qmlIoWorldHello.say(someMessage, someWhen)
+
             }
+
         }
+
     IoWorldHello { id: qmlIoWorldHello }
+
 ...
+
 }
 ```
 

@@ -15,10 +15,16 @@ Base on this API example we can create a client which can be used to trigger seq
 ```
 module demo
 
+
+
 interface Counter {
+
   count: int
+
   increment()
+
   decrement()
+
 }
 ```
 
@@ -27,41 +33,78 @@ The counter example shows a simple interface which can be used to increment or d
 ```
 // counter_client.js
 
+
+
 const url = "ws://localhost:5555/ws"
+
 const channel = $createChannel(url)
 
+
+
 // create a client based on module and interface name
+
 const counter = channel.createClient("demo.Counter");
 
+
+
 // Monitor property changes
+
 counter.onProperty("count", function(value) {
+
   console.log("Count changed to:", value);
+
 });
+
+
 
 // Listen for signals if any
+
 counter.onSignal("countReached", function(target) {
+
   console.log("Count reached:", target);
+
 });
 
+
+
 function main() { // main is auto run on script execution
+
   // Connect to the remote service
+
   channel.connect();
+
   
+
   // Trigger operations
+
   for (let i = 0; i < 10; i++) {
+
     counter.callMethod("increment");
+
     counter.callMethod("decrement");
+
   }
+
   
+
   // Get current property value
+
   const currentCount = counter.getProperty("count");
+
   console.log("Final count:", currentCount);
+
   
+
   // Optionally disconnect when done
+
   setTimeout(function() {
+
     channel.disconnect();
+
     $quit();
+
   }, 1000);
+
 }
 ```
 
@@ -81,6 +124,7 @@ Now we can run the stimulation file:
 
 ```
 // run simulation client but don't create a server
+
 apigear sim run counter_client.js --no-serve
 ```
 

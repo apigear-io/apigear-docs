@@ -38,11 +38,17 @@ A typical ApiGear project has this structure:
 
 ```
 my-project/
+
 ├── apigear/
+
 │   ├── myapi.module.yaml      # API definitions
+
 │   ├── myapi.solution.yaml    # Generation config
+
 │   └── myapi.scenario.yaml    # Simulation scripts
+
 ├── generated-cpp/             # Generated SDK (example)
+
 └── generated-python/          # Generated SDK (example)
 ```
 
@@ -136,9 +142,13 @@ For larger systems, create separate modules for different domains:
 
 ```
 apigear/
+
 ├── user.module.yaml        # User management APIs
+
 ├── inventory.module.yaml   # Inventory APIs
+
 ├── orders.module.yaml      # Order processing APIs
+
 └── app.solution.yaml       # Single solution for all modules
 ```
 
@@ -158,9 +168,13 @@ Create different solutions for different targets:
 
 ```
 apigear/
+
 ├── api.module.yaml
+
 ├── cpp.solution.yaml       # C++ SDK generation
+
 ├── python.solution.yaml    # Python SDK generation
+
 └── unreal.solution.yaml    # Unreal Engine generation
 ```
 

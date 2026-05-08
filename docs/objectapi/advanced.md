@@ -8,6 +8,7 @@ The info section allows user to add information related to the current document.
 
 ```
 info:
+
   license: <license-identifier>
 ```
 
@@ -17,9 +18,13 @@ Sometimes it is required to add additional information, which is not part of the
 
 ```
 interfaces:
+
   - name: Tuner
+
     meta:
+
       singleton: true
+
       config: { port: 1024 }
 ```
 
@@ -31,11 +36,17 @@ YAML allows a compact format for single line information. This allows us to shor
 
 ```
 structs:
+
   - name: Error
+
     fields:
+
       - name: message
+
         type: string
+
       - name: code
+
         type: int
 ```
 
@@ -43,8 +54,12 @@ Can be written in a short format like this:
 
 ```
 structs:
+
   - name: Error
+
     fields:
+
       - { name: message, type: string }
+
       - { name: code, type: int }
 ```

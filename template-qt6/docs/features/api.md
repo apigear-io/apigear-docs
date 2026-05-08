@@ -18,33 +18,61 @@ Hello World API (click to expand)
 
 ```
 schema: apigear.module/1.0
+
 name: io.world
+
 version: "1.0.0"
 
+
+
 interfaces:
+
   - name: Hello
+
     properties:
+
       - { name: last, type: Message }
+
     operations:
+
       - name: say
+
         params:
+
           - { name: msg, type: Message }
+
           - { name: when, type: When }
+
         return:
+
           type: int
+
     signals:
+
       - name: justSaid
+
         params:
+
           - { name: msg, type: Message }
+
 enums:
+
   - name: When
+
     members:
+
       - { name: Now, value: 0 }
+
       - { name: Soon, value: 1 }
+
       - { name: Never, value: 2 }
+
 structs:
+
   - name: Message
+
     fields:
+
       - { name: content, type: string }
 ```
 
@@ -52,17 +80,29 @@ the following file structure will be generated. The purpose and content of each 
 
 ```
 📂hello-world
+
  ┣ 📂apigear
+
  ┣ 📂qt_hello_world
+
  ┃ ┣ 📂apigear
+
  ┃ ┣ 📂examples
+
  ┃ ┣ 📂io_world
+
  ┃ ┃ ┣ 📂api
+
  ┃ ┃ ┃  ┣ 📜api.cpp
+
  ┃ ┃ ┃  ┣ 📜api.h
+
  ┃ ┃ ┃  ┣ 📜iapifactory.h
+
  ┃ ┃ ┃  ┣ 📜json.adapter.h
+
  ┃ ┃ ┃  ┗ 📜CMakeLists.txt
+
  ...
 ```
 
@@ -85,10 +125,15 @@ api.h
 
 ```
 ...
+
 struct IO_WORLD_API_EXPORT Message
+
 {
+
     Q_GADGET
+
     Q_PROPERTY(QString content MEMBER m_content )
+
 ...
 ```
 
@@ -111,6 +156,7 @@ Base interface version for Qt template is a QObject Abstract base class, here `A
 
 ```
    virtual void setLast(const Message& last) = 0;
+
    virtual Message last() const = 0;
 ```
 
@@ -124,7 +170,9 @@ virtual int say(const Message& msg, When::WhenEnum when) = 0;
 
 ```
 signals:
+
     void justSaid(const Message& msg);
+
     void lastChanged(const Message& last);
 ```
 
@@ -134,6 +182,7 @@ signals:
 
 ```
 Message message = json.get<Message>();
+
 nlohmann::json message = message;
 ```
 

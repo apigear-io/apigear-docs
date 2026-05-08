@@ -20,8 +20,11 @@ A typical API would look like this:
 
 ```
 const client = new HttpClient();
+
 const data = await client.get("/counter/$id");
+
 data.count += 1;
+
 await client.put("/counter/$id");
 ```
 
@@ -39,10 +42,15 @@ A typical message based client would look like this:
 
 ```
 const client = new MessageClient();
+
 client.subscribe("/counter/$id");
+
 client.on("/counter/$id", (v) => {
+
   console.log(v);
+
 });
+
 client.publish("/counter/$id/increment");
 ```
 
@@ -56,9 +64,13 @@ The API for this would look like this.
 
 ```
 const client = new CounterClient();
+
 client.on((s) => {
+
   console.log(s.count);
+
 });
+
 await client.increment();
 ```
 
