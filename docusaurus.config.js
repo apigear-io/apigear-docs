@@ -183,9 +183,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/icon.png',
       metadata: [
         { name: 'og:type', content: 'website' },
         { name: 'og:site_name', content: 'ApiGear Documentation' },
+        { name: 'og:locale', content: 'en_US' },
+        { name: 'twitter:card', content: 'summary_large_image' },
       ],
       docs: {
         sidebar: {
