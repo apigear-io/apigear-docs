@@ -35,11 +35,22 @@ Archive
 
 - [Tags](/blog/tags.md)
 - [One post tagged with "ai"](/blog/tags/ai.md)
+- [One post tagged with "android"](/blog/tags/android.md)
 - [One post tagged with "api"](/blog/tags/api.md)
 - [One post tagged with "code-generation"](/blog/tags/code-generation.md)
 - [One post tagged with "idl"](/blog/tags/idl.md)
+- [One post tagged with "ipc"](/blog/tags/ipc.md)
+- [One post tagged with "java"](/blog/tags/java.md)
+- [One post tagged with "jni"](/blog/tags/jni.md)
 - [One post tagged with "mcp"](/blog/tags/mcp.md)
 - [One post tagged with "sdk"](/blog/tags/sdk.md)
+- [One post tagged with "unreal"](/blog/tags/unreal.md)
+
+### unreal-android-jni-bridge
+
+Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings for an Unreal Engine app from one API definition — using the Java and Unreal Engine templates together.
+
+- [ApiGear on Android: Bridging Unreal Engine and Java with Generated JNI](/blog/unreal-android-jni-bridge.md): Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings for an Unreal Engine app from one API definition — using the Java and Unreal Engine templates together.
 
 ## template-cpp14
 
