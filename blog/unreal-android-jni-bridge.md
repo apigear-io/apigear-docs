@@ -168,7 +168,7 @@ targets:
 
     output: ../UEProject/Plugins
 
-    template: apigear-io/template-unreal@v4.0.0-beta-149
+    template: apigear-io/template-unreal@v4.0.0
 
     force: true
 
