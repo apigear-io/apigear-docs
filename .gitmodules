@@ -21,3 +21,7 @@
 	path = template-docs/template-java
 	url = https://github.com/apigear-io/template-java.git
 	branch = main
+[submodule "template-docs/template-rust"]
+	path = template-docs/template-rust
+	url = https://github.com/apigear-io/template-rust.git
+	branch = main
