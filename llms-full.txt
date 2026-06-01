@@ -121,6 +121,21 @@ Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings f
 - [Template Qt6](/template-qt6/docs/intro.md): This is the documentation for the Qt6 template.
 - [Quick-Start](/template-qt6/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Qt plugin.
 
+## template-rust
+
+
+### docs
+
+- [Features](/template-rust/docs/features.md): This guide explains how to use the generated code, what features are available, and their purpose.
+- [API Feature](/template-rust/docs/features/api.md): The feature api is the bare minimum for code generation. It generates the trait-based API for your interfaces, the data types (structs and enums) defined in your module, a publisher for property changes and signals, and the shared error and future types. Together with the core feature it produces a self-contained crate that compiles without any transport dependency.
+- [Monitor](/template-rust/docs/features/monitor.md): Use the monitor feature to observe interface calls and state changes at runtime. It generates a tracing decorator that wraps any implementation of your interface and emits a tracing event for every operation and property change. Because the decorator implements the same interface trait, you can drop it in wherever your implementation is used.
+- [MQTT](/template-rust/docs/features/mqtt.md): This feature provides a client and a service adapter for your interfaces over the MQTT protocol, built on the rumqttc crate. It lets you connect applications built with the same or different technologies — check all of our templates and the MQTT feature in other templates that support it.
+- [NATS](/template-rust/docs/features/nats.md): This feature provides a client and a service adapter for your interfaces over the NATS protocol, built on the async-nats crate. It lets you connect applications built with the same or different technologies — check all of our templates and the NATS feature in other templates that support it.
+- [Olink](/template-rust/docs/features/olink.md): This feature provides a client and a service adapter for your interfaces over the ObjectLink protocol. It lets you connect applications built with the same or different technologies — check all of our templates.
+- [Stubs](/template-rust/docs/features/stubs.md): The feature stubs turns the bare api traits into a runnable workspace. It adds:
+- [Template Rust](/template-rust/docs/intro.md): This is the documentation for the rust template for the ApiGear code generator.
+- [Quick-Start](/template-rust/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional Rust example.
+
 ## template-unreal
 
 
@@ -13194,6 +13209,2414 @@ target_link_libraries(MyExample io_world_impl Qt6::Gui)
 ```
 
 Add the `example` subdirectory to the hello-world/qt\_hello\_world/CMakeLists.txt. Now you can build the application and the libraries with it and run your example.
+
+
+---
+
+# Features
+
+This guide explains how to use the generated code, what features are available, and their purpose.
+
+info
+
+A feature is a part of the template that generates a specific aspect of the code. For example, the `api` feature generates the interface traits and the publisher, while the `stubs` feature generates a default implementation you can build on.
+
+## Get started[​](#get-started "Direct link to Get started")
+
+This template generates a [Cargo](https://doc.rust-lang.org/cargo/) workspace for pure *Rust* projects. To successfully compile and use the code you need a working [Rust toolchain](https://www.rust-lang.org/tools/install) (`rustc` and `cargo`, 1.80 or newer). The generated code is asynchronous and built on [tokio](https://tokio.rs/).
+
+note
+
+Basic Rust knowledge is necessary.
+
+### Code generation[​](#code-generation "Direct link to Code generation")
+
+Follow the documentation for [code generation](/docs/guide/quick-start.md) in general and the [CLI](/docs/cli/generate.md) or the [Studio](/docs/studio/intro.md) tools. Or try the [quick start guide](/template-rust/docs/quickstart.md) first, which shows how to prepare an API and generate code from it.
+
+tip
+
+For questions regarding the template please go to our [discussions page](https://github.com/orgs/apigear-io/discussions). For feature requests or bug reports please use our [issue tracker](https://github.com/apigear-io/template-rust/issues).
+
+### Example API[​](#example-api "Direct link to Example API")
+
+The following code snippet contains the *API* definition used throughout this guide to demonstrate the generated code and its usage.
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+## Features[​](#features-1 "Direct link to Features")
+
+### Core Features[​](#core-features "Direct link to Core Features")
+
+The core features generate a working view of your *API* definition. They are self-contained: the `api` and `core` features do **not** depend on any transport or IPC crate, so you can use the generated module crate in a pure in-process application.
+
+* [api](/template-rust/docs/features/api.md) - generates the interface traits for your *API*, with awaitable operations and a `Publisher` (built on tokio channels) that exposes property changes and signals. Also generates the `serde`-enabled data structs and enums (`Serialize`/`Deserialize`, `TryFrom<u8>` for enums) defined in your module, and the shared `ApiError` and `ApiFuture` types.
+* [core](/template-rust/docs/features/api.md#data-types-core) - generates per-interface support types under `core_types/`: a property-bundle struct for state synchronization, a shared-reference alias and constructor (`Arc<dyn Trait>`), and a test helper.
+* [stubs](/template-rust/docs/features/stubs.md) - adds a ready-to-use default implementation of each interface trait, the workspace `Cargo.toml`, the `examples` crate, and per-interface unit tests. This is a good starting point for your own implementation.
+
+note
+
+The `stubs` feature requires `api` and `core`.
+
+### Extended Features[​](#extended-features "Direct link to Extended Features")
+
+The extended features build on top of `api` and `core` and add more functionality, like monitoring or sharing your data over the network (see [olink](/template-rust/docs/features/olink.md), [mqtt](/template-rust/docs/features/mqtt.md), [nats](/template-rust/docs/features/nats.md)).
+
+* [monitor](/template-rust/docs/features/monitor.md) - generates a [`tracing`](https://docs.rs/tracing) decorator that wraps any implementation and logs all operations and state changes to the [CLI](/docs/cli/intro.md) or the [Studio](/docs/studio/intro.md).
+* [olink](/template-rust/docs/features/olink.md) - provides a client and a service adapter for each interface that can be connected to any of the other technology templates with support for [ObjectLink](/docs/protocols/objectlink/intro.md). Use this feature to connect with the ApiGear simulation tools. Includes in-process loopback round-trip tests.
+* [mqtt](/template-rust/docs/features/mqtt.md) - provides client and service adapters for each interface over the [MQTT](https://mqtt.org/) protocol (via the [`rumqttc`](https://docs.rs/rumqttc) crate). Check also MQTT in other technology templates that support it. Includes broker-backed integration tests.
+* [nats](/template-rust/docs/features/nats.md) - provides client and service adapters for each interface over the [NATS](https://nats.io/) protocol (via the [`async-nats`](https://docs.rs/async-nats) crate). Check also NATS in other technology templates that support it. Includes server-backed integration tests.
+* examples - a shared `examples` crate with runnable programs: a local example exercising every interface in-process, plus `*_server` and `*_client` binaries for each IPC transport (OLink over TCP, MQTT and NATS over a broker/server). Run them with `cargo run`.
+
+Each feature can be selected using the solution file or via the command line tool.
+
+note
+
+*Features are case sensitive, make sure to always **use lower-case.***
+
+tip
+
+The *meta* feature `all` enables all specified features of the template. If you want to see the full extent of the generated code, `all` is the easiest solution. Please note, `all` is part of the code generator and not explicitly defined within templates.
+
+## Folder structure[​](#folder-structure "Direct link to Folder structure")
+
+This graph shows the folder structure generated with `all` features enabled. Each module becomes its own workspace member crate (here `io_world`), and the shared `examples` crate sits next to it at the workspace root (here `rust_hello_world`). For more details visit the documentation for each feature.
+
+```
+📂hello-world
+
+ ┣ 📂apigear
+
+ ┃ ┣ 📜helloworld.solution.yaml
+
+ ┃ ┗ 📜helloworld.module.yaml
+
+ ┣ 📂rust_hello_world
+
+ ┃ ┣ 📜Cargo.toml          # workspace manifest
+
+ ┃ ┣ 📜rustfmt.toml
+
+ ┃ ┣ 📂examples            # runnable example programs (local + IPC client/server)
+
+ ┃ ┗ 📂io_world            # one crate per module
+
+ ┃ ┃ ┣ 📜Cargo.toml
+
+ ┃ ┃ ┣ 📂src
+
+ ┃ ┃ ┃ ┣ 📜lib.rs
+
+ ┃ ┃ ┃ ┣ 📂api             # api feature: traits + Publisher + data structs/enums + ApiError/ApiFuture
+
+ ┃ ┃ ┃ ┣ 📂core_types      # core feature: property bundle + shared reference + test helpers
+
+ ┃ ┃ ┃ ┣ 📂implementation  # stubs feature: default implementation
+
+ ┃ ┃ ┃ ┣ 📂monitor         # monitor feature: tracing decorator
+
+ ┃ ┃ ┃ ┣ 📂olink           # olink feature: client + service adapters
+
+ ┃ ┃ ┃ ┣ 📂mqtt            # mqtt feature: client + service adapters
+
+ ┃ ┃ ┃ ┗ 📂nats            # nats feature: client + service adapters
+
+ ┃ ┃ ┗ 📂tests             # unit tests + IPC round-trip tests
+```
+
+
+---
+
+# API Feature
+
+The feature `api` is the bare minimum for code generation. It generates the trait-based API for your interfaces, the data types (structs and enums) defined in your module, a publisher for property changes and signals, and the shared error and future types. Together with the [core](#data-types-core) feature it produces a self-contained crate that compiles without any transport dependency.
+
+The `api` feature generates:
+
+* a trait for each defined *interface*, with awaitable operations and property accessors
+* an ergonomic `_async` companion for every operation
+* the `serde`-enabled [data structs and enums](#data-structs-and-enums) defined in your module
+* a [`Publisher`](#publisher) per interface, exposing property changes and signals over tokio channels
+* the shared [`ApiError` and `ApiFuture`](#apierror-and-apifuture) types
+
+note
+
+Check out the [stubs](/template-rust/docs/features/stubs.md) feature, which provides a ready-to-use implementation of every trait generated here.
+
+### Files overview per module[​](#files-overview-per-module "Direct link to Files overview per module")
+
+Using the example API definition
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following file structure is generated inside the module crate. The purpose and content of each file is explained below.
+
+```
+📂io_world
+
+ ┣ 📂src
+
+ ┃ ┣ 📂api
+
+ ┃ ┃ ┣ 📜mod.rs              # re-exports for the api module
+
+ ┃ ┃ ┣ 📜api_common.rs       # ApiError + ApiFuture
+
+ ┃ ┃ ┣ 📜data_structs.rs     # module-wide enums/structs (Message, WhenEnum)
+
+ ┃ ┃ ┗ 📜hello.rs            # HelloTrait, HelloTraitAsync, HelloPublisher
+
+ ┃ ┗ 📜lib.rs
+
+ ...
+```
+
+For each interface in the module a separate file is generated, like `📜hello.rs`. It contains the interface trait, its async companion trait, and the publisher.
+
+## Interface trait[​](#interface-trait "Direct link to Interface trait")
+
+Every interface becomes a trait that is `Send + Sync`, so an implementation can be shared across threads and `await` points. For the `Hello` interface you get a `HelloTrait`:
+
+```
+use crate::api::data_structs::*;
+
+use crate::api::{ApiError, ApiFuture};
+
+
+
+pub trait HelloTrait: Send + Sync {
+
+    /// Operations return an awaitable, object-safe `ApiFuture`.
+
+    fn say(
+
+        &self,
+
+        msg: &Message,
+
+        when: WhenEnum,
+
+    ) -> ApiFuture<'_, Result<i32, ApiError>>;
+
+
+
+    /// Gets the value of the last property.
+
+    fn last(&self) -> Message;
+
+    /// Sets the value of the last property.
+
+    fn set_last(
+
+        &self,
+
+        last: &Message,
+
+    );
+
+
+
+    fn publisher(&self) -> &HelloPublisher;
+
+}
+```
+
+The trait has:
+
+* an **operation** for each method in the interface. Operations are object-safe and awaitable: they return an `ApiFuture` (see [below](#apierror-and-apifuture)). Returning a boxed future — instead of using `async fn` directly — keeps the trait object-safe, so it can be used behind `Arc<dyn HelloTrait>`.
+* a **getter and setter** for each property (here `last()` / `set_last()`).
+* an accessor for the [`Publisher`](#publisher).
+
+note
+
+The trait itself does not contain signals — signal emission and property-change notification are handled by the [`Publisher`](#publisher).
+
+### Async operations[​](#async-operations "Direct link to Async operations")
+
+Calling an operation through the trait returns a future you `await`:
+
+```
+let result: Result<i32, ApiError> = object.say(&message, WhenEnum::Now).await;
+```
+
+For convenience, every interface also generates an **extension trait** `HelloTraitAsync` with an `_async` companion for each operation. It is provided through a blanket implementation for every implementor — including `dyn HelloTrait` — so it works on a trait object behind an `Arc` without any extra setup:
+
+```
+pub trait HelloTraitAsync: HelloTrait {
+
+    fn say_async(
+
+        &self,
+
+        msg: &Message,
+
+        when: WhenEnum,
+
+    ) -> impl std::future::Future<Output = Result<i32, ApiError>> + Send {
+
+        async move { self.say(msg, when).await }
+
+    }
+
+}
+
+
+
+impl<T: HelloTrait + ?Sized> HelloTraitAsync for T {}
+```
+
+Bring the `_async` trait into scope to call the ergonomic variant:
+
+```
+use io_world::api::hello::HelloTrait;
+
+use io_world::api::hello::HelloTraitAsync;
+
+
+
+let said = object.say_async(&message, WhenEnum::Now).await?;
+```
+
+Both forms do the same work; `say()` returns the boxed `ApiFuture` (useful in object-safe contexts), while `say_async()` reads more naturally at the call site.
+
+## Publisher[​](#publisher "Direct link to Publisher")
+
+The interface trait does not expose signals or change callbacks directly. Instead, each interface gets a `Publisher` struct that broadcasts property changes and signal emissions over [tokio](https://tokio.rs/) channels. Subscribers receive a channel receiver and react to changes asynchronously.
+
+```
+use tokio::sync::{watch, broadcast};
+
+
+
+pub struct HelloPublisher {
+
+    /// Property changes are delivered over a `watch` channel (latest value).
+
+    pub last_changed: watch::Sender<Message>,
+
+    /// Signals are delivered over a `broadcast` channel (every emission).
+
+    pub just_said: broadcast::Sender<(Message,)>,
+
+}
+```
+
+Each property gets a `watch::Sender` named `<property>_changed` (here `last_changed`), and each signal gets a `broadcast::Sender` named after the signal (here `just_said`).
+
+* **Property changes** use a tokio [`watch`](https://docs.rs/tokio/latest/tokio/sync/watch/) channel. A `watch` channel always holds the latest value, so a new subscriber immediately sees the current state. The implementation sends on the channel whenever the property changes.
+* **Signals** use a tokio [`broadcast`](https://docs.rs/tokio/latest/tokio/sync/broadcast/) channel, so every subscriber receives every emission. Signal payloads are delivered as a tuple of the signal parameters (here `(Message,)`).
+
+### Subscribe to changes and signals[​](#subscribe-to-changes-and-signals "Direct link to Subscribe to changes and signals")
+
+Subscribe by calling `subscribe()` on the relevant channel sender exposed by `publisher()`:
+
+```
+// React to property changes:
+
+let mut last_rx = object.publisher().last_changed.subscribe();
+
+tokio::spawn(async move {
+
+    while last_rx.changed().await.is_ok() {
+
+        let last = last_rx.borrow().clone();
+
+        println!("last property changed: {last:?}");
+
+    }
+
+});
+
+
+
+// React to a signal:
+
+let mut said_rx = object.publisher().just_said.subscribe();
+
+tokio::spawn(async move {
+
+    while let Ok((msg,)) = said_rx.recv().await {
+
+        println!("justSaid emitted: {msg:?}");
+
+    }
+
+});
+```
+
+note
+
+It is the implementation's responsibility to send on the publisher's channels when a property changes or a signal is emitted. The [stubs](/template-rust/docs/features/stubs.md) feature already does this for you — see the generated default implementation.
+
+## ApiError and ApiFuture[​](#apierror-and-apifuture "Direct link to ApiError and ApiFuture")
+
+The shared `ApiError` and `ApiFuture` types are defined in `📜api_common.rs`, inside the `api` module. They have no transport or IPC dependency, so the `api` and `core` features stay self-contained.
+
+`ApiFuture` is a boxed, pinned, `Send` future — the return type of every trait operation:
+
+```
+use std::future::Future;
+
+use std::pin::Pin;
+
+
+
+/// A boxed, pinned future returned by async trait operations.
+
+/// Named `ApiFuture` (not `ApiResult`) because it wraps a `Future`, not a `Result`.
+
+pub type ApiFuture<'a, T> = Pin<Box<dyn Future<Output = T> + Send + 'a>>;
+```
+
+`ApiError` is a [`thiserror`](https://docs.rs/thiserror)-derived enum covering the failure modes shared by local and IPC implementations:
+
+```
+#[derive(Debug, thiserror::Error)]
+
+pub enum ApiError {
+
+    #[error("operation failed: {0}")]
+
+    OperationFailed(String),
+
+    #[error("not connected")]
+
+    NotConnected,
+
+    #[error("serialization error: {0}")]
+
+    Serialization(#[from] serde_json::Error),
+
+    #[error("transport error: {0}")]
+
+    Transport(String),
+
+}
+```
+
+Local implementations typically return `Ok(...)`, while the IPC client adapters use `NotConnected` and `Transport` when the remote service is unavailable.
+
+## Data structs and enums[​](#data-structs-and-enums "Direct link to Data structs and enums")
+
+The `api` feature also generates the data types defined in your module — the structs and enums referenced by your interfaces — into `📜src/api/data_structs.rs`. They carry `serde` derives so they can be serialized for the IPC transports. Bring them into scope with `use crate::api::data_structs::*;` (as the generated trait, implementation and adapter files do).
+
+### Structs[​](#structs "Direct link to Structs")
+
+Each struct in your API becomes a Rust struct with `serde` derives:
+
+```
+use serde::{Deserialize, Serialize};
+
+
+
+#[derive(Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
+
+pub struct Message {
+
+    pub content: String,
+
+}
+```
+
+The derives give you, for free:
+
+* `Default` for zero-value construction
+* `Clone` and `PartialEq` for copying and comparison
+* `Serialize`/`Deserialize` for the IPC transports
+
+### Enums[​](#enums "Direct link to Enums")
+
+Each enum becomes a `#[repr(u8)]` Rust enum with `serde` derives and a `TryFrom<u8>` conversion for decoding wire values:
+
+```
+use serde::{Deserialize, Serialize};
+
+use std::convert::TryFrom;
+
+
+
+#[repr(u8)]
+
+#[derive(Copy, Clone, Debug, Default, Serialize, Deserialize, PartialEq)]
+
+pub enum WhenEnum {
+
+    #[default]
+
+    Now = 0,
+
+    Soon = 1,
+
+    Never = 2,
+
+}
+
+
+
+impl TryFrom<u8> for WhenEnum {
+
+    type Error = ();
+
+
+
+    fn try_from(value: u8) -> Result<Self, Self::Error> {
+
+        match value {
+
+            0 => Ok(WhenEnum::Now),
+
+            1 => Ok(WhenEnum::Soon),
+
+            2 => Ok(WhenEnum::Never),
+
+            _ => Err(()),
+
+        }
+
+    }
+
+}
+```
+
+The first member is marked `#[default]`, so `WhenEnum::default()` and `Default::default()` resolve to it.
+
+## Data types (core)[​](#data-types-core "Direct link to Data types (core)")
+
+The [`core`](/template-rust/docs/features.md#core-features) feature generates the per-interface support types used for state synchronization and for passing implementations around, under `📂src/core_types/`. It does **not** generate your structs and enums — those come from the [`api`](#data-structs-and-enums) feature above. `core` is enabled automatically when you use [stubs](/template-rust/docs/features/stubs.md) or any extended feature.
+
+For each interface it generates:
+
+* a **property bundle** struct that gathers all of the interface's properties for state sync
+* a **shared-reference** type alias and constructor for handing the implementation around as an `Arc`
+* a **test helper** that builds a populated instance of each data struct
+
+### Property bundle[​](#property-bundle "Direct link to Property bundle")
+
+The property bundle (`📜src/core_types/hello_data.rs`) collects every property of the interface into one `serde`-enabled struct. The IPC adapters use it to send and receive the full initial state in a single message:
+
+```
+use crate::api::data_structs::*;
+
+use serde::{Deserialize, Serialize};
+
+
+
+/// Bundles all properties of Hello for state synchronization.
+
+#[derive(Debug, Default, Clone, PartialEq, Serialize, Deserialize)]
+
+pub struct HelloData {
+
+    pub last: Message,
+
+}
+```
+
+### Shared reference[​](#shared-reference "Direct link to Shared reference")
+
+A type alias and constructor (`📜src/core_types/hello_shared.rs`) let you hand a trait object around as an `Arc`:
+
+```
+use std::sync::Arc;
+
+use crate::api::hello::HelloTrait;
+
+use crate::implementation::hello::Hello;
+
+
+
+/// Shared reference to a Hello implementation.
+
+pub type SharedHello = Arc<dyn HelloTrait>;
+
+
+
+/// Creates a new shared Hello with the default implementation.
+
+pub fn new_shared_hello() -> SharedHello {
+
+    Arc::new(Hello::default())
+
+}
+```
+
+This `Arc<dyn HelloTrait>` is exactly what the [monitor](/template-rust/docs/features/monitor.md), [olink](/template-rust/docs/features/olink.md), [mqtt](/template-rust/docs/features/mqtt.md) and [nats](/template-rust/docs/features/nats.md) features wrap, so the same implementation can be used locally and exposed over the network.
+
+note
+
+`new_shared_hello()` builds the default [stub](/template-rust/docs/features/stubs.md) implementation, so the shared-reference helper is only generated when `stubs` is enabled. The `core` feature also generates a `📜test_helpers.rs` with a `fill_test_*` function per data struct, used by the generated tests.
+
+
+---
+
+# Monitor
+
+Use the monitor feature to observe interface calls and state changes at runtime. It generates a [`tracing`](https://docs.rs/tracing) decorator that wraps any implementation of your interface and emits a tracing event for every operation and property change. Because the decorator implements the same interface trait, you can drop it in wherever your implementation is used.
+
+The monitoring server is embedded into [ApiGear Studio](/docs/studio/intro.md) and the [CLI](/docs/cli/intro.md). For more details see the [monitoring documentation](/docs/monitor/intro.md).
+
+note
+
+This feature requires `api` and `core`.
+
+## File overview for module[​](#file-overview-for-module "Direct link to File overview for module")
+
+With our example API definition
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following files are generated. The purpose and content of each file is explained below.
+
+```
+📂io_world
+
+ ┣ 📂src
+
+ ┃ ┣ 📂monitor
+
+ ┃ ┃ ┣ 📜mod.rs
+
+ ┃ ┃ ┗ 📜hello_traced.rs   # tracing decorator for Hello
+
+ ┃ ┗ 📜lib.rs
+
+ ...
+```
+
+## The tracing decorator[​](#the-tracing-decorator "Direct link to The tracing decorator")
+
+The file `📜hello_traced.rs` contains a `HelloTraced<T>` decorator. It is generic over any `T: HelloTrait`, wraps an inner implementation, and implements `HelloTrait` itself by logging a [`tracing`](https://docs.rs/tracing) event and then forwarding the call to the inner object.
+
+```
+use crate::api::data_structs::*;
+
+use crate::api::{ApiError, ApiFuture};
+
+use crate::api::hello::HelloPublisher;
+
+use crate::api::hello::HelloTrait;
+
+use tracing;
+
+
+
+/// Trace decorator for Hello.
+
+/// Wraps any implementation and instruments all operations with tracing spans.
+
+pub struct HelloTraced<T: HelloTrait> {
+
+    inner: T,
+
+}
+
+
+
+impl<T: HelloTrait> HelloTraced<T> {
+
+    pub fn new(inner: T) -> Self {
+
+        Self { inner }
+
+    }
+
+}
+
+
+
+impl<T: HelloTrait> HelloTrait for HelloTraced<T> {
+
+    fn say(
+
+        &self,
+
+        msg: &Message,
+
+        when: WhenEnum,
+
+    ) -> ApiFuture<'_, Result<i32, ApiError>> {
+
+        tracing::info!("Hello::say called");
+
+        self.inner.say(msg, when)
+
+    }
+
+
+
+    fn last(&self) -> Message {
+
+        self.inner.last() // getters are forwarded without tracing
+
+    }
+
+    fn set_last(
+
+        &self,
+
+        last: &Message,
+
+    ) {
+
+        tracing::info!("Hello::set_last called");
+
+        self.inner.set_last(last);
+
+    }
+
+
+
+    fn publisher(&self) -> &HelloPublisher {
+
+        self.inner.publisher()
+
+    }
+
+}
+```
+
+Operations and property setters are logged; getters and the `publisher()` accessor are forwarded unchanged. Since `HelloTraced<T>` is itself a `HelloTrait`, you can use it anywhere the plain implementation fits — including in front of an IPC client adapter.
+
+note
+
+The wrapped `inner` value just has to satisfy the `HelloTrait` bound, so it can be the default [stub](/template-rust/docs/features/stubs.md) implementation, an [OLink client](/template-rust/docs/features/olink.md), or any other implementation.
+
+## Use the decorator[​](#use-the-decorator "Direct link to Use the decorator")
+
+Wrap your implementation with `HelloTraced::new(...)` and use the result as a `Hello` object. Every traced call produces a `tracing` event that a configured subscriber can forward to the ApiGear monitoring server.
+
+```
+use io_world::api::hello::HelloTrait;
+
+use io_world::api::hello::HelloTraitAsync;
+
+use io_world::implementation::hello::Hello;
+
+use io_world::monitor::hello_traced::HelloTraced;
+
+
+
+#[tokio::main(flavor = "multi_thread")]
+
+async fn main() {
+
+    // Set up a tracing subscriber (here: log to stdout).
+
+    tracing_subscriber::fmt::init();
+
+
+
+    // Wrap the default implementation with the tracing decorator.
+
+    let hello = HelloTraced::new(Hello::default());
+
+
+
+    // Use it exactly like a Hello implementation — every call is traced.
+
+    let _ = hello.say_async(&Default::default(), Default::default()).await;
+
+    hello.set_last(&Default::default());
+
+}
+```
+
+tip
+
+The `tracing` crate decouples *emitting* events from *collecting* them. Install any [`tracing-subscriber`](https://docs.rs/tracing-subscriber) layer to control where the events go — the console for local development, or an exporter that forwards them to the [ApiGear Studio](/docs/studio/intro.md) or [CLI](/docs/cli/intro.md) monitor.
+
+
+---
+
+# MQTT
+
+This feature provides a *client* and a *service* adapter for your interfaces over the [MQTT](https://mqtt.org/) protocol, built on the [`rumqttc`](https://docs.rs/rumqttc) crate. It lets you connect applications built with the same or different technologies — check all of our [templates](/docs/sdk/intro.md) and the MQTT feature in other templates that support it.
+
+* Use an *MQTT client* in place of your local implementation to receive data from a remote service.
+* Use an *MQTT service adapter* to expose your implementation as a remote service.
+
+note
+
+This feature requires `api` and `core`.
+
+tip
+
+The MQTT broker is not part of the template. To run a client and a service you need a broker (for example [Mosquitto](https://mosquitto.org/)) reachable by both.
+
+## File overview for module[​](#file-overview-for-module "Direct link to File overview for module")
+
+With our example API definition
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following files are generated. The purpose and content of each file is explained below.
+
+```
+📂io_world
+
+ ┣ 📂src
+
+ ┃ ┣ 📂mqtt
+
+ ┃ ┃ ┣ 📜mod.rs
+
+ ┃ ┃ ┣ 📜hello_client.rs    # MQTT client adapter for Hello
+
+ ┃ ┃ ┗ 📜hello_service.rs   # MQTT service adapter for Hello
+
+ ┃ ┗ 📜lib.rs
+
+ ┣ 📂tests
+
+ ┃ ┣ 📜mqtt_common.rs       # broker test helper
+
+ ┃ ┗ 📜mqtt_hello_test.rs   # round-trip tests for Hello
+
+ ...
+```
+
+The adapters map your interface onto MQTT topics: operations are published as request messages, while properties, signals and the service's state use dedicated topics. The service publishes property and state messages as retained, so a client that connects later still receives the current state.
+
+## MQTT client adapter[​](#mqtt-client-adapter "Direct link to MQTT client adapter")
+
+The file `📜hello_client.rs` contains `HelloMqttClient`, the MQTT client version of the `Hello` interface. It implements `HelloTrait`, so you use it like a local implementation. It takes a shared [`rumqttc`](https://docs.rs/rumqttc) `AsyncClient`, subscribes to the interface's topics, and decodes incoming messages.
+
+```
+let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt_async_client)));
+
+client.subscribe_topics().await.expect("subscribe to topics");
+```
+
+#### Properties[​](#properties "Direct link to Properties")
+
+A getter (here `last()`) returns the locally cached value last received from the service. A setter (here `set_last()`) publishes a change request; the local value updates when the service confirms the change. Subscribe to changes through the [`Publisher`](/template-rust/docs/features/api.md#publisher) returned by `publisher()`.
+
+note
+
+Property and state messages are retained on the broker, so a client connecting after the service started still receives the current property values.
+
+#### Operations[​](#operations "Direct link to Operations")
+
+Operations are published as request messages and awaited:
+
+```
+let result = client.say(&message, WhenEnum::Now).await;
+```
+
+#### Signals[​](#signals "Direct link to Signals")
+
+Do not emit signals from a client. Subscribe to signals through the [`Publisher`](/template-rust/docs/features/api.md#publisher); incoming signal messages are delivered on the matching `broadcast` channel.
+
+## MQTT service adapter[​](#mqtt-service-adapter "Direct link to MQTT service adapter")
+
+The file `📜hello_service.rs` contains `HelloMqttService`, which wraps a local `Hello` implementation and exposes it over MQTT. It applies incoming operation and property-change requests to your local object and publishes property changes and signals back to clients.
+
+* **Properties** — a change on your local object (or a client request) is published to all clients.
+* **Operations** — a request is run on your local object; the result is returned only to the requesting client.
+* **Signals** — a signal emitted by your local object is forwarded to all clients.
+
+## Use the adapters[​](#use-the-adapters "Direct link to Use the adapters")
+
+The generated `examples` crate ships ready-to-run `mqtt_server` and `mqtt_client` binaries. The client creates a `rumqttc` `AsyncClient`, hands it to the adapter, and pumps the MQTT event loop so the adapter receives state, property changes and signals:
+
+```
+use rumqttc::{AsyncClient, Event, MqttOptions, Packet};
+
+use std::sync::Arc;
+
+use std::time::Duration;
+
+
+
+let mut opts = MqttOptions::new("hello-client", "127.0.0.1", 1883);
+
+opts.set_keep_alive(Duration::from_secs(5));
+
+let (mqtt, mut eventloop) = AsyncClient::new(opts, 64);
+
+
+
+let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt)));
+
+client.subscribe_topics().await.expect("subscribe to topics");
+
+
+
+// Drive the event loop so incoming messages reach the adapter.
+
+let pump = client.clone();
+
+tokio::spawn(async move {
+
+    loop {
+
+        if let Ok(Event::Incoming(Packet::Publish(p))) = eventloop.poll().await {
+
+            pump.handle_message(&p.topic, &p.payload);
+
+        }
+
+    }
+
+});
+
+
+
+// Use the client like a local Hello implementation:
+
+let _ = client.say(&Default::default(), WhenEnum::Now).await;
+```
+
+Start a broker, then run the two binaries in separate terminals (override the broker port with the `MQTT_PORT` environment variable, default `1883`):
+
+```
+mosquitto -p 1883 &
+
+cargo run -p rust_hello_world_examples --bin mqtt_server
+
+cargo run -p rust_hello_world_examples --bin mqtt_client
+```
+
+## Tests[​](#tests "Direct link to Tests")
+
+The MQTT feature generates round-trip tests in `📜tests/mqtt_hello_test.rs`, backed by the helper in `📜mqtt_common.rs`. They exercise a real client ↔ service round-trip over a live broker, so they are marked `#[ignore]` and skipped by default. Run them against a broker the way CI does:
+
+```
+mosquitto -p 1883 &
+
+cargo test --manifest-path goldenmaster/Cargo.toml -- --ignored
+```
+
+
+---
+
+# NATS
+
+This feature provides a *client* and a *service* adapter for your interfaces over the [NATS](https://nats.io/) protocol, built on the [`async-nats`](https://docs.rs/async-nats) crate. It lets you connect applications built with the same or different technologies — check all of our [templates](/docs/sdk/intro.md) and the NATS feature in other templates that support it.
+
+* Use a *NATS client* in place of your local implementation to receive data from a remote service.
+* Use a *NATS service adapter* to expose your implementation as a remote service.
+
+note
+
+This feature requires `api` and `core`.
+
+tip
+
+The NATS server is not part of the template. To run a client and a service (both connect as NATS clients) you need a [nats-server](https://nats.io/download/) reachable by both.
+
+## File overview for module[​](#file-overview-for-module "Direct link to File overview for module")
+
+With our example API definition
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following files are generated. The purpose and content of each file is explained below.
+
+```
+📂io_world
+
+ ┣ 📂src
+
+ ┃ ┣ 📂nats
+
+ ┃ ┃ ┣ 📜mod.rs
+
+ ┃ ┃ ┣ 📜hello_client.rs    # NATS client adapter for Hello
+
+ ┃ ┃ ┗ 📜hello_service.rs   # NATS service adapter for Hello
+
+ ┃ ┗ 📜lib.rs
+
+ ┣ 📂tests
+
+ ┃ ┣ 📜nats_common.rs       # server test helper
+
+ ┃ ┗ 📜nats_hello_test.rs   # round-trip tests for Hello
+
+ ...
+```
+
+The adapters use NATS request/reply for operations and dedicated subjects for properties, signals and the service's state.
+
+## NATS client adapter[​](#nats-client-adapter "Direct link to NATS client adapter")
+
+The file `📜hello_client.rs` contains `HelloNatsClient`, the NATS client version of the `Hello` interface. It implements `HelloTrait`, so you use it like a local implementation. It takes a connected [`async-nats`](https://docs.rs/async-nats) client and subscribes to the interface's subjects.
+
+```
+let nats = async_nats::connect("127.0.0.1:4222").await?;
+
+let client = Arc::new(HelloNatsClient::new(nats));
+
+let _subscription = client.subscribe();
+```
+
+#### Properties[​](#properties "Direct link to Properties")
+
+A getter (here `last()`) returns the locally cached value last received from the service. A setter (here `set_last()`) sends a change request; the local value updates when the service confirms the change. Subscribe to changes through the [`Publisher`](/template-rust/docs/features/api.md#publisher) returned by `publisher()`.
+
+#### Operations[​](#operations "Direct link to Operations")
+
+Operations use NATS request/reply — the call sends a request and awaits the reply:
+
+```
+let result = client.say(&message, WhenEnum::Now).await;
+```
+
+#### Signals[​](#signals "Direct link to Signals")
+
+Do not emit signals from a client. Subscribe to signals through the [`Publisher`](/template-rust/docs/features/api.md#publisher); incoming signal messages are delivered on the matching `broadcast` channel.
+
+#### Connectivity[​](#connectivity "Direct link to Connectivity")
+
+The client's `subscribe()` spawns a background task that subscribes to the property (`apigear.io.world.Hello.prop.*`), signal (`apigear.io.world.Hello.sig.*`) and state (`apigear.io.world.Hello.state`) subjects, and keeps the cache in sync as messages arrive. The service publishes its full state on the `.state` subject via `publish_state()`. Because NATS does not retain messages, a client that connects after the service published only sees the state if the service publishes it again — the generated `nats_server` example re-publishes the state periodically so late-joining clients still receive it.
+
+## NATS service adapter[​](#nats-service-adapter "Direct link to NATS service adapter")
+
+The file `📜hello_service.rs` contains `HelloNatsService`, which wraps a local `Hello` implementation and exposes it over NATS. It applies incoming operation and property-change requests to your local object and publishes property changes and signals back to clients.
+
+* **Properties** — a change on your local object (or a client request) is published to all clients.
+* **Operations** — a request is run on your local object; the result is returned only to the requesting client.
+* **Signals** — a signal emitted by your local object is forwarded to all clients.
+
+## Use the adapters[​](#use-the-adapters "Direct link to Use the adapters")
+
+The generated `examples` crate ships ready-to-run `nats_server` and `nats_client` binaries. The client connects to the server, hands the connection to the adapter, and subscribes:
+
+```
+use std::sync::Arc;
+
+use std::time::Duration;
+
+
+
+let nats = async_nats::connect("127.0.0.1:4222").await.expect("connect to nats-server");
+
+
+
+let client = Arc::new(HelloNatsClient::new(nats));
+
+let _subscription = client.subscribe();
+
+
+
+// Give the subscriptions and state exchange a moment.
+
+tokio::time::sleep(Duration::from_millis(500)).await;
+
+
+
+// Use the client like a local Hello implementation:
+
+let result = client.say(&Default::default(), WhenEnum::Now).await;
+
+println!("say() -> {result:?}");
+```
+
+Start a server, then run the two binaries in separate terminals (override the server URL with the `NATS_URL` environment variable, default `127.0.0.1:4222`):
+
+```
+nats-server -p 4222 &
+
+cargo run -p rust_hello_world_examples --bin nats_server
+
+cargo run -p rust_hello_world_examples --bin nats_client
+```
+
+## Tests[​](#tests "Direct link to Tests")
+
+The NATS feature generates round-trip tests in `📜tests/nats_hello_test.rs`, backed by the helper in `📜nats_common.rs`. They exercise a real client ↔ service round-trip over a live server, so they are marked `#[ignore]` and skipped by default. Run them against a server the way CI does:
+
+```
+nats-server -p 4222 &
+
+cargo test --manifest-path goldenmaster/Cargo.toml -- --ignored
+```
+
+
+---
+
+# Olink
+
+This feature provides a *client* and a *service* adapter for your interfaces over the [ObjectLink](/docs/protocols/objectlink/intro.md) protocol. It lets you connect applications built with the same or different technologies — check all of our [templates](/docs/sdk/intro.md).
+
+Use an *OLink client* in place of your local implementation to talk to a remote service or to the [ApiGear simulation](#simulation). Use an *OLink service adapter* to expose your implementation as a remote service.
+
+note
+
+This feature requires `api` and `core`.
+
+### ApiGear ObjectLink protocol[​](#apigear-objectlink-protocol "Direct link to ApiGear ObjectLink protocol")
+
+The [ObjectLink](/docs/protocols/objectlink/intro.md) protocol is a lightweight message protocol for objects described by an interface. It connects a client object with a server object and supports remote operations: requesting a property change (client) or notifying a property change (server), emitting a signal (server), and invoking a remote method with a response delivered to the caller (server).
+
+The OLink adapters build on the [objectlink-core-rs](https://github.com/apigear-io/objectlink-core-rs) library (the `objectlink-core` crate), which is shared across Rust-based ObjectLink code. It provides the protocol abstraction — encoding and decoding messages and routing them to the right object through a registry — independent of the network stack. Messages are exchanged as newline-delimited JSON, so any byte stream (a TCP socket, an in-process loopback) can carry them.
+
+## File overview for module[​](#file-overview-for-module "Direct link to File overview for module")
+
+With our example API
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following files are generated. The purpose and content of each file is explained below.
+
+```
+📂io_world
+
+ ┣ 📂src
+
+ ┃ ┣ 📂olink
+
+ ┃ ┃ ┣ 📜mod.rs
+
+ ┃ ┃ ┣ 📜hello_client.rs    # OLink client adapter for Hello
+
+ ┃ ┃ ┗ 📜hello_service.rs   # OLink service adapter for Hello
+
+ ┃ ┗ 📜lib.rs
+
+ ┣ 📂tests
+
+ ┃ ┣ 📜olink_common.rs      # in-process loopback helper
+
+ ┃ ┗ 📜olink_hello_test.rs  # round-trip tests for Hello
+
+ ...
+```
+
+## OLink client adapter[​](#olink-client-adapter "Direct link to OLink client adapter")
+
+The file `📜hello_client.rs` contains `HelloOlinkClient`, the OLink client version of the `Hello` interface. It implements two traits: `HelloTrait` (so you can use it exactly like a local implementation) and `ObjectSink` (so the OLink core can deliver incoming messages to it). It caches property values locally and forwards operations and property writes to the remote service.
+
+```
+pub struct HelloOlinkClient {
+
+    data: RwLock<HelloData>,                  // locally cached property values
+
+    node: RwLock<Option<Arc<dyn IClientNode>>>,
+
+    publisher: HelloPublisher,
+
+}
+```
+
+#### Properties[​](#properties "Direct link to Properties")
+
+A property getter (here `last()`) returns the locally cached value last received from the service. A property setter (here `set_last()`) sends a change request to the service; the local value is **not** changed immediately — it updates when the service confirms the change. Subscribe to changes through the [`Publisher`](/template-rust/docs/features/api.md#publisher) returned by `publisher()`. When the client receives a property-change message, it updates its cache and sends on the matching `watch` channel.
+
+note
+
+On a successful link, the client receives the service's current state, so its cached properties start in sync with the service.
+
+#### Operations[​](#operations "Direct link to Operations")
+
+Operations are forwarded as remote invocations. Calling an operation sends an invoke request to the service and awaits the reply:
+
+```
+let result = client.say(&message, WhenEnum::Now).await;
+```
+
+If no client node has been set or the link is down, the operation resolves to `Err(ApiError::NotConnected)`.
+
+#### Signals[​](#signals "Direct link to Signals")
+
+Do not emit signals from a client. Subscribe to any signal through the [`Publisher`](/template-rust/docs/features/api.md#publisher); when the client receives a signal message it sends on the matching `broadcast` channel.
+
+## OLink service adapter[​](#olink-service-adapter "Direct link to OLink service adapter")
+
+The file `📜hello_service.rs` contains `HelloOlinkService`, which wraps a local `Hello` implementation and exposes it to remote clients by implementing the `ObjectSource` trait from [objectlink-core-rs](https://github.com/apigear-io/objectlink-core-rs). It receives remote invocations and property-change requests, applies them to your local object, and pushes property changes and signals back to connected clients. Construct it with the shared implementation you want to expose:
+
+```
+let object: Arc<dyn HelloTrait> = Arc::new(Hello::default());
+
+let service = HelloOlinkService::new(object.clone());
+```
+
+* **Properties** — a property change on your local object (or a change requested by a client) is published to all connected clients.
+* **Operations** — a remote invocation is run on your local object; the result is returned only to the calling client.
+* **Signals** — a signal emitted by your local object is forwarded to all connected clients.
+
+## Use the adapters[​](#use-the-adapters "Direct link to Use the adapters")
+
+The adapters need a transport to carry the ObjectLink messages. The generated `examples` crate ships ready-to-run `olink_server` and `olink_client` binaries that wire the adapters to a TCP socket. The service side registers the adapter and pumps socket lines through a `RemoteNode`:
+
+```
+use objectlink_core::remote_node::RemoteNode;
+
+use objectlink_core::remote_registry::RemoteRegistry;
+
+use objectlink_core::traits::ObjectSource;
+
+use std::sync::Arc;
+
+
+
+let object = Arc::new(Hello::default());
+
+let service: Arc<dyn ObjectSource> =
+
+    Arc::new(HelloOlinkService::new(object.clone() as Arc<dyn HelloTrait>));
+
+
+
+let registry = Arc::new(RemoteRegistry::new());
+
+registry.add_source(Arc::downgrade(&service));
+
+// Accept TCP connections and feed each incoming line to `node.handle_message(&line)`.
+```
+
+The client side connects a `HelloOlinkClient` through a `ClientNode` and links it to the remote object:
+
+```
+use objectlink_core::client_node::ClientNode;
+
+use objectlink_core::client_registry::ClientRegistry;
+
+use objectlink_core::traits::ObjectSink;
+
+use std::sync::Arc;
+
+
+
+let registry = Arc::new(ClientRegistry::new());
+
+let node = Arc::new(ClientNode::new(registry));
+
+
+
+let client = Arc::new(HelloOlinkClient::default());
+
+client.set_node(node.clone());
+
+let sink: Arc<dyn ObjectSink> = client.clone();
+
+node.link_remote(&sink);
+
+
+
+// Once linked, use the client like a local Hello implementation:
+
+let _ = client.say(&Default::default(), WhenEnum::Now).await;
+
+println!("last = {:?}", client.last());
+```
+
+Run the two binaries in separate terminals (override the address with the `OLINK_ADDR` environment variable, default `127.0.0.1:8182`):
+
+```
+cargo run -p rust_hello_world_examples --bin olink_server
+
+cargo run -p rust_hello_world_examples --bin olink_client
+```
+
+## Tests[​](#tests "Direct link to Tests")
+
+The OLink feature generates round-trip tests in `📜tests/olink_hello_test.rs`, backed by an in-process loopback helper in `📜olink_common.rs`. The loopback wires a service adapter and a client adapter together without a socket, so the tests verify the full client ↔ service round-trip — operations, property writes, remote property notifications, and signals — entirely in-memory. They run as part of `cargo test` and require no broker:
+
+```
+cargo test --manifest-path goldenmaster/Cargo.toml
+```
+
+## Simulation[​](#simulation "Direct link to Simulation")
+
+The simulation lets you test, demonstrate or develop applications without the real service. The simulation server is integrated into [ApiGear Studio](/docs/studio/intro.md) and the [CLI](/docs/cli/simulate.md). Because the simulation speaks ObjectLink, point your `HelloOlinkClient` at the simulation server's address instead of a real service and it behaves like a remote implementation.
+
+You drive the simulation with [simulation scenarios](/docs/scripting/backends/scenario.md) — YAML files that define sequences of actions that change property values or emit signals. See more on [simulation](/docs/scripting/backends/intro.md).
+
+Run a scenario from the CLI and connect your client to the same port:
+
+```
+apigear simulate run path/to/helloworldtest.scenario.yaml --addr :8182
+```
+
+
+---
+
+# Stubs
+
+The feature `stubs` turns the bare [api](/template-rust/docs/features/api.md) traits into a runnable workspace. It adds:
+
+* a ready-to-use default implementation of every interface trait — a good starting point for your own logic
+* the workspace `Cargo.toml` and `rustfmt.toml`
+* the `examples` crate with runnable programs
+* per-interface unit tests
+
+note
+
+The `stubs` feature requires `api` and `core`. Enabling it pulls them in automatically.
+
+### File overview[​](#file-overview "Direct link to File overview")
+
+With our example API definition
+
+Hello World API (click to expand)
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+the following files are generated. The purpose and content of each file is explained below.
+
+```
+📂rust_hello_world
+
+ ┣ 📜Cargo.toml                          # workspace manifest (system scope)
+
+ ┣ 📜rustfmt.toml
+
+ ┣ 📂examples                            # runnable example programs (system scope)
+
+ ┃ ┣ 📜Cargo.toml
+
+ ┃ ┗ 📂src
+
+ ┃ ┃ ┣ 📜main.rs                         # local in-process example
+
+ ┃ ┃ ┗ 📂bin                             # IPC client/server binaries
+
+ ┃ ┗ ...
+
+ ┗ 📂io_world
+
+ ┃ ┣ 📜Cargo.toml                        # module crate manifest
+
+ ┃ ┣ 📂src
+
+ ┃ ┃ ┣ 📜lib.rs
+
+ ┃ ┃ ┗ 📂implementation
+
+ ┃ ┃ ┃ ┣ 📜mod.rs
+
+ ┃ ┃ ┃ ┗ 📜hello.rs                      # default Hello implementation
+
+ ┃ ┗ 📂tests
+
+ ┃ ┃ ┗ 📜implementation_hello_test.rs    # unit tests for Hello
+```
+
+## Implementation[​](#implementation "Direct link to Implementation")
+
+The file `📜implementation/hello.rs` contains the default implementation of `HelloTrait`. It is a regular struct that:
+
+* stores each property behind a [`parking_lot::RwLock`](https://docs.rs/parking_lot) for interior mutability, so the methods take `&self` (matching the object-safe trait) yet can still mutate state
+* owns a [`HelloPublisher`](/template-rust/docs/features/api.md#publisher) and returns it through `publisher()`
+* implements the property getters and setters, sending on the publisher's channel on every actual change
+* provides a default body for each operation for you to fill with your business logic
+
+```
+use crate::api::hello::HelloTrait;
+
+use crate::api::data_structs::*;
+
+use crate::api::{ApiError, ApiFuture};
+
+use crate::api::hello::HelloPublisher;
+
+use parking_lot::RwLock;
+
+
+
+pub struct Hello {
+
+    last: RwLock<Message>,
+
+    publisher: HelloPublisher,
+
+}
+
+
+
+impl Default for Hello {
+
+    fn default() -> Self {
+
+        Self { last: RwLock::new(Default::default()), publisher: Default::default() }
+
+    }
+
+}
+
+
+
+impl HelloTrait for Hello {
+
+    fn say(
+
+        &self,
+
+        _msg: &Message,
+
+        _when: WhenEnum,
+
+    ) -> ApiFuture<'_, Result<i32, ApiError>> {
+
+        // Fill in your business logic here.
+
+        Box::pin(async move { Ok(Default::default()) })
+
+    }
+
+
+
+    fn last(&self) -> Message {
+
+        self.last.read().clone()
+
+    }
+
+    fn set_last(
+
+        &self,
+
+        last: &Message,
+
+    ) {
+
+        let new_val = last.clone();
+
+        let mut value = self.last.write();
+
+        if *value == new_val {
+
+            return; // skip notification if the value did not change
+
+        }
+
+        *value = new_val.clone();
+
+        // Notify subscribers of the change.
+
+        let _ = self.publisher.last_changed.send(new_val);
+
+    }
+
+
+
+    fn publisher(&self) -> &HelloPublisher {
+
+        &self.publisher
+
+    }
+
+}
+```
+
+tip
+
+When adding your own logic, remember to send on the publisher's channels each time you want a property change to be shared or a signal to be emitted — just like the generated setters do.
+
+note
+
+The setter skips the notification when the new value equals the current one, so subscribers are only woken on a real change.
+
+### Shared constructor[​](#shared-constructor "Direct link to Shared constructor")
+
+Alongside each implementation, the [core](/template-rust/docs/features/api.md#data-types-core) feature generates a shared type alias and constructor in `📜src/core_types/hello_shared.rs`, so you can hand a trait object around as an `Arc`:
+
+```
+use std::sync::Arc;
+
+use crate::api::hello::HelloTrait;
+
+use crate::implementation::hello::Hello;
+
+
+
+/// Shared reference to a Hello implementation.
+
+pub type SharedHello = Arc<dyn HelloTrait>;
+
+
+
+/// Creates a new shared Hello with the default implementation.
+
+pub fn new_shared_hello() -> SharedHello {
+
+    Arc::new(Hello::default())
+
+}
+```
+
+This `Arc<dyn HelloTrait>` is exactly what the [monitor](/template-rust/docs/features/monitor.md), [olink](/template-rust/docs/features/olink.md), [mqtt](/template-rust/docs/features/mqtt.md) and [nats](/template-rust/docs/features/nats.md) features wrap, so the same implementation can be used locally and exposed over the network.
+
+## The examples crate[​](#the-examples-crate "Direct link to The examples crate")
+
+The `📂examples` crate is generated once per workspace (system scope). Its `src/main.rs` instantiates every interface's default implementation in-process and exercises it — calling the first operation through the `_async` companion, setting each property, and reporting how many signals are available through the publisher. Run it with:
+
+```
+cargo run -p rust_hello_world_examples
+```
+
+The `examples/src/bin/` folder additionally contains `*_server` and `*_client` binaries for each IPC transport. They are documented with the [olink](/template-rust/docs/features/olink.md), [mqtt](/template-rust/docs/features/mqtt.md) and [nats](/template-rust/docs/features/nats.md) features.
+
+## Build on the stub[​](#build-on-the-stub "Direct link to Build on the stub")
+
+The default implementation is the recommended starting point. A typical workflow:
+
+1. Generate with the `stubs` feature (and any IPC features you need).
+2. Fill in the operation bodies in `📂implementation/*.rs` with your logic.
+3. Send on the publisher's signal channels wherever your logic emits a signal.
+4. Use your implementation locally, or wrap it with a [monitor](/template-rust/docs/features/monitor.md) decorator or an IPC service adapter to share it over the network.
+
+note
+
+Set `force: false` in your solution file for the `stubs` target if you don't want your filled-in implementations overwritten on regeneration. The [api](/template-rust/docs/features/api.md) and [core](/template-rust/docs/features/api.md#data-types-core) files are always regenerated.
+
+## Tests[​](#tests "Direct link to Tests")
+
+For each interface a unit test file is generated, like `📜tests/implementation_hello_test.rs`. It instantiates the default implementation and exercises each operation through both the `ApiFuture` form and the `_async` companion. These tests run as part of `cargo test` (no broker required) and are a starting point for your own tests:
+
+```
+#[tokio::test]
+
+async fn test_say() {
+
+    let test_object = Hello::default();
+
+    let result = test_object.say(&Default::default(), Default::default()).await;
+
+    assert!(result.is_ok());
+
+    let result_async = test_object.say_async(&Default::default(), Default::default()).await;
+
+    assert!(result_async.is_ok());
+
+}
+```
+
+
+---
+
+# Template Rust
+
+This is the documentation for the *rust* template for the [ApiGear](/docs/guide/quick-start.md) code generator.
+
+It is split in several parts:
+
+* [Quick-Start](/template-rust/docs/quickstart.md?current-template=template-rust) is the easiest way to get started
+* [Features](/template-rust/docs/features.md) explains the available code generator features and their usage and purpose.
+
+
+---
+
+# Quick-Start
+
+The Quick-Start guide explains how in a few steps you get from an API definition to a functional *Rust* example.
+
+Steps one and two are universal for other technologies. In step two you will choose a concrete *rust* template. For more general information about first steps with ApiGear see [First Steps](/docs/guide/quick-start.md).
+
+The quick start enables only basic features: the [api](/template-rust/docs/features/api.md) generation and a ready-to-use [stub](/template-rust/docs/features/stubs.md) implementation. For all available features check the [overview](/template-rust/docs/features.md).
+
+## 1. Install the Code Generator[​](#1-install-the-code-generator "Direct link to 1. Install the Code Generator")
+
+ApiGear provides two powerful tools: a Studio and a Command Line Interface (CLI). The Studio is a graphical tool for creating, editing API modules and projects, while the CLI is a command-line tool for generating code from API modules. Both offer comprehensive functionality, including SDK template management, API project creation, code generation, API monitoring, and API simulation.
+
+[Download Studio](https://github.com/apigear-io/studio/releases/latest)
+
+[Download CLI](https://github.com/apigear-io/cli/releases/latest)
+
+### Install ApiGear Studio[​](#install-apigear-studio "Direct link to Install ApiGear Studio")
+
+ApiGear Studio is available for macOS, Windows, and Linux. You can download it from the [ApiGear Studio GitHub releases page](https://github.com/apigear-io/studio/releases/latest).
+
+For more detailed information on ApiGear Studio, refer to the dedicated [studio documentation](/docs/studio/intro.md).
+
+### Install ApiGear CLI[​](#install-apigear-cli "Direct link to Install ApiGear CLI")
+
+The ApiGear CLI is a versatile command-line tool for generating code from API modules. It's available for macOS, Windows, and Linux. Download the latest version from the [ApiGear CLI GitHub releases page](https://github.com/apigear-io/cli/releases/latest).
+
+The CLI offers all the features available in the Studio.
+
+For more detailed information on the ApiGear CLI, consult the dedicated [CLI documentation](/docs/cli/intro.md).
+
+## 2. Obtain the Template[​](#2-obtain-the-template "Direct link to 2. Obtain the Template")
+
+There are several methods to obtain the template: installation via the Studio, installation via the CLI, or cloning/downloading from GitHub.
+
+This step is optional
+
+The ApiGear Studio and the CLI detect the specified template in the [solution document](#solution-file) and install it automatically.
+
+Optional steps (click to expand)
+
+### Installation via CLI[​](#installation-via-cli "Direct link to Installation via CLI")
+
+When using the CLI, only the highlighted line needs to be executed. You can verify the successful installation using the `template cache` command.
+
+* Unreal Engine
+* C++14
+* Qt6
+* Python
+
+```
+$ apigear template install apigear-io/template-unreal@v3.2.2
+
+$ apigear template cache
+
+list of templates from the local cache
+
+
+
+source                            | url                                               | installed | latest
+
+apigear-io/template-unreal@v3.2.2 | https://github.com/apigear-io/template-unreal.git | <sha1>    | v3.2.2
+
+...
+```
+
+```
+$ apigear template install apigear-io/template-cpp14@v3.6.0
+
+$ apigear template cache
+
+list of templates from the local cache
+
+
+
+source                            | url                                               | installed | latest
+
+apigear-io/template-cpp14@v3.6.0  | https://github.com/apigear-io/template-cpp14.git  | <sha1>    | v3.6.0
+
+...
+```
+
+```
+$ apigear template install apigear-io/template-qtcpp@v0.4.0
+
+$ apigear template cache
+
+list of templates from the local cache
+
+
+
+source                            | url                                               | installed | latest
+
+apigear-io/template-qtcpp@v0.4.0  | https://github.com/apigear-io/template-qtcpp.git  | <sha1>    | v0.4.0
+
+...
+```
+
+```
+$ apigear template install apigear-io/template-python@v1.0.0
+
+$ apigear template cache
+
+list of templates from the local cache
+
+
+
+source                            | url                                               | installed | latest
+
+apigear-io/template-python@v1.0.0 | https://github.com/apigear-io/template-python.git | <sha1>    | v1.0.0
+
+...
+```
+
+### Installation via Studio[​](#installation-via-studio "Direct link to Installation via Studio")
+
+Installing the template through the Studio is straightforward:
+
+* Unreal Engine
+* C++14
+* Qt6
+* Python
+
+1. Open an existing project or create a new one
+2. Navigate to the `Templates` tab
+3. Click `Install` on the `apigear-io/template-unreal` entry
+
+1) Open an existing project or create a new one
+2) Navigate to the `Templates` tab
+3) Click `Install` on the `apigear-io/template-cpp14` entry
+
+1. Open an existing project or create a new one
+2. Navigate to the `Templates` tab
+3. Click `Install` on the `apigear-io/template-qtcpp` entry
+
+1) Open an existing project or create a new one
+2) Navigate to the `Templates` tab
+3) Click `Install` on the `apigear-io/template-python` entry
+
+![Installing the template](/img/apigear-studio-install-unreal-template.png)
+
+Figure: Installing the template
+
+### Cloning from GitHub[​](#cloning-from-github "Direct link to Cloning from GitHub")
+
+If you need to inspect or modify the template's source code, cloning or downloading the repository is recommended. The repository doesn't need to be part of your project and can be stored anywhere on your computer.
+
+* Unreal Engine
+* C++14
+* Qt6
+* Python
+
+```
+$ git clone https://github.com/apigear-io/template-unreal.git
+```
+
+```
+$ git clone https://github.com/apigear-io/template-cpp14.git
+```
+
+```
+$ git clone https://github.com/apigear-io/template-qtcpp.git
+```
+
+```
+$ git clone https://github.com/apigear-io/template-python.git
+```
+
+You can then configure the solution file to use your template by providing the relative path from the solution file to the template directory.
+
+## 3. Set Up the Project[​](#3-set-up-the-project "Direct link to 3. Set Up the Project")
+
+A typical project requires two files: a solution file specifying the APIs and the template to use, and at least one API module file. Ideally, both should be placed in a folder named `apigear`, adjacent to each other.
+
+Alternatively, you can use the Studio to create a new project and modify the two example files provided.
+
+### Solution File[​](#solution-file "Direct link to Solution File")
+
+Create a [solution](/docs/guide/quick-start.md#solution-file) file. The example below specifies:
+
+* Module files in *line 8*, here the `helloworld.module.yaml` module with the `Hello` API
+* The output directory for generated files in *line 9*
+* The template used to generate the code in *line 10* (this can also be a path to a local copy of the template)
+* The enabled features of the template in *line 13*, here the `stubs` feature, which provides a simple implementation of interfaces.
+
+- Unreal Engine
+- C++14
+- Qt6
+- Python
+
+helloworld.solution.yaml
+
+```
+schema: "apigear.solution/1.0"
+
+name: hello_world_example
+
+version: "0.1.0"
+
+
+
+targets:
+
+  - name: ue_docs
+
+    inputs:
+
+      - helloworld.module.yaml
+
+    output: ../ue_docs
+
+    template: apigear-io/template-unreal@v3.2.2
+
+    force: true
+
+    features:
+
+      - stubs
+```
+
+helloworld.solution.yaml
+
+```
+schema: "apigear.solution/1.0"
+
+name: hello_world_example
+
+version: "0.1.0"
+
+
+
+targets:
+
+  - name: cpp_hello_world
+
+    inputs:
+
+      - helloworld.module.yaml
+
+    output: ../cpp_hello_world
+
+    template: apigear-io/template-cpp14@v3.6.0
+
+    force: true
+
+    features:
+
+      - stubs
+```
+
+helloworld.solution.yaml
+
+```
+schema: "apigear.solution/1.0"
+
+name: hello_world_example
+
+version: "0.1.0"
+
+
+
+targets:
+
+  - name: qt_hello_world
+
+    inputs:
+
+      - helloworld.module.yaml
+
+    output: ../qt_hello_world
+
+    template: apigear-io/template-qtcpp@v0.4.0
+
+    force: true
+
+    features:
+
+      - stubs
+```
+
+helloworld.solution.yaml
+
+```
+schema: "apigear.solution/1.0"
+
+name: hello_world_example
+
+version: "0.1.0"
+
+
+
+targets:
+
+  - name: hello_world
+
+    inputs:
+
+      - helloworld.module.yaml
+
+    output: ../py_hello_world
+
+    template: apigear-io/template-python@v1.0.0
+
+    force: true
+
+    features:
+
+      - stubs
+```
+
+Targets
+
+You can extend this solution file with additional targets, each for a different technology with a different template. The `module.yaml` file is technology-independent and can be used with any template.
+
+Template Version
+
+We highly recommend specifying the exact version of the template. Otherwise, a newer version will be automatically downloaded and used for code generation. This can lead to unexpected behavior if file structures or code changes in the template.
+
+note
+
+Set the `force` parameter to `true` if you want to always override all generated files. When set to `false`, some files, such as implementations (stub feature), won't be updated. API files are always updated regardless of this setting.
+
+### API Module File[​](#api-module-file "Direct link to API Module File")
+
+Use your preferred text editor to create the `helloworld.module.yaml` file with the following example content:
+
+helloworld.module.yaml
+
+```
+schema: apigear.module/1.0
+
+name: io.world
+
+version: "1.0.0"
+
+
+
+interfaces:
+
+  - name: Hello
+
+    properties:
+
+      - { name: last, type: Message }
+
+    operations:
+
+      - name: say
+
+        params:
+
+          - { name: msg, type: Message }
+
+          - { name: when, type: When }
+
+        return:
+
+          type: int
+
+    signals:
+
+      - name: justSaid
+
+        params:
+
+          - { name: msg, type: Message }
+
+enums:
+
+  - name: When
+
+    members:
+
+      - { name: Now, value: 0 }
+
+      - { name: Soon, value: 1 }
+
+      - { name: Never, value: 2 }
+
+structs:
+
+  - name: Message
+
+    fields:
+
+      - { name: content, type: string }
+```
+
+## 4. Generate Code[​](#4-generate-code "Direct link to 4. Generate Code")
+
+### Generate via CLI[​](#generate-via-cli "Direct link to Generate via CLI")
+
+The following snippet demonstrates how to run the CLI and provides an example output:
+
+```
+$ apigear generate solution apigear/helloworld.solution.yaml
+
+10:52:20 INF generated 21 files in 30ms. (20 write, 0 skip, 1 copy) topic=gen
+```
+
+* The `generate` command instructs the CLI to generate code
+* The `solution` parameter specifies that we want to process a solution file
+
+### Generate via Studio[​](#generate-via-studio "Direct link to Generate via Studio")
+
+1. Open the project
+2. Navigate to the `Solutions` tab
+3. Click `Run` on the `helloworld.solution.yaml` entry
+
+![Generating code](/img/apigear-studio-generate-code.png)
+
+Figure: Generating code
+
+## 5. Use the generated Cargo workspace[​](#5-use-the-generated-cargo-workspace "Direct link to 5. Use the generated Cargo workspace")
+
+The *rust* template generates a [Cargo](https://doc.rust-lang.org/cargo/) workspace. Each API module becomes its own member crate, and a shared `examples` crate ties them together with runnable programs. To build and run the code you need a working [Rust toolchain](https://www.rust-lang.org/tools/install) (`rustc` and `cargo`, 1.80 or newer).
+
+note
+
+Basic Rust knowledge is necessary.
+
+### Project folder structure[​](#project-folder-structure "Direct link to Project folder structure")
+
+With the output directory set as in the example, both *ApiGear* files reside in an `apigear` subfolder next to the generated *Rust* workspace. In this case the folder structure should look similar to this:
+
+```
+📂hello-world
+
+ ┣ 📂apigear
+
+ ┃ ┣ 📜helloworld.solution.yaml
+
+ ┃ ┗ 📜helloworld.module.yaml
+
+ ┣ 📂rust_hello_world
+
+ ┃ ┣ 📜Cargo.toml          # workspace manifest (lists every module crate)
+
+ ┃ ┣ 📜rustfmt.toml
+
+ ┃ ┣ 📂io_world            # one crate per module
+
+ ┃ ┃ ┣ 📜Cargo.toml
+
+ ┃ ┃ ┣ 📂src
+
+ ┃ ┃ ┃ ┣ 📜lib.rs
+
+ ┃ ┃ ┃ ┣ 📂api             # interface traits + Publisher + data structs/enums
+
+ ┃ ┃ ┃ ┣ 📂core_types      # property bundle + shared reference
+
+ ┃ ┃ ┃ ┗ 📂implementation  # ready-to-use default impl
+
+ ┃ ┃ ┗ 📂tests             # per-interface unit tests
+
+ ┃ ┗ 📂examples            # runnable example programs
+```
+
+Using the solution file from the previous paragraph the code is generated in the `rust_hello_world` folder, with a subfolder (member crate) for each module — here `io_world`, the name of the module defined in line 2 of `helloworld.module.yaml`. It contains both generated features: the basic [api](/template-rust/docs/features/api.md) and a [stub](/template-rust/docs/features/stubs.md) implementation.
+
+The `io_world/src/api/` folder contains the trait definitions for your interfaces along with the `serde`-enabled enums and structs for your module, while `io_world/src/core_types/` holds the per-interface support types (a property bundle for state sync and a shared-reference helper). The `io_world/src/implementation/` folder holds a default implementation you can use as-is or build on.
+
+tip
+
+Check our `examples` crate with all features enabled to get more working examples — including IPC clients and servers for [OLink](/template-rust/docs/features/olink.md), [MQTT](/template-rust/docs/features/mqtt.md) and [NATS](/template-rust/docs/features/nats.md).
+
+note
+
+For the simulation, check [the olink feature](/template-rust/docs/features/olink.md) which provides a middle layer on your code side, and the [simulation](/docs/scripting/backends/intro.md) explained.
+
+### Build the workspace[​](#build-the-workspace "Direct link to Build the workspace")
+
+Open a terminal, navigate to the generated `rust_hello_world` folder and build everything with Cargo:
+
+```
+cargo build
+```
+
+`cargo` resolves the workspace from the top-level `Cargo.toml`, downloads the dependencies, and compiles every module crate together with the `examples` crate.
+
+### Run an example[​](#run-an-example "Direct link to Run an example")
+
+The generated `examples` crate ships a runnable program that exercises every interface in-process — calling operations, setting properties and listing available signals. Run it with:
+
+```
+cargo run -p rust_hello_world_examples
+```
+
+note
+
+The example crate's package name is derived from your solution target, with an `_examples` suffix. If your target is named `rust_hello_world`, the package is `rust_hello_world_examples`. Check the `[package] name` in `examples/Cargo.toml` and run `cargo run -p <name>` accordingly.
+
+### Run the tests[​](#run-the-tests "Direct link to Run the tests")
+
+Each interface comes with a generated unit test that instantiates the default implementation and exercises its operations and properties. Run them with:
+
+```
+cargo test
+```
+
+From now on you can simply add your module crate to your own `Cargo.toml` as a dependency and use the generated traits, data types and default implementation. For more details on the generated features please check [api](/template-rust/docs/features/api.md) and [stubs](/template-rust/docs/features/stubs.md).
 
 
 ---

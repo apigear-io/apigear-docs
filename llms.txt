@@ -121,6 +121,21 @@ Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings f
 - [Template Qt6](/template-qt6/docs/intro.md): This is the documentation for the Qt6 template.
 - [Quick-Start](/template-qt6/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Qt plugin.
 
+## template-rust
+
+
+### docs
+
+- [Features](/template-rust/docs/features.md): This guide explains how to use the generated code, what features are available, and their purpose.
+- [API Feature](/template-rust/docs/features/api.md): The feature api is the bare minimum for code generation. It generates the trait-based API for your interfaces, the data types (structs and enums) defined in your module, a publisher for property changes and signals, and the shared error and future types. Together with the core feature it produces a self-contained crate that compiles without any transport dependency.
+- [Monitor](/template-rust/docs/features/monitor.md): Use the monitor feature to observe interface calls and state changes at runtime. It generates a tracing decorator that wraps any implementation of your interface and emits a tracing event for every operation and property change. Because the decorator implements the same interface trait, you can drop it in wherever your implementation is used.
+- [MQTT](/template-rust/docs/features/mqtt.md): This feature provides a client and a service adapter for your interfaces over the MQTT protocol, built on the rumqttc crate. It lets you connect applications built with the same or different technologies — check all of our templates and the MQTT feature in other templates that support it.
+- [NATS](/template-rust/docs/features/nats.md): This feature provides a client and a service adapter for your interfaces over the NATS protocol, built on the async-nats crate. It lets you connect applications built with the same or different technologies — check all of our templates and the NATS feature in other templates that support it.
+- [Olink](/template-rust/docs/features/olink.md): This feature provides a client and a service adapter for your interfaces over the ObjectLink protocol. It lets you connect applications built with the same or different technologies — check all of our templates.
+- [Stubs](/template-rust/docs/features/stubs.md): The feature stubs turns the bare api traits into a runnable workspace. It adds:
+- [Template Rust](/template-rust/docs/intro.md): This is the documentation for the rust template for the ApiGear code generator.
+- [Quick-Start](/template-rust/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional Rust example.
+
 ## template-unreal
 
 
