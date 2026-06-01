@@ -48,7 +48,8 @@ const config = {
     'template-docs/template-cpp14/docs/static',
     'template-docs/template-qt6/docs/static',
     'template-docs/template-python/docs/static',
-    'template-docs/template-java/docs/static'
+    'template-docs/template-java/docs/static',
+    'template-docs/template-rust/docs/static'
   ],
 
   presets: [
@@ -157,6 +158,18 @@ const config = {
       },
     ],
     [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'template-rust',
+        path: 'template-docs/template-rust/docs/docs',
+        routeBasePath: 'template-rust/docs',
+        sidebarPath: undefined,
+        editUrl: ({docPath}) =>
+          `https://github.com/apigear-io/template-rust/edit/main/docs/docs/${docPath}`,
+        showLastUpdateTime: false,
+      },
+    ],
+    [
       require.resolve('docusaurus-lunr-search'),
       {
         highlightResult: true
@@ -250,6 +263,7 @@ const config = {
               {type: 'doc', docsPluginId: 'template-qt6', docId: 'intro', label: 'Template Qt6'},
               {type: 'doc', docsPluginId: 'template-python', docId: 'intro', label: 'Template Python'},
               {type: 'doc', docsPluginId: 'template-java', docId: 'intro', label: 'Template Java'},
+              {type: 'doc', docsPluginId: 'template-rust', docId: 'intro', label: 'Template Rust'},
             ],
           },
           {
