@@ -1,6 +1,6 @@
 {
   "label": "HTTP",
-  "position": 2,
+  "position": 4,
   "link": {
     "type": "doc",
     "id": "protocols/http/mapping_http"
