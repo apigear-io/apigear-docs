@@ -1,0 +1,8 @@
+{
+  "label": "MQTT",
+  "position": 2,
+  "link": {
+    "type": "doc",
+    "id": "protocols/mqtt/intro"
+  }
+}

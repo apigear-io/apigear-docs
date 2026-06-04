@@ -1,0 +1,8 @@
+{
+  "label": "NATS",
+  "position": 3,
+  "link": {
+    "type": "doc",
+    "id": "protocols/nats/intro"
+  }
+}
