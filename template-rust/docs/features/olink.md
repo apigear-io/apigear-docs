@@ -1,4 +1,4 @@
-# Olink
+# OLink
 
 This feature provides a *client* and a *service* adapter for your interfaces over the [ObjectLink](/docs/protocols/objectlink/intro.md) protocol. It lets you connect applications built with the same or different technologies — check all of our [templates](/docs/sdk/intro.md).
 

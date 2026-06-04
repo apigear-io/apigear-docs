@@ -129,7 +129,7 @@ Features can be used in combination with *API* and add more functionality on top
   * `app` simple example with stubs.
   * `appthreadsafe` simple example with stubs wrapped with thread safe decorator. See [thread safe decorator from core features](/template-cpp14/docs/features/stubs.md#core)
 
-![Overview of features for user application, including receiving data from network: Bottom floor shows possible inputs for your API, you can either obtain data from the network with OLink or MQTT or use local (thread safe if necessary) implementation.](/img/features/featuresApp.png)
+![Overview of features for user application, including receiving data from network: Bottom floor shows possible inputs for your API, you can either obtain data from the network with OLink or MQTT or use local (thread safe if necessary) implementation.](/img/cpp14/features/featuresApp.png)
 
 Figure: Overview of features for user application, including receiving data from network: Bottom floor shows possible inputs for your API, you can either obtain data from the network with OLink or MQTT or use local (thread safe if necessary) implementation.
 
@@ -137,7 +137,7 @@ note
 
 Theoretically you can use the Thread Safe Decorator with other features that implements API: OLinkClient and MQTT Client, but they, already provide thread safety on at least the same level as the Thread Safe Decorator.
 
-![Overview of features for user application, including publishing data through network: Topmost floor shows your options for using your local implementation (bottom floor): you can use it in your local app and/or use method of sharing the data with clients in the network. Consider then using thread safe version of your implementation.](/img/features/featuresServer.png)
+![Overview of features for user application, including publishing data through network: Topmost floor shows your options for using your local implementation (bottom floor): you can use it in your local app and/or use method of sharing the data with clients in the network. Consider then using thread safe version of your implementation.](/img/cpp14/features/featuresServer.png)
 
 Figure: Overview of features for user application, including publishing data through network: Topmost floor shows your options for using your local implementation (bottom floor): you can use it in your local app and/or use method of sharing the data with clients in the network. Consider then using thread safe version of your implementation.
 

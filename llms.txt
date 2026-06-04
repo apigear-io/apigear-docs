@@ -57,31 +57,31 @@ Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings f
 
 ### docs
 
-- [Features](/template-cpp14/docs/features.md): This guide explains how to use the generated code, what are the available features and their benefits.
-- [API Feature](/template-cpp14/docs/features/api.md): The feature api is the bare minimum for code generation. The feature will generate:
-- [Conan package manager](/template-cpp14/docs/features/conan.md): With this feature you we generate a conan support for your project. It helps with packaging and to managing dependencies for different platforms, OSs, compilers, architecture, cross-builds. Read more about conan and its all benefits here.
-- [Monitor](/template-cpp14/docs/features/monitor.md): Use the monitor feature to examine the interface calls, state and signals during runtime. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI version.
-- [MQTT](/template-cpp14/docs/features/mqtt.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the MQTT protocol.
-- [Olink](/template-cpp14/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications using the same or different technologies (check all of our templates).
-- [Stubs](/template-cpp14/docs/features/stubs.md): The feature stubs adds:
-- [Template C++ 14 (Maintenance)](/template-cpp14/docs/intro.md): This is the documentation for the cpp14 template for the ApiGear code generator.
-- [Quick-Start](/template-cpp14/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
+- [Features](/template-cpp14/docs/features.md): Overview of the C++14 template features for the ApiGear code generator: generated interfaces and data types, stub implementations, networking adapters, and traffic monitoring.
+- [API Feature](/template-cpp14/docs/features/api.md): How the ApiGear C++14 template generates API code from ObjectAPI definitions — interfaces, structs, and enums for your C++14 SDK.
+- [Conan package manager](/template-cpp14/docs/features/conan.md): Package the generated ApiGear C++14 SDK with the Conan C++ package manager for clean dependency management and reuse.
+- [Monitor](/template-cpp14/docs/features/monitor.md): Traffic monitoring in the ApiGear C++14 template: trace interface properties, methods, and signals from your C++14 SDK in ApiGear Studio.
+- [MQTT](/template-cpp14/docs/features/mqtt.md): MQTT networking in the ApiGear C++14 template: expose and consume C++14 interfaces over MQTT using generated client and server adapters.
+- [OLink](/template-cpp14/docs/features/olink.md): OLink (ObjectLink) networking in the ApiGear C++14 template: connect C++14 interface clients and services over the ObjectLink protocol with built-in monitoring.
+- [Stubs](/template-cpp14/docs/features/stubs.md): Generated stub implementations in the ApiGear C++14 template: ready-to-extend default classes for your interfaces, ideal for prototyping and testing C++14 services.
+- [Template C++ 14 (Maintenance)](/template-cpp14/docs/intro.md): Maintenance-mode C++14 template for the ApiGear code generator. Generate C++14-compatible SDKs with OLink and MQTT networking; new projects should use the C++17 template.
+- [Quick-Start](/template-cpp14/docs/quickstart.md): Quick-start guide for the ApiGear C++14 template: install the generator, define an ObjectAPI interface, and generate your first C++14 SDK in minutes.
 
 ## template-cpp17
 
 
 ### docs
 
-- [Features](/template-cpp17/docs/features.md): This guide explains how to use the generated code, what are the available features and their benefits.
-- [API Feature](/template-cpp17/docs/features/api.md): The feature api is the bare minimum for code generation. The feature will generate:
-- [Conan package manager](/template-cpp17/docs/features/conan.md): With this feature you we generate a conan support for your project. It helps with packaging and to managing dependencies for different platforms, OSs, compilers, architecture, cross-builds. Read more about conan and its all benefits here.
-- [Monitor](/template-cpp17/docs/features/monitor.md): Use the monitor feature to examine the interface calls, state and signals during runtime. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI version.
-- [MQTT](/template-cpp17/docs/features/mqtt.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the MQTT protocol.
-- [NATS](/template-cpp17/docs/features/nats.md): This is an experimental feature. It contains the smallest working set of functionalities to adapt the generated interface for use with the NATS protocol.
-- [Olink](/template-cpp17/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications using the same or different technologies (check all of our templates).
-- [Stubs](/template-cpp17/docs/features/stubs.md): The feature stubs adds:
-- [Template C++ 17](/template-cpp17/docs/intro.md): This is the documentation for the cpp17 template for the ApiGear code generator.
-- [Quick-Start](/template-cpp17/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional c++ example.
+- [Features](/template-cpp17/docs/features.md): Overview of the C++17 template features for the ApiGear code generator: generated interfaces and data types, stub implementations, networking adapters, and traffic monitoring.
+- [API Feature](/template-cpp17/docs/features/api.md): How the ApiGear C++17 template generates API code from ObjectAPI definitions — interfaces, structs, and enums for your C++17 SDK.
+- [Conan package manager](/template-cpp17/docs/features/conan.md): Package the generated ApiGear C++17 SDK with the Conan C++ package manager for clean dependency management and reuse.
+- [Monitor](/template-cpp17/docs/features/monitor.md): Traffic monitoring in the ApiGear C++17 template: trace interface properties, methods, and signals from your C++17 SDK in ApiGear Studio.
+- [MQTT](/template-cpp17/docs/features/mqtt.md): MQTT networking in the ApiGear C++17 template: expose and consume C++17 interfaces over MQTT using generated client and server adapters.
+- [NATS](/template-cpp17/docs/features/nats.md): NATS networking in the ApiGear C++17 template: connect C++17 interface clients and services over the NATS messaging system.
+- [OLink](/template-cpp17/docs/features/olink.md): OLink (ObjectLink) networking in the ApiGear C++17 template: connect C++17 interface clients and services over the ObjectLink protocol with built-in monitoring.
+- [Stubs](/template-cpp17/docs/features/stubs.md): Generated stub implementations in the ApiGear C++17 template: ready-to-extend default classes for your interfaces, ideal for prototyping and testing C++17 services.
+- [Template C++ 17](/template-cpp17/docs/intro.md): Generate modern C++17 SDKs from ObjectAPI definitions with ApiGear: interfaces, structs, stub implementations, plus OLink, NATS, and MQTT networking with built-in monitoring.
+- [Quick-Start](/template-cpp17/docs/quickstart.md): Quick-start guide for the ApiGear C++17 template: install the generator, define an ObjectAPI interface, and generate your first C++17 SDK in minutes.
 
 ## template-java
 
@@ -101,40 +101,40 @@ Generate the Android Messenger plumbing, Parcelable payloads, and JNI bindings f
 
 ### docs
 
-- [Features](/template-python/docs/features.md): This guide explains how to use the generated code, what are the available features and  their benefits.
-- [MQTT](/template-python/docs/features/mqtt.md): Experimental — API may change in 1.x; not recommended for production.
-- [Template Python](/template-python/docs/intro.md): This is the documentation for the Python template.
-- [Quick-Start](/template-python/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Python plugin.
+- [Features](/template-python/docs/features.md): Overview of the Python template features for the ApiGear code generator: generated interfaces and data types, stub implementations, networking adapters, and traffic monitoring.
+- [MQTT](/template-python/docs/features/mqtt.md): MQTT networking in the ApiGear Python template: expose and consume Python interfaces over MQTT using generated client and server adapters.
+- [Template Python](/template-python/docs/intro.md): Generate Python SDKs from ObjectAPI definitions with ApiGear: typed interfaces, asyncio clients, OLink and MQTT networking, and monitoring for stateful APIs.
+- [Quick-Start](/template-python/docs/quickstart.md): Quick-start guide for the ApiGear Python template: install the generator, define an ObjectAPI interface, and generate your first Python SDK in minutes.
 
 ## template-qt6
 
 
 ### docs
 
-- [Features](/template-qt6/docs/features.md): This guide explains how to use the generated code, what are the available features and  their benefits.
-- [API](/template-qt6/docs/features/api.md): The feature api is the bare minimum for the code generation. What you receive is:
-- [Monitor](/template-qt6/docs/features/monitor.md): Use our monitor feature to examine the interface calls, state and signals. With this feature you obtain a monitor client and a monitored version of your interfaces. The monitoring server is embedded into the ApiGear Studio and CLI application(/docs/cli/intro).
-- [MQTT](/template-qt6/docs/features/mqtt.md): This is an experimental feature. It contains smallest working set of functionalities to adapt the generated interface for using over the network with MQTT protocol.
-- [Olink](/template-qt6/docs/features/olink.md): This feature provides a client and a server adapter for your interfaces for the ObjectLink protocol. It allows you to connect different applications in the same or different technologies (check all of our templates).
-- [QML Plugin](/template-qt6/docs/features/qmlplugin.md): With this feature you can use a qml version of your interface as a [Qml plugin](https://doc.qt.io/qtcreator/creator-qml-modules-with-plugins.html.
-- [Stubs](/template-qt6/docs/features/stubs.md): The feature stubs adds:
-- [Template Qt6](/template-qt6/docs/intro.md): This is the documentation for the Qt6 template.
-- [Quick-Start](/template-qt6/docs/quickstart.md): The Quick-Start guide explains how to, in few steps, get from an API to a functional Qt plugin.
+- [Features](/template-qt6/docs/features.md): Overview of the Qt6 C++ template features for the ApiGear code generator: generated interfaces and data types, stub implementations, networking adapters, and traffic monitoring.
+- [API](/template-qt6/docs/features/api.md): How the ApiGear Qt6 C++ template generates API code from ObjectAPI definitions — interfaces, structs, and enums for your Qt6 C++ SDK.
+- [Monitor](/template-qt6/docs/features/monitor.md): Traffic monitoring in the ApiGear Qt6 C++ template: trace interface properties, methods, and signals from your Qt6 C++ SDK in ApiGear Studio.
+- [MQTT](/template-qt6/docs/features/mqtt.md): MQTT networking in the ApiGear Qt6 C++ template: expose and consume Qt6 C++ interfaces over MQTT using generated client and server adapters.
+- [OLink](/template-qt6/docs/features/olink.md): OLink (ObjectLink) networking in the ApiGear Qt6 C++ template: connect Qt6 C++ interface clients and services over the ObjectLink protocol with built-in monitoring.
+- [QML Plugin](/template-qt6/docs/features/qmlplugin.md): Generate a QML plugin from ObjectAPI definitions with the ApiGear Qt6 template — use your interfaces directly in QML and Qt Quick applications.
+- [Stubs](/template-qt6/docs/features/stubs.md): Generated stub implementations in the ApiGear Qt6 C++ template: ready-to-extend default classes for your interfaces, ideal for prototyping and testing Qt6 C++ services.
+- [Template Qt6](/template-qt6/docs/intro.md): Generate Qt6 C++ and QML SDKs from ObjectAPI definitions with ApiGear: QObject-based interfaces, QML-ready types, OLink and MQTT networking, and built-in monitoring.
+- [Quick-Start](/template-qt6/docs/quickstart.md): Quick-start guide for the ApiGear Qt6 C++ template: install the generator, define an ObjectAPI interface, and generate your first Qt6 C++ SDK in minutes.
 
 ## template-rust
 
 
 ### docs
 
-- [Features](/template-rust/docs/features.md): This guide explains how to use the generated code, what features are available, and their purpose.
-- [API Feature](/template-rust/docs/features/api.md): The feature api is the bare minimum for code generation. It generates the trait-based API for your interfaces, the data types (structs and enums) defined in your module, a publisher for property changes and signals, and the shared error and future types. Together with the core feature it produces a self-contained crate that compiles without any transport dependency.
-- [Monitor](/template-rust/docs/features/monitor.md): Use the monitor feature to observe interface calls and state changes at runtime. It generates a tracing decorator that wraps any implementation of your interface and emits a tracing event for every operation and property change. Because the decorator implements the same interface trait, you can drop it in wherever your implementation is used.
-- [MQTT](/template-rust/docs/features/mqtt.md): This feature provides a client and a service adapter for your interfaces over the MQTT protocol, built on the rumqttc crate. It lets you connect applications built with the same or different technologies — check all of our templates and the MQTT feature in other templates that support it.
-- [NATS](/template-rust/docs/features/nats.md): This feature provides a client and a service adapter for your interfaces over the NATS protocol, built on the async-nats crate. It lets you connect applications built with the same or different technologies — check all of our templates and the NATS feature in other templates that support it.
-- [Olink](/template-rust/docs/features/olink.md): This feature provides a client and a service adapter for your interfaces over the ObjectLink protocol. It lets you connect applications built with the same or different technologies — check all of our templates.
-- [Stubs](/template-rust/docs/features/stubs.md): The feature stubs turns the bare api traits into a runnable workspace. It adds:
-- [Template Rust](/template-rust/docs/intro.md): This is the documentation for the rust template for the ApiGear code generator.
-- [Quick-Start](/template-rust/docs/quickstart.md): The Quick-Start guide explains how in a few steps you get from an API definition to a functional Rust example.
+- [Features](/template-rust/docs/features.md): Overview of the Rust template features for the ApiGear code generator: generated interfaces and data types, stub implementations, networking adapters, and traffic monitoring.
+- [API Feature](/template-rust/docs/features/api.md): How the ApiGear Rust template generates API code from ObjectAPI definitions — interfaces, structs, and enums for your Rust SDK.
+- [Monitor](/template-rust/docs/features/monitor.md): Traffic monitoring in the ApiGear Rust template: trace interface properties, methods, and signals from your Rust SDK in ApiGear Studio.
+- [MQTT](/template-rust/docs/features/mqtt.md): MQTT networking in the ApiGear Rust template: expose and consume Rust interfaces over MQTT using generated client and server adapters.
+- [NATS](/template-rust/docs/features/nats.md): NATS networking in the ApiGear Rust template: connect Rust interface clients and services over the NATS messaging system.
+- [OLink](/template-rust/docs/features/olink.md): OLink (ObjectLink) networking in the ApiGear Rust template: connect Rust interface clients and services over the ObjectLink protocol with built-in monitoring.
+- [Stubs](/template-rust/docs/features/stubs.md): Generated stub implementations in the ApiGear Rust template: ready-to-extend default classes for your interfaces, ideal for prototyping and testing Rust services.
+- [Template Rust](/template-rust/docs/intro.md): Generate Rust SDKs from ObjectAPI definitions with ApiGear: trait-based interfaces, async Tokio clients, OLink, NATS, and MQTT networking, and built-in monitoring.
+- [Quick-Start](/template-rust/docs/quickstart.md): Quick-start guide for the ApiGear Rust template: install the generator, define an ObjectAPI interface, and generate your first Rust SDK in minutes.
 
 ## template-unreal
 

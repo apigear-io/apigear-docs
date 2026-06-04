@@ -1,4 +1,4 @@
-# Olink
+# OLink
 
 This feature provides a *client* and a *server* adapter for your interfaces for the [ObjectLink](/docs/protocols/objectlink/intro.md) protocol. It allows you to connect different applications in the same or different technologies (check all of our [templates](/docs/sdk/intro.md)).<br />Use an *OLink client* instead of your interface implementation to connect to a remote service, or to a the [ApiGear simulation](/template-qt6/docs/features/olink.md#simulation). Use an *OLink server adapter* to expose your interface implementation as a remote service.<br />Below you'll find short introduction on `ApiGear ObjectLink` protocol. Before details on client and server, you'll also find piece of information on a network layer implementation for handling ObjectLink in `Qt`.
 
