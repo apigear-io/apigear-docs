@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
+import Head from '@docusaurus/Head';
 import FeatureListSection from '../sections/FeatureListSection';
 import HeroSection from '../sections/HeroSection';
 import WorkflowSection from '../sections/WorkflowSection';
@@ -14,6 +15,21 @@ export default function Home() {
     <Layout
       title={`API Code Generator for C++, Qt, Unreal & Python`}
       description="Generate production-ready SDKs from API definitions. One YAML spec, multiple native implementations with scripted backends and monitoring.">
+      <Head>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'ApiGear',
+            applicationCategory: 'DeveloperApplication',
+            operatingSystem: 'Windows, macOS, Linux',
+            url: 'https://apigear.io',
+            description:
+              'ApiGear generates native SDKs from stateful API definitions (ObjectAPI) for C++, Qt, Unreal Engine, Python, Rust, and Java, with scripted backends and monitoring.',
+            offers: {'@type': 'Offer', price: '0', priceCurrency: 'USD'},
+          })}
+        </script>
+      </Head>
       <HeroSection />
       <main>
         <section className={styles.section}>
