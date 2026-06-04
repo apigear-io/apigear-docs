@@ -14,6 +14,13 @@ ObjectAPI describes object communication patterns based on simple to use protoco
 
 There exists currently several API types, like REST, Message Based or RPC. ObjectAPI supports a mixture of these.
 
+| API style | Communication | State model | Real-time updates | Strengths | Trade-offs |
+|---|---|---|---|---|---|
+| **REST** | request/response over HTTP | stateless; client drives logic | none (poll) | ubiquitous tooling, cacheable, simple | chatty for live state; logic leaks to the client |
+| **RPC** | request/response (function calls) | stateless calls | none | natural call semantics, efficient | tighter coupling; no built-in events |
+| **Message based** | publish/subscribe via broker | event / stream | yes (push) | decoupled, many-to-many, real-time | needs a broker; eventual consistency |
+| **ObjectAPI** | properties, methods & signals | **stateful objects** | yes (auto-synced) | models real state, clean developer API, maps onto all of the above | needs a code generator (ApiGear) |
+
 ### REST based APIs
 
 REST API is about browsing data but the underlying nature of the protocol is HTTP. HTTP is a request/response protocol and as such is architecture wise next to RPC. REST itself defines an architectural style on top of HTTP.
@@ -89,3 +96,21 @@ First we register a callback when the interface state changes. Then we call the 
 
 This makes it much nicer and easier to use the API inside your application. The
 The API patterns is also extended to the service side, where service calls end into an API which looks very mich like the defined ObjectAPI.
+
+## Choosing a transport
+
+ObjectAPI generates the same interface for several transports (also called IPC implementations). Pick the one
+that fits your topology — each links to its full wire mapping:
+
+| Transport | Pattern | Needs | Real-time push | Late-join state | Best for | ApiGear Simulation |
+|---|---|---|---|---|---|---|
+| **[OLink](/docs/protocols/objectlink/intro)** | point-to-point live link (WebSocket) | a server URL | yes (live) | live link only | tight client↔service and simulation links | ✅ |
+| **[MQTT](/docs/protocols/mqtt/intro)** | publish/subscribe via broker | an MQTT broker | yes | retained messages | IoT, telemetry, many-to-many | — |
+| **[NATS](/docs/protocols/nats/intro)** | publish/subscribe and request/reply | a NATS server | yes | `init` / `state` resync | high-throughput cloud and edge messaging | — |
+| **[HTTP](/docs/protocols/http/mapping_http)** | request/response | a web server | no (request-driven) | n/a | simple, REST-style integration | — |
+
+:::note
+The [Unreal Engine template](/template-unreal/docs/features/msgbus) also ships a **Message Bus** transport
+(zero-configuration UDP for Unreal-to-Unreal IPC), which is specific to Unreal and not part of the
+cross-language set above.
+:::
