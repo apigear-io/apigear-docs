@@ -35,7 +35,7 @@ export default function TextLeft({ item }) {
         <div className="container">
             <div className="row">
                 <div className="col col--6">
-                    <h1>{item.title}</h1>
+                    <h2>{item.title}</h2>
                     <p>{item.description}</p>
                     <div className={clsx(styles.right_align, "margin-top--lg")} >
                         <Link

@@ -243,15 +243,17 @@ a.button--primary:hover {
   text-decoration: none;
 }
 
-.button--secondary {
+.button--secondary,
+a.button--secondary {
   background: transparent;
   border: 2px solid var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary) !important;
 }
 
-.button--secondary:hover {
+.button--secondary:hover,
+a.button--secondary:hover {
   background: var(--ifm-color-primary);
-  color: #0d1117;
+  color: #ffffff !important;
 }
 
 .button--lg {

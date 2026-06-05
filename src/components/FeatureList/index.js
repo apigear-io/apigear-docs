@@ -26,10 +26,16 @@ function Feature({ item }) {
 }
 
 export default function FeatureList(props) {
-    const items = props.items;
+    const { items, title, subtitle } = props;
     return (
         <section className={styles.section}>
             <div className="container">
+                {title && (
+                    <div className={styles.header}>
+                        <h2>{title}</h2>
+                        {subtitle && <p>{subtitle}</p>}
+                    </div>
+                )}
                 <div className="row">
                     {items.map((item, idx) => (
                         <Feature key={idx} item={item} />

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles.module.css';
 import CodeBlock from '@theme/CodeBlock';
 
-export default function CodeExample({ title, subtitle, inputCode, inputLabel, outputItems }) {
+export default function CodeExample({ title, subtitle, inputCode, inputLabel, outputItems, footnote }) {
     return (
         <section className={styles.section}>
             <div className="container">
@@ -30,6 +30,7 @@ export default function CodeExample({ title, subtitle, inputCode, inputLabel, ou
                         </div>
                     </div>
                 </div>
+                {footnote && <p className={styles.footnote}>{footnote}</p>}
             </div>
         </section>
     );

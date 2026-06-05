@@ -128,6 +128,7 @@ The `version` tool takes no parameters.
 
 ## Related Documentation
 
+- [AI Meets API Design: MCP-Powered SDK Generation](/blog/ai-meets-api-design-mcp) — blog walkthrough: connect ApiGear to your AI assistant step by step
 - [Code Generation](generate) — Generate SDKs from API definitions
 - [SDK Templates](template) — Manage SDK templates
 - [Introduction](intro) — CLI overview and installation

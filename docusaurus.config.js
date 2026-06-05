@@ -5,8 +5,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Define Once, Generate Everywhere',
-  tagline: 'Turn API definitions into production-ready C++, Qt, Unreal, and Python SDKs — with scripted backends and monitoring.',
+  title: 'ApiGear',
+  tagline: 'Generate native SDKs from one API definition — for C++, Qt, Unreal, Python, Rust & Java, with simulation and monitoring built in.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
