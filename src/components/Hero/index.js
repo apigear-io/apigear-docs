@@ -28,6 +28,7 @@ export default function Hero({ item }) {
     return (
         <header className={clsx('hero', styles.banner)}>
             <div className="container">
+                {item.eyebrow && <p className={styles.eyebrow}>{item.eyebrow}</p>}
                 <h1 className="hero__title">{item.title}</h1>
                 <p className="hero__subtitle">{item.tagline}</p>
                 <div className={styles.buttons}>
@@ -36,6 +37,13 @@ export default function Hero({ item }) {
                         to={item.link}>
                         {item.message}
                     </Link>
+                    {item.secondaryLink && (
+                        <Link
+                            className="button button--secondary button--lg"
+                            to={item.secondaryLink}>
+                            {item.secondaryMessage}
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

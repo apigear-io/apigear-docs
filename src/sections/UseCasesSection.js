@@ -10,12 +10,12 @@ const items = [
   {
     icon: '🚗',
     title: 'Automotive & Embedded',
-    description: 'Create consistent C++/Qt interfaces across ECUs. Simulate hardware APIs before physical components exist.',
+    description: 'Share consistent C++/Qt interfaces across ECUs. Simulate hardware APIs before the physical components exist.',
   },
   {
     icon: '📱',
     title: 'Cross-Platform SDKs',
-    description: 'Maintain one API definition, generate native code for every platform. Keep implementations in sync automatically.',
+    description: 'Maintain one definition, generate native code for every platform, and keep implementations in sync automatically.',
   },
 ];
 
@@ -24,7 +24,7 @@ export default function UseCasesSection() {
     <UseCaseList
       items={items}
       title="Built For"
-      subtitle="Teams who need consistent APIs across languages and platforms"
+      subtitle="Consistent APIs across languages and platforms — from prototype to production"
     />
   );
 }

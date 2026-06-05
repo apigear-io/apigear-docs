@@ -21,17 +21,18 @@ const outputItems = [
   { icon: '🧪', text: 'ThermostatTest.cpp' },
   { icon: '🔧', text: 'CMakeLists.txt' },
   { icon: '📦', text: 'Stub implementation' },
-  { icon: '📡', text: 'OLink adapter (optional)' },
+  { icon: '📡', text: 'OLink transport adapter (optional)' },
 ];
 
 export default function CodeExampleSection() {
   return (
     <CodeExample
       title="See It In Action"
-      subtitle="Stateful APIs with properties, operations, and signals"
+      subtitle="One stateful interface — properties, operations, and signals — becomes buildable code."
       inputCode={inputCode}
-      inputLabel="Define Your API (IDL)"
+      inputLabel="Define your API (IDL)"
       outputItems={outputItems}
+      footnote="C++ shown. The same definition also generates Python, Qt, Unreal, Rust & Java."
     />
   );
 }

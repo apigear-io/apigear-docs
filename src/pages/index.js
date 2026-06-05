@@ -1,20 +1,22 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import Head from '@docusaurus/Head';
-import FeatureListSection from '../sections/FeatureListSection';
 import HeroSection from '../sections/HeroSection';
-import WorkflowSection from '../sections/WorkflowSection';
-import TechnologiesSection from '../sections/TechnologiesSection';
 import ObjectAPISection from '../sections/ObjectAPISection';
-import UseCasesSection from '../sections/UseCasesSection';
+import WorkflowSection from '../sections/WorkflowSection';
 import CodeExampleSection from '../sections/CodeExampleSection';
+import AIAgentsSection from '../sections/AIAgentsSection';
+import FeatureListSection from '../sections/FeatureListSection';
+import TechnologiesSection from '../sections/TechnologiesSection';
+import UseCasesSection from '../sections/UseCasesSection';
+import FinalCtaSection from '../sections/FinalCtaSection';
 import styles from './index.module.css';
 
 export default function Home() {
   return (
     <Layout
       title={`API Code Generator for C++, Qt, Unreal & Python`}
-      description="Generate production-ready SDKs from API definitions. One YAML spec, multiple native implementations with scripted backends and monitoring.">
+      description="Free, open-source CLI that generates native SDKs from one API definition — C++, Qt, Unreal, Python, Rust & Java — with simulation and monitoring built in.">
       <Head>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -25,7 +27,7 @@ export default function Home() {
             operatingSystem: 'Windows, macOS, Linux',
             url: 'https://apigear.io',
             description:
-              'ApiGear generates native SDKs from stateful API definitions (ObjectAPI) for C++, Qt, Unreal Engine, Python, Rust, and Java, with scripted backends and monitoring.',
+              'ApiGear generates native SDKs from stateful API definitions (ObjectAPI) for C++, Qt, Unreal Engine, Python, Rust, and Java, with per-feature transports such as OLink and MQTT (NATS on select templates), scripted backends and monitoring.',
             offers: {'@type': 'Offer', price: '0', priceCurrency: 'USD'},
           })}
         </script>
@@ -33,22 +35,28 @@ export default function Home() {
       <HeroSection />
       <main>
         <section className={styles.section}>
-          <CodeExampleSection />
-        </section>
-        <section className={styles.section}>
-          <UseCasesSection />
-        </section>
-        <section className={styles.section}>
-          <FeatureListSection />
+          <ObjectAPISection />
         </section>
         <section className={styles.sectionDark}>
           <WorkflowSection />
         </section>
         <section className={styles.section}>
+          <CodeExampleSection />
+        </section>
+        <section className={styles.sectionDark}>
+          <AIAgentsSection />
+        </section>
+        <section className={styles.section}>
+          <FeatureListSection />
+        </section>
+        <section className={styles.sectionDark}>
           <TechnologiesSection />
         </section>
         <section className={styles.section}>
-          <ObjectAPISection />
+          <UseCasesSection />
+        </section>
+        <section className={styles.sectionDark}>
+          <FinalCtaSection />
         </section>
       </main>
     </Layout>

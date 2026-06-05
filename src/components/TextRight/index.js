@@ -43,7 +43,7 @@ export default function TextRight({ item }) {
                         />
                     </div>
                     <div className="col col--6">
-                        <h1>{item.title}</h1>
+                        <h2>{item.title}</h2>
                         <p>{item.description}</p>
                         <div className="margin-top--lg">
                             <Link

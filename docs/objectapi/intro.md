@@ -1,17 +1,23 @@
 ---
 sidebar_position: 1
 title: "ObjectAPI – Stateful API Specification"
-description: "ObjectAPI is a specification for defining stateful, object-oriented APIs with properties, operations, and signals for C++, Qt, Unreal Engine, and Python."
-keywords: [objectapi, api specification, stateful api, code generation, properties, operations, signals]
+description: "ObjectAPI defines stateful, object-oriented APIs — properties, operations, and signals — and gives designers and engineers a shared language from rapid prototyping to production."
+keywords: [objectapi, api specification, stateful api, code generation, properties, operations, signals, api contract, prototype to production, design to development]
 ---
 
 # Introduction
 
 ObjectAPI is a specification for defining **stateful, object-oriented APIs**. Unlike REST or RPC specifications that model stateless request/response interactions, ObjectAPI models interfaces as objects with observable state.
 
+## A Shared Language, From Prototype to Production
+
+ObjectAPI deliberately models the **familiar object pattern** — **properties**, **operations** (methods), and **signals** (events) — so a single definition reads naturally to everyone who touches it. That makes it a **common ground** where designers and backend engineers align on one contract, instead of trading documents and assumptions.
+
+And because the same definition drives simulation, generated stubs, and production SDKs, a single ObjectAPI artifact carries a feature **from rapid prototype to production** — no throwaway spec, no rewrite when you cross into real code.
+
 ## Why Stateful APIs?
 
-Most API specifications (OpenAPI, gRPC/protobuf) are designed for stateless request/response patterns. But many real-world systems have inherent state:
+Most API specifications — OpenAPI, and gRPC/protobuf in their common request/response form — are built around stateless request/response. But many real-world systems have inherent state:
 
 | Domain | Examples of State |
 |--------|-------------------|
