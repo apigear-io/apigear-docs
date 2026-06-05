@@ -188,13 +188,17 @@ ApiGear generates native SDKs from stateful API definitions using ObjectAPI. Gen
 - [API Foundation](/docs/objectapi/core.md): Learn the ObjectAPI document format, primitive types (bool, int, float, string), arrays, complex types, and cross-module imports.
 - [API Examples](/docs/objectapi/examples.md): Complete ObjectAPI YAML examples including a Counter, Radio Tuner with structs and enums, and a Weather Station with signals.
 - [ObjectAPI IDL](/docs/objectapi/idl.md): Write APIs using the ObjectAPI IDL, a concise code-like syntax that auto-converts to YAML. Covers modules, interfaces, structs, enums, and imports.
-- [Introduction](/docs/objectapi/intro.md): ObjectAPI is a specification for defining stateful, object-oriented APIs with properties, operations, and signals for C++, Qt, Unreal Engine, and Python.
+- [Introduction](/docs/objectapi/intro.md): ObjectAPI defines stateful, object-oriented APIs — properties, operations, and signals — and gives designers and engineers a shared language from rapid prototyping to production.
 - [API Modules](/docs/objectapi/modules.md): Define API modules with interfaces (properties, operations, signals), data structures, and enumerations using the ObjectAPI specification.
 
 ### protocols
 
 - [HTTP Mapping](/docs/protocols/http/mapping_http.md): Map ObjectAPI interfaces to HTTP endpoints using an RPC model. Covers property, operation, and signal mapping with JSON payloads.
-- [Protocol Mappings](/docs/protocols/mapping.md): Map ObjectAPI communication patterns to REST, RPC, and message-based protocols. Compare API types and understand how ObjectAPI bridges them.
+- [Protocol Mappings](/docs/protocols/mapping.md): How ApiGear's ObjectAPI relates to OpenAPI, AsyncAPI, gRPC, MQTT, SOME/IP and DDS — and why it generates code that runs over them instead of replacing them.
+- [ApiGear over MQTT](/docs/protocols/mqtt/intro.md): How ApiGear maps ObjectAPI interfaces onto MQTT v5: brokered pub/sub for properties, signals and operations, shared across the C++, Qt, Python, Rust and Unreal templates.
+- [ApiGear MQTT Topic Mapping](/docs/protocols/mqtt/mapping.md): The ApiGear MQTT v5 topic-mapping spec: how interface operations, signals and properties map to MQTT topics and JSON payloads, with correlation, retained state and a v3 fallback.
+- [ApiGear over NATS](/docs/protocols/nats/intro.md): How ApiGear maps ObjectAPI interfaces onto NATS subjects: request/reply for operations, pub/sub for signals and properties, plus connectivity messaging, shared across templates.
+- [ApiGear NATS Subject Mapping](/docs/protocols/nats/mapping.md): How ApiGear maps ObjectAPI interface operations, signals and properties onto NATS subjects and JSON payloads, with request/reply and connectivity messaging.
 - [Use Cases](/docs/protocols/objectlink/cases.md): ObjectLink use cases including embedded service sharing, sensor-to-dashboard linking, and UI-to-service layer communication across platforms.
 - [Error Messages](/docs/protocols/objectlink/errors.md): ObjectLink error message format and error codes. Covers error handling for link, invoke, set-property, and signal operations.
 - [Introduction](/docs/protocols/objectlink/intro.md): ObjectLink is an IPC protocol that links local objects to remote objects over network connections, synchronizing properties, operations, and signals.

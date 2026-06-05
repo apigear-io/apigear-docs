@@ -336,4 +336,4 @@ Have in mind that the `Hello` implementation is not thread safe by default.
 
 ### Nats Messages[​](#nats-messages "Direct link to Nats Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this document [messages format](/assets/files/ApiGearNatsv0.1-f853bfcb02dde8ca7cd73c2aed926ed3.pdf).
+For the NATS subject structure and payload format, see **[ApiGear over NATS](/docs/protocols/nats/mapping.md)**.

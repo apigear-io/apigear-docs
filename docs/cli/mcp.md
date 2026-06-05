@@ -131,6 +131,7 @@ The `version` tool takes no parameters.
 
 ## Related Documentation[​](#related-documentation "Direct link to Related Documentation")
 
+* [AI Meets API Design: MCP-Powered SDK Generation](/blog/ai-meets-api-design-mcp.md) — blog walkthrough: connect ApiGear to your AI assistant step by step
 * [Code Generation](/docs/cli/generate.md) — Generate SDKs from API definitions
 * [SDK Templates](/docs/cli/template.md) — Manage SDK templates
 * [Introduction](/docs/cli/intro.md) — CLI overview and installation

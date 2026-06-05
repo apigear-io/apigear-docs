@@ -188,13 +188,17 @@ ApiGear generates native SDKs from stateful API definitions using ObjectAPI. Gen
 - [API Foundation](/docs/objectapi/core.md): Learn the ObjectAPI document format, primitive types (bool, int, float, string), arrays, complex types, and cross-module imports.
 - [API Examples](/docs/objectapi/examples.md): Complete ObjectAPI YAML examples including a Counter, Radio Tuner with structs and enums, and a Weather Station with signals.
 - [ObjectAPI IDL](/docs/objectapi/idl.md): Write APIs using the ObjectAPI IDL, a concise code-like syntax that auto-converts to YAML. Covers modules, interfaces, structs, enums, and imports.
-- [Introduction](/docs/objectapi/intro.md): ObjectAPI is a specification for defining stateful, object-oriented APIs with properties, operations, and signals for C++, Qt, Unreal Engine, and Python.
+- [Introduction](/docs/objectapi/intro.md): ObjectAPI defines stateful, object-oriented APIs — properties, operations, and signals — and gives designers and engineers a shared language from rapid prototyping to production.
 - [API Modules](/docs/objectapi/modules.md): Define API modules with interfaces (properties, operations, signals), data structures, and enumerations using the ObjectAPI specification.
 
 ### protocols
 
 - [HTTP Mapping](/docs/protocols/http/mapping_http.md): Map ObjectAPI interfaces to HTTP endpoints using an RPC model. Covers property, operation, and signal mapping with JSON payloads.
-- [Protocol Mappings](/docs/protocols/mapping.md): Map ObjectAPI communication patterns to REST, RPC, and message-based protocols. Compare API types and understand how ObjectAPI bridges them.
+- [Protocol Mappings](/docs/protocols/mapping.md): How ApiGear's ObjectAPI relates to OpenAPI, AsyncAPI, gRPC, MQTT, SOME/IP and DDS — and why it generates code that runs over them instead of replacing them.
+- [ApiGear over MQTT](/docs/protocols/mqtt/intro.md): How ApiGear maps ObjectAPI interfaces onto MQTT v5: brokered pub/sub for properties, signals and operations, shared across the C++, Qt, Python, Rust and Unreal templates.
+- [ApiGear MQTT Topic Mapping](/docs/protocols/mqtt/mapping.md): The ApiGear MQTT v5 topic-mapping spec: how interface operations, signals and properties map to MQTT topics and JSON payloads, with correlation, retained state and a v3 fallback.
+- [ApiGear over NATS](/docs/protocols/nats/intro.md): How ApiGear maps ObjectAPI interfaces onto NATS subjects: request/reply for operations, pub/sub for signals and properties, plus connectivity messaging, shared across templates.
+- [ApiGear NATS Subject Mapping](/docs/protocols/nats/mapping.md): How ApiGear maps ObjectAPI interface operations, signals and properties onto NATS subjects and JSON payloads, with request/reply and connectivity messaging.
 - [Use Cases](/docs/protocols/objectlink/cases.md): ObjectLink use cases including embedded service sharing, sensor-to-dashboard linking, and UI-to-service layer communication across platforms.
 - [Error Messages](/docs/protocols/objectlink/errors.md): ObjectLink error message format and error codes. Covers error handling for link, invoke, set-property, and signal operations.
 - [Introduction](/docs/protocols/objectlink/intro.md): ObjectLink is an IPC protocol that links local objects to remote objects over network connections, synchronizing properties, operations, and signals.
@@ -2512,7 +2516,7 @@ testIoWorldHello->_getPublisher().publishJustSaid(someMessage);
 
 ### MQTT Messages[​](#mqtt-messages "Direct link to MQTT Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this document [messages format](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf).
+For the MQTT topic structure and payload format, see **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
 
 
 ---
@@ -5110,7 +5114,7 @@ testIoWorldHello->_getPublisher().publishJustSaid(someMessage);
 
 ### MQTT Messages[​](#mqtt-messages "Direct link to MQTT Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this document [messages format](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf).
+For the MQTT topic structure and payload format, see **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
 
 
 ---
@@ -5453,7 +5457,7 @@ Have in mind that the `Hello` implementation is not thread safe by default.
 
 ### Nats Messages[​](#nats-messages "Direct link to Nats Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this document [messages format](/assets/files/ApiGearNatsv0.1-f853bfcb02dde8ca7cd73c2aed926ed3.pdf).
+For the NATS subject structure and payload format, see **[ApiGear over NATS](/docs/protocols/nats/mapping.md)**.
 
 
 ---
@@ -9717,7 +9721,7 @@ The implemented Mqtt Client (used both in apigear.mqtt.Client and apigear.mqtt.S
 
 ### MQTT Messages[​](#mqtt-messages "Direct link to MQTT Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this documentS [messages format](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf).
+For the MQTT topic structure and payload format, see **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
 
 
 ---
@@ -11290,7 +11294,7 @@ ApplicationWindow {
 
 ### MQTT Messages[​](#mqtt-messages "Direct link to MQTT Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this documentS [messages format](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf).
+For the MQTT topic structure and payload format, see **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
 
 
 ---
@@ -14214,14 +14218,26 @@ the following files are generated. The purpose and content of each file is expla
  ...
 ```
 
-The adapters map your interface onto MQTT topics: operations are published as request messages, while properties, signals and the service's state use dedicated topics. The service publishes property and state messages as retained, so a client that connects later still receives the current state.
+The adapters speak the agreed ApiGear MQTT (MQTT 5) wire scheme, so a Rust client or service interoperates with the services and clients generated by the other ApiGear templates (C++, Qt, Python, …) over the same broker. For module `io.world` / interface `Hello` the topics are:
+
+| Message                 | Topic                                                                              | Direction        |
+| ----------------------- | ---------------------------------------------------------------------------------- | ---------------- |
+| operation request       | `io.world/Hello/rpc/<op>`                                                          | client → service |
+| operation reply         | the request's MQTT 5 `ResponseTopic` (`io.world/Hello/rpc/<op>/<clientId>/result`) | service → client |
+| property change request | `io.world/Hello/set/<prop>`                                                        | client → service |
+| property notification   | `io.world/Hello/prop/<prop>` (retained)                                            | service → client |
+| signal                  | `io.world/Hello/sig/<sig>`                                                         | service → client |
+
+Operation replies are correlated using the request's MQTT 5 `CorrelationData`, which the service echoes back. Because property notifications are retained, a client that connects later still receives the current value (the MQTT scheme has no separate state topic).
+
+See **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)** for the topic structure and payload format.
 
 ## MQTT client adapter[​](#mqtt-client-adapter "Direct link to MQTT client adapter")
 
-The file `📜hello_client.rs` contains `HelloMqttClient`, the MQTT client version of the `Hello` interface. It implements `HelloTrait`, so you use it like a local implementation. It takes a shared [`rumqttc`](https://docs.rs/rumqttc) `AsyncClient`, subscribes to the interface's topics, and decodes incoming messages.
+The file `📜hello_client.rs` contains `HelloMqttClient`, the MQTT client version of the `Hello` interface. It implements `HelloTrait`, so you use it like a local implementation. It takes a shared [`rumqttc`](https://docs.rs/rumqttc) v5 `AsyncClient` and a unique `client_id` (used to route RPC replies), subscribes to the interface's topics, and decodes incoming messages.
 
 ```
-let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt_async_client)));
+let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt_async_client), "hello-client"));
 
 client.subscribe_topics().await.expect("subscribe to topics");
 ```
@@ -14232,7 +14248,7 @@ A getter (here `last()`) returns the locally cached value last received from the
 
 note
 
-Property and state messages are retained on the broker, so a client connecting after the service started still receives the current property values.
+Property notifications are retained on the broker, so a client connecting after the service started still receives the current property values.
 
 #### Operations[​](#operations "Direct link to Operations")
 
@@ -14256,10 +14272,12 @@ The file `📜hello_service.rs` contains `HelloMqttService`, which wraps a local
 
 ## Use the adapters[​](#use-the-adapters "Direct link to Use the adapters")
 
-The generated `examples` crate ships ready-to-run `mqtt_server` and `mqtt_client` binaries. The client creates a `rumqttc` `AsyncClient`, hands it to the adapter, and pumps the MQTT event loop so the adapter receives state, property changes and signals:
+The generated `examples` crate ships ready-to-run `mqtt_server` and `mqtt_client` binaries. The client creates a `rumqttc` v5 `AsyncClient`, hands it to the adapter, and pumps the MQTT event loop so the adapter receives RPC replies, property changes and signals. The incoming MQTT 5 `CorrelationData` is forwarded to the adapter so it can match RPC replies:
 
 ```
-use rumqttc::{AsyncClient, Event, MqttOptions, Packet};
+use rumqttc::v5::mqttbytes::v5::Packet;
+
+use rumqttc::v5::{AsyncClient, Event, MqttOptions};
 
 use std::sync::Arc;
 
@@ -14267,7 +14285,9 @@ use std::time::Duration;
 
 
 
-let mut opts = MqttOptions::new("hello-client", "127.0.0.1", 1883);
+let client_id = "hello-client";
+
+let mut opts = MqttOptions::new(client_id, "127.0.0.1", 1883);
 
 opts.set_keep_alive(Duration::from_secs(5));
 
@@ -14275,7 +14295,7 @@ let (mqtt, mut eventloop) = AsyncClient::new(opts, 64);
 
 
 
-let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt)));
+let client = Arc::new(HelloMqttClient::new(Arc::new(mqtt), client_id));
 
 client.subscribe_topics().await.expect("subscribe to topics");
 
@@ -14291,7 +14311,11 @@ tokio::spawn(async move {
 
         if let Ok(Event::Incoming(Packet::Publish(p))) = eventloop.poll().await {
 
-            pump.handle_message(&p.topic, &p.payload);
+            let topic = String::from_utf8_lossy(&p.topic);
+
+            let correlation_data = p.properties.as_ref().and_then(|pr| pr.correlation_data.as_deref());
+
+            pump.handle_message(&topic, &p.payload, correlation_data);
 
         }
 
@@ -14301,7 +14325,7 @@ tokio::spawn(async move {
 
 
 
-// Use the client like a local Hello implementation:
+// Use the client like a local Hello implementation; the call awaits the RPC reply:
 
 let _ = client.say(&Default::default(), WhenEnum::Now).await;
 ```
@@ -14436,7 +14460,19 @@ the following files are generated. The purpose and content of each file is expla
  ...
 ```
 
-The adapters use NATS request/reply for operations and dedicated subjects for properties, signals and the service's state.
+The adapters speak the agreed ApiGear NATS wire scheme, so a Rust client or service interoperates with the services and clients generated by the other ApiGear templates (C++, Qt, Python, …) against the same nats-server. For module `io.world` / interface `Hello` the subjects are:
+
+| Message                 | Subject                                               | Direction                 |
+| ----------------------- | ----------------------------------------------------- | ------------------------- |
+| operation request/reply | `io.world.Hello.rpc.<op>` (native NATS request/reply) | client → service → client |
+| property change request | `io.world.Hello.set.<prop>`                           | client → service          |
+| property notification   | `io.world.Hello.prop.<prop>`                          | service → client          |
+| signal                  | `io.world.Hello.sig.<sig>`                            | service → client          |
+| availability            | `io.world.Hello.service.available`                    | service → client          |
+| init request            | `io.world.Hello.init` (payload = client id)           | client → service          |
+| init reply              | `io.world.Hello.init.resp.<clientId>` (current state) | service → client          |
+
+See **[ApiGear over NATS](/docs/protocols/nats/mapping.md)** for the subject structure and payload format.
 
 ## NATS client adapter[​](#nats-client-adapter "Direct link to NATS client adapter")
 
@@ -14468,7 +14504,7 @@ Do not emit signals from a client. Subscribe to signals through the [`Publisher`
 
 #### Connectivity[​](#connectivity "Direct link to Connectivity")
 
-The client's `subscribe()` spawns a background task that subscribes to the property (`apigear.io.world.Hello.prop.*`), signal (`apigear.io.world.Hello.sig.*`) and state (`apigear.io.world.Hello.state`) subjects, and keeps the cache in sync as messages arrive. The service publishes its full state on the `.state` subject via `publish_state()`. Because NATS does not retain messages, a client that connects after the service published only sees the state if the service publishes it again — the generated `nats_server` example re-publishes the state periodically so late-joining clients still receive it.
+The client's `subscribe()` spawns a background task that subscribes to the property (`io.world.Hello.prop.*`), signal (`io.world.Hello.sig.*`), availability (`io.world.Hello.service.available`) and init-reply (`io.world.Hello.init.resp.<clientId>`) subjects, and keeps the cache in sync as messages arrive. On start-up — and whenever the service (re)announces availability — the client sends an `init` request and the service replies with the current state on `init.resp.<clientId>`. Because NATS does not retain messages, this handshake is how a client that connects after the service started obtains the current property values; the service announces `service.available` once it is ready so clients can re-sync.
 
 ## NATS service adapter[​](#nats-service-adapter "Direct link to NATS service adapter")
 
@@ -17439,25 +17475,15 @@ Unlike OLink (point-to-point WebSocket) and Message Bus (intra-Unreal IPC), MQTT
 | Retained state     | Yes (broker retains last property) | No (live link only)          | No (heartbeat-based)            |
 | ApiGear Simulation | No                                 | Yes                          | No                              |
 
+For the full cross-language transport comparison (including NATS), see [Choosing a transport](/docs/protocols/mapping.md#choosing-a-transport).
+
 tip
 
 Use **MQTT** when fanning state out to many heterogeneous subscribers or integrating with an existing IoT topology. Use **OLink** for direct Unreal-to-service or simulation connections. Use **Message Bus** for IPC between Unreal applications.
 
 ## ApiGear MQTT Protocol[​](#apigear-mqtt-protocol "Direct link to ApiGear MQTT Protocol")
 
-The generated code maps interface concepts to MQTT topics using the following convention. For an interface `Hello` in module `io.world`:
-
-| Direction        | Topic                                      | Purpose                                 |
-| ---------------- | ------------------------------------------ | --------------------------------------- |
-| Client → Adapter | `io.world/Hello/set/last`                  | Set property request                    |
-| Adapter → Client | `io.world/Hello/prop/last`                 | Property change notification (retained) |
-| Client → Adapter | `io.world/Hello/rpc/say`                   | Operation invocation                    |
-| Adapter → Client | `io.world/Hello/rpc/say/{clientId}/result` | Operation reply (per-client)            |
-| Adapter → Client | `io.world/Hello/sig/justSaid`              | Signal broadcast                        |
-
-Property notifications are published with `retain=true` so newly subscribing clients receive the current state immediately. Operation replies are routed back to the topic the caller advertised in the MQTT 5 `ResponseTopic` property — typically `…/rpc/{op}/{clientId}/result` — so multiple clients can invoke the same operation concurrently without their replies colliding.
-
-Payloads are JSON-encoded. RPC payloads contain only the operation's args (e.g. `[42]`); correlation rides on the MQTT 5 `CorrelationData` property as opaque bytes that the service echoes back unchanged in the reply. Property values and signal arg arrays are unchanged plain JSON. All subscribe and publish operations use QoS 1 (at-least-once delivery) by default.
+The generated code maps interface concepts to MQTT topics following the shared ApiGear MQTT mapping. The topic structure, JSON payloads, MQTT 5 correlation (`CorrelationData` / `ResponseTopic`), and retained property notifications are documented in **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
 
 ## File overview for module[​](#file-overview-for-module "Direct link to File overview for module")
 
@@ -21309,6 +21335,7 @@ The `version` tool takes no parameters.
 
 ## Related Documentation[​](#related-documentation "Direct link to Related Documentation")
 
+* [AI Meets API Design: MCP-Powered SDK Generation](/blog/ai-meets-api-design-mcp.md) — blog walkthrough: connect ApiGear to your AI assistant step by step
 * [Code Generation](/docs/cli/generate.md) — Generate SDKs from API definitions
 * [SDK Templates](/docs/cli/template.md) — Manage SDK templates
 * [Introduction](/docs/cli/intro.md) — CLI overview and installation
@@ -24355,9 +24382,15 @@ struct Station {
 
 ObjectAPI is a specification for defining **stateful, object-oriented APIs**. Unlike REST or RPC specifications that model stateless request/response interactions, ObjectAPI models interfaces as objects with observable state.
 
+## A Shared Language, From Prototype to Production[​](#a-shared-language-from-prototype-to-production "Direct link to A Shared Language, From Prototype to Production")
+
+ObjectAPI deliberately models the **familiar object pattern** — **properties**, **operations** (methods), and **signals** (events) — so a single definition reads naturally to everyone who touches it. That makes it a **common ground** where designers and backend engineers align on one contract, instead of trading documents and assumptions.
+
+And because the same definition drives simulation, generated stubs, and production SDKs, a single ObjectAPI artifact carries a feature **from rapid prototype to production** — no throwaway spec, no rewrite when you cross into real code.
+
 ## Why Stateful APIs?[​](#why-stateful-apis "Direct link to Why Stateful APIs?")
 
-Most API specifications (OpenAPI, gRPC/protobuf) are designed for stateless request/response patterns. But many real-world systems have inherent state:
+Most API specifications — OpenAPI, and gRPC/protobuf in their common request/response form — are built around stateless request/response. But many real-world systems have inherent state:
 
 | Domain              | Examples of State                                 |
 | ------------------- | ------------------------------------------------- |
@@ -24794,6 +24827,13 @@ ObjectAPI describes object communication patterns based on simple to use protoco
 
 There exists currently several API types, like REST, Message Based or RPC. ObjectAPI supports a mixture of these.
 
+| API style         | Communication                     | State model                    | Real-time updates | Strengths                                                          | Trade-offs                                       |
+| ----------------- | --------------------------------- | ------------------------------ | ----------------- | ------------------------------------------------------------------ | ------------------------------------------------ |
+| **REST**          | request/response over HTTP        | stateless; client drives logic | none (poll)       | ubiquitous tooling, cacheable, simple                              | chatty for live state; logic leaks to the client |
+| **RPC**           | request/response (function calls) | stateless calls                | none              | natural call semantics, efficient                                  | tighter coupling; no built-in events             |
+| **Message based** | publish/subscribe via broker      | event / stream                 | yes (push)        | decoupled, many-to-many, real-time                                 | needs a broker; eventual consistency             |
+| **ObjectAPI**     | properties, methods & signals     | **stateful objects**           | yes (auto-synced) | models real state, clean developer API, maps onto all of the above | needs a code generator (ApiGear)                 |
+
 ### REST based APIs[​](#rest-based-apis "Direct link to REST based APIs")
 
 REST API is about browsing data but the underlying nature of the protocol is HTTP. HTTP is a request/response protocol and as such is architecture wise next to RPC. REST itself defines an architectural style on top of HTTP.
@@ -24824,7 +24864,7 @@ Message based APIs are typically realized using a message broker. The broker is 
 
 <!-- -->
 
-First we would subscribe to and interface state changes. Then we would publish the increment signal and wait for changes on the interface state. The changes are announces by the service via the broker.
+First we subscribe to an interface's state changes. Then we publish an increment message and wait for changes on the interface state. The changes are announced by the service via the broker.
 
 A typical message based client would look like this:
 
@@ -24864,7 +24904,332 @@ await client.increment();
 
 First we register a callback when the interface state changes. Then we call the operation, as we defined an object API the API feels and works as developers would expect this.
 
-This makes it much nicer and easier to use the API inside your application. The The API patterns is also extended to the service side, where service calls end into an API which looks very mich like the defined ObjectAPI.
+This makes it much nicer and easier to use the API inside your application. The API pattern also extends to the service side, where service calls land in an API that looks very much like the defined ObjectAPI.
+
+## Is ApiGear an alternative to REST, gRPC, AsyncAPI, or DDS?[​](#is-apigear-an-alternative-to-rest-grpc-asyncapi-or-dds "Direct link to Is ApiGear an alternative to REST, gRPC, AsyncAPI, or DDS?")
+
+Short answer: **no — and that's the point.** ApiGear works at a different layer. You describe your interface once with ObjectAPI (the *spec*), and ApiGear *generates* the client and service code that runs **over** a transport like OLink, MQTT, NATS, or HTTP. REST, gRPC and MQTT are things ApiGear targets, not things it replaces.
+
+It helps to separate the layers:
+
+| Layer          | What it is               | Examples                                                                             |
+| -------------- | ------------------------ | ------------------------------------------------------------------------------------ |
+| **Spec / IDL** | describes the interface  | **ObjectAPI**, OpenAPI, AsyncAPI, Protobuf                                           |
+| **Paradigm**   | the interaction model    | stateful objects (ObjectAPI) · request/response (REST, RPC) · pub/sub (messaging)    |
+| **Transport**  | moves the bytes          | OLink, MQTT, NATS, HTTP, HTTP/2 — plus service/data middlewares like SOME/IP and DDS |
+| **Codegen**    | turns the spec into SDKs | **ApiGear**, OpenAPI Generator, protoc                                               |
+
+ApiGear spans the spec, paradigm and codegen layers while staying transport-agnostic, so the same definition can run over different transports — chosen per feature.
+
+**vs OpenAPI** — Both are specs you generate code from. OpenAPI describes *request/response HTTP APIs* (the resource-oriented, typically stateless REST style); ObjectAPI describes *stateful objects* — observable properties, operations, and server-pushed signals — with a single source of truth. If your service is mostly CRUD over HTTP, OpenAPI is a fine fit. If it has live state that clients must stay in sync with, ObjectAPI models that directly.
+
+**vs AsyncAPI** — AsyncAPI is the event-driven counterpart to OpenAPI: a spec for *messages and channels* over messaging technologies like MQTT, Kafka or NATS. It describes the *messaging* — you still design topics and payloads. ObjectAPI describes the *object* — properties, operations, signals — and generates the messaging for you (properties auto-sync, signals become events). Reach for AsyncAPI when the message stream itself is the contract; reach for ObjectAPI when stateful objects are, and you'd rather not hand-design every topic.
+
+**vs gRPC** — gRPC is an RPC *framework*: Protobuf (its IDL) + HTTP/2 (its transport) + streaming + codegen, bundled together. ApiGear sits one layer up — you define the object model once and generate code over whichever transport you choose. gRPC isn't a built-in transport today, but the templates are extensible: a gRPC binding *can* be added — generating gRPC services *from* your ObjectAPI through the same template extension point the built-in OLink, MQTT and NATS bindings use. The honest framing is "generate gRPC **with** ApiGear," not "ApiGear **or** gRPC."
+
+**vs MQTT / NATS** — These are *transports*, not API definitions. ApiGear already generates code that speaks them. You keep your broker; ApiGear gives you a typed object API on top instead of hand-written topic strings and payload parsing.
+
+**vs SOME/IP & DDS (automotive & embedded middleware)** — These are service and data middlewares — transports with a built-in service model, not API generators. The fit is unusually close: a SOME/IP **field** (getter + setter + notifier) is essentially an ObjectAPI **property**, and its methods and events map to operations and signals; DDS's data-centric publish/subscribe maps to property sync. Neither is a built-in transport today, but the object model lines up cleanly — so the same template extension point used for the built-in transports could generate SOME/IP or DDS bindings *from* one ObjectAPI definition, as it could for gRPC. You keep your middleware; ApiGear gives you one typed object model shared across every ECU and language.
+
+### When ApiGear is the wrong tool[​](#when-apigear-is-the-wrong-tool "Direct link to When ApiGear is the wrong tool")
+
+* A simple, public, cacheable CRUD API → plain REST/OpenAPI is lighter.
+* A one-off script with no shared state → you don't need generated stubs.
+* Your team is standardized on one middleware's own IDL and tooling (e.g. gRPC or DDS) and doesn't need multi-language generation → use it directly (or add a template if you want ObjectAPI's object model on top).
+
+## Choosing a transport[​](#choosing-a-transport "Direct link to Choosing a transport")
+
+ObjectAPI generates the same interface for several transports (also called IPC implementations). Pick the one that fits your topology — each links to its full wire mapping:
+
+| Transport                                        | Pattern                              | Needs          | Real-time push      | Late-join state         | Best for                                  | ApiGear Simulation |
+| ------------------------------------------------ | ------------------------------------ | -------------- | ------------------- | ----------------------- | ----------------------------------------- | ------------------ |
+| **[OLink](/docs/protocols/objectlink/intro.md)** | point-to-point live link (WebSocket) | a server URL   | yes (live)          | live link only          | tight client↔service and simulation links | ✅                 |
+| **[MQTT](/docs/protocols/mqtt/intro.md)**        | publish/subscribe via broker         | an MQTT broker | yes                 | retained messages       | IoT, telemetry, many-to-many              | —                  |
+| **[NATS](/docs/protocols/nats/intro.md)**        | publish/subscribe and request/reply  | a NATS server  | yes                 | `init` / `state` resync | high-throughput cloud and edge messaging  | —                  |
+| **[HTTP](/docs/protocols/http/mapping_http.md)** | request/response                     | a web server   | no (request-driven) | n/a                     | simple, REST-style integration            | —                  |
+
+note
+
+The [Unreal Engine template](/template-unreal/docs/features/msgbus.md) also ships a **Message Bus** transport (zero-configuration UDP for Unreal-to-Unreal IPC), which is specific to Unreal and not part of the cross-language set above.
+
+
+---
+
+# ApiGear over MQTT
+
+[MQTT](https://mqtt.org/) is a lightweight publish/subscribe messaging protocol widely used for IoT, telemetry, and many-to-many communication. ApiGear generates **client** and **service adapter** code that exposes your [ObjectAPI](/docs/objectapi/intro.md) interfaces over an MQTT broker, so an interface's **properties**, **signals**, and **operations** flow between any MQTT-speaking peers — C++, Qt, Python, Rust, Unreal Engine, web dashboards, or embedded devices.
+
+This page describes the **wire protocol**: how an interface maps onto MQTT topics and payloads. It is the same across every template, so a service generated for one language interoperates with a client generated for another. For the language-specific generated classes and usage, see the per-template pages linked below.
+
+A broker is required
+
+Unlike [OLink](/docs/protocols/objectlink/intro.md) (point-to-point), MQTT routes all traffic through an external broker (Mosquitto, EMQX, HiveMQ, AWS IoT Core, …). The broker decouples publishers from subscribers and handles message routing and retention.
+
+## How it works[​](#how-it-works "Direct link to How it works")
+
+* A **service adapter** wraps your local interface implementation and publishes property changes, signals, and operation replies to the broker; it subscribes to inbound set-requests and operation calls.
+* A **client** implements the same interface but, instead of running the logic locally, publishes/subscribes to the broker — acting as a remote proxy. Properties are cached locally and updated from retained messages.
+* ApiGear uses **MQTT v5** so that operation calls can carry `CorrelationData` and `ResponseTopic` as message properties. A **v3.1.1 fallback** is available that embeds the same data in the payload (see the mapping page).
+
+## In this section[​](#in-this-section "Direct link to In this section")
+
+* **[Topic Mapping](/docs/protocols/mqtt/mapping.md)** — the authoritative spec: topic structure, payloads, QoS, and the v3 fallback.
+* **[ApiGear MQTT Spec v0.1 (PDF)](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf)** — the formal specification document.
+* Protocol reference: [MQTT v5.0 (OASIS)](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html).
+
+## Implemented by[​](#implemented-by "Direct link to Implemented by")
+
+The MQTT transport is generated by these templates:
+
+* [C++17](/template-cpp17/docs/features/mqtt.md) · [C++14](/template-cpp14/docs/features/mqtt.md) · [Qt6](/template-qt6/docs/features/mqtt.md) · [Python](/template-python/docs/features/mqtt.md) · [Rust](/template-rust/docs/features/mqtt.md) · [Unreal Engine](/template-unreal/docs/features/mqtt.md)
+
+
+---
+
+# ApiGear MQTT Topic Mapping
+
+This is the wire specification for running [ObjectAPI](/docs/objectapi/intro.md) interfaces over **MQTT v5**. It defines how an interface's members map to MQTT topics and payloads. The mapping is transport-level and language-independent — a service generated by any [template](/docs/sdk/intro.md) interoperates with a client generated by any other.
+
+> Formal document: **[ApiGear MQTT Spec v0.1 (PDF)](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf)**.
+
+## Topic structure[​](#topic-structure "Direct link to Topic structure")
+
+All topics are built from the module name, interface name, a **verb**, and the member name, separated by `/`:
+
+```
+{moduleName}/{interfaceName}/{verb}/{memberName}
+```
+
+| Verb   | Member    | Direction        | Purpose                                    |
+| ------ | --------- | ---------------- | ------------------------------------------ |
+| `rpc`  | operation | client → service | Invoke an operation (request)              |
+| `sig`  | signal    | service → client | Signal broadcast                           |
+| `prop` | property  | service → client | Property value notification (**retained**) |
+| `set`  | property  | client → service | Property change request                    |
+
+Using an interface `Hello` in module `io.world` as an example:
+
+| Direction        | Topic                                      | Purpose                                 |
+| ---------------- | ------------------------------------------ | --------------------------------------- |
+| Client → Service | `io.world/Hello/set/last`                  | Set property request                    |
+| Service → Client | `io.world/Hello/prop/last`                 | Property change notification (retained) |
+| Client → Service | `io.world/Hello/rpc/say`                   | Operation invocation                    |
+| Service → Client | `io.world/Hello/rpc/say/{clientId}/result` | Operation reply (per-client)            |
+| Service → Client | `io.world/Hello/sig/justSaid`              | Signal broadcast                        |
+
+## Operations (request / response)[​](#operations-request--response "Direct link to Operations (request / response)")
+
+Operations use a request topic and a per-client response topic.
+
+**Request** — the client publishes; the service subscribes:
+
+```
+Topic:   {moduleName}/{interfaceName}/rpc/{functionName}
+
+Content: JSON array of the operation arguments, e.g. [42]
+
+MQTT v5: CorrelationData = unique call id (UUID); ResponseTopic = the reply topic below
+```
+
+**Response** — the service publishes to the caller's `ResponseTopic`; that client subscribes:
+
+```
+Topic:   {moduleName}/{interfaceName}/rpc/{functionName}/{UniqueClientID}/result
+
+Content: JSON-encoded return value
+
+MQTT v5: CorrelationData = the same call id, echoed back unchanged
+```
+
+The `CorrelationData` property carries the unique call id as opaque bytes, which the service echoes back on the reply. This lets multiple clients invoke the same operation concurrently without their replies colliding — each client matches the echoed id to the call it made.
+
+### Internal (non-API) operations[​](#internal-non-api-operations "Direct link to Internal (non-API) operations")
+
+Operations not declared in the API (template-internal helpers) use the same `rpc` verb with an **underscore** prefix on the function name, so they never clash with generated operations:
+
+```
+{moduleName}/{interfaceName}/rpc/_{functionName}
+```
+
+## Signals[​](#signals "Direct link to Signals")
+
+The service publishes; clients subscribe:
+
+```
+Topic:   {moduleName}/{interfaceName}/sig/{signalName}
+
+Content: JSON array of the signal arguments
+```
+
+## Properties[​](#properties "Direct link to Properties")
+
+Property handling is split into a **change request** and a **value notification**:
+
+**Set (change request)** — the client publishes a desired value; the service subscribes:
+
+```
+Topic:   {moduleName}/{interfaceName}/set/{propertyName}
+
+Content: JSON-encoded property value
+```
+
+**Notify (value)** — the service publishes the current value; clients subscribe:
+
+```
+Topic:   {moduleName}/{interfaceName}/prop/{propertyName}
+
+Content: JSON-encoded property value
+```
+
+Retained state
+
+Property value notifications are published with **retain = true**. A newly-subscribing client therefore receives the current value immediately on subscription — no separate handshake is needed.
+
+## Payloads & QoS[​](#payloads--qos "Direct link to Payloads & QoS")
+
+* Payloads are **JSON-encoded**. Operation requests carry an **args-only** array (e.g. `[42]`); the call id rides on the MQTT v5 `CorrelationData` property rather than inside the payload.
+* Property values and signal argument arrays are plain JSON.
+* Subscribe/publish use **QoS 1** (at-least-once delivery) by default.
+
+## MQTT v3.1.1 fallback[​](#mqtt-v311-fallback "Direct link to MQTT v3.1.1 fallback")
+
+MQTT 3.1.1 has no user properties, so the v3 mapping moves the version into the topic and embeds the correlation data and response topic **inside the payload**:
+
+```
+Request:  {moduleName}/{interfaceName}/rpc/v3/{functionName}
+
+          Content: Data { correlationData (call id) + ResponseTopic }
+
+Response: {moduleName}/{interfaceName}/rpc/v3/{functionName}/{UniqueClientID}/result
+
+          Content: Data { correlationData (call id) }
+```
+
+Prefer **MQTT v5** where the broker supports it; it keeps payloads clean and uses native correlation.
+
+## Implemented by[​](#implemented-by "Direct link to Implemented by")
+
+* [C++17](/template-cpp17/docs/features/mqtt.md) · [C++14](/template-cpp14/docs/features/mqtt.md) · [Qt6](/template-qt6/docs/features/mqtt.md) · [Python](/template-python/docs/features/mqtt.md) · [Rust](/template-rust/docs/features/mqtt.md) · [Unreal Engine](/template-unreal/docs/features/mqtt.md)
+
+Related: [ApiGear over NATS](/docs/protocols/nats/intro.md) · [ObjectLink](/docs/protocols/objectlink/intro.md) · [Protocol Mappings](/docs/protocols/mapping.md)
+
+
+---
+
+# ApiGear over NATS
+
+[NATS](https://docs.nats.io/) is a high-performance messaging system for cloud and edge applications. ApiGear generates **client** and **service adapter** code that exposes your [ObjectAPI](/docs/objectapi/intro.md) interfaces over NATS, so an interface's **operations**, **signals**, and **properties** flow between any NATS-connected peers.
+
+This page describes the **wire protocol**: how an interface maps onto NATS subjects and payloads. It is the same across every template that supports NATS, so a service generated for one language interoperates with a client generated for another. For the language-specific generated classes and usage, see the per-template pages linked below.
+
+## How it works[​](#how-it-works "Direct link to How it works")
+
+* A **service adapter** wraps your local implementation, subscribes to operation and property-change subjects, and publishes signals and property values.
+* A **client** implements the same interface but publishes/subscribes over NATS instead of running the logic locally, acting as a remote proxy.
+* Operations use NATS's native **request/reply** mechanism. NATS also adds **connectivity messaging** (`service.available`, `init`, `init.resp`) so clients can discover a service and synchronise initial state.
+
+## In this section[​](#in-this-section "Direct link to In this section")
+
+* **[Subject Mapping](/docs/protocols/nats/mapping.md)** — the subject structure, payloads, and connectivity messaging.
+* Protocol reference: [NATS documentation](https://docs.nats.io/).
+
+## Implemented by[​](#implemented-by "Direct link to Implemented by")
+
+The NATS transport is generated by these templates:
+
+* [C++17](/template-cpp17/docs/features/nats.md) · [Rust](/template-rust/docs/features/nats.md)
+
+
+---
+
+# ApiGear NATS Subject Mapping
+
+This is the wire specification for running [ObjectAPI](/docs/objectapi/intro.md) interfaces over **NATS**. It defines how an interface's members map to NATS subjects and payloads. The mapping is transport-level and language-independent — a service generated by any [template](/docs/sdk/intro.md) interoperates with a client generated by any other.
+
+## Subject structure[​](#subject-structure "Direct link to Subject structure")
+
+NATS subjects use `.` as the separator. They are built from the module name, interface name, a **verb**, and the member name:
+
+```
+{moduleName}.{interfaceName}.{verb}.{memberName}
+```
+
+| Verb   | Member    | Direction        | Purpose                             |
+| ------ | --------- | ---------------- | ----------------------------------- |
+| `rpc`  | operation | client → service | Invoke an operation (request/reply) |
+| `sig`  | signal    | service → client | Signal broadcast                    |
+| `set`  | property  | client → service | Property change request             |
+| `prop` | property  | service → client | Property value notification         |
+
+The property verbs match the [MQTT mapping](/docs/protocols/mqtt/mapping.md): `set` carries a change request to the service, and `prop` carries the value notification back to clients.
+
+## Operations (request / reply)[​](#operations-request--reply "Direct link to Operations (request / reply)")
+
+Operations use NATS's native request/reply. The client publishes a request; the service subscribes and replies on the request's reply subject:
+
+```
+Subject: {moduleName}.{interfaceName}.rpc.{functionName}
+
+Content: JSON array of the operation arguments (string-encoded)
+```
+
+### Internal (non-API) operations[​](#internal-non-api-operations "Direct link to Internal (non-API) operations")
+
+Operations not declared in the API use the `rpc` verb with an **underscore** prefix on the function name:
+
+```
+{moduleName}.{interfaceName}.rpc._{functionName}
+```
+
+## Signals[​](#signals "Direct link to Signals")
+
+The service publishes; clients subscribe:
+
+```
+Subject: {moduleName}.{interfaceName}.sig.{signalName}
+
+Content: JSON array of the signal arguments (string-encoded)
+```
+
+## Properties[​](#properties "Direct link to Properties")
+
+**Change request** — the client publishes a desired value; the service subscribes:
+
+```
+Subject: {moduleName}.{interfaceName}.set.{propertyName}
+
+Content: JSON-encoded property value (string)
+```
+
+**Value notification** — the service publishes the current value; clients subscribe:
+
+```
+Subject: {moduleName}.{interfaceName}.prop.{propertyName}
+
+Content: JSON-encoded property value (string)
+```
+
+## Connectivity messaging[​](#connectivity-messaging "Direct link to Connectivity messaging")
+
+NATS has no broker-side retained state, so ApiGear adds explicit messages for service discovery and initial state synchronisation:
+
+| Message           | Subject                                             | Content                     | Direction        |
+| ----------------- | --------------------------------------------------- | --------------------------- | ---------------- |
+| Service available | `{moduleName}.{interfaceName}.service.available`    | empty                       | service → client |
+| Init request      | `{moduleName}.{interfaceName}.init`                 | `clientId`                  | client → service |
+| Init response     | `{moduleName}.{interfaceName}.init.resp.{clientId}` | initial state (JSON object) | service → client |
+
+A client subscribes to `service.available`, then sends an `init` request carrying its `clientId`; the service replies on `init.resp.{clientId}` with the current property values so the client starts in sync.
+
+## Payloads[​](#payloads "Direct link to Payloads")
+
+Payloads are **string-encoded JSON** (`nlohmann::json`). Operation and signal arguments are JSON arrays; property values and init responses are JSON elements/objects.
+
+## Implemented by[​](#implemented-by "Direct link to Implemented by")
+
+* [C++17](/template-cpp17/docs/features/nats.md) · [Rust](/template-rust/docs/features/nats.md)
+
+Related: [ApiGear over MQTT](/docs/protocols/mqtt/intro.md) · [ObjectLink](/docs/protocols/objectlink/intro.md) · [Protocol Mappings](/docs/protocols/mapping.md)
 
 
 ---

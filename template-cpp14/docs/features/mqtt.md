@@ -287,4 +287,4 @@ testIoWorldHello->_getPublisher().publishJustSaid(someMessage);
 
 ### MQTT Messages[​](#mqtt-messages "Direct link to MQTT Messages")
 
-In case you want construct messages for client or server side on your own, please check how topics are created and how does the payload look like, check this document [messages format](/assets/files/ApiGearMQTTv0.1-b44583aa1c3fc1e5416afe55dd6470db.pdf).
+For the MQTT topic structure and payload format, see **[ApiGear over MQTT](/docs/protocols/mqtt/mapping.md)**.
