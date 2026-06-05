@@ -169,9 +169,33 @@ h3 {
 .navbar {
   background: var(--ifm-background-surface-color);
   border-bottom: 1px solid var(--custom-border-color);
-  backdrop-filter: blur(12px);
   box-shadow: none;
   transition: all 0.3s ease;
+}
+
+/*
+ * Frosted-glass blur via a pseudo-element instead of backdrop-filter on the
+ * .navbar itself.
+ *
+ * The mobile sidebar drawer (.navbar-sidebar) and its backdrop are
+ * position:fixed CHILDREN of .navbar. A backdrop-filter on .navbar would make
+ * it the containing block for those fixed children, clipping them to the
+ * navbar's height — the open menu then hides behind the page content and the
+ * page scrolls underneath, on every page.
+ *
+ * ::before is NOT an ancestor of those fixed children, so it blurs the full
+ * width of the bar without trapping them. z-index keeps it behind the nav
+ * links (but still above the page), matching where the filter used to sit.
+ * Nothing toggles, so there is no open/close animation glitch.
+ */
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
 }
 
 .navbar--fixed-top {
